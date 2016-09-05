@@ -5,15 +5,16 @@ this['Rent-Split Calculator'] = function (Kotlin) {
       bh: Kotlin.definePackage(null, /** @lends _.org.bh */ {
         app: Kotlin.definePackage(null, /** @lends _.org.bh.app */ {
           rentSplit: Kotlin.definePackage(null, /** @lends _.org.bh.app.rentSplit */ {
-            Main: Kotlin.createClass(null, null, null, /** @lends _.org.bh.app.rentSplit.Main */ {
-              Companion: Kotlin.createObject(null, null, /** @lends _.org.bh.app.rentSplit.Main.Companion.prototype */ {
-                main_kand9s$: function (args) {
-                  Kotlin.println('Hello, Rent!');
-                }
-              }),
-              object_initializer$: function () {
-                _.org.bh.app.rentSplit.Main.Companion;
-              }
+            main_kand9s$: function (args) {
+              _.org.bh.app.rentSplit.html_354nf0$($('main'), new _.org.bh.app.rentSplit.elements.TopBar());
+            },
+            html_354nf0$: function ($receiver, element) {
+              $receiver.html(element.outerHTML);
+            },
+            elements: Kotlin.definePackage(null, /** @lends _.org.bh.app.rentSplit.elements */ {
+              TopBar: Kotlin.createClass(null, function () {
+                this.id = 'top-bar';
+              })
             })
           })
         })
@@ -21,5 +22,6 @@ this['Rent-Split Calculator'] = function (Kotlin) {
     })
   });
   Kotlin.defineModule('Rent-Split Calculator', _);
+  _.org.bh.app.rentSplit.main_kand9s$([]);
   return _;
 }(kotlin);

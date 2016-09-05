@@ -1,9 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html class="rent husktype">
 <head>
-<title>Rent-Split Calculator</title>
+    <title>Rent-Split Calculator</title>
+    <link rel='stylesheet' href='//shared.BHStudios.org/_css/reset.css'/>
+    <!-- CSS reset to help ensure cross-browser reliability -->
+    <link rel='stylesheet' href='//prog.BHStudios.org/Husk/_css/Husk.css'/> <!-- CSS framework for layout -->
+    <link rel='stylesheet' href='//prog.BHStudios.org/Husk/_css/Flex.css'/>
+    <!-- CSS framework for flexbox-based layout -->
+    <link rel='stylesheet' href='//prog.BHStudios.org/Husk/_css/Type.css'/> <!-- CSS framework for typography -->
+    <link rel='stylesheet' href='//prog.BHStudios.org/Husk/_css/Print.css'/> <!-- CSS framework for printing -->
+    <link rel="stylesheet" href="./_css/rent-green.css"/>
+    <script src="https://code.jquery.com/jquery-3.1.0.slim.min.js"></script>
+    <script src="https://use.fontawesome.com/5167d0f8d0.js"></script>
 </head>
 <body>
-<h1>Rent-Split Calculator</h1>
-<h2>Calculates what your portion of the rent should be</h2>
+<header class="flex-row flex-horiz-space-between">
+    <h1 class="brand">Rent Split</h1>
+    <aside class="flex-row flex-vert-center">
+        <a href="https://github.com/Supuhstar/Rent-Split-Calculator">
+            <i class="fa fa-github fa-2x" aria-hidden="true"></i>
+        </a>
+    </aside>
+</header>
+<main>
+    <h2>Calculate what your portion of the rent should be.</h2>
+</main>
+<script src="./out/production/Rent-Split%20Calculator/lib/kotlin.js"></script>
+<script src="./out/production/Rent-Split%20Calculator/Rent-Split%20Calculator.js"></script>
 </body>
