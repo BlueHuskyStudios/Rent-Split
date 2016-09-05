@@ -1,0 +1,9 @@
+@import url("./rent-base.css");
+@import url("./rent-type.css");
+
+.main-bg,
+ body>header,
+ body>header * {
+    background-color: #66BB6A;
+    color: #FFF;
+}
