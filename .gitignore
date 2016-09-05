@@ -26,6 +26,9 @@
 ## File-based project format:
 *.iws
 
+# IntelliJ
+/out/
+
 ## Plugin-specific files:
 
 # mpeltonen/sbt-idea plugin
