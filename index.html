@@ -1,28 +1,108 @@
 <!DOCTYPE html>
-<html class="rent husktype">
+<!-- The UI for calculating roommate rent splitting
+  --
+  -- @dependency jQuery 3+: https://Code.jQuery.com/jquery-3.1.0.slim.min.js
+  -- @dependency FontAwesome: https://use.fontawesome.com/5167d0f8d0.js
+  --
+  -- @since 2016-09-05
+  -- @author Kyli Rouge of Blue Husky Studios
+  --
+  -- @see https://RougeWare.GitHub.IO/Rent-Split
+  -->
+<html class="rent husktype material">
 <head>
     <title>Rent-Split Calculator</title>
-    <link rel='stylesheet' href='//shared.BHStudios.org/_css/reset.css'/>
-    <!-- CSS reset to help ensure cross-browser reliability -->
-    <link rel='stylesheet' href='//prog.BHStudios.org/Husk/_css/Husk.css'/> <!-- CSS framework for layout -->
-    <link rel='stylesheet' href='//prog.BHStudios.org/Husk/_css/Flex.css'/>
-    <!-- CSS framework for flexbox-based layout -->
-    <link rel='stylesheet' href='//prog.BHStudios.org/Husk/_css/Type.css'/> <!-- CSS framework for typography -->
+    <link rel='stylesheet' href='//shared.BHStudios.org/_css/reset.css'/>    <!-- CSS reset to help ensure cross-browser reliability -->
+    <link rel='stylesheet' href='//prog.BHStudios.org/Husk/_css/Husk.css'/>  <!-- CSS framework for layout -->
+    <link rel='stylesheet' href='//prog.BHStudios.org/Husk/_css/Flex.css'/>  <!-- CSS framework for flexbox-based layout -->
+    <link rel='stylesheet' href='//prog.BHStudios.org/Husk/_css/Type.css'/>  <!-- CSS framework for typography -->
     <link rel='stylesheet' href='//prog.BHStudios.org/Husk/_css/Print.css'/> <!-- CSS framework for printing -->
-    <link rel="stylesheet" href="./_css/rent-green.css"/>
-    <script src="https://code.jquery.com/jquery-3.1.0.slim.min.js"></script>
+    <link rel="stylesheet" href="./_css/rent-green.css"/>                    <!-- Main styles -->
+    <script src="https://Code.jQuery.com/jquery-3.1.0.slim.min.js"></script>
     <script src="https://use.fontawesome.com/5167d0f8d0.js"></script>
+    <script src="./_js/rent.jquery.js"></script>
 </head>
 <body>
 <header class="flex-row flex-horiz-space-between">
-    <h1 class="brand">Rent Split</h1>
+    <h1 class="brand title">Rent Split</h1>
     <aside class="flex-row flex-vert-center">
         <a href="https://github.com/Supuhstar/Rent-Split-Calculator">
             <i class="fa fa-github fa-2x" aria-hidden="true"></i>
         </a>
     </aside>
 </header>
-<main>
-    <h2>Calculate what your portion of the rent should be.</h2>
+<main class="flex-column flex-vert-space-between">
+    <noscript>
+        <dialog class="big hero" open>
+            This page requires JavaScript to work. &#x1F640;
+        </dialog>
+    </noscript>
+    <h2 class="text-center">Calculate what your portion of the rent should be.</h2>
+    <section id="input-vars" class="flex-row flex-horiz-space-around">
+        <table id="roommates" class="pretty">
+            <caption>Roommates</caption>
+            <thead>
+            <tr>
+                <th class="text-center">Name</th>
+                <th>Monthly Income</th>
+                <th class="text-center">Proportion</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-roommate-row="1">
+                <td class="plain"><input type="text" class="roommate-name" placeholder="Name" /></td>
+                <td class="plain"><input type="number" class="roommate-income" value="1000" placeholder="Income" /></td>
+                <td class="roommate-proportion">Calculating</td>
+            </tr>
+            <tr data-roommate-row="2">
+                <td class="plain"><input type="text" class="roommate-name" placeholder="Name" /></td>
+                <td class="plain"><input type="number" class="roommate-income" value="1000" placeholder="Income" /></td>
+                <td class="roommate-proportion">Calculating</td>
+            </tr>
+            <tr id="Add-Roommate-Row" class="hidden">
+                <th id="Add-Roommate-Button" class="text-center" colspan="3"><i class="fa fa-plus-circle"></i> Add a roommate</th>
+            </tr>
+            </tbody>
+        </table>
+
+        <table id="Expenses" class="pretty">
+            <caption>Shared Monthly Expenses</caption>
+            <thead>
+            <tr>
+                <th>Type</th>
+                <th>Monthly Cost</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr data-expense-row="1">
+                <th><input type="hidden" class="expense-name" value="Rent"/>Rent</th>
+                <td class="plain vert-bottom"><input type="number" id="total-rent" class="expense-cost" required pattern="($\s+)?(\d|,)+(\.\d+)?" value="500" step="100" placeholder="Total Rent" /></td>
+            </tr>
+            <tr data-expense-row="2">
+                <th><input type="hidden" class="expense-name" value="General Utilities"/>General Utilities</th>
+                <td class="plain vert-bottom"><input type="number" id="total-utilities" class="expense-cost" required pattern="($\s+)?\d+(\.\d+)?" value="50" step="10" placeholder="Total Utilities" /></td>
+            </tr>
+            <tr id="Add-Expense-Row" class="hidden">
+                <th id="Add-Expense-Button" class="text-center" colspan="2"><i class="fa fa-plus-circle"></i> Add an expense</th>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="output" class="big   flex-row flex-horiz-space-around">
+        <table id="Results" class="pretty">
+            <caption>Results</caption>
+            <thead>
+            <tr>
+                <th class="text-center">Name</th>
+                <th>Rent Share</th>
+                <th>Utilities Share</th>
+                <th>Total Share</th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </section>
 </main>
 </body>

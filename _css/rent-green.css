@@ -1,9 +1,14 @@
+/**
+ * Green-themed styles for Rent Split
+ *
+ * @dependency Visual Clean Green: https://shared.BHStudios.org/_css/visual_Clean_Green.php
+ *
+ * @since 2016-09-05
+ * @author Kyli Rouge of Blue Husky Studios
+ *
+ * @see https://RougeWare.GitHub.IO/Rent-Split
+ */
+
 @import url("./rent-base.css");
 @import url("./rent-type.css");
-
-.main-bg,
- body>header,
- body>header * {
-    background-color: #66BB6A;
-    color: #FFF;
-}
+@import url("//shared.BHStudios.org/_css/visual_Clean_Green.php");
