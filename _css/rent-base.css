@@ -50,8 +50,8 @@ html.rent {
 }
 
 .rent button,
-.rent #AddARoommateButton,
-.rent #AddAnExpenseButton {
+.rent #Add-Roommate-Button,
+.rent #Add-Expense-Button {
     cursor: pointer;
     transition-duration: 0.5s;
     transition-property: box-shadow;
@@ -59,17 +59,17 @@ html.rent {
 
 .rent button:hover,
 .rent button:focus,
-.rent #AddARoommateButton:hover,
-.rent #AddARoommateButton:focus,
-.rent #AddAnExpenseButton:hover,
-.rent #AddAnExpenseButton:focus {
+.rent #Add-Roommate-Button:hover,
+.rent #Add-Roommate-Button:focus,
+.rent #Add-Expense-Button:hover,
+.rent #Add-Expense-Button:focus {
     box-shadow: 0 2pt 10pt rgba(0, 0, 0, 0.2), 0 2pt 5pt rgba(0, 0, 0, 0.2);
     transition-duration: 0.2s;
 }
 
 .rent button:active,
-.rent #AddARoommateButton:active,
-.rent #AddAnExpenseButton:active {
+.rent #Add-Roommate-Button:active,
+.rent #Add-Expense-Button:active {
     box-shadow: inset 0 2pt 10pt rgba(0, 0, 0, 0.2), inset 0 2pt 5pt rgba(0, 0, 0, 0.2);
 }
 
