@@ -89,3 +89,26 @@ html.rent {
     position: relative;
     z-index: 0;
 }
+
+.rent .fork:link,
+.rent .fork:visited,
+.rent :link .fa,
+.rent :visited .fa,
+.rent :link:hover .fa,
+.rent :visited:hover .fa,
+.rent :link:focus .fa,
+.rent :visited:focus .fa {
+    text-decoration: none !important;
+}
+
+
+.rent :link b.fork-cta {
+    text-overflow: clip;
+    white-space: nowrap;
+    overflow: hidden;
+    transition-property: max-width;
+    max-width: 50vw;
+}
+.rent :link:not(:hover):not(:focus) b.fork-cta {
+    max-width: 0;
+}
