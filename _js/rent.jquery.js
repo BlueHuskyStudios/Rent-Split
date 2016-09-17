@@ -33,7 +33,13 @@ RentSplit = function() {
     var MoneyAmountInputSelector = RoommateIncomeInputSelector + "," + ExpenseCostInputSelector
 
     var ResultsTableSelector = "#Results"
-    var ResultsTableBodySelector = ResultsTableSelector + " tbody"
+    var ResultsTableBodySelector = ResultsTableSelector + ">tbody"
+    var ResultsTableHeadRowSelector = ResultsTableSelector + ">thead>tr"
+
+
+    var RoommateNameColumnTitle = "Name"
+    var TotalColumnTitle = "Total Cost"
+
 
     var self = {
         totalIncome: undefined,
@@ -119,13 +125,30 @@ RentSplit = function() {
         },
 
         fillOutResults: function(roommates, expenses) {
-            var $resultsTable = $(ResultsTableBodySelector)
-            $resultsTable.empty()
-            roommates.forEach(function(each) { self.appendResultRow($resultsTable, each, expenses) })
+            self.fillOutResultsTableHead(roommates, expenses)
+            self.fillOutResultsTableBody(roommates, expenses)
         },
 
-        appendResultRow: function($resultsTable, roommate, expenses) {
-            $resultsTable.append(self.buildResultRow(roommate, expenses))
+        fillOutResultsTableHead: function(roommates, expenses) {
+            var $resultsTableHeadRow= $(ResultsTableHeadRowSelector)
+            $resultsTableHeadRow.empty()
+            $resultsTableHeadRow.append("<th class=\"text-center\">" + RoommateNameColumnTitle + "</th>")
+            expenses.forEach(function(each) { self.appendExpenseColumn($resultsTableHeadRow, each) })
+            $resultsTableHeadRow.append("<th class=\"text-center\">" + TotalColumnTitle + "</th>")
+        },
+
+        appendExpenseColumn: function($resultsTableHeadRow, expense) {
+            $resultsTableHeadRow.append("<th>" + expense.type + "</th>")
+        },
+
+        fillOutResultsTableBody: function(roommates, expenses) {
+            var $resultsTableBody = $(ResultsTableBodySelector)
+            $resultsTableBody.empty()
+            roommates.forEach(function(each) { self.appendResultRow($resultsTableBody, each, expenses) })
+        },
+
+        appendResultRow: function($resultsTableBody, roommate, expenses) {
+            $resultsTableBody.append(self.buildResultRow(roommate, expenses))
         },
 
         buildResultRow: function(roommate, expenses) {
