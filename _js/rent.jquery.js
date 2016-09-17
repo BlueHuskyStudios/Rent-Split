@@ -13,6 +13,8 @@
 RentSplit = function() {
     "use strict";
 
+    ///// APP-GLOBAL CONSTANTS /////
+
     var AddARoommateButtonId = "Add-Roommate-Button"
     var AddAnExpenseButtonId = "Add-Expense-Button"
 
@@ -42,6 +44,9 @@ RentSplit = function() {
 
 
     var self = {
+
+        ///// SETUP /////
+
         totalIncome: undefined,
         rentRoommateCounter: 0,
 
@@ -63,6 +68,8 @@ RentSplit = function() {
 
             self.fillOutResults(roommates, expenses)
         },
+
+        ///// FETCHING /////
 
         fetchRoommates: function() {
             return self.roommateRowsToRoommates($(RoommateRowSelector))
@@ -98,6 +105,8 @@ RentSplit = function() {
             )
         },
 
+        ///// CALCULATION /////
+
         recalculateRoommateProportions: function(roommates) {
             self.recalculateTotalIncome(roommates)
             roommates.forEach(self.recalculateRoommateProportion)
@@ -123,6 +132,8 @@ RentSplit = function() {
         recalculateTotalExpenses: function(expenses) {
             self.totalExpenses = expenses.reduce(function(prev, curr) { return prev.monthlyCost + curr.monthlyCost })
         },
+
+        ///// OUTPUT /////
 
         fillOutResults: function(roommates, expenses) {
             self.fillOutResultsTableHead(roommates, expenses)
@@ -161,6 +172,7 @@ RentSplit = function() {
 
 
 
+        ///// UTILITIES /////
 
         dollarFormat: function(n) {
             return "$" + n.toFixed(2)
