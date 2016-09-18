@@ -30,7 +30,7 @@
 <header class="flex-row flex-horiz-space-between">
     <h1 class="brand title">Rent Split</h1>
     <aside class="flex-row flex-vert-center">
-        <a href="https://github.com/Supuhstar/Rent-Split-Calculator" class="fork flex-row flex-vert-center flex-nowrap">
+        <a href="https://github.com/Supuhstar/Rent-Split-Calculator" class="fork flex-row flex-vert-center flex-nowrap" tabindex="1">
             <b class="fork-cta">Fork me on GitHub!&emsp;</b> <i class="fa fa-github fa-2x" aria-hidden="true"></i>
         </a>
     </aside>
@@ -54,13 +54,13 @@
             </thead>
             <tbody>
                 <tr data-roommate-row="1">
-                    <td class="plain"><input type="text" class="roommate-name" placeholder="Name" /></td>
-                    <td class="plain"><input type="number" class="roommate-income" value="1000" placeholder="Income" /></td>
+                    <td class="plain"><input type="text" class="roommate-name" tabindex="0" placeholder="Name" /></td>
+                    <td class="plain"><input type="number" class="roommate-income" value="1000" tabindex="0" placeholder="Income" /></td>
                     <td class="roommate-proportion">Calculating</td>
                 </tr>
                 <tr data-roommate-row="2">
-                    <td class="plain"><input type="text" class="roommate-name" placeholder="Name" /></td>
-                    <td class="plain"><input type="number" class="roommate-income" value="1000" placeholder="Income" /></td>
+                    <td class="plain"><input type="text" class="roommate-name" placeholder="Name" tabindex="0" /></td>
+                    <td class="plain"><input type="number" class="roommate-income" value="1000" placeholder="Income" tabindex="0" /></td>
                     <td class="roommate-proportion">Calculating</td>
                 </tr>
                 <tr id="Add-Roommate-Row" class="hidden">
@@ -79,7 +79,7 @@
             </thead>
             <tbody>
                 <tr id="Add-Expense-Row">
-                    <th id="Add-Expense-Button" class="text-center" colspan="2"><i class="fa fa-plus-circle"></i> Add an expense</th>
+                    <th id="Add-Expense-Button" class="text-center" colspan="2" tabindex="0"><i class="fa fa-plus-circle"></i> Add an expense</th>
                 </tr>
             </tbody>
         </table>
