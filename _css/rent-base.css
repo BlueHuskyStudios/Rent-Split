@@ -51,7 +51,8 @@ html.rent {
 
 .rent button,
 .rent #Add-Roommate-Button,
-.rent #Add-Expense-Button {
+.rent #Add-Expense-Button,
+.rent .remove-expense-button {
     cursor: pointer;
     transition-duration: 0.5s;
     transition-property: box-shadow;
@@ -62,14 +63,17 @@ html.rent {
 .rent #Add-Roommate-Button:hover,
 .rent #Add-Roommate-Button:focus,
 .rent #Add-Expense-Button:hover,
-.rent #Add-Expense-Button:focus {
+.rent #Add-Expense-Button:focus,
+.rent .remove-expense-button:hover,
+.rent .remove-expense-button:focus {
     box-shadow: 0 2pt 10pt rgba(0, 0, 0, 0.2), 0 2pt 5pt rgba(0, 0, 0, 0.2);
     transition-duration: 0.2s;
 }
 
 .rent button:active,
 .rent #Add-Roommate-Button:active,
-.rent #Add-Expense-Button:active {
+.rent #Add-Expense-Button:active,
+.rent .remove-expense-button:active {
     box-shadow: inset 0 2pt 10pt rgba(0, 0, 0, 0.2), inset 0 2pt 5pt rgba(0, 0, 0, 0.2);
 }
 
@@ -111,4 +115,9 @@ html.rent {
 }
 .rent :link:not(:hover):not(:focus) b.fork-cta {
     max-width: 0;
+}
+
+.rent input.expense-cost {
+    width: 0;
+    min-width: 100%;
 }
