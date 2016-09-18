@@ -20,8 +20,12 @@ RentSplit = function() {
 
     /// Selectors ///
 
+    var AddARoommateRowId = "Add-Roommate-Row"
+    var AddARoommateRowSelector = "#" + AddARoommateRowId
     var AddARoommateButtonId = "Add-Roommate-Button"
     var AddARoommateButtonSelector = "#" + AddARoommateButtonId
+    var RemoveARoommateButtonClassName = "remove-roommate-button"
+    var RemoveARoommateButtonSelector = "." + RemoveARoommateButtonClassName
     var AddAnExpenseRowId = "Add-Expense-Row"
     var AddAnExpenseRowSelector = "#" + AddAnExpenseRowId
     var AddAnExpenseButtonId = "Add-Expense-Button"
@@ -29,12 +33,17 @@ RentSplit = function() {
     var RemoveAnExpenseButtonClassName = "remove-expense-button"
     var RemoveAnExpenseButtonSelector = "." + RemoveAnExpenseButtonClassName
 
-    var RoommateRowSelector = "[data-roommate-row]"
-    var ExpenseRowSelector = "[data-expense-row]"
+    var RoommateRowDataName = "roommate-row"
+    var RoommateRowSelector = "[data-" + RoommateRowDataName + "]"
+    var ExpenseRowDataName = "expense-row"
+    var ExpenseRowSelector = "[data-" + ExpenseRowDataName + "]"
 
-    var RoommateNameInputSelector = ".roommate-name"
-    var RoommateIncomeInputSelector = ".roommate-income"
-    var RoommateProportionSelector = ".roommate-proportion"
+    var RoommateNameInputClassName = "roommate-name"
+    var RoommateNameInputSelector = "." + RoommateNameInputClassName
+    var RoommateIncomeInputClassName = "roommate-income"
+    var RoommateIncomeInputSelector = "." + RoommateIncomeInputClassName
+    var RoommateProportionClassName = "roommate-proportion"
+    var RoommateProportionSelector = "." + RoommateProportionClassName
     var RoommateAnyInputFieldSelector = RoommateNameInputSelector + "," + RoommateIncomeInputSelector
 
     var ExpenseNameInputClassName = "expense-name"
@@ -60,6 +69,9 @@ RentSplit = function() {
     var RentExpenseTitle = "Rent"
     var UtilitiesExpenseTitle = "Utilities"
 
+    var RoommateNamePlaceholderText = "Name"
+    var RoommateIncomePlaceholderText = "Income"
+
     var ExpenseTypePlaceholderText = "Type"
     var ExpenseCostPlaceholderText = "Monthly Cost"
 
@@ -67,6 +79,8 @@ RentSplit = function() {
     var TotalColumnTitle = "Total Cost"
 
     /// Defaults ///
+
+    var DefaultRoommateIncome = 1000
 
     var DefaultExpenseCost = 100
     var RentExpenseDefaultCost = 800
@@ -84,11 +98,11 @@ RentSplit = function() {
         /**
          * The running number of roommates, used to generate generic table headers
          */
-        rentRoommateCounter: 0,
+        roommateCounter: 0,
         /**
          * The running number of expenses, used to generate generic table headers
          */
-        expenseRowCounter: 0,
+        expenseCounter: 0,
 
         /**
          * Called once when the DOM is ready
@@ -114,15 +128,20 @@ RentSplit = function() {
             $(AnyInputFieldSelector).change(self.recalculateRentSplit)
             $(AddAnExpenseButtonSelector).click(self.addNewExpense)
             $(RemoveAnExpenseButtonSelector).click(self.removeExpense)
+            $(AddARoommateButtonSelector).click(self.addNewRoommate)
+            $(RemoveARoommateButtonSelector).click(self.removeRoommate)
         },
 
         /**
-         * Adds default expenses. In future versions, this will also add default roommates.
+         * Adds default expenses and roommates. Does not perform any calculations.
          */
         addDefaults: function() {
             // TODO: Read GET parameters
-            self.addNewExpense(undefined, RentExpenseTitle, RentExpenseDefaultCost, true)
-            self.addNewExpense(undefined, UtilitiesExpenseTitle, UtilitiesExpenseDefaultCost, true)
+            self.addNewRoommate(undefined, "", DefaultRoommateIncome, true, true)
+            self.addNewRoommate(undefined, "", DefaultRoommateIncome, true, true)
+
+            self.addNewExpense(undefined, RentExpenseTitle, RentExpenseDefaultCost, true, true)
+            self.addNewExpense(undefined, UtilitiesExpenseTitle, UtilitiesExpenseDefaultCost, true, true)
         },
 
         /**
@@ -160,7 +179,7 @@ RentSplit = function() {
          * results in an array
          */
         roommateRowsToRoommates: function($roommateRows) {
-            self.rentRoommateCounter = 0
+            self.roommateCounter = 0
             return $roommateRows.map(self.roommateRowToRoommate).toArray()
         },
 
@@ -176,9 +195,9 @@ RentSplit = function() {
          * Takes in a jQuery result containing a single roommate input row, parses it to a RentRoommate, and returns that
          */
         roommateRowToRoommate: function(index, $roommateRow) {
-            self.rentRoommateCounter++
+            self.roommateCounter++
             return new RentRoommate(
-                $(RoommateNameInputSelector, $roommateRow).val() || ("Roommate #" + self.rentRoommateCounter),
+                $(RoommateNameInputSelector, $roommateRow).val() || ("Roommate #" + self.roommateCounter),
                 $(RoommateIncomeInputSelector, $roommateRow).val(),
                 $roommateRow
             )
@@ -202,7 +221,7 @@ RentSplit = function() {
          * proportions in the roommate input table
          */
         recalculateRoommateProportions: function(roommates) {
-            self.recalculateTotalIncome(roommates)
+            self.totalIncome = self.recalculateTotalIncome(roommates)
             roommates.forEach(self.recalculateRoommateProportion)
             self.displayRoommateProportions(roommates)
         },
@@ -211,7 +230,9 @@ RentSplit = function() {
          * Trows away and recalculates the total income
          */
         recalculateTotalIncome: function(roommates) {
-            self.totalIncome = roommates.reduce(function(prev, curr) { return prev.monthlyIncome + curr.monthlyIncome })
+            return roommates.reduce(function(prev, curr) {
+                return {monthlyIncome: prev.monthlyIncome + curr.monthlyIncome}
+            }).monthlyIncome
         },
 
         /**
@@ -251,30 +272,32 @@ RentSplit = function() {
          * and recalculates the roommate split. If the type and cost are given, they are filled-in. If the type is
          * given, it is made non-editable.
          */
-        addNewExpense: function(event, type, cost, locked) {
-            self.expenseRowCounter++
+        addNewExpense: function(event, type, cost, locked, suppressCalculation) {
+            self.expenseCounter++
             var $expenseButtonRow = $(AddAnExpenseRowSelector)
             $expenseButtonRow.before(self.buildExpenseInputRow(type, cost, locked))
             self.reregisterListeners()
-            self.recalculateRentSplit()
+            if (!suppressCalculation) {
+                self.recalculateRentSplit()
+            }
         },
 
         /**
          * Builds a string representation of a table row representing an expense input. If the type and cost are given,
-         * they are filled-in. If the type is given, it is made non-editable.
+         * they are filled-in.
          *
          * @param type   The type of expense; its name
          * @param cost   The monthly cost of the expense
          * @param locked Indicates whether the type should be editable and the row should be removable
          */
         buildExpenseInputRow: function(type, cost, locked) {
-            var row = "<tr data-expense-row=\"" + self.expenseRowCounter + "\">"
+            var row = "<tr data-" + ExpenseRowDataName + "=\"" + self.expenseCounter + "\">"
             row += "<th"
                 + (locked ? "" : " class=\"plain\"")
                 + ">"
                 + "<input"
                     + " type=\"" + (locked ? "hidden" : "text") + "\""
-                    + " class=\"" + ExpenseNameInputClassName + " text-right\""
+                    + " class=\"" + ExpenseNameInputClassName + "   text-right\""
                     + (type ? " value=\"" + type + "\"" : "")
                     + " size=\"8\""
                     + " tabindex=0"
@@ -305,14 +328,81 @@ RentSplit = function() {
             return row + "</tr>"
         },
 
+        /**
+         * Adds a new roommate input row, its corresponding roommate output row, de- and re-registers all listeners,
+         * and recalculates the roommate split. If the name and income are given, they are filled-in.
+         */
+        addNewRoommate: function(event, name, income, locked, suppressCalculation) {
+            self.roommateCounter++
+            var $roommateButtonRow = $(AddARoommateRowSelector)
+            $roommateButtonRow.before(self.buildRoommateInputRow(name, income, locked))
+            self.reregisterListeners()
+            if (!suppressCalculation) {
+                self.recalculateRentSplit()
+            }
+        },
+
+        /**
+         * Builds a string representation of a table row representing an roommate input. If the name and income are
+         * given, they are filled-in.
+         *
+         * @param name   The type of expense; its name
+         * @param income The monthly cost of the expense
+         * @param locked Indicates whether the row should be removable
+         */
+        buildRoommateInputRow: function(name, income, locked) {
+            var row = "<tr data-" + RoommateRowDataName + "=\"" + self.roommateCounter + "\">"
+            row += "<th class=\"plain\">"
+                + "<input"
+                    + " type=\"text\""
+                    + " class=\"" + RoommateNameInputClassName + "   text-right\""
+                    + (name ? " value=\"" + name + "\"" : "")
+                    + " size=\"8\""
+                    + " tabindex=0"
+                    + " placeholder=\"" + RoommateNamePlaceholderText + "\""
+                    + "/>"
+                + "</th>"
+            row += "<td class=\"plain vert-bottom\">"
+                    + "<input"
+                        + " type=\"number\""
+                        + " class=\"" + RoommateIncomeInputClassName + "\""
+                        + " required"
+                        + " value=\"" + (income ? income : DefaultRoommateIncome) + "\""
+                        + " step=\"100\""
+                        + " size=\"8\""
+                        + " tabindex=0"
+                        + " placeholder=\"" + RoommateIncomePlaceholderText + "\""
+                        + "/>"
+                + "</td>"
+            row += "<td class=\"" + RoommateProportionClassName + "\">Calculating</td>"
+            if (!locked) {
+                row += "<td"
+                    + " class=\"" + RemoveARoommateButtonClassName + " color-danger\""
+                    +" tabindex=\"0\">"
+                        + "<i class=\"fa fa-minus-circle\"></i>"
+                    + "</td>"
+            }
+            return row + "</tr>"
+        },
+
         ///// REMOVING ROWS /////
 
         /**
-         * Removes the expense input row referenced in the given error
+         * Removes the expense input row referenced in the given event
          */
         removeExpense: function(event) {
             var expenseRow = event.currentTarget.parentElement
             expenseRow.remove()
+            self.reregisterListeners()
+            self.recalculateRentSplit()
+        },
+
+        /**
+         * Removes the roommate input row referenced in the given event
+         */
+        removeRoommate: function(event) {
+            var roommateRow = event.currentTarget.parentElement
+            roommateRow.remove()
             self.reregisterListeners()
             self.recalculateRentSplit()
         },
