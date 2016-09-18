@@ -78,15 +78,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr data-expense-row="1">
-                    <th><input type="hidden" class="expense-name" value="Rent"/>Rent</th>
-                    <td class="plain vert-bottom"><input type="number" id="total-rent" class="expense-cost" required pattern="($\s+)?(\d|,)+(\.\d+)?" value="500" step="100" placeholder="Total Rent" /></td>
-                </tr>
-                <tr data-expense-row="2">
-                    <th><input type="hidden" class="expense-name" value="Utilities"/>General Utilities</th>
-                    <td class="plain vert-bottom"><input type="number" id="total-utilities" class="expense-cost" required pattern="($\s+)?\d+(\.\d+)?" value="50" step="10" placeholder="Total Utilities" /></td>
-                </tr>
-                <tr id="Add-Expense-Row" class="hidden">
+                <tr id="Add-Expense-Row">
                     <th id="Add-Expense-Button" class="text-center" colspan="2"><i class="fa fa-plus-circle"></i> Add an expense</th>
                 </tr>
             </tbody>

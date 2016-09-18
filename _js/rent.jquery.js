@@ -18,8 +18,14 @@ RentSplit = function() {
 
     ///// APP-GLOBAL CONSTANTS /////
 
+    /// Selectors ///
+
     var AddARoommateButtonId = "Add-Roommate-Button"
+    var AddARoommateButtonSelector = "#" + AddARoommateButtonId
+    var AddAnExpenseRowId = "Add-Expense-Row"
+    var AddAnExpenseRowSelector = "#" + AddAnExpenseRowId
     var AddAnExpenseButtonId = "Add-Expense-Button"
+    var AddAnExpenseButtonSelector = "#" + AddAnExpenseButtonId
 
     var RoommateRowSelector = "[data-roommate-row]"
     var ExpenseRowSelector = "[data-expense-row]"
@@ -27,13 +33,19 @@ RentSplit = function() {
     var RoommateNameInputSelector = ".roommate-name"
     var RoommateIncomeInputSelector = ".roommate-income"
     var RoommateProportionSelector = ".roommate-proportion"
-    var RoommateAnyInputSelector = RoommateNameInputSelector + "," + RoommateIncomeInputSelector
+    var RoommateAnyInputFieldSelector = RoommateNameInputSelector + "," + RoommateIncomeInputSelector
 
-    var ExpenseNameInputSelector = ".expense-name"
-    var ExpenseCostInputSelector = ".expense-cost"
-    var ExpenseAnyInputSelector = ExpenseNameInputSelector + "," + ExpenseCostInputSelector
+    var ExpenseNameInputClassName = "expense-name"
+    var ExpenseNameInputSelector = "." + ExpenseNameInputClassName
+    var ExpenseCostInputClassName = "expense-cost"
+    var ExpenseCostInputSelector = "." + ExpenseCostInputClassName
+    var ExpenseAnyInputFieldSelector = ExpenseNameInputSelector + "," + ExpenseCostInputSelector
+    var ExpenseTableSelector = "#Expenses"
+    var ExpenseTableBodySelector = ExpenseTableSelector + ">tbody"
 
-    var AnyInputSelector = RoommateAnyInputSelector + "," + ExpenseAnyInputSelector
+    var AnyInputFieldSelector = RoommateAnyInputFieldSelector + "," + ExpenseAnyInputFieldSelector
+    var AnyInputButtonSelector = AddARoommateButtonSelector + "," + AddAnExpenseButtonSelector
+    var AnyInputSelector = AnyInputFieldSelector + "," + AnyInputButtonSelector
 
     var MoneyAmountInputSelector = RoommateIncomeInputSelector + "," + ExpenseCostInputSelector
 
@@ -41,9 +53,22 @@ RentSplit = function() {
     var ResultsTableBodySelector = ResultsTableSelector + ">tbody"
     var ResultsTableHeadRowSelector = ResultsTableSelector + ">thead>tr"
 
+    /// Label text ///
+
+    var RentExpenseTitle = "Rent"
+    var UtilitiesExpenseTitle = "Utilities"
+
+    var ExpenseTypePlaceholderText = "Expense Type"
+    var ExpenseCostPlaceholderText = "Monthly Cost"
 
     var RoommateNameColumnTitle = "Name"
     var TotalColumnTitle = "Total Cost"
+
+    /// Defaults ///
+
+    var DefaultExpenseCost = 100
+    var RentExpenseDefaultCost = 800
+    var UtilitiesExpenseDefaultCost = 50
 
 
     var self = {
@@ -58,20 +83,43 @@ RentSplit = function() {
          * The running number of roommates, used to generate generic table headers
          */
         rentRoommateCounter: 0,
+        /**
+         * The running number of expenses, used to generate generic table headers
+         */
+        expenseRowCounter: 0,
 
         /**
          * Called once when the DOM is ready
          */
         onReady: function() {
             self.registerListeners()
+            self.addDefaults()
             self.recalculateRentSplit()
+        },
+
+        /**
+         * De- and re-registers every listener
+         */
+        reregisterListeners: function() {
+            $(AnyInputSelector).off()
+            self.registerListeners()
         },
 
         /**
          * Registers every listener
          */
         registerListeners: function() {
-            $(AnyInputSelector).change(self.recalculateRentSplit)
+            $(AnyInputFieldSelector).change(self.recalculateRentSplit)
+            $(AddAnExpenseButtonSelector).click(self.addNewExpense)
+        },
+
+        /**
+         * Adds default expenses. In future versions, this will also add default roommates.
+         */
+        addDefaults: function() {
+            // TODO: Read GET parameters
+            self.addNewExpense(undefined, RentExpenseTitle, RentExpenseDefaultCost)
+            self.addNewExpense(undefined, UtilitiesExpenseTitle, UtilitiesExpenseDefaultCost)
         },
 
         /**
@@ -83,7 +131,7 @@ RentSplit = function() {
             var expenses = self.fetchExpenses()
 
             self.recalculateRoommateProportions(roommates)
-            self.recalculateTotalExpenses(expenses)
+            self.totalExpenses = self.recalculateTotalExpenses(expenses)
 
             self.fillOutResults(roommates, expenses)
         },
@@ -188,7 +236,56 @@ RentSplit = function() {
          * Throws away and recalculates the total of all given expenses
          */
         recalculateTotalExpenses: function(expenses) {
-            self.totalExpenses = expenses.reduce(function(prev, curr) { return prev.monthlyCost + curr.monthlyCost })
+            return expenses.reduce(function(prev, curr) {
+                return {monthlyCost: prev.monthlyCost + curr.monthlyCost}
+            }).monthlyCost
+        },
+
+        ///// ADDING ROWS ////
+
+        /**
+         * Adds a new expense input row, its corresponding expense output column, de- and re-registers all listeners,
+         * and recalculates the roommate split. If the type and cost are given, they are filled-in. If the type is
+         * given, it is made non-editable.
+         */
+        addNewExpense: function(event, type, cost) {
+            self.expenseRowCounter++
+            var $expenseButtonRow = $(AddAnExpenseRowSelector)
+            $expenseButtonRow.before(self.buildExpenseInputRow(type, cost))
+            self.reregisterListeners()
+            self.recalculateRentSplit()
+        },
+
+        /**
+         * Builds a string representation of a table row representing an expense input. If the type and cost are given,
+         * they are filled-in. If the type is given, it is made non-editable.
+         */
+        buildExpenseInputRow: function(type, cost) {
+            var row = "<tr data-expense-row=\"" + self.expenseRowCounter + "\">"
+            row += "<th"
+                + (type ? "" : " class=\"plain\"")
+                + ">"
+                + "<input"
+                    + " type=\"" + (type ? "hidden" : "text") + "\""
+                    + " class=\"" + ExpenseNameInputClassName + " text-right\""
+                    + (type ? " value=\"" + type + "\"" : "")
+                    + " size=\"9\""
+                    + " placeholder=\"" + ExpenseTypePlaceholderText + "\""
+                    + "/>"
+                + (type ? type : "")
+                + "</th>"
+            row += "<td class=\"plain vert-bottom\">"
+                    + "<input"
+                        + " type=\"number\""
+                        + (type ? " id=\"total-" + type + "\"" : "")
+                        + " class=\"" + ExpenseCostInputClassName + "\""
+                        + " required"
+                        + " value=\"" + (cost ? cost : DefaultExpenseCost) + "\""
+                        + " step=\"10\""
+                        + " placeholder=\"" + ExpenseCostPlaceholderText + "\""
+                        + "/>"
+                + "</td>"
+            return row + "</tr>"
         },
 
         ///// OUTPUT /////
@@ -241,7 +338,7 @@ RentSplit = function() {
          * Builds a string representation of a Results table row.
          */
         buildResultRow: function(roommate, expenses) {
-            var row = "<tr><th>" + roommate.name + "</th>"//"<td>yo</td></tr>"
+            var row = "<tr><th>" + roommate.name + "</th>"
             row += expenses.map(function(each) { return "<td>" + self.dollarFormat(roommate.proportion * each.monthlyCost) +
             "</td>" }).join()
             row += "<th>" + self.dollarFormat(roommate.proportion * self.totalExpenses) + "</th>"
