@@ -117,6 +117,7 @@ html.rent {
     max-width: 0;
 }
 
+.rent input.roommate-income,
 .rent input.expense-cost {
     width: 0;
     min-width: 100%;
