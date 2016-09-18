@@ -388,11 +388,21 @@ RentSplit = function() {
         ///// REMOVING ROWS /////
 
         /**
-         * Removes the expense input row referenced in the given error
+         * Removes the expense input row referenced in the given event
          */
         removeExpense: function(event) {
             var expenseRow = event.currentTarget.parentElement
             expenseRow.remove()
+            self.reregisterListeners()
+            self.recalculateRentSplit()
+        },
+
+        /**
+         * Removes the roommate input row referenced in the given event
+         */
+        removeRoommate: function(event) {
+            var roommateRow = event.currentTarget.parentElement
+            roommateRow.remove()
             self.reregisterListeners()
             self.recalculateRentSplit()
         },

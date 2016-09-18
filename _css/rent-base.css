@@ -52,6 +52,7 @@ html.rent {
 .rent button,
 .rent #Add-Roommate-Button,
 .rent #Add-Expense-Button,
+.rent .remove-roommate-button,
 .rent .remove-expense-button {
     cursor: pointer;
     transition-duration: 0.5s;
@@ -64,6 +65,8 @@ html.rent {
 .rent #Add-Roommate-Button:focus,
 .rent #Add-Expense-Button:hover,
 .rent #Add-Expense-Button:focus,
+.rent .remove-roommate-button:hover,
+.rent .remove-roommate-button:focus,
 .rent .remove-expense-button:hover,
 .rent .remove-expense-button:focus {
     box-shadow: 0 2pt 10pt rgba(0, 0, 0, 0.2), 0 2pt 5pt rgba(0, 0, 0, 0.2);
@@ -73,6 +76,7 @@ html.rent {
 .rent button:active,
 .rent #Add-Roommate-Button:active,
 .rent #Add-Expense-Button:active,
+.rent .remove-roommate-button:active,
 .rent .remove-expense-button:active {
     box-shadow: inset 0 2pt 10pt rgba(0, 0, 0, 0.2), inset 0 2pt 5pt rgba(0, 0, 0, 0.2);
 }
