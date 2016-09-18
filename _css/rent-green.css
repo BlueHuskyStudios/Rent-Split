@@ -12,3 +12,7 @@
 @import url("./rent-base.css");
 @import url("./rent-type.css");
 @import url("//shared.BHStudios.org/_css/visual_Clean_Green.php");
+
+.rent .color-danger {
+    color: #b71c1c;
+}
