@@ -30,7 +30,7 @@
 <header class="flex-row flex-horiz-space-between">
     <h1 class="brand title">Rent Split</h1>
     <aside class="flex-row flex-vert-center">
-        <a href="https://github.com/Supuhstar/Rent-Split-Calculator" class="fork flex-row flex-vert-center flex-nowrap">
+        <a href="https://github.com/Supuhstar/Rent-Split-Calculator" class="fork flex-row flex-vert-center flex-nowrap" tabindex="1">
             <b class="fork-cta">Fork me on GitHub!&emsp;</b> <i class="fa fa-github fa-2x" aria-hidden="true"></i>
         </a>
     </aside>
@@ -46,50 +46,31 @@
         <table id="Roommates" class="pretty">
             <caption>Roommates</caption>
             <thead>
-            <tr>
-                <th class="text-center">Name</th>
-                <th>Monthly Income</th>
-                <th class="text-center">Proportion</th>
-            </tr>
+                <tr>
+                    <th class="text-center">Name</th>
+                    <th>Monthly Income</th>
+                    <th class="text-center">Proportion</th>
+                </tr>
             </thead>
             <tbody>
-            <tr data-roommate-row="1">
-                <td class="plain"><input type="text" class="roommate-name" placeholder="Name" /></td>
-                <td class="plain"><input type="number" class="roommate-income" value="1000" placeholder="Income" /></td>
-                <td class="roommate-proportion">Calculating</td>
-            </tr>
-            <tr data-roommate-row="2">
-                <td class="plain"><input type="text" class="roommate-name" placeholder="Name" /></td>
-                <td class="plain"><input type="number" class="roommate-income" value="1000" placeholder="Income" /></td>
-                <td class="roommate-proportion">Calculating</td>
-            </tr>
-            <tr id="Add-Roommate-Row" class="hidden">
-                <th id="Add-Roommate-Button" class="text-center" colspan="3"><i class="fa fa-plus-circle"></i> Add a roommate</th>
-            </tr>
+                <tr id="Add-Roommate-Row">
+                    <th id="Add-Roommate-Button" class="text-center" colspan="3"><i class="fa fa-plus-circle"></i> Add a roommate</th>
+                </tr>
             </tbody>
         </table>
 
         <table id="Expenses" class="pretty">
             <caption>Shared Monthly Expenses</caption>
             <thead>
-            <tr>
-                <th>Type</th>
-                <th>Monthly Cost</th>
-            </tr>
+                <tr>
+                    <th>Type</th>
+                    <th>Monthly Cost</th>
+                </tr>
             </thead>
             <tbody>
-
-            <tr data-expense-row="1">
-                <th><input type="hidden" class="expense-name" value="Rent"/>Rent</th>
-                <td class="plain vert-bottom"><input type="number" id="total-rent" class="expense-cost" required pattern="($\s+)?(\d|,)+(\.\d+)?" value="500" step="100" placeholder="Total Rent" /></td>
-            </tr>
-            <tr data-expense-row="2">
-                <th><input type="hidden" class="expense-name" value="General Utilities"/>General Utilities</th>
-                <td class="plain vert-bottom"><input type="number" id="total-utilities" class="expense-cost" required pattern="($\s+)?\d+(\.\d+)?" value="50" step="10" placeholder="Total Utilities" /></td>
-            </tr>
-            <tr id="Add-Expense-Row" class="hidden">
-                <th id="Add-Expense-Button" class="text-center" colspan="2"><i class="fa fa-plus-circle"></i> Add an expense</th>
-            </tr>
+                <tr id="Add-Expense-Row">
+                    <th id="Add-Expense-Button" class="text-center" colspan="2" tabindex="0"><i class="fa fa-plus-circle"></i> Add an expense</th>
+                </tr>
             </tbody>
         </table>
     </section>
@@ -97,20 +78,17 @@
     <section id="output" class="big   flex-row flex-horiz-space-around">
         <table id="Results" class="pretty">
             <caption>Results</caption>
-            <thead>
-            <tr>
-                <th class="text-center">Name</th>
-                <th>Rent Share</th>
-                <th>Utilities Share</th>
-                <th>Total Share</th>
-            </tr>
-            </thead>
+            <thead><tr></tr></thead>
             <tbody></tbody>
         </table>
     </section>
 </main>
 
-<footer class="flex-column flex-vert-bottom flex-horiz-center   font-3qx text-uppercase   ">
-    <aside><a href="https://github.com/Supuhstar/Rent-Split-Calculator/releases/tag/1.0.1" target="_blank">Version 1.0.1</a></aside>
+<footer class="flex-column flex-vert-bottom flex-horiz-center   text-uppercase">
+    <aside class="text-center">
+        &copy; <a href="https://BHStudios.org" target="_blank">Blue Husky Studios</a> 2016, <a href="https://bit.ly/BH-1-PS">BH-1-PS</a>
+        <span class="hide-tiny">&ensp;&mdash;&ensp;</span><br class="show-tiny"/>
+        <a href="https://github.com/Supuhstar/Rent-Split-Calculator/releases/tag/1.1.0" target="_blank">Version 1.1.0</a>
+    </aside>
 </footer>
 </body>
