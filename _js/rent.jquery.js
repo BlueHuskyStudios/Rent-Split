@@ -26,6 +26,8 @@ RentSplit = function() {
     var AddAnExpenseRowSelector = "#" + AddAnExpenseRowId
     var AddAnExpenseButtonId = "Add-Expense-Button"
     var AddAnExpenseButtonSelector = "#" + AddAnExpenseButtonId
+    var RemoveAnExpenseButtonClassName = "remove-expense-button"
+    var RemoveAnExpenseButtonSelector = "." + RemoveAnExpenseButtonClassName
 
     var RoommateRowSelector = "[data-roommate-row]"
     var ExpenseRowSelector = "[data-expense-row]"
@@ -44,7 +46,7 @@ RentSplit = function() {
     var ExpenseTableBodySelector = ExpenseTableSelector + ">tbody"
 
     var AnyInputFieldSelector = RoommateAnyInputFieldSelector + "," + ExpenseAnyInputFieldSelector
-    var AnyInputButtonSelector = AddARoommateButtonSelector + "," + AddAnExpenseButtonSelector
+    var AnyInputButtonSelector = AddARoommateButtonSelector + "," + AddAnExpenseButtonSelector + "," + RemoveAnExpenseButtonSelector
     var AnyInputSelector = AnyInputFieldSelector + "," + AnyInputButtonSelector
 
     var MoneyAmountInputSelector = RoommateIncomeInputSelector + "," + ExpenseCostInputSelector
@@ -58,7 +60,7 @@ RentSplit = function() {
     var RentExpenseTitle = "Rent"
     var UtilitiesExpenseTitle = "Utilities"
 
-    var ExpenseTypePlaceholderText = "Expense Type"
+    var ExpenseTypePlaceholderText = "Type"
     var ExpenseCostPlaceholderText = "Monthly Cost"
 
     var RoommateNameColumnTitle = "Name"
@@ -111,6 +113,7 @@ RentSplit = function() {
         registerListeners: function() {
             $(AnyInputFieldSelector).change(self.recalculateRentSplit)
             $(AddAnExpenseButtonSelector).click(self.addNewExpense)
+            $(RemoveAnExpenseButtonSelector).click(self.removeExpense)
         },
 
         /**
@@ -118,8 +121,8 @@ RentSplit = function() {
          */
         addDefaults: function() {
             // TODO: Read GET parameters
-            self.addNewExpense(undefined, RentExpenseTitle, RentExpenseDefaultCost)
-            self.addNewExpense(undefined, UtilitiesExpenseTitle, UtilitiesExpenseDefaultCost)
+            self.addNewExpense(undefined, RentExpenseTitle, RentExpenseDefaultCost, true)
+            self.addNewExpense(undefined, UtilitiesExpenseTitle, UtilitiesExpenseDefaultCost, true)
         },
 
         /**
@@ -248,10 +251,10 @@ RentSplit = function() {
          * and recalculates the roommate split. If the type and cost are given, they are filled-in. If the type is
          * given, it is made non-editable.
          */
-        addNewExpense: function(event, type, cost) {
+        addNewExpense: function(event, type, cost, locked) {
             self.expenseRowCounter++
             var $expenseButtonRow = $(AddAnExpenseRowSelector)
-            $expenseButtonRow.before(self.buildExpenseInputRow(type, cost))
+            $expenseButtonRow.before(self.buildExpenseInputRow(type, cost, locked))
             self.reregisterListeners()
             self.recalculateRentSplit()
         },
@@ -259,20 +262,25 @@ RentSplit = function() {
         /**
          * Builds a string representation of a table row representing an expense input. If the type and cost are given,
          * they are filled-in. If the type is given, it is made non-editable.
+         *
+         * @param type   The type of expense; its name
+         * @param cost   The monthly cost of the expense
+         * @param locked Indicates whether the type should be editable and the row should be removable
          */
-        buildExpenseInputRow: function(type, cost) {
+        buildExpenseInputRow: function(type, cost, locked) {
             var row = "<tr data-expense-row=\"" + self.expenseRowCounter + "\">"
             row += "<th"
-                + (type ? "" : " class=\"plain\"")
+                + (locked ? "" : " class=\"plain\"")
                 + ">"
                 + "<input"
-                    + " type=\"" + (type ? "hidden" : "text") + "\""
+                    + " type=\"" + (locked ? "hidden" : "text") + "\""
                     + " class=\"" + ExpenseNameInputClassName + " text-right\""
                     + (type ? " value=\"" + type + "\"" : "")
-                    + " size=\"9\""
+                    + " size=\"8\""
+                    + " tabindex=0"
                     + " placeholder=\"" + ExpenseTypePlaceholderText + "\""
                     + "/>"
-                + (type ? type : "")
+                + (locked && type ? type : "")
                 + "</th>"
             row += "<td class=\"plain vert-bottom\">"
                     + "<input"
@@ -282,10 +290,31 @@ RentSplit = function() {
                         + " required"
                         + " value=\"" + (cost ? cost : DefaultExpenseCost) + "\""
                         + " step=\"10\""
+                        + " size=\"8\""
+                        + " tabindex=0"
                         + " placeholder=\"" + ExpenseCostPlaceholderText + "\""
                         + "/>"
                 + "</td>"
+            if (!locked) {
+                row += "<td"
+                    + " class=\"" + RemoveAnExpenseButtonClassName + " color-danger\""
+                    +" tabindex=\"0\">"
+                        + "<i class=\"fa fa-minus-circle\"></i>"
+                    + "</td>"
+            }
             return row + "</tr>"
+        },
+
+        ///// REMOVING ROWS /////
+
+        /**
+         * Removes the expense input row referenced in the given error
+         */
+        removeExpense: function(event) {
+            var expenseRow = event.currentTarget.parentElement
+            expenseRow.remove()
+            self.reregisterListeners()
+            self.recalculateRentSplit()
         },
 
         ///// OUTPUT /////
