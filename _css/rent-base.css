@@ -49,6 +49,13 @@ html.rent {
     width: fit-content;
 }
 
+.rent body .warning-message {
+    padding: 1em;
+    } @media screen and (max-width: 479px) { .rent body .warning-message {
+        margin: -1em;
+    }
+}
+
 .rent button,
 .rent #Add-Roommate-Button,
 .rent #Add-Expense-Button,
