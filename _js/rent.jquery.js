@@ -433,7 +433,7 @@ RentSplit = function() {
          * Using the given expense, generates and outputs the table column head to the Results output table
          */
         appendExpenseColumn: function($resultsTableHeadRow, expense) {
-            $resultsTableHeadRow.append("<th>" + expense.type + "</th>")
+            $resultsTableHeadRow.append("<th class='hide-small'>" + expense.type + "</th>")
         },
 
         /**
@@ -458,7 +458,7 @@ RentSplit = function() {
          */
         buildResultRow: function(roommate, expenses) {
             var row = "<tr><th>" + roommate.name + "</th>"
-            row += expenses.map(function(each) { return "<td>" + self.dollarFormat(roommate.proportion * each.monthlyCost) +
+            row += expenses.map(function(each) { return "<td class='hide-small'>" + self.dollarFormat(roommate.proportion * each.monthlyCost) +
             "</td>" }).join()
             row += "<th>" + self.dollarFormat(roommate.proportion * self.totalExpenses) + "</th>"
             return row + "</tr>"

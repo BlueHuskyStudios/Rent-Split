@@ -7,6 +7,8 @@
  * @see https://BlueHuskyStudios.GitHub.IO/Rent-Split-Calculator
  */
 
+ @import url("../Responsive-Tables/_css/responsive-tables.css");
+
 .rent html,
 html.rent {
     min-height: 100vh;
