@@ -13,9 +13,23 @@
 html.rent {
     min-height: 100vh;
 }
+
+.rent body>:not(noscript):not(dialog) {
+    filter: blur(0px);
+    transition-duration: 1s;
+    transition-property: filter;
+    transition-timing-function: ease-in-out;
+    z-index: -1;
+}
+
+.rent:not(.rent-ready) body>:not(noscript):not(dialog) {
+    filter: blur(24px);
+}
+
 .rent body {
     min-height: 80vh;
 }
+
 .rent main {
     height: 100%
 }
@@ -44,11 +58,14 @@ html.rent {
     max-height: -moz-fit-content;
     max-height: -ms-fit-content;
     max-height: fit-content;
+    max-width: 85vw;
     margin: auto !important;
+    text-align: center;
     width: -webkit-fit-content;
     width: -moz-fit-content;
     width: -ms-fit-content;
     width: fit-content;
+    z-index: 100;
 }
 
 .rent body .warning-message {

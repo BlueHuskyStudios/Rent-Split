@@ -111,6 +111,7 @@ RentSplit = function() {
             self.registerListeners()
             self.addDefaults()
             self.recalculateRentSplit()
+            self.presentToUser()
         },
 
         /**
@@ -156,6 +157,10 @@ RentSplit = function() {
             self.totalExpenses = self.recalculateTotalExpenses(expenses)
 
             self.fillOutResults(roommates, expenses)
+        },
+
+        presentToUser: function() {
+            $(".rent").addClass("rent-ready")
         },
 
         ///// FETCHING /////
