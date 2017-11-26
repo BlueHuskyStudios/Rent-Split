@@ -38,6 +38,7 @@ public external class JQuery() {
     public fun change(handler: () -> Unit): JQuery
 
     public fun append(str: String): JQuery
+    public fun before(content: JQuery): JQuery
     public fun ready(handler: () -> Unit): JQuery
     public fun text(text: String): JQuery
     public fun slideUp(): JQuery
@@ -45,10 +46,14 @@ public external class JQuery() {
     public fun hover(handlerIn: () -> Unit, handlerOut: () -> Unit): JQuery
     public fun next(): JQuery
     public fun parent(): JQuery
-    public fun `val`(): String
+    public fun `val`(): String?
 
     public fun off(): JQuery
+
+    public fun <To> map(mapper: JQueryMapper<To>): List<To>
 }
+
+public typealias JQueryMapper<To> = (row: Int, element: Element) -> To
 
 open public external class MouseEvent() {
     public val pageX: Double
@@ -66,6 +71,9 @@ public external fun jq(selector: String): JQuery
 
 @JsName("$")
 public external fun jq(selector: String, context: Element): JQuery
+
+@JsName("$")
+public external fun jq(selector: String, context: JQuery): JQuery
 
 @JsName("$")
 public external fun jq(callback: () -> Unit): JQuery
