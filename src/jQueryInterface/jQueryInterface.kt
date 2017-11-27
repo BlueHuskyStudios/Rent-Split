@@ -1,7 +1,8 @@
 package jQueryInterface
 
 import org.w3c.dom.Element
-
+import org.w3c.dom.events.Event
+import org.w3c.dom.events.EventTarget
 
 
 /**
@@ -39,6 +40,8 @@ public external class JQuery() {
 
     public fun append(str: String): JQuery
     public fun before(content: JQuery): JQuery
+    public fun before(content: String): JQuery
+    public fun empty()
     public fun ready(handler: () -> Unit): JQuery
     public fun text(text: String): JQuery
     public fun slideUp(): JQuery
@@ -50,15 +53,17 @@ public external class JQuery() {
 
     public fun off(): JQuery
 
-    public fun <To> map(mapper: JQueryMapper<To>): List<To>
+    public fun <To> map(mapper: JQueryMapper1<To>): Array<To>
+    public fun <To> map(mapper: JQueryMapper2<To>): Array<To>
 }
 
-public typealias JQueryMapper<To> = (row: Int, element: Element) -> To
+public typealias JQueryMapper2<To> = (row: Int, element: JQuery) -> To
+public typealias JQueryMapper1<To> = (row: Int, element: Element) -> To
 
-open public external class MouseEvent() {
+open public external class MouseEvent(): Event {
     public val pageX: Double
     public val pageY: Double
-    public fun preventDefault()
+//    public fun preventDefault()
     public fun isDefaultPrevented(): Boolean
 }
 
@@ -88,3 +93,7 @@ public external fun jq(el: Element): JQuery
 public external fun jq(): JQuery
 
 
+
+@Suppress("UnsafeCastFromDynamic")
+inline val EventTarget.parentElement: Element
+    get() = asDynamic().parentElement
