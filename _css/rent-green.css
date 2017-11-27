@@ -1,0 +1,23 @@
+/**
+ * Green-themed styles for Rent Split
+ *
+ * @dependency Visual Clean Green: https://shared.BHStudios.org/_css/visual_Clean_Green.php
+ *
+ * @since 2016-09-05
+ * @author Kyli Rouge of Blue Husky Studios
+ *
+ * @see https://BlueHuskyStudios.GitHub.IO/Rent-Split-Calculator
+ */
+
+@import url("./rent-base.css");
+@import url("./rent-type.css");
+@import url("//shared.BHStudios.org/_css/visual_Clean_Green.php");
+
+.rent .color-danger {
+    color: #b71c1c;
+}
+
+.rent .warning-message {
+    background-color: #FFEB3B;
+    color: #000;
+}

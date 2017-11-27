@@ -1,0 +1,135 @@
+/**
+ * Layout for Rent Split Calculator
+ *
+ * @since 2016-09-05
+ * @author Kyli Rouge of Blue Husky Studios
+ *
+ * @see https://BlueHuskyStudios.GitHub.IO/Rent-Split-Calculator
+ */
+
+.rent html,
+html.rent {
+    min-height: 100vh;
+}
+.rent body {
+    min-height: 80vh;
+}
+.rent main {
+    height: 100%
+}
+
+.rent header {
+    padding: 4pt 8pt;
+    min-height: auto;
+}
+
+.rent section {
+    margin: 2em 0;
+}
+
+.rent dialog {
+    box-shadow: 0 2em 5em rgba(0, 0, 0, .8), 0 0 0 .5em #FF1744, 0 1em 2em rgba(0, 0, 0, .5), 0 1pt 4pt rgba(0, 0, 0, .2);
+    border-radius: 2pt;
+    position: fixed;
+    top: 10%;
+    left: 0;
+    right: 0;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: -ms-fit-content;
+    height: fit-content;
+    max-height: -webkit-fit-content;
+    max-height: -moz-fit-content;
+    max-height: -ms-fit-content;
+    max-height: fit-content;
+    margin: auto !important;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: -ms-fit-content;
+    width: fit-content;
+}
+
+.rent body .warning-message {
+    padding: 1em;
+    } @media screen and (max-width: 479px) { .rent body .warning-message {
+        margin: -1em;
+    }
+}
+
+.rent button,
+.rent #Add-Roommate-Button,
+.rent #Add-Expense-Button,
+.rent .remove-roommate-button,
+.rent .remove-expense-button {
+    cursor: pointer;
+    transition-duration: 0.5s;
+    transition-property: box-shadow;
+}
+
+.rent button:hover,
+.rent button:focus,
+.rent #Add-Roommate-Button:hover,
+.rent #Add-Roommate-Button:focus,
+.rent #Add-Expense-Button:hover,
+.rent #Add-Expense-Button:focus,
+.rent .remove-roommate-button:hover,
+.rent .remove-roommate-button:focus,
+.rent .remove-expense-button:hover,
+.rent .remove-expense-button:focus {
+    box-shadow: 0 2pt 10pt rgba(0, 0, 0, 0.2), 0 2pt 5pt rgba(0, 0, 0, 0.2);
+    transition-duration: 0.2s;
+}
+
+.rent button:active,
+.rent #Add-Roommate-Button:active,
+.rent #Add-Expense-Button:active,
+.rent .remove-roommate-button:active,
+.rent .remove-expense-button:active {
+    box-shadow: inset 0 2pt 10pt rgba(0, 0, 0, 0.2), inset 0 2pt 5pt rgba(0, 0, 0, 0.2);
+}
+
+.rent td.vert-bottom {
+    vertical-align: bottom;
+}
+
+.rent.material input[type=text][placeholder]::before {
+    box-shadow: 0 0 0 10px magenta;
+    content: "Text";
+    position: absolute;
+    z-index: 1;
+    top: -1em;
+}
+
+.rent.material input[type=text][placeholder] {
+    position: relative;
+    z-index: 0;
+}
+
+.rent .fork:link,
+.rent .fork:visited,
+.rent :link .fa,
+.rent :visited .fa,
+.rent :link:hover .fa,
+.rent :visited:hover .fa,
+.rent :link:focus .fa,
+.rent :visited:focus .fa {
+    text-decoration: none !important;
+}
+
+
+.rent :link b.fork-cta {
+    text-overflow: clip;
+    white-space: nowrap;
+    overflow: hidden;
+    transition-property: max-width;
+    max-width: 50vw;
+}
+.rent :link:not(:hover):not(:focus) b.fork-cta {
+    max-width: 0;
+}
+
+.rent input.roommate-income,
+.rent input.expense-cost {
+    width: 0;
+    min-width: 100%;
+}
