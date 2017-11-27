@@ -67,6 +67,6 @@
     </LinkMapSettings>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_9" default="true" project-jdk-name="9.0" project-jdk-type="JavaSDK">
-    <output url="file://$PROJECT_DIR$/out" />
+    <output url="file://$PROJECT_DIR$/_js" />
   </component>
 </project>
