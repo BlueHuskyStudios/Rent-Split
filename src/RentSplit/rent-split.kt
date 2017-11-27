@@ -2,6 +2,8 @@
  *  Rent-Split.kt
  *  Made for Rent Split 2 by Ben Leggiero, starting 2017-11-23
  *
+ *  Written in Kotlin/JS 1.2
+ *
  *  Copyright Blue Husky Studios 2017 BH-1-PS
  */
 
@@ -206,6 +208,7 @@ class RentSplit {
     /**
      * Takes in a jQuery result containing a single roommate input row, parses it to a RentRoommate, and returns that
      */
+    @Suppress("UNUSED_PARAMETER")
     fun roommateRowToRoommate(index: Int, jq_roommateRow: JQuery): RentRoommate {
         this.roommateCounter++
         return RentRoommate(
@@ -218,6 +221,7 @@ class RentSplit {
     /**
      * Takes in a jQuery result containing a single expense input row, parses it to a RentExpense, and returns that
      */
+    @Suppress("UNUSED_PARAMETER")
     fun expenseRowToExpense(index: Int, jq_expenseRow: JQuery): RentExpense {
         return RentExpense(
                 jq(expenseNameInputSelector, jq_expenseRow).`val`() ?: "<EXPENSE>",
@@ -290,6 +294,7 @@ class RentSplit {
      * and recalculates the roommate split. If the type and cost are given, they are filled-in. If the type is
      * given, it is made non-editable.
      */
+    @Suppress("UNUSED_PARAMETER")
     fun addNewExpense(event: Event?, type: String?, cost: Double?, locked: Boolean, suppressCalculation: Boolean) {
         this.expenseCounter++
         val jq_expenseButtonRow = jq(addAnExpenseRowSelector)
@@ -360,6 +365,7 @@ class RentSplit {
      * Adds a new roommate input row, its corresponding roommate output row, de- and re-registers all listeners,
      * and recalculates the roommate split. If the name and income are given, they are filled-in.
      */
+    @Suppress("UNUSED_PARAMETER")
     fun addNewRoommate(event: Event?, name: String?, income: Double?, locked: Boolean, suppressCalculation: Boolean) {
         this.roommateCounter++
         val jq_roommateButtonRow = jq(addARoommateRowSelector)
@@ -455,6 +461,7 @@ class RentSplit {
      * Using the given roommates and expenses, generates and outputs the table column heads to the Results
      * output table
      */
+    @Suppress("UNUSED_PARAMETER")
     fun fillOutResultsTableHead(roommates: List<RentRoommate>, expenses: List<RentExpense>) {
         val jq_resultsTableHeadRow= jq(resultsTableHeadRowSelector)
         jq_resultsTableHeadRow.empty()
