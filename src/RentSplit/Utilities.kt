@@ -16,4 +16,6 @@ inline fun String?.isNeitherNullNorBlank(): Boolean = !isNullOrBlank()
 
 val Double.dollarFormat: String get() = "\$${toFixed(2)}"
 
-fun Double.toFixed(decimalPlaces: Int): String = "${Math.round(this * 100.0) / 100.0}"
+fun Double.toFixed(decimalPlaces: Int): String = this.asDynamic().toFixed(decimalPlaces) as String
+
+fun String.nonEmptyOrNull(): String? = if (isEmpty()) null else this

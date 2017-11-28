@@ -55,6 +55,9 @@ public external class JQuery() {
 
     public fun <To> map(mapper: JQueryMapper1<To>): Array<To>
     public fun <To> map(mapper: JQueryMapper2<To>): Array<To>
+
+    public val length: Int
+    public fun size(): Int
 }
 
 public typealias JQueryMapper2<To> = (row: Int, element: JQuery) -> To
