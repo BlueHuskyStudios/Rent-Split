@@ -4,9 +4,6 @@ if (typeof kotlin === 'undefined') {
 this['Rent Split 2'] = function (_, Kotlin) {
   'use strict';
   var $$importsForInline$$ = _.$$importsForInline$$ || (_.$$importsForInline$$ = {});
-  var defineInlineFunction = Kotlin.defineInlineFunction;
-  var wrapFunction = Kotlin.wrapFunction;
-  var throwCCE = Kotlin.throwCCE;
   var Unit = Kotlin.kotlin.Unit;
   var getCallableRef = Kotlin.getCallableRef;
   var asList = Kotlin.kotlin.collections.asList_us0mfu$;
@@ -15,25 +12,9 @@ this['Rent Split 2'] = function (_, Kotlin) {
   var toString = Kotlin.toString;
   var joinToString = Kotlin.kotlin.collections.joinToString_fmv235$;
   var Kind_CLASS = Kotlin.Kind.CLASS;
-  var isNeitherNullNorEmpty = defineInlineFunction('Rent Split 2.RentSplit.isNeitherNullNorEmpty_5cw0du$', function ($receiver) {
-    return !($receiver == null || $receiver.length === 0);
-  });
-  var isNeitherNullNorBlank = defineInlineFunction('Rent Split 2.RentSplit.isNeitherNullNorBlank_5cw0du$', wrapFunction(function () {
-    var isBlank = Kotlin.kotlin.text.isBlank_gw00vp$;
-    return function ($receiver) {
-      return !($receiver == null || isBlank($receiver));
-    };
-  }));
-  function get_dollarFormat($receiver) {
-    return '$' + toFixed($receiver, 2);
-  }
-  function toFixed($receiver, decimalPlaces) {
-    var tmp$;
-    return typeof (tmp$ = $receiver.toFixed(decimalPlaces)) === 'string' ? tmp$ : throwCCE();
-  }
-  function nonEmptyOrNull($receiver) {
-    return $receiver.length === 0 ? null : $receiver;
-  }
+  var defineInlineFunction = Kotlin.defineInlineFunction;
+  var wrapFunction = Kotlin.wrapFunction;
+  var throwCCE = Kotlin.throwCCE;
   var addARoommateRowId;
   var addARoommateRowSelector;
   var addARoommateButtonId;
@@ -50,6 +31,9 @@ this['Rent Split 2'] = function (_, Kotlin) {
   var roommateRowSelector;
   var expenseRowDataName;
   var expenseRowSelector;
+  var roommateResultRowDataName;
+  var roommateWhoOwesTooMuchClassName;
+  var roommateWhoOwesTooMuchSelector;
   var roommateNameInputClassName;
   var roommateNameInputSelector;
   var roommateIncomeInputClassName;
@@ -124,6 +108,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
     this.recalculateRoommateProportions_a4l0xx$(roommates);
     this.totalExpenses = this.recalculateTotalExpenses_sgeyu7$(expenses);
     this.fillOutResults_tm2r7c$(roommates, expenses);
+    this.notifyOfProblems_tm2r7c$(roommates, expenses);
   };
   RentSplit.prototype.presentToUser = function () {
     $('.rent').addClass('rent-ready');
@@ -301,17 +286,42 @@ this['Rent Split 2'] = function (_, Kotlin) {
   RentSplit.prototype.appendResultRow_3v0ovg$ = function (jq_resultsTableBody, roommate, expenses) {
     jq_resultsTableBody.append(this.buildResultRow_cxtimx$(roommate, expenses));
   };
-  function RentSplit$buildResultRow$lambda(closure$roommate) {
+  function RentSplit$buildResultRow$lambda(closure$roommate, this$RentSplit) {
     return function (it) {
-      return "<td class='hide-small'>" + get_dollarFormat(closure$roommate.proportion * it.monthlyCost) + '<\/td>';
+      return "<td class='hide-small'>" + get_dollarFormat(this$RentSplit.roommateContribution_ykbhv8$(closure$roommate, it)) + '<\/td>';
     };
   }
   RentSplit.prototype.buildResultRow_cxtimx$ = function (roommate, expenses) {
-    var tmp$;
-    var row = '<tr><th>' + roommate.name + '<\/th>';
-    row += joinToString(expenses, '', void 0, void 0, void 0, void 0, RentSplit$buildResultRow$lambda(roommate));
-    row = row + ('<th>' + get_dollarFormat(roommate.proportion * ((tmp$ = this.totalExpenses) != null ? tmp$ : 0.0)) + '<\/th>');
+    var row = '<tr data-' + roommateResultRowDataName + "='" + roommate.name + "'><th>" + roommate.name + '<\/th>';
+    row += joinToString(expenses, '', void 0, void 0, void 0, void 0, RentSplit$buildResultRow$lambda(roommate, this));
+    row += '<th>' + get_dollarFormat(this.roommateTotalContributions_pcqrmu$(roommate)) + '<\/th>';
     return row + '<\/tr>';
+  };
+  RentSplit.prototype.roommateContribution_ykbhv8$ = function (roommate, expense) {
+    return roommate.proportion * expense.monthlyCost;
+  };
+  RentSplit.prototype.roommateTotalContributions_pcqrmu$ = function (roommate) {
+    var tmp$;
+    return roommate.proportion * ((tmp$ = this.totalExpenses) != null ? tmp$ : 0.0);
+  };
+  var ArrayList_init = Kotlin.kotlin.collections.ArrayList_init_ww73n8$;
+  RentSplit.prototype.notifyOfProblems_tm2r7c$ = function (roommates, expenses) {
+    var destination = ArrayList_init();
+    var tmp$;
+    tmp$ = roommates.iterator();
+    while (tmp$.hasNext()) {
+      var element = tmp$.next();
+      var roommateTotalContributions = this.roommateTotalContributions_pcqrmu$(element);
+      if (roommateTotalContributions > element.monthlyIncome)
+        destination.add_11rb$(element);
+    }
+    var roommatesWhoOweTooMuch = destination;
+    var tmp$_0;
+    tmp$_0 = roommatesWhoOweTooMuch.iterator();
+    while (tmp$_0.hasNext()) {
+      var element_0 = tmp$_0.next();
+      $('[data-' + roommateResultRowDataName + "='" + element_0.name + "']").addClass(roommateWhoOwesTooMuchClassName).attr('title', 'This roommate owes too much!');
+    }
   };
   RentSplit.$metadata$ = {
     kind: Kind_CLASS,
@@ -402,15 +412,29 @@ this['Rent Split 2'] = function (_, Kotlin) {
   function main(args) {
     $(main$lambda);
   }
+  var isNeitherNullNorEmpty = defineInlineFunction('Rent Split 2.RentSplit.isNeitherNullNorEmpty_5cw0du$', function ($receiver) {
+    return !($receiver == null || $receiver.length === 0);
+  });
+  var isNeitherNullNorBlank = defineInlineFunction('Rent Split 2.RentSplit.isNeitherNullNorBlank_5cw0du$', wrapFunction(function () {
+    var isBlank = Kotlin.kotlin.text.isBlank_gw00vp$;
+    return function ($receiver) {
+      return !($receiver == null || isBlank($receiver));
+    };
+  }));
+  function get_dollarFormat($receiver) {
+    return '$' + toFixed($receiver, 2);
+  }
+  function toFixed($receiver, decimalPlaces) {
+    var tmp$;
+    return typeof (tmp$ = $receiver.toFixed(decimalPlaces)) === 'string' ? tmp$ : throwCCE();
+  }
+  function nonEmptyOrNull($receiver) {
+    return $receiver.length === 0 ? null : $receiver;
+  }
   var get_parentElement = defineInlineFunction('Rent Split 2.jQueryInterface.get_parentElement_s15u7w$', function ($receiver) {
     return $receiver.parentElement;
   });
   var package$RentSplit = _.RentSplit || (_.RentSplit = {});
-  package$RentSplit.isNeitherNullNorEmpty_5cw0du$ = isNeitherNullNorEmpty;
-  package$RentSplit.isNeitherNullNorBlank_5cw0du$ = isNeitherNullNorBlank;
-  package$RentSplit.get_dollarFormat_yrwdxr$ = get_dollarFormat;
-  package$RentSplit.toFixed_j6vyb1$ = toFixed;
-  package$RentSplit.nonEmptyOrNull_pdl1vz$ = nonEmptyOrNull;
   Object.defineProperty(package$RentSplit, 'addARoommateRowId', {
     get: function () {
       return addARoommateRowId;
@@ -489,6 +513,21 @@ this['Rent Split 2'] = function (_, Kotlin) {
   Object.defineProperty(package$RentSplit, 'expenseRowSelector', {
     get: function () {
       return expenseRowSelector;
+    }
+  });
+  Object.defineProperty(package$RentSplit, 'roommateResultRowDataName', {
+    get: function () {
+      return roommateResultRowDataName;
+    }
+  });
+  Object.defineProperty(package$RentSplit, 'roommateWhoOwesTooMuchClassName', {
+    get: function () {
+      return roommateWhoOwesTooMuchClassName;
+    }
+  });
+  Object.defineProperty(package$RentSplit, 'roommateWhoOwesTooMuchSelector', {
+    get: function () {
+      return roommateWhoOwesTooMuchSelector;
     }
   });
   Object.defineProperty(package$RentSplit, 'roommateNameInputClassName', {
@@ -646,6 +685,11 @@ this['Rent Split 2'] = function (_, Kotlin) {
   package$RentSplit.RentRoommate = RentRoommate;
   package$RentSplit.RentExpense = RentExpense;
   package$RentSplit.main_kand9s$ = main;
+  package$RentSplit.isNeitherNullNorEmpty_5cw0du$ = isNeitherNullNorEmpty;
+  package$RentSplit.isNeitherNullNorBlank_5cw0du$ = isNeitherNullNorBlank;
+  package$RentSplit.get_dollarFormat_yrwdxr$ = get_dollarFormat;
+  package$RentSplit.toFixed_j6vyb1$ = toFixed;
+  package$RentSplit.nonEmptyOrNull_pdl1vz$ = nonEmptyOrNull;
   var package$jQueryInterface = _.jQueryInterface || (_.jQueryInterface = {});
   package$jQueryInterface.get_parentElement_s15u7w$ = get_parentElement;
   addARoommateRowId = 'Add-Roommate-Row';
@@ -664,6 +708,9 @@ this['Rent Split 2'] = function (_, Kotlin) {
   roommateRowSelector = '[data-roommate-row]';
   expenseRowDataName = 'expense-row';
   expenseRowSelector = '[data-expense-row]';
+  roommateResultRowDataName = 'result-roommate-row';
+  roommateWhoOwesTooMuchClassName = 'roommate-owes-too-much';
+  roommateWhoOwesTooMuchSelector = '.roommate-owes-too-much';
   roommateNameInputClassName = 'roommate-name';
   roommateNameInputSelector = '.' + roommateNameInputClassName;
   roommateIncomeInputClassName = 'roommate-income';
