@@ -36,6 +36,10 @@ val roommateRowDataName = "roommate-row"
 val roommateRowSelector = "[data-$roommateRowDataName]"
 val expenseRowDataName = "expense-row"
 val expenseRowSelector = "[data-$expenseRowDataName]"
+val roommateResultRowDataName = "result-$roommateRowDataName"
+//val roommateResultRowSelector = "[data-$roommateResultRowDataName]"
+val roommateWhoOwesTooMuchClassName = "roommate-owes-too-much"
+val roommateWhoOwesTooMuchSelector = ".$roommateWhoOwesTooMuchClassName"
 
 //val roommateTableId = "Roommate"
 //val roommateTableSelector = "#$roommateTableId"
@@ -172,6 +176,8 @@ class RentSplit {
         this.totalExpenses = this.recalculateTotalExpenses(expenses)
 
         this.fillOutResults(roommates, expenses)
+
+        this.notifyOfProblems(roommates, expenses)
     }
 
 
@@ -519,13 +525,41 @@ class RentSplit {
      * Builds a string representation of a Results table row.
      */
     fun buildResultRow(roommate: RentRoommate, expenses: List<RentExpense>): String {
-        var row = "<tr><th>${roommate.name}</th>"
+        var row = "<tr data-$roommateResultRowDataName='${roommate.name}'><th>${roommate.name}</th>"
         row += expenses.joinToString(separator = "",
-                                     transform = { "<td class='hide-small'>${(roommate.proportion * it.monthlyCost).dollarFormat}</td>" })
-        row += "<th>${(roommate.proportion * (this.totalExpenses ?: 0.0)).dollarFormat}</th>"
+                                     transform = { "<td class='hide-small'>${roommateContribution(roommate, it).dollarFormat}</td>" })
+        row += "<th>${roommateTotalContributions(roommate).dollarFormat}</th>"
         return "$row</tr>"
     }
+
+
+    fun roommateContribution(roommate: RentRoommate, expense: RentExpense): Double
+            = roommate.proportion * expense.monthlyCost
+
+
+    /**
+     * Finds the total amount that the given roommate will contribute
+     */
+    fun roommateTotalContributions(roommate: RentRoommate): Double
+            = roommate.proportion * (this.totalExpenses ?: 0.0)
+
+
+    ///// CHECKING /////
+
+    fun notifyOfProblems(roommates: List<RentRoommate>, expenses: List<RentExpense>) {
+        val roommatesWhoOweTooMuch = roommates.filter { roommate ->
+            val roommateTotalContributions = roommateTotalContributions(roommate)
+            return@filter roommateTotalContributions > roommate.monthlyIncome
+        }
+
+        roommatesWhoOweTooMuch.forEach { roommate ->
+            jq("[data-$roommateResultRowDataName='${roommate.name}']")
+                    .addClass(roommateWhoOwesTooMuchClassName)
+                    .attr("title", "This roommate owes too much!")
+        }
+    }
 }
+
 
 
 /**
