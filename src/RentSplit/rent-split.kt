@@ -125,6 +125,7 @@ class RentSplit {
         this.presentToUser()
     }
 
+
     /**
      * De- and re-registers every listener
      */
@@ -132,6 +133,7 @@ class RentSplit {
         jq(anyInputSelector).off()
         this.registerListeners()
     }
+
 
     /**
      * Registers every listener
@@ -143,6 +145,7 @@ class RentSplit {
         jq(addARoommateButtonSelector).click(::addNewRoommate)
         jq(removeARoommateButtonSelector).click(::removeRoommate)
     }
+
 
     /**
      * Adds default expenses and roommates. Does not perform any calculations.
@@ -163,6 +166,7 @@ class RentSplit {
                            locked = true,
                            suppressCalculation = true)
     }
+
 
     /**
      * Throws out the old calculations and recalculates every roommate's share of every expense, and displays
@@ -195,12 +199,14 @@ class RentSplit {
         return this.roommateRowsToRoommates(jq(roommateRowSelector))
     }
 
+
     /**
      * Finds all expenses in the DOM, parses them into RentExpense objects, and returns them.
      */
     fun fetchExpenses(): List<RentExpense> {
         return this.expenseRowsToExpenses(jq(expenseRowSelector))
     }
+
 
     /**
      * Takes in a jQuery result containing roommate input rows, parses each to a RentRoommate, and returns the
@@ -211,6 +217,7 @@ class RentSplit {
         return jq_roommateRows.map(this::roommateRowToRoommate).asList()
     }
 
+
     /**
      * Takes in a jQuery result containing expense input rows, parses each to a RentExpense, and returns the
      * results in an array
@@ -218,6 +225,7 @@ class RentSplit {
     fun expenseRowsToExpenses(jq_expenseRows: JQuery): List<RentExpense> {
         return jq_expenseRows.map(this::expenseRowToExpense).asList()
     }
+
 
     /**
      * Takes in a jQuery result containing a single roommate input row, parses it to a RentRoommate, and returns that
@@ -231,6 +239,7 @@ class RentSplit {
         )
     }
 
+
     /**
      * Takes in a jQuery result containing a single expense input row, parses it to a RentExpense, and returns that
      */
@@ -242,6 +251,7 @@ class RentSplit {
                 jq_expenseRow
         )
     }
+
 
     ///// CALCULATION /////
 
@@ -255,6 +265,7 @@ class RentSplit {
         this.displayRoommateProportions(roommates)
     }
 
+
     /**
      * Trows away and recalculates the total income
      */
@@ -266,12 +277,14 @@ class RentSplit {
         }.monthlyIncome
     }
 
+
     /**
      * Throws away and recalculates each roommate's proportion of the total income
      */
     fun recalculateRoommateProportion(roommate: RentRoommate) {
         roommate.proportion = roommate.monthlyIncome / (this.totalIncome ?: 0.0)
     }
+
 
     /**
      * Displays each roommate's proportions of the total income in their input row
@@ -280,12 +293,14 @@ class RentSplit {
         roommates.forEach(this::displayRoommateProportion)
     }
 
+
     /**
      * Displays a single roommate's proportions of the total income in their input row
      */
     fun displayRoommateProportion(roommate: RentRoommate) {
         jq(roommateProportionSelector, roommate.originalDOMElement).html((roommate.proportion * 100).toFixed(2) + "%")
     }
+
 
     /**
      * Throws away and recalculates the total of all given expenses
@@ -464,6 +479,7 @@ class RentSplit {
         this.recalculateRentSplit()
     }
 
+
     /**
      * Removes the roommate input row referenced in the given event
      */
@@ -474,6 +490,7 @@ class RentSplit {
         this.recalculateRentSplit()
     }
 
+
     ///// OUTPUT /////
 
     /**
@@ -483,6 +500,7 @@ class RentSplit {
         this.fillOutResultsTableHead(roommates, expenses)
         this.fillOutResultsTableBody(roommates, expenses)
     }
+
 
     /**
      * Using the given roommates and expenses, generates and outputs the table column heads to the Results
@@ -497,12 +515,14 @@ class RentSplit {
         jq_resultsTableHeadRow.append("<th class=\"text-center\">$totalColumnTitle</th>")
     }
 
+
     /**
      * Using the given expense, generates and outputs the table column head to the Results output table
      */
     fun appendExpenseColumn(jq_resultsTableHeadRow: JQuery, expense: RentExpense) {
         jq_resultsTableHeadRow.append("<th class='hide-small'>${expense.type}</th>")
     }
+
 
     /**
      * Using the given roommates and expenses, generates and outputs the roommate table rows to the Results
@@ -514,12 +534,14 @@ class RentSplit {
         roommates.forEach { this.appendResultRow(jq_resultsTableBody, it, expenses) }
     }
 
+
     /**
      * Using the given roommate and expenses, generates and outputs the table row to the Results output table
      */
     fun appendResultRow(jq_resultsTableBody: JQuery, roommate: RentRoommate, expenses: List<RentExpense>) {
         jq_resultsTableBody.append(this.buildResultRow(roommate, expenses))
     }
+
 
     /**
      * Builds a string representation of a Results table row.
@@ -570,10 +592,15 @@ data class RentRoommate(val name: String,
                         val originalDOMElement: JQuery,
                         var proportion: Double = 0.0)
 
+
+
 /**
  * The RentExpense class represents an expense and its monthly cost.
  */
-data class RentExpense(val type: String, val monthlyCost: Double, val originalDOMElement: JQuery)
+data class RentExpense(val type: String,
+                       val monthlyCost: Double,
+                       val originalDOMElement: JQuery)
+
 
 
 fun main(args: Array<String>) {
