@@ -19,3 +19,11 @@ val Double.dollarFormat: String get() = "\$${toFixed(2)}"
 fun Double.toFixed(decimalPlaces: Int): String = this.asDynamic().toFixed(decimalPlaces) as String
 
 fun String.nonEmptyOrNull(): String? = if (isEmpty()) null else this
+
+fun <From, To> Collection<From>.reduceTo(start: To, transformer: (To, From) -> To): To {
+    var value = start
+    forEach {
+        value = transformer(value, it)
+    }
+    return value
+}

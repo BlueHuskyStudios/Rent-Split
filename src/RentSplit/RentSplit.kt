@@ -12,6 +12,7 @@
 package RentSplit
 
 import jQueryInterface.*
+import org.bh.tools.base.func.observing
 import org.w3c.dom.events.Event
 
 
@@ -102,20 +103,25 @@ class RentSplit {
 
     ///// SETUP /////
 
-    /**
-     * The total amount of income of all roommates
-     */
-    var totalIncome: Double? = undefined
+//    /**
+//     * The total amount of income of all roommates
+//     */
+//    var totalIncome: Double? = undefined
 
-    /**
-     * The total amount of expenses of all roommates
-     */
-    var totalExpenses: Double? = undefined
+//    /**
+//     * The total amount of expenses of all roommates
+//     */
+//    var totalExpenses: Double? = undefined
 
-    /**
-     * The running number of expenses, used to generate generic table headers
-     */
-    var expenseCounter: Double = 0.0
+//    /**
+//     * The running number of expenses, used to generate generic table headers
+//     */
+//    var expenseCounter: Double = 0.0
+
+
+    var state: RentSplitState by observing(RentSplitState.default, didSet = { _, _ ->
+        this.recalculateRentSplit()
+    })
 
 
     fun onReady() {
@@ -139,7 +145,7 @@ class RentSplit {
      * Registers every listener
      */
     fun registerListeners() {
-        jq(anyInputFieldSelector).change(::recalculateRentSplit)
+        jq(anyInputFieldSelector).change(::reloadStateFromPage)
         jq(addAnExpenseButtonSelector).click(::addNewExpense)
         jq(removeAnExpenseButtonSelector).click(::removeExpense)
         jq(addARoommateButtonSelector).click(::addNewRoommate)
@@ -169,15 +175,23 @@ class RentSplit {
 
 
     /**
+     * Re-loads the app state based on user input on the page
+     */
+    fun reloadStateFromPage() {
+        state = RentSplitState(roommates = fetchRoommates(), expenses = fetchExpenses())
+    }
+
+
+    /**
      * Throws out the old calculations and recalculates every roommate's share of every expense, and displays
      * the output
      */
     fun recalculateRentSplit() {
-        val roommates = this.fetchRoommates()
-        val expenses = this.fetchExpenses()
+        val roommates = state.roommates
+        val expenses = state.expenses
 
         this.recalculateRoommateProportions(roommates)
-        this.totalExpenses = this.recalculateTotalExpenses(expenses)
+        val totalExpenses = this.totalExpenses(expenses)
 
         this.fillOutResults(roommates, expenses)
 
@@ -303,21 +317,17 @@ class RentSplit {
 
 
     /**
-     * Throws away and recalculates the total of all given expenses
+     * Calculates the total of all given expenses
      */
-    fun recalculateTotalExpenses(expenses: List<RentExpense>): Double {
-        return expenses.reduce({ acc, curr ->
-                                   return@reduce RentExpense(monthlyCost = acc.monthlyCost + curr.monthlyCost,
-                                                             type = "<EXPENSE>",
-                                                             originalDOMElement = jq())
-                               }).monthlyCost
+    fun totalExpenses(expenses: List<RentExpense>): Double {
+        return expenses.map(RentExpense::monthlyCost).reduceTo(0.0, Double::plus)
     }
 
 
     ///// ADDING ROWS ////
 
     fun addNewExpense(event: Event) {
-        this.addNewExpense(event, null, null, locked = false, suppressCalculation = false)
+        this.addNewExpense(event = event, type = null, cost = null, locked = false, suppressCalculation = false)
     }
 
 
@@ -328,7 +338,6 @@ class RentSplit {
      */
     @Suppress("UNUSED_PARAMETER")
     fun addNewExpense(event: Event?, type: String?, cost: Double?, locked: Boolean, suppressCalculation: Boolean) {
-        this.expenseCounter++
         val jq_expenseButtonRow = jq(addAnExpenseRowSelector)
         jq_expenseButtonRow.before(this.buildExpenseInputRow(type, cost, locked))
         this.reRegisterListeners()
@@ -346,17 +355,17 @@ class RentSplit {
      * @param cost   The monthly cost of the expense
      * @param locked Indicates whether the type should be editable and the row should be removable
      */
-    fun buildExpenseInputRow(type: String?, cost: Double?, locked: Boolean): String {
-        var row = "<tr data-" + expenseRowDataName + "=\"" + this.expenseCounter + "\">"
+    fun buildExpenseInputRow(index: Int, type: String?, cost: Double?, locked: Boolean): String {
+        var row = "<tr data-$expenseRowDataName=\"$index\">"
         row +=
                 "<th${(if (locked) "" else " class=\"plain\"")}>" +
                         "<input" +
-                        " type=\"" + (if (locked) "hidden" else "text") + "\"" +
-                        " class=\"" + expenseNameInputClassName + "   text-right\"" +
-                        (if (type.isNeitherNullNorEmpty()) " value=\"" + type + "\"" else "") +
+                        " type=\"${if (locked) "hidden" else "text"}\"" +
+                        " class=\"$expenseNameInputClassName   text-right\"" +
+                        (if (type.isNeitherNullNorEmpty()) " value=\"$type\"" else "") +
                         " size=\"8\"" +
                         " tabindex=0" +
-                        " placeholder=\"" + expenseTypePlaceholderText + "\"" +
+                        " placeholder=\"$expenseTypePlaceholderText\"" +
                         "/>" +
                         (if (locked && type.isNeitherNullNorEmpty()) type else "") +
                         "</th>"
@@ -366,9 +375,9 @@ class RentSplit {
                         "<input" +
                         " type=\"number\"" +
                         (if (type.isNeitherNullNorEmpty()) " id=\"total-$type\"" else "") +
-                        " class=\"" + expenseCostInputClassName + "\"" +
+                        " class=\"$expenseCostInputClassName\"" +
                         " required" +
-                        " value=\"${(cost ?: defaultExpenseCost)}\"" +
+                        " value=\"${cost ?: defaultExpenseCost}\"" +
                         " step=\"10\"" +
                         " size=\"8\"" +
                         " tabindex=0" +
@@ -562,8 +571,8 @@ class RentSplit {
     /**
      * Finds the total amount that the given roommate will contribute
      */
-    fun roommateTotalContributions(roommate: RentRoommate): Double
-            = roommate.proportion * (this.totalExpenses ?: 0.0)
+    fun roommateTotalContributions(roommate: RentRoommate, allExpenses: List<RentExpense>): Double
+            = roommate.proportion * (this.totalExpenses(allExpenses) ?: 0.0)
 
 
     ///// CHECKING /////
