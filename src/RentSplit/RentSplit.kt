@@ -38,9 +38,6 @@ val roommateRowSelector = "[data-$roommateRowDataName]"
 val expenseRowDataName = "expense-row"
 val expenseRowSelector = "[data-$expenseRowDataName]"
 val roommateResultRowDataName = "result-$roommateRowDataName"
-//val roommateResultRowSelector = "[data-$roommateResultRowDataName]"
-val roommateWhoOwesTooMuchClassName = "roommate-owes-too-much"
-val roommateWhoOwesTooMuchSelector = ".$roommateWhoOwesTooMuchClassName"
 
 //val roommateTableId = "Roommate"
 //val roommateTableSelector = "#$roommateTableId"
@@ -51,6 +48,15 @@ val roommateIncomeInputSelector = "." + roommateIncomeInputClassName
 val roommateProportionClassName = "roommate-proportion"
 val roommateProportionSelector = "." + roommateProportionClassName
 val roommateAnyInputFieldSelector = "$roommateNameInputSelector,$roommateIncomeInputSelector"
+//val roommateResultRowSelector = "[data-$roommateResultRowDataName]"
+val roommateWhoOwesTooMuchClassName = "roommate-owes-too-much"
+//val roommateWhoOwesTooMuchSelector = ".$roommateWhoOwesTooMuchClassName"
+val roommateRemovabilityDataName = "roommate-removable"
+val roommateRemovabilityAttribute = "data-$roommateRemovabilityDataName"
+val roommateRemovabilitySelector = "[$roommateRemovabilityAttribute]"
+val roommateRenamabilityDataName = "roommate-renamable"
+val roommateRenamabilityAttribute = "data-$roommateRenamabilityDataName"
+val roommateRenamabilitySelector = "[$roommateRenamabilityAttribute]"
 
 val expenseNameInputClassName = "expense-name"
 val expenseNameInputSelector = "." + expenseNameInputClassName
@@ -59,6 +65,12 @@ val expenseCostInputSelector = "." + expenseCostInputClassName
 val expenseAnyInputFieldSelector = "$expenseNameInputSelector,$expenseCostInputSelector"
 //val expenseTableSelector = "#Expenses"
 //val expenseTableBodySelector = expenseTableSelector + ">tbody"
+val expenseRemovabilityDataName = "expense-removable"
+val expenseRemovabilityAttribute = "data-$expenseRemovabilityDataName"
+val expenseRemovabilitySelector = "[$expenseRemovabilityAttribute]"
+val expenseRenamabilityDataName = "expense-renamable"
+val expenseRenamabilityAttribute = "data-$expenseRenamabilityDataName"
+val expenseRenamabilitySelector = "[$expenseRenamabilityAttribute]"
 
 val anyInputFieldSelector = "$roommateAnyInputFieldSelector,$expenseAnyInputFieldSelector"
 val anyInputButtonSelector = "$addARoommateButtonSelector,$addAnExpenseButtonSelector,$removeAnExpenseButtonSelector"
@@ -119,14 +131,14 @@ class RentSplit {
 //    var expenseCounter: Double = 0.0
 
 
-    var state: RentSplitState by observing(RentSplitState.default, didSet = { _, _ ->
+    var state: RentSplitState by observing(RentSplitState.load(), didSet = { _, _ ->
+        this.reRegisterListeners()
         this.recalculateRentSplit()
     })
 
 
     fun onReady() {
         this.registerListeners()
-        this.addDefaults()
         this.recalculateRentSplit()
         this.presentToUser()
     }
@@ -146,31 +158,10 @@ class RentSplit {
      */
     fun registerListeners() {
         jq(anyInputFieldSelector).change(::reloadStateFromPage)
-        jq(addAnExpenseButtonSelector).click(::addNewExpense)
-        jq(removeAnExpenseButtonSelector).click(::removeExpense)
-        jq(addARoommateButtonSelector).click(::addNewRoommate)
-        jq(removeARoommateButtonSelector).click(::removeRoommate)
-    }
-
-
-    /**
-     * Adds default expenses and roommates. Does not perform any calculations.
-     */
-    fun addDefaults() {
-        // TODO: Read GET parameters
-        this.addNewRoommate(event = undefined, name = null, income = null, locked = true, suppressCalculation = true)
-        this.addNewRoommate(event = undefined, name = null, income = null, locked = true, suppressCalculation = true)
-
-        this.addNewExpense(event = undefined,
-                           type = rentExpenseTitle,
-                           cost = defaultRentExpenseCost,
-                           locked = true,
-                           suppressCalculation = true)
-        this.addNewExpense(event = undefined,
-                           type = utilitiesExpenseTitle,
-                           cost = defaultUtilitiesExpenseCost,
-                           locked = true,
-                           suppressCalculation = true)
+        jq(addAnExpenseButtonSelector).click(::didPressNewExpenseButton)
+        jq(removeAnExpenseButtonSelector).click(::didPressRemoveExpenseButton)
+        jq(addARoommateButtonSelector).click(::didPressNewRoommateButton)
+        jq(removeARoommateButtonSelector).click(::didPressRemoveRoommateButton)
     }
 
 
@@ -191,7 +182,7 @@ class RentSplit {
         val expenses = state.expenses
 
         this.recalculateRoommateProportions(roommates)
-        val totalExpenses = this.totalExpenses(expenses)
+        //val totalExpenses = this.totalExpenses(expenses)
 
         this.fillOutResults(roommates, expenses)
 
@@ -209,7 +200,7 @@ class RentSplit {
     /**
      * Finds all roommates in the DOM, parses them into RentRoommate objects, and returns them.
      */
-    fun fetchRoommates(): List<RentRoommate> {
+    fun fetchRoommates(): RentRoommates {
         return this.roommateRowsToRoommates(jq(roommateRowSelector))
     }
 
@@ -217,7 +208,7 @@ class RentSplit {
     /**
      * Finds all expenses in the DOM, parses them into RentExpense objects, and returns them.
      */
-    fun fetchExpenses(): List<RentExpense> {
+    fun fetchExpenses(): RentExpenses {
         return this.expenseRowsToExpenses(jq(expenseRowSelector))
     }
 
@@ -226,9 +217,9 @@ class RentSplit {
      * Takes in a jQuery result containing roommate input rows, parses each to a RentRoommate, and returns the
      * results in an array
      */
-    fun roommateRowsToRoommates(jq_roommateRows: JQuery): List<RentRoommate> {
+    fun roommateRowsToRoommates(jq_roommateRows: JQuery): RentRoommates {
 //        this.roommateCounter = 0
-        return jq_roommateRows.map(this::roommateRowToRoommate).asList()
+        return RentRoommates(jq_roommateRows.map(this::roommateRowToRoommate).asList())
     }
 
 
@@ -236,8 +227,8 @@ class RentSplit {
      * Takes in a jQuery result containing expense input rows, parses each to a RentExpense, and returns the
      * results in an array
      */
-    fun expenseRowsToExpenses(jq_expenseRows: JQuery): List<RentExpense> {
-        return jq_expenseRows.map(this::expenseRowToExpense).asList()
+    fun expenseRowsToExpenses(jq_expenseRows: JQuery): RentExpenses {
+        return RentExpenses(jq_expenseRows.map(this::expenseRowToExpense).asList())
     }
 
 
@@ -247,9 +238,15 @@ class RentSplit {
     @Suppress("UNUSED_PARAMETER")
     fun roommateRowToRoommate(index: Int, jq_roommateRow: JQuery): RentRoommate {
         return RentRoommate(
-                jq(roommateNameInputSelector, jq_roommateRow).`val`()?.nonEmptyOrNull() ?: "Roommate #${index + 1}",
-                jq(roommateIncomeInputSelector, jq_roommateRow).`val`()?.toDoubleOrNull() ?: Double.NaN,
-                jq_roommateRow
+                name = RentRoommate.name(ideal = jq(roommateNameInputSelector,
+                                                              jq_roommateRow).`val`()?.nonEmptyOrNull(),
+                                                   backupNumber = index + 1),
+                monthlyIncome = jq(roommateIncomeInputSelector, jq_roommateRow).`val`()?.toDoubleOrNull() ?: Double.NaN,
+                removable = jq(roommateRemovabilitySelector,
+                               jq_roommateRow).attr(roommateRemovabilityAttribute).toBooleanOrNull() ?: true,
+                renamable = jq(roommateRenamabilitySelector,
+                               jq_roommateRow).attr(roommateRenamabilityAttribute).toBooleanOrNull() ?: true,
+                originalDOMElement = jq_roommateRow
         )
     }
 
@@ -260,9 +257,15 @@ class RentSplit {
     @Suppress("UNUSED_PARAMETER")
     fun expenseRowToExpense(index: Int, jq_expenseRow: JQuery): RentExpense {
         return RentExpense(
-                jq(expenseNameInputSelector, jq_expenseRow).`val`()?.nonEmptyOrNull() ?: "Expense #${index + 1}",
-                jq(expenseCostInputSelector, jq_expenseRow).`val`()?.toDoubleOrNull() ?: Double.NaN,
-                jq_expenseRow
+                type = RentExpense.name(ideal = jq(expenseNameInputSelector,
+                                                   jq_expenseRow).`val`()?.nonEmptyOrNull(),
+                                        backupNumber = index + 1),
+                monthlyCost = jq(expenseCostInputSelector, jq_expenseRow).`val`()?.toDoubleOrNull() ?: Double.NaN,
+                removable = jq(expenseRemovabilitySelector,
+                               jq_expenseRow).attr(expenseRemovabilityAttribute).toBooleanOrNull() ?: true,
+                renamable = jq(expenseRenamabilitySelector,
+                               jq_expenseRow).attr(expenseRenamabilityAttribute).toBooleanOrNull() ?: true,
+                originalDOMElement = jq_expenseRow
         )
     }
 
@@ -273,9 +276,9 @@ class RentSplit {
      * Trows away and recalculates the total income and each roommate's proportion of that, then displays the
      * proportions in the roommate input table
      */
-    fun recalculateRoommateProportions(roommates: List<RentRoommate>) {
-        this.totalIncome = this.recalculateTotalIncome(roommates)
-        roommates.forEach(this::recalculateRoommateProportion)
+    fun recalculateRoommateProportions(roommates: RentRoommates) {
+        val totalIncome = this.recalculateTotalIncome(roommates)
+        roommates.allRoommates.forEach { this.recalculateRoommateProportion(it, totalIncome) }
         this.displayRoommateProportions(roommates)
     }
 
@@ -283,28 +286,24 @@ class RentSplit {
     /**
      * Trows away and recalculates the total income
      */
-    fun recalculateTotalIncome(roommates: List<RentRoommate>): Double {
-        return roommates.reduce { acc, curr ->
-            return@reduce RentRoommate(monthlyIncome = acc.monthlyIncome + curr.monthlyIncome,
-                                       name = "TMP",
-                                       originalDOMElement = jq())
-        }.monthlyIncome
+    fun recalculateTotalIncome(roommates: RentRoommates): Double {
+        return roommates.allRoommates.map(RentRoommate::monthlyIncome).reduceTo(0.0, Double::plus)
     }
 
 
     /**
      * Throws away and recalculates each roommate's proportion of the total income
      */
-    fun recalculateRoommateProportion(roommate: RentRoommate) {
-        roommate.proportion = roommate.monthlyIncome / (this.totalIncome ?: 0.0)
+    fun recalculateRoommateProportion(roommate: RentRoommate, totalIncome: Double) {
+        roommate.proportion = roommate.monthlyIncome / totalIncome
     }
 
 
     /**
      * Displays each roommate's proportions of the total income in their input row
      */
-    fun displayRoommateProportions(roommates: List<RentRoommate>) {
-        roommates.forEach(this::displayRoommateProportion)
+    fun displayRoommateProportions(roommates: RentRoommates) {
+        roommates.allRoommates.forEach(this::displayRoommateProportion)
     }
 
 
@@ -312,38 +311,29 @@ class RentSplit {
      * Displays a single roommate's proportions of the total income in their input row
      */
     fun displayRoommateProportion(roommate: RentRoommate) {
-        jq(roommateProportionSelector, roommate.originalDOMElement).html((roommate.proportion * 100).toFixed(2) + "%")
-    }
-
-
-    /**
-     * Calculates the total of all given expenses
-     */
-    fun totalExpenses(expenses: List<RentExpense>): Double {
-        return expenses.map(RentExpense::monthlyCost).reduceTo(0.0, Double::plus)
+        roommate.originalDOMElement?.let { originalDOMElement ->
+            jq(roommateProportionSelector, originalDOMElement).html("${((roommate.proportion ?: 0.0) * 100).toFixed(2)}%")
+        }
     }
 
 
     ///// ADDING ROWS ////
 
-    fun addNewExpense(event: Event) {
-        this.addNewExpense(event = event, type = null, cost = null, locked = false, suppressCalculation = false)
+    fun didPressNewExpenseButton(event: Event) {
+        this.addNewExpense(event = event,
+                           expense = RentExpense("",
+                                                 monthlyCost = defaultExpenseCost,
+                                                 removable = true,
+                                                 renamable = true))
     }
 
 
     /**
-     * Adds a new expense input row, its corresponding expense output column, de- and re-registers all listeners,
-     * and recalculates the roommate split. If the type and cost are given, they are filled-in. If the type is
-     * given, it is made non-editable.
+     * Adds a new expense to the calculator
      */
     @Suppress("UNUSED_PARAMETER")
-    fun addNewExpense(event: Event?, type: String?, cost: Double?, locked: Boolean, suppressCalculation: Boolean) {
-        val jq_expenseButtonRow = jq(addAnExpenseRowSelector)
-        jq_expenseButtonRow.before(this.buildExpenseInputRow(type, cost, locked))
-        this.reRegisterListeners()
-        if (!suppressCalculation) {
-            this.recalculateRentSplit()
-        }
+    fun addNewExpense(event: Event?, expense: RentExpense) {
+        state = state.addingNewExpense(expense)
     }
 
 
@@ -351,23 +341,25 @@ class RentSplit {
      * Builds a string representation of a table row representing an expense input. If the type and cost are given,
      * they are filled-in.
      *
-     * @param type   The type of expense; its name
-     * @param cost   The monthly cost of the expense
-     * @param locked Indicates whether the type should be editable and the row should be removable
+     * @param type      The type of expense; its name
+     * @param cost      The monthly cost of the expense
+     * @param renamable Indicates whether the type should be editable
+     * @param removable Indicates whether the row should be removable
      */
-    fun buildExpenseInputRow(index: Int, type: String?, cost: Double?, locked: Boolean): String {
+    fun buildExpenseInputRow(index: Int, type: String?, cost: Double?, renamable: Boolean, removable: Boolean): String {
+
         var row = "<tr data-$expenseRowDataName=\"$index\">"
         row +=
-                "<th${(if (locked) "" else " class=\"plain\"")}>" +
+                "<th${(if (renamable) "" else " class=\"plain\"")}>" +
                         "<input" +
-                        " type=\"${if (locked) "hidden" else "text"}\"" +
+                        " type=\"${if (renamable) "hidden" else "text"}\"" +
                         " class=\"$expenseNameInputClassName   text-right\"" +
                         (if (type.isNeitherNullNorEmpty()) " value=\"$type\"" else "") +
                         " size=\"8\"" +
                         " tabindex=0" +
                         " placeholder=\"$expenseTypePlaceholderText\"" +
                         "/>" +
-                        (if (locked && type.isNeitherNullNorEmpty()) type else "") +
+                        (if (renamable && type.isNeitherNullNorEmpty()) type else "") +
                         "</th>"
 
         row +=
@@ -385,7 +377,7 @@ class RentSplit {
                         "/>" +
                         "</td>"
 
-        if (!locked) {
+        if (removable) {
             row +=
                     "<td" +
                             " class=\"$removeAnExpenseButtonClassName color-danger\"" +
@@ -397,23 +389,21 @@ class RentSplit {
     }
 
 
-    fun addNewRoommate(event: Event) {
-        return this.addNewRoommate(event, name = null, income = null, locked = false, suppressCalculation = false)
+    fun didPressNewRoommateButton(event: Event) {
+        return this.addNewRoommate(event = event,
+                                   roommate = RentRoommate(name = "",
+                                                           monthlyIncome = defaultRoommateIncome,
+                                                           removable = true,
+                                                           renamable = true))
     }
 
 
     /**
-     * Adds a new roommate input row, its corresponding roommate output row, de- and re-registers all listeners,
-     * and recalculates the roommate split. If the name and income are given, they are filled-in.
+     * Adds a new roommate to the calculator
      */
     @Suppress("UNUSED_PARAMETER")
-    fun addNewRoommate(event: Event?, name: String?, income: Double?, locked: Boolean, suppressCalculation: Boolean) {
-        val jq_roommateButtonRow = jq(addARoommateRowSelector)
-        jq_roommateButtonRow.before(this.buildRoommateInputRow(name, income, locked))
-        this.reRegisterListeners()
-        if (!suppressCalculation) {
-            this.recalculateRentSplit()
-        }
+    fun addNewRoommate(event: Event?, roommate: RentRoommate) {
+        state = state.addingNewRoommate(roommate)
     }
 
 
@@ -472,7 +462,12 @@ class RentSplit {
 
 
     fun numberOfRoommates(): Int {
-        return jq(roommateRowSelector).length
+        return state.roommates.allRoommates.size
+    }
+
+
+    fun numberOfExpenses(): Int {
+        return state.expenses.allExpenses.size
     }
 
 
@@ -481,22 +476,20 @@ class RentSplit {
     /**
      * Removes the expense input row referenced in the given event
      */
-    fun removeExpense(event: Event) {
+    fun didPressRemoveExpenseButton(event: Event) {
         val expenseRow = event.currentTarget?.parentElement
         expenseRow?.remove()
-        this.reRegisterListeners()
-        this.recalculateRentSplit()
+        reloadStateFromPage()
     }
 
 
     /**
      * Removes the roommate input row referenced in the given event
      */
-    fun removeRoommate(event: Event) {
+    fun didPressRemoveRoommateButton(event: Event) {
         val roommateRow = event.currentTarget?.parentElement
         roommateRow?.remove()
-        this.reRegisterListeners()
-        this.recalculateRentSplit()
+        reloadStateFromPage()
     }
 
 
@@ -505,7 +498,7 @@ class RentSplit {
     /**
      * Using the given roommates and expenses, this throws away and regenerates the Results output table
      */
-    fun fillOutResults(roommates: List<RentRoommate>, expenses: List<RentExpense>) {
+    fun fillOutResults(roommates: RentRoommates, expenses: RentExpenses) {
         this.fillOutResultsTableHead(roommates, expenses)
         this.fillOutResultsTableBody(roommates, expenses)
     }
@@ -516,11 +509,11 @@ class RentSplit {
      * output table
      */
     @Suppress("UNUSED_PARAMETER")
-    fun fillOutResultsTableHead(roommates: List<RentRoommate>, expenses: List<RentExpense>) {
+    fun fillOutResultsTableHead(roommates: RentRoommates, expenses: RentExpenses) {
         val jq_resultsTableHeadRow = jq(resultsTableHeadRowSelector)
         jq_resultsTableHeadRow.empty()
         jq_resultsTableHeadRow.append("<th class=\"text-center\">$roommateNameColumnTitle</th>")
-        expenses.forEach { this.appendExpenseColumn(jq_resultsTableHeadRow, it) }
+        expenses.allExpenses.forEach { this.appendExpenseColumn(jq_resultsTableHeadRow, it) }
         jq_resultsTableHeadRow.append("<th class=\"text-center\">$totalColumnTitle</th>")
     }
 
@@ -537,78 +530,63 @@ class RentSplit {
      * Using the given roommates and expenses, generates and outputs the roommate table rows to the Results
      * output table
      */
-    fun fillOutResultsTableBody(roommates: List<RentRoommate>, expenses: List<RentExpense>) {
+    fun fillOutResultsTableBody(roommates: RentRoommates, expenses: RentExpenses) {
         val jq_resultsTableBody = jq(resultsTableBodySelector)
         jq_resultsTableBody.empty()
-        roommates.forEach { this.appendResultRow(jq_resultsTableBody, it, expenses) }
+        roommates.allRoommates.forEach { this.appendResultRow(jq_resultsTableBody, it, expenses) }
     }
 
 
     /**
      * Using the given roommate and expenses, generates and outputs the table row to the Results output table
      */
-    fun appendResultRow(jq_resultsTableBody: JQuery, roommate: RentRoommate, expenses: List<RentExpense>) {
-        jq_resultsTableBody.append(this.buildResultRow(roommate, expenses))
+    fun appendResultRow(jq_resultsTableBody: JQuery, roommate: RentRoommate, expenses: RentExpenses) {
+        jq_resultsTableBody.append(this.buildResultRow(rowIndex = numberOfRoommates(),
+                                                       roommate = roommate,
+                                                       expenses = expenses))
     }
 
 
     /**
      * Builds a string representation of a Results table row.
      */
-    fun buildResultRow(roommate: RentRoommate, expenses: List<RentExpense>): String {
-        var row = "<tr data-$roommateResultRowDataName='${roommate.name}'><th>${roommate.name}</th>"
-        row += expenses.joinToString(separator = "",
-                                     transform = { "<td class='hide-small'>${roommateContribution(roommate, it).dollarFormat}</td>" })
-        row += "<th>${roommateTotalContributions(roommate).dollarFormat}</th>"
+    fun buildResultRow(rowIndex: Int, roommate: RentRoommate, expenses: RentExpenses): String {
+        val roommateName = RentRoommate.name(ideal = roommate.name.nonEmptyOrNull(), backupNumber = rowIndex + 1)
+        var row = "<tr data-$roommateResultRowDataName='$roommateName'><th>$roommateName</th>"
+        row += expenses.allExpenses.joinToString(
+                separator = "",
+                transform = { "<td class='hide-small'>${roommateContribution(roommate, it).dollarFormat}</td>" })
+        row += "<th>${roommateTotalContributions(roommate, totalExpenses = expenses.totalExpenses).dollarFormat}</th>"
         return "$row</tr>"
     }
 
 
     fun roommateContribution(roommate: RentRoommate, expense: RentExpense): Double
-            = roommate.proportion * expense.monthlyCost
+            = (roommate.proportion ?: 0.0) * expense.monthlyCost
 
 
     /**
      * Finds the total amount that the given roommate will contribute
      */
-    fun roommateTotalContributions(roommate: RentRoommate, allExpenses: List<RentExpense>): Double
-            = roommate.proportion * (this.totalExpenses(allExpenses) ?: 0.0)
+    fun roommateTotalContributions(roommate: RentRoommate, totalExpenses: Double): Double
+            = (roommate.proportion ?: 0.0) * totalExpenses
 
 
     ///// CHECKING /////
 
-    fun notifyOfProblems(roommates: List<RentRoommate>, expenses: List<RentExpense>) {
-        val roommatesWhoOweTooMuch = roommates.filter { roommate ->
-            val roommateTotalContributions = roommateTotalContributions(roommate)
+    fun notifyOfProblems(roommates: RentRoommates, expenses: RentExpenses) {
+        val roommatesWhoOweTooMuch = roommates.allRoommates.mapIndexed { index, roommate ->  Pair(index, roommate) }.filter { (_, roommate) ->
+            val roommateTotalContributions = roommateTotalContributions(roommate, expenses.totalExpenses)
             return@filter roommateTotalContributions > roommate.monthlyIncome
         }
 
-        roommatesWhoOweTooMuch.forEach { roommate ->
-            jq("[data-$roommateResultRowDataName='${roommate.name}']")
+        roommatesWhoOweTooMuch.forEach { (index, roommate) ->
+            jq("[data-$roommateResultRowDataName='${roommate.nonEmptyName(index = index) }']")
                     .addClass(roommateWhoOwesTooMuchClassName)
                     .attr("title", "This roommate owes too much!")
         }
     }
 }
-
-
-
-/**
- * The RentRoommate class represents a roommate and their monthly income.
- */
-data class RentRoommate(val name: String,
-                        val monthlyIncome: Double,
-                        val originalDOMElement: JQuery,
-                        var proportion: Double = 0.0)
-
-
-
-/**
- * The RentExpense class represents an expense and its monthly cost.
- */
-data class RentExpense(val type: String,
-                       val monthlyCost: Double,
-                       val originalDOMElement: JQuery)
 
 
 
