@@ -301,6 +301,7 @@ class RentSplit {
         this.regenerateExpenseInputTable()
     }
 
+
     private fun <Resource> regenerateInputTable(rowSelector: String,
                                                 allResources: List<Resource>,
                                                 configureExistingInput: (existingInput: Element, resource: Resource) -> Unit,
@@ -320,7 +321,11 @@ class RentSplit {
 
 
     private fun regenerateExpenseInputTable() {
-        regenerateInputTable(expenseRowSelector, state.expenses.allExpenses, ::configureExistingExpenseInputRow, ::insertNewExpenseInputRow)
+        regenerateInputTable(expenseRowSelector, state.expenses.allExpenses,
+                             { existingExpenseInput, expense ->
+                                 configureExistingExpenseInputRow(existingExpenseInput,
+                                                                  expense)
+                             }) { explicitIndex, expense -> insertNewExpenseInputRow(explicitIndex, expense) }
     }
 
 

@@ -491,12 +491,20 @@ this['Rent Split 2'] = function (_, Kotlin) {
       insertNewInput((tmp$_0_0 = index, index = tmp$_0_0 + 1 | 0, tmp$_0_0) + offset | 0, item);
     }
   };
+  function RentSplit$regenerateExpenseInputTable$lambda(this$RentSplit) {
+    return function (existingExpenseInput, expense) {
+      this$RentSplit.configureExistingExpenseInputRow_0(existingExpenseInput, expense);
+      return Unit;
+    };
+  }
+  function RentSplit$regenerateExpenseInputTable$lambda_0(this$RentSplit) {
+    return function (explicitIndex, expense) {
+      this$RentSplit.insertNewExpenseInputRow_nly0u5$(explicitIndex, expense);
+      return Unit;
+    };
+  }
   RentSplit.prototype.regenerateExpenseInputTable_0 = function () {
-    this.regenerateInputTable_0(expenseRowSelector, this.state.expenses.allExpenses, getCallableRef('configureExistingExpenseInputRow', function ($receiver, existingExpenseInput, expense) {
-      return $receiver.configureExistingExpenseInputRow_0(existingExpenseInput, expense), Unit;
-    }.bind(null, this)), getCallableRef('insertNewExpenseInputRow', function ($receiver, explicitIndex, expense) {
-      return $receiver.insertNewExpenseInputRow_nly0u5$(explicitIndex, expense), Unit;
-    }.bind(null, this)));
+    this.regenerateInputTable_0(expenseRowSelector, this.state.expenses.allExpenses, RentSplit$regenerateExpenseInputTable$lambda(this), RentSplit$regenerateExpenseInputTable$lambda_0(this));
   };
   RentSplit.prototype.configureExistingExpenseInputRow_0 = function (existingExpenseInput, expense) {
     var jq_existingExpenseInput = $(existingExpenseInput);
