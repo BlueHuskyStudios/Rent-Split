@@ -7,26 +7,26 @@ import jQueryInterface.JQuery
  */
 data class RentExpense(val type: String,
                        val monthlyCost: Double,
-                       val removable: Boolean,
-                       val renamable: Boolean,
-                       val originalDOMElement: JQuery? = null) {
+                       val isRemovable: Boolean,
+                       val isRenamable: Boolean,
+                       var originalDOMElement: JQuery? = null) {
     companion object {
         val initialRent
             get() = RentExpense(rentExpenseTitle,
                                 defaultRentExpenseCost,
-                                removable = false,
-                                renamable = false)
+                                isRemovable = false,
+                                isRenamable = false)
         val initialUtilities
             get() = RentExpense(utilitiesExpenseTitle,
                                 defaultUtilitiesExpenseCost,
-                                removable = false,
-                                renamable = false)
+                                isRemovable = false,
+                                isRenamable = false)
 
-        fun name(ideal: String?, backupNumber: Int): String {
-            return ideal?.nonEmptyOrNull() ?: numberedName(backupNumber)
+        fun type(ideal: String?, backupNumber: Int): String {
+            return ideal?.nonEmptyOrNull() ?: numberedType(backupNumber)
         }
 
-        fun numberedName(number: Int): String {
+        fun numberedType(number: Int): String {
             return "Expense #$number"
         }
     }

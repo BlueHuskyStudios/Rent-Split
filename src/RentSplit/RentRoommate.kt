@@ -7,16 +7,16 @@ import jQueryInterface.JQuery
  */
 data class RentRoommate(val name: String,
                         val monthlyIncome: Double,
-                        val removable: Boolean,
-                        val renamable: Boolean,
-                        val originalDOMElement: JQuery? = null,
+                        val isRemovable: Boolean,
+                        val isRenamable: Boolean,
+                        var originalDOMElement: JQuery? = null,
                         var proportion: Double? = null) {
 
     companion object {
         val initial get() = RentRoommate("",
                                          defaultRoommateIncome,
-                                         removable = false,
-                                         renamable = false)
+                                         isRemovable = false,
+                                         isRenamable = true)
 
         fun name(ideal: String?, backupNumber: Int): String {
             return ideal?.nonEmptyOrNull() ?: numberedName(backupNumber)

@@ -1,5 +1,7 @@
 package RentSplit
 
+import jQueryInterface.JQuery
+import org.w3c.dom.Element
 import kotlin.text.toByte
 
 /*
