@@ -41,6 +41,6 @@ data class RentRoommates(val allRoommates: List<RentRoommate>,
                          val totalIncome: Double = allRoommates.map(RentRoommate::monthlyIncome).reduceTo(0.0, Double::plus)) {
 
     fun adding(newRoommate: RentRoommate): RentRoommates {
-        return copy(allRoommates = allRoommates + newRoommate)
+        return copy(allRoommates = allRoommates.adding(newRoommate))
     }
 }

@@ -36,3 +36,10 @@ fun <From, To> Collection<From>.reduceTo(start: To, transformer: (To, From) -> T
     }
     return value
 }
+
+
+fun <Element> List<Element>.adding(newElement: Element): List<Element> {
+    val newExpenses = this.toMutableList()
+    newExpenses.add(newElement)
+    return newExpenses.toList()
+}

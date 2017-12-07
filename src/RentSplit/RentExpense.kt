@@ -39,6 +39,6 @@ data class RentExpenses(val allExpenses: List<RentExpense>,
                                 .reduceTo(0.0, Double::plus)) {
 
     fun adding(newExpense: RentExpense): RentExpenses {
-        return copy(allExpenses = allExpenses + newExpense)
+        return this.copy(allExpenses = allExpenses.adding(newExpense))
     }
 }

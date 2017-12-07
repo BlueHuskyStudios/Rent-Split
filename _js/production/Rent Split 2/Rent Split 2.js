@@ -6,7 +6,6 @@ this['Rent Split 2'] = function (_, Kotlin) {
   var $$importsForInline$$ = _.$$importsForInline$$ || (_.$$importsForInline$$ = {});
   var Kind_OBJECT = Kotlin.Kind.OBJECT;
   var Kind_CLASS = Kotlin.Kind.CLASS;
-  var plus = Kotlin.kotlin.collections.plus_qloxvw$;
   var getPropertyCallableRef = Kotlin.getPropertyCallableRef;
   var getCallableRef = Kotlin.getCallableRef;
   var PropertyMetadata = Kotlin.PropertyMetadata;
@@ -23,6 +22,8 @@ this['Rent Split 2'] = function (_, Kotlin) {
   var wrapFunction = Kotlin.wrapFunction;
   var throwCCE = Kotlin.throwCCE;
   var equals = Kotlin.equals;
+  var toMutableList = Kotlin.kotlin.collections.toMutableList_4c7yge$;
+  var toList = Kotlin.kotlin.collections.toList_7wnvza$;
   var Any = Object;
   var ReadWriteProperty = Kotlin.kotlin.properties.ReadWriteProperty;
   var ObservableProperty = Kotlin.kotlin.properties.ObservableProperty;
@@ -130,7 +131,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
     this.totalExpenses = totalExpenses;
   }
   RentExpenses.prototype.adding_pbrwj2$ = function (newExpense) {
-    return this.copy_3hmhdd$(plus(this.allExpenses, newExpense));
+    return this.copy_3hmhdd$(adding(this.allExpenses, newExpense));
   };
   RentExpenses.$metadata$ = {
     kind: Kind_CLASS,
@@ -263,7 +264,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
     this.totalIncome = totalIncome;
   }
   RentRoommates.prototype.adding_pcqrmu$ = function (newRoommate) {
-    return this.copy_c53kkp$(plus(this.allRoommates, newRoommate));
+    return this.copy_c53kkp$(adding(this.allRoommates, newRoommate));
   };
   RentRoommates.$metadata$ = {
     kind: Kind_CLASS,
@@ -823,6 +824,11 @@ this['Rent Split 2'] = function (_, Kotlin) {
     }
     return value.v;
   }
+  function adding($receiver, newElement) {
+    var newExpenses = toMutableList($receiver);
+    newExpenses.add_11rb$(newElement);
+    return toList(newExpenses);
+  }
   var asList_0 = defineInlineFunction('Rent Split 2.jQueryInterface.asList_9ufosi$', wrapFunction(function () {
     var asList = Kotlin.kotlin.collections.asList_us0mfu$;
     return function ($receiver) {
@@ -1244,6 +1250,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
   package$RentSplit.toBooleanOrNull_pdl1vz$ = toBooleanOrNull;
   package$RentSplit.toBoolean_f4dhtg$ = toBoolean;
   package$RentSplit.reduceTo_i8uhts$ = reduceTo;
+  package$RentSplit.adding_bv23uc$ = adding;
   var package$jQueryInterface = _.jQueryInterface || (_.jQueryInterface = {});
   package$jQueryInterface.asList_9ufosi$ = asList_0;
   package$jQueryInterface.attr_mndj09$ = attr;
