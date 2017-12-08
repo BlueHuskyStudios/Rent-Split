@@ -73,6 +73,10 @@ val expenseRenamabilityDataName = "expense-renamable"
 val expenseRenamabilityAttribute = "data-$expenseRenamabilityDataName"
 val expenseRenamabilitySelector = "[$expenseRenamabilityAttribute]"
 
+val resultRowDataName = "result-roommate-row"
+val resultRowAttribute = "data-$resultRowDataName"
+val resultRowSelector = "[$resultRowAttribute]"
+
 val anyInputFieldSelector = "$roommateAnyInputFieldSelector,$expenseAnyInputFieldSelector"
 val anyInputButtonSelector = "$addARoommateButtonSelector,$addAnExpenseButtonSelector,$removeAnExpenseButtonSelector"
 val anyInputSelector = "$anyInputFieldSelector,$anyInputButtonSelector"
@@ -479,17 +483,17 @@ class RentSplit {
 
     fun insertNewRoommateInputRow(explicitIndex: Int? = null, roommate: RentRoommate) {
         val roommateInputHtml = buildRoommateInputRow(index = explicitIndex ?: numberOfExpensesOnPage(),
-                                                    roommate = roommate)
+                                                      roommate = roommate)
         roommate.originalDOMElement = jq(addARoommateRowSelector).before(roommateInputHtml).prev()
     }
 
 
     fun buildRoommateInputRow(index: Int, roommate: RentRoommate): String {
         return buildRoommateInputRow(index = index,
-                                    name = roommate.name,
-                                    income = roommate.monthlyIncome,
-                                    isRenamable = roommate.isRenamable,
-                                    isRemovable = roommate.isRemovable)
+                                     name = roommate.name,
+                                     income = roommate.monthlyIncome,
+                                     isRenamable = roommate.isRenamable,
+                                     isRemovable = roommate.isRemovable)
     }
 
 
@@ -613,7 +617,7 @@ class RentSplit {
         val jq_resultsTableHeadRow = jq(resultsTableHeadRowSelector)
         jq_resultsTableHeadRow.empty()
         jq_resultsTableHeadRow.append("<th class=\"text-center\">$roommateNameColumnTitle</th>")
-        expenses.allExpenses.forEach { this.appendExpenseColumn(jq_resultsTableHeadRow, it) }
+        expenses.allExpenses.forEach { this.appendExpenseColumnHeader(jq_resultsTableHeadRow, it) }
         jq_resultsTableHeadRow.append("<th class=\"text-center\">$totalColumnTitle</th>")
     }
 
@@ -621,7 +625,7 @@ class RentSplit {
     /**
      * Using the given expense, generates and outputs the table column head to the Results output table
      */
-    fun appendExpenseColumn(jq_resultsTableHeadRow: JQuery, expense: RentExpense) {
+    fun appendExpenseColumnHeader(jq_resultsTableHeadRow: JQuery, expense: RentExpense) {
         jq_resultsTableHeadRow.append("<th class='hide-small'>${expense.type}</th>")
     }
 
@@ -641,7 +645,7 @@ class RentSplit {
      * Using the given roommate and expenses, generates and outputs the table row to the Results output table
      */
     fun appendResultRow(jq_resultsTableBody: JQuery, roommate: RentRoommate, expenses: RentExpenses) {
-        jq_resultsTableBody.append(this.buildResultRow(rowIndex = numberOfRoommates(),
+        jq_resultsTableBody.append(this.buildResultRow(rowIndex = jq(resultRowSelector).length,
                                                        roommate = roommate,
                                                        expenses = expenses))
     }

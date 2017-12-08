@@ -334,6 +334,9 @@ this['Rent Split 2'] = function (_, Kotlin) {
   var expenseRenamabilityDataName;
   var expenseRenamabilityAttribute;
   var expenseRenamabilitySelector;
+  var resultRowDataName;
+  var resultRowAttribute;
+  var resultRowSelector;
   var anyInputFieldSelector;
   var anyInputButtonSelector;
   var anyInputSelector;
@@ -626,11 +629,11 @@ this['Rent Split 2'] = function (_, Kotlin) {
     tmp$ = expenses.allExpenses.iterator();
     while (tmp$.hasNext()) {
       var element = tmp$.next();
-      this.appendExpenseColumn_7jb809$(jq_resultsTableHeadRow, element);
+      this.appendExpenseColumnHeader_7jb809$(jq_resultsTableHeadRow, element);
     }
     jq_resultsTableHeadRow.append('<th class="text-center">Total Cost<\/th>');
   };
-  RentSplit.prototype.appendExpenseColumn_7jb809$ = function (jq_resultsTableHeadRow, expense) {
+  RentSplit.prototype.appendExpenseColumnHeader_7jb809$ = function (jq_resultsTableHeadRow, expense) {
     jq_resultsTableHeadRow.append("<th class='hide-small'>" + expense.type + '<\/th>');
   };
   RentSplit.prototype.fillOutResultsTableBody_ra4pb4$ = function (roommates, expenses) {
@@ -644,7 +647,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
     }
   };
   RentSplit.prototype.appendResultRow_sx45l8$ = function (jq_resultsTableBody, roommate, expenses) {
-    jq_resultsTableBody.append(this.buildResultRow_day3s3$(this.numberOfRoommates(), roommate, expenses));
+    jq_resultsTableBody.append(this.buildResultRow_day3s3$($(resultRowSelector).length, roommate, expenses));
   };
   function RentSplit$buildResultRow$lambda(closure$roommate, this$RentSplit) {
     return function (it) {
@@ -1141,6 +1144,21 @@ this['Rent Split 2'] = function (_, Kotlin) {
       return expenseRenamabilitySelector;
     }
   });
+  Object.defineProperty(package$RentSplit, 'resultRowDataName', {
+    get: function () {
+      return resultRowDataName;
+    }
+  });
+  Object.defineProperty(package$RentSplit, 'resultRowAttribute', {
+    get: function () {
+      return resultRowAttribute;
+    }
+  });
+  Object.defineProperty(package$RentSplit, 'resultRowSelector', {
+    get: function () {
+      return resultRowSelector;
+    }
+  });
   Object.defineProperty(package$RentSplit, 'anyInputFieldSelector', {
     get: function () {
       return anyInputFieldSelector;
@@ -1307,6 +1325,9 @@ this['Rent Split 2'] = function (_, Kotlin) {
   expenseRenamabilityDataName = 'expense-renamable';
   expenseRenamabilityAttribute = 'data-expense-renamable';
   expenseRenamabilitySelector = '[data-expense-renamable]';
+  resultRowDataName = 'result-roommate-row';
+  resultRowAttribute = 'data-result-roommate-row';
+  resultRowSelector = '[data-result-roommate-row]';
   anyInputFieldSelector = '.roommate-name,.roommate-income,.expense-type,.expense-cost';
   anyInputButtonSelector = '#Add-Roommate-Button,#Add-Expense-Button,.remove-expense-button';
   anyInputSelector = '.roommate-name,.roommate-income,.expense-type,.expense-cost,#Add-Roommate-Button,#Add-Expense-Button,.remove-expense-button';
