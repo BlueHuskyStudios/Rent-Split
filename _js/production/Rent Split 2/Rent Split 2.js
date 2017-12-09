@@ -131,7 +131,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
     this.totalExpenses = totalExpenses;
   }
   RentExpenses.prototype.adding_pbrwj2$ = function (newExpense) {
-    return this.copy_3hmhdd$(adding(this.allExpenses, newExpense));
+    return new RentExpenses(adding(this.allExpenses, newExpense));
   };
   RentExpenses.$metadata$ = {
     kind: Kind_CLASS,
@@ -264,7 +264,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
     this.totalIncome = totalIncome;
   }
   RentRoommates.prototype.adding_pcqrmu$ = function (newRoommate) {
-    return this.copy_c53kkp$(adding(this.allRoommates, newRoommate));
+    return new RentRoommates(adding(this.allRoommates, newRoommate));
   };
   RentRoommates.$metadata$ = {
     kind: Kind_CLASS,

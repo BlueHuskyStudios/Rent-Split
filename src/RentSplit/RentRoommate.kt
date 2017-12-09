@@ -38,9 +38,10 @@ fun RentRoommate.nonEmptyName(index: Int) = RentRoommate.name(ideal = name.nonEm
  * A group of `RentRoommate`s
  */
 data class RentRoommates(val allRoommates: List<RentRoommate>,
-                         val totalIncome: Double = allRoommates.map(RentRoommate::monthlyIncome).reduceTo(0.0, Double::plus)) {
+                         val totalIncome: Double = allRoommates.map(RentRoommate::monthlyIncome)
+                                 .reduceTo(0.0, Double::plus)) {
 
     fun adding(newRoommate: RentRoommate): RentRoommates {
-        return copy(allRoommates = allRoommates.adding(newRoommate))
+        return RentRoommates(allRoommates = allRoommates.adding(newRoommate))
     }
 }
