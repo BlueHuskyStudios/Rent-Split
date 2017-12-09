@@ -617,7 +617,7 @@ class RentSplit {
         val jq_resultsTableHeadRow = jq(resultsTableHeadRowSelector)
         jq_resultsTableHeadRow.empty()
         jq_resultsTableHeadRow.append("<th class=\"text-center\">$roommateNameColumnTitle</th>")
-        expenses.allExpenses.forEach { this.appendExpenseColumnHeader(jq_resultsTableHeadRow, it) }
+        expenses.allExpenses.forEachIndexed { index, expense -> this.appendExpenseColumnHeader(jq_resultsTableHeadRow, expense, index) }
         jq_resultsTableHeadRow.append("<th class=\"text-center\">$totalColumnTitle</th>")
     }
 
@@ -625,8 +625,11 @@ class RentSplit {
     /**
      * Using the given expense, generates and outputs the table column head to the Results output table
      */
-    fun appendExpenseColumnHeader(jq_resultsTableHeadRow: JQuery, expense: RentExpense) {
-        jq_resultsTableHeadRow.append("<th class='hide-small'>${expense.type}</th>")
+    fun appendExpenseColumnHeader(jq_resultsTableHeadRow: JQuery, expense: RentExpense, index: Int) {
+        jq_resultsTableHeadRow.append(
+                "<th class='hide-small'>${
+                RentExpense.type(ideal = expense.type.nonEmptyOrNull(), backupNumber = index + 1)
+                }</th>")
     }
 
 

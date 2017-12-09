@@ -23,7 +23,7 @@ data class RentRoommate(val name: String,
         }
 
         fun numberedName(number: Int): String {
-            return "Roommate #$number"
+            return "Room\u00ADmate #$number"
         }
     }
 }

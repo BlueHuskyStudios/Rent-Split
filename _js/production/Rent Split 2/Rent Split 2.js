@@ -185,7 +185,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
     return (tmp$ = ideal != null ? nonEmptyOrNull(ideal) : null) != null ? tmp$ : this.numberedName_za3lpa$(backupNumber);
   };
   RentRoommate$Companion.prototype.numberedName_za3lpa$ = function (number) {
-    return 'Roommate #' + number;
+    return 'Room' + '\xAD' + 'mate #' + number;
   };
   RentRoommate$Companion.$metadata$ = {
     kind: Kind_OBJECT,
@@ -625,16 +625,17 @@ this['Rent Split 2'] = function (_, Kotlin) {
     var jq_resultsTableHeadRow = $(resultsTableHeadRowSelector);
     jq_resultsTableHeadRow.empty();
     jq_resultsTableHeadRow.append('<th class="text-center">Name<\/th>');
-    var tmp$;
+    var tmp$, tmp$_0;
+    var index = 0;
     tmp$ = expenses.allExpenses.iterator();
     while (tmp$.hasNext()) {
-      var element = tmp$.next();
-      this.appendExpenseColumnHeader_7jb809$(jq_resultsTableHeadRow, element);
+      var item = tmp$.next();
+      this.appendExpenseColumnHeader_w1v0qf$(jq_resultsTableHeadRow, item, (tmp$_0 = index, index = tmp$_0 + 1 | 0, tmp$_0));
     }
     jq_resultsTableHeadRow.append('<th class="text-center">Total Cost<\/th>');
   };
-  RentSplit.prototype.appendExpenseColumnHeader_7jb809$ = function (jq_resultsTableHeadRow, expense) {
-    jq_resultsTableHeadRow.append("<th class='hide-small'>" + expense.type + '<\/th>');
+  RentSplit.prototype.appendExpenseColumnHeader_w1v0qf$ = function (jq_resultsTableHeadRow, expense, index) {
+    jq_resultsTableHeadRow.append("<th class='hide-small'>" + RentExpense$Companion_getInstance().type_9d67ql$(nonEmptyOrNull(expense.type), index + 1 | 0) + '<\/th>');
   };
   RentSplit.prototype.fillOutResultsTableBody_ra4pb4$ = function (roommates, expenses) {
     var jq_resultsTableBody = $(resultsTableBodySelector);
