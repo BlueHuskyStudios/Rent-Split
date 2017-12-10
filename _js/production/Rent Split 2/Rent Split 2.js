@@ -44,12 +44,17 @@ this['Rent Split 2'] = function (_, Kotlin) {
   }
   Object.defineProperty(RentExpense$Companion.prototype, 'initialRent', {
     get: function () {
-      return new RentExpense(rentExpenseTitle, defaultRentExpenseCost, false, false);
+      return new RentExpense(rentExpenseType, defaultRentExpenseCost, false, false);
     }
   });
   Object.defineProperty(RentExpense$Companion.prototype, 'initialUtilities', {
     get: function () {
-      return new RentExpense(utilitiesExpenseTitle, defaultUtilitiesExpenseCost, false, false);
+      return new RentExpense(utilitiesExpenseType, defaultUtilitiesExpenseCost, false, false);
+    }
+  });
+  Object.defineProperty(RentExpense$Companion.prototype, 'defaultNewExpense', {
+    get: function () {
+      return new RentExpense('', defaultExpenseCost, true, true);
     }
   });
   RentExpense$Companion.prototype.type_9d67ql$ = function (ideal, backupNumber) {
@@ -109,26 +114,27 @@ this['Rent Split 2'] = function (_, Kotlin) {
   RentExpense.prototype.equals = function (other) {
     return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.type, other.type) && Kotlin.equals(this.monthlyCost, other.monthlyCost) && Kotlin.equals(this.isRemovable, other.isRemovable) && Kotlin.equals(this.isRenamable, other.isRenamable) && Kotlin.equals(this.originalDOMElement, other.originalDOMElement)))));
   };
+  function nonEmptyType($receiver, index) {
+    return RentExpense$Companion_getInstance().type_9d67ql$($receiver.type, index + 1 | 0);
+  }
   var collectionSizeOrDefault = Kotlin.kotlin.collections.collectionSizeOrDefault_ba2ldo$;
   var ArrayList_init = Kotlin.kotlin.collections.ArrayList_init_ww73n8$;
-  function RentExpenses(allExpenses, totalExpenses) {
-    if (totalExpenses === void 0) {
-      var transform = getPropertyCallableRef('monthlyCost', 1, function ($receiver) {
-        return $receiver.monthlyCost;
-      });
-      var destination = ArrayList_init(collectionSizeOrDefault(allExpenses, 10));
-      var tmp$;
-      tmp$ = allExpenses.iterator();
-      while (tmp$.hasNext()) {
-        var item = tmp$.next();
-        destination.add_11rb$(transform(item));
-      }
-      totalExpenses = reduceTo(destination, 0.0, getCallableRef('plus', function ($receiver, other) {
-        return $receiver + other;
-      }));
-    }
+  function RentExpenses(allExpenses) {
     this.allExpenses = allExpenses;
-    this.totalExpenses = totalExpenses;
+    var $receiver = this.allExpenses;
+    var transform = getPropertyCallableRef('monthlyCost', 1, function ($receiver) {
+      return $receiver.monthlyCost;
+    });
+    var destination = ArrayList_init(collectionSizeOrDefault($receiver, 10));
+    var tmp$;
+    tmp$ = $receiver.iterator();
+    while (tmp$.hasNext()) {
+      var item = tmp$.next();
+      destination.add_11rb$(transform(item));
+    }
+    this.totalExpenses = reduceTo(destination, 0.0, getCallableRef('plus', function ($receiver, other) {
+      return $receiver + other;
+    }));
   }
   RentExpenses.prototype.adding_pbrwj2$ = function (newExpense) {
     return new RentExpenses(adding(this.allExpenses, newExpense));
@@ -141,23 +147,19 @@ this['Rent Split 2'] = function (_, Kotlin) {
   RentExpenses.prototype.component1 = function () {
     return this.allExpenses;
   };
-  RentExpenses.prototype.component2 = function () {
-    return this.totalExpenses;
-  };
-  RentExpenses.prototype.copy_3hmhdd$ = function (allExpenses, totalExpenses) {
-    return new RentExpenses(allExpenses === void 0 ? this.allExpenses : allExpenses, totalExpenses === void 0 ? this.totalExpenses : totalExpenses);
+  RentExpenses.prototype.copy_sgeyu7$ = function (allExpenses) {
+    return new RentExpenses(allExpenses === void 0 ? this.allExpenses : allExpenses);
   };
   RentExpenses.prototype.toString = function () {
-    return 'RentExpenses(allExpenses=' + Kotlin.toString(this.allExpenses) + (', totalExpenses=' + Kotlin.toString(this.totalExpenses)) + ')';
+    return 'RentExpenses(allExpenses=' + Kotlin.toString(this.allExpenses) + ')';
   };
   RentExpenses.prototype.hashCode = function () {
     var result = 0;
     result = result * 31 + Kotlin.hashCode(this.allExpenses) | 0;
-    result = result * 31 + Kotlin.hashCode(this.totalExpenses) | 0;
     return result;
   };
   RentExpenses.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.allExpenses, other.allExpenses) && Kotlin.equals(this.totalExpenses, other.totalExpenses)))));
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && Kotlin.equals(this.allExpenses, other.allExpenses))));
   };
   function RentRoommate(name, monthlyIncome, isRemovable, isRenamable, originalDOMElement, proportion) {
     RentRoommate$Companion_getInstance();
@@ -178,6 +180,11 @@ this['Rent Split 2'] = function (_, Kotlin) {
   Object.defineProperty(RentRoommate$Companion.prototype, 'initial', {
     get: function () {
       return new RentRoommate('', defaultRoommateIncome, false, true);
+    }
+  });
+  Object.defineProperty(RentRoommate$Companion.prototype, 'defaultNewRoommate', {
+    get: function () {
+      return new RentRoommate('', defaultRoommateIncome, true, true);
     }
   });
   RentRoommate$Companion.prototype.name_9d67ql$ = function (ideal, backupNumber) {
@@ -242,26 +249,24 @@ this['Rent Split 2'] = function (_, Kotlin) {
     return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.name, other.name) && Kotlin.equals(this.monthlyIncome, other.monthlyIncome) && Kotlin.equals(this.isRemovable, other.isRemovable) && Kotlin.equals(this.isRenamable, other.isRenamable) && Kotlin.equals(this.originalDOMElement, other.originalDOMElement) && Kotlin.equals(this.proportion, other.proportion)))));
   };
   function nonEmptyName($receiver, index) {
-    return RentRoommate$Companion_getInstance().name_9d67ql$(nonEmptyOrNull($receiver.name), index + 1 | 0);
+    return RentRoommate$Companion_getInstance().name_9d67ql$($receiver.name, index + 1 | 0);
   }
-  function RentRoommates(allRoommates, totalIncome) {
-    if (totalIncome === void 0) {
-      var transform = getPropertyCallableRef('monthlyIncome', 1, function ($receiver) {
-        return $receiver.monthlyIncome;
-      });
-      var destination = ArrayList_init(collectionSizeOrDefault(allRoommates, 10));
-      var tmp$;
-      tmp$ = allRoommates.iterator();
-      while (tmp$.hasNext()) {
-        var item = tmp$.next();
-        destination.add_11rb$(transform(item));
-      }
-      totalIncome = reduceTo(destination, 0.0, getCallableRef('plus', function ($receiver, other) {
-        return $receiver + other;
-      }));
-    }
+  function RentRoommates(allRoommates) {
     this.allRoommates = allRoommates;
-    this.totalIncome = totalIncome;
+    var $receiver = this.allRoommates;
+    var transform = getPropertyCallableRef('monthlyIncome', 1, function ($receiver) {
+      return $receiver.monthlyIncome;
+    });
+    var destination = ArrayList_init(collectionSizeOrDefault($receiver, 10));
+    var tmp$;
+    tmp$ = $receiver.iterator();
+    while (tmp$.hasNext()) {
+      var item = tmp$.next();
+      destination.add_11rb$(transform(item));
+    }
+    this.totalIncome = reduceTo(destination, 0.0, getCallableRef('plus', function ($receiver, other) {
+      return $receiver + other;
+    }));
   }
   RentRoommates.prototype.adding_pcqrmu$ = function (newRoommate) {
     return new RentRoommates(adding(this.allRoommates, newRoommate));
@@ -274,23 +279,19 @@ this['Rent Split 2'] = function (_, Kotlin) {
   RentRoommates.prototype.component1 = function () {
     return this.allRoommates;
   };
-  RentRoommates.prototype.component2 = function () {
-    return this.totalIncome;
-  };
-  RentRoommates.prototype.copy_c53kkp$ = function (allRoommates, totalIncome) {
-    return new RentRoommates(allRoommates === void 0 ? this.allRoommates : allRoommates, totalIncome === void 0 ? this.totalIncome : totalIncome);
+  RentRoommates.prototype.copy_a4l0xx$ = function (allRoommates) {
+    return new RentRoommates(allRoommates === void 0 ? this.allRoommates : allRoommates);
   };
   RentRoommates.prototype.toString = function () {
-    return 'RentRoommates(allRoommates=' + Kotlin.toString(this.allRoommates) + (', totalIncome=' + Kotlin.toString(this.totalIncome)) + ')';
+    return 'RentRoommates(allRoommates=' + Kotlin.toString(this.allRoommates) + ')';
   };
   RentRoommates.prototype.hashCode = function () {
     var result = 0;
     result = result * 31 + Kotlin.hashCode(this.allRoommates) | 0;
-    result = result * 31 + Kotlin.hashCode(this.totalIncome) | 0;
     return result;
   };
   RentRoommates.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.allRoommates, other.allRoommates) && Kotlin.equals(this.totalIncome, other.totalIncome)))));
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && Kotlin.equals(this.allRoommates, other.allRoommates))));
   };
   var addARoommateRowId;
   var addARoommateRowSelector;
@@ -304,10 +305,10 @@ this['Rent Split 2'] = function (_, Kotlin) {
   var addAnExpenseButtonSelector;
   var removeAnExpenseButtonClassName;
   var removeAnExpenseButtonSelector;
-  var roommateRowDataName;
-  var roommateRowSelector;
-  var expenseRowDataName;
-  var expenseRowSelector;
+  var roommateInputRowDataName;
+  var roommateInputRowSelector;
+  var expenseInputRowDataName;
+  var expenseInputRowSelector;
   var roommateResultRowDataName;
   var roommateNameInputClassName;
   var roommateNameInputSelector;
@@ -343,8 +344,8 @@ this['Rent Split 2'] = function (_, Kotlin) {
   var resultsTableSelector;
   var resultsTableBodySelector;
   var resultsTableHeadRowSelector;
-  var rentExpenseTitle;
-  var utilitiesExpenseTitle;
+  var rentExpenseType;
+  var utilitiesExpenseType;
   var roommateNamePlaceholderText;
   var roommateIncomePlaceholderText;
   var expenseTypePlaceholderText;
@@ -410,10 +411,10 @@ this['Rent Split 2'] = function (_, Kotlin) {
     $('.rent').addClass('rent-ready');
   };
   RentSplit.prototype.fetchRoommates = function () {
-    return this.roommateRowsToRoommates_r6ezyp$($(roommateRowSelector));
+    return this.roommateRowsToRoommates_r6ezyp$($(roommateInputRowSelector));
   };
   RentSplit.prototype.fetchExpenses = function () {
-    return this.expenseRowsToExpenses_r6ezyp$($(expenseRowSelector));
+    return this.expenseRowsToExpenses_r6ezyp$($(expenseInputRowSelector));
   };
   function RentSplit$roommateRowsToRoommates$lambda(this$RentSplit) {
     return function (index, roommateRow) {
@@ -508,7 +509,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
     };
   }
   RentSplit.prototype.regenerateExpenseInputTable_0 = function () {
-    this.regenerateInputTable_0(expenseRowSelector, this.state.expenses.allExpenses, RentSplit$regenerateExpenseInputTable$lambda(this), RentSplit$regenerateExpenseInputTable$lambda_0(this));
+    this.regenerateInputTable_0(expenseInputRowSelector, this.state.expenses.allExpenses, RentSplit$regenerateExpenseInputTable$lambda(this), RentSplit$regenerateExpenseInputTable$lambda_0(this));
   };
   RentSplit.prototype.configureExistingExpenseInputRow_0 = function (existingExpenseInput, expense) {
     var jq_existingExpenseInput = $(existingExpenseInput);
@@ -519,7 +520,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
     attr(jq_existingExpenseInput, expenseRemovabilityAttribute, expense.isRemovable);
   };
   RentSplit.prototype.regenerateRoommateInputTable_0 = function () {
-    this.regenerateInputTable_0(roommateRowSelector, this.state.roommates.allRoommates, getCallableRef('configureExistingRoommateInputRow', function ($receiver, existingRoommateInputTableRow, roommate) {
+    this.regenerateInputTable_0(roommateInputRowSelector, this.state.roommates.allRoommates, getCallableRef('configureExistingRoommateInputRow', function ($receiver, existingRoommateInputTableRow, roommate) {
       return $receiver.configureExistingRoommateInputRow_0(existingRoommateInputTableRow, roommate), Unit;
     }.bind(null, this)), getCallableRef('insertNewRoommateInputRow', function ($receiver, explicitIndex, roommate) {
       return $receiver.insertNewRoommateInputRow_7kd045$(explicitIndex, roommate), Unit;
@@ -535,7 +536,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
     attr(jq_existingRoommateInputTableRow, roommateRemovabilityAttribute, roommate.isRemovable);
   };
   RentSplit.prototype.didPressNewExpenseButton_9ojx7i$ = function (event) {
-    this.addNewExpense_rhtjr1$(new RentExpense('', defaultExpenseCost, true, true), event);
+    this.addNewExpense_rhtjr1$(RentExpense$Companion_getInstance().defaultNewExpense, event);
   };
   RentSplit.prototype.addNewExpense_rhtjr1$ = function (newExpense, event) {
     if (event === void 0)
@@ -545,14 +546,15 @@ this['Rent Split 2'] = function (_, Kotlin) {
   RentSplit.prototype.insertNewExpenseInputRow_nly0u5$ = function (explicitIndex, expense) {
     if (explicitIndex === void 0)
       explicitIndex = null;
-    var expenseInputHtml = this.buildExpenseInputRow_cymhq0$(explicitIndex != null ? explicitIndex : this.numberOfExpensesOnPage(), expense);
+    var expenseInputHtml = this.buildExpenseInputRow_cymhq0$(explicitIndex != null ? explicitIndex : this.numberOfExpensesWithInputRows(), expense);
     expense.originalDOMElement = $(addAnExpenseRowSelector).before(expenseInputHtml).prev();
   };
   RentSplit.prototype.buildExpenseInputRow_cymhq0$ = function (index, expense) {
     return this.buildExpenseInputRow_cefq5e$(index, expense.type, expense.monthlyCost, expense.isRenamable, expense.isRemovable);
   };
   RentSplit.prototype.buildExpenseInputRow_cefq5e$ = function (index, type, cost, isRenamable, isRemovable) {
-    var row = '<tr' + (' data-' + expenseRowDataName + '=' + '"' + index + '"') + (' ' + expenseRenamabilityAttribute + "='" + isRenamable + "'") + (' ' + expenseRemovabilityAttribute + "='" + isRemovable + "'") + '>';
+    var expenseNumber = index + 1 | 0;
+    var row = '<tr' + (' data-' + expenseInputRowDataName + '=' + '"' + expenseNumber + '"') + (' ' + expenseRenamabilityAttribute + "='" + isRenamable + "'") + (' ' + expenseRemovabilityAttribute + "='" + isRemovable + "'") + '>';
     var tmp$ = '<th' + (isRenamable ? ' class="plain"' : '') + '>' + '<input' + (' type=' + '"' + (isRenamable ? 'text' : 'hidden') + '"') + ' class="expense-type   text-right"' + (!(type == null || type.length === 0) ? ' value=' + '"' + toString(type) + '"' : '') + ' size="8"' + ' tabindex=0' + ' placeholder="Type"' + '/>';
     var tmp$_0 = !isRenamable;
     if (tmp$_0) {
@@ -566,7 +568,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
     return row + '<\/tr>';
   };
   RentSplit.prototype.didPressNewRoommateButton_9ojx7i$ = function (event) {
-    return this.addNewRoommate_an8xux$(new RentRoommate('', defaultRoommateIncome, true, true), event);
+    return this.addNewRoommate_an8xux$(RentRoommate$Companion_getInstance().defaultNewRoommate, event);
   };
   RentSplit.prototype.addNewRoommate_an8xux$ = function (newRoommate, event) {
     if (event === void 0)
@@ -576,15 +578,15 @@ this['Rent Split 2'] = function (_, Kotlin) {
   RentSplit.prototype.insertNewRoommateInputRow_7kd045$ = function (explicitIndex, roommate) {
     if (explicitIndex === void 0)
       explicitIndex = null;
-    var roommateInputHtml = this.buildRoommateInputRow_hi9t74$(explicitIndex != null ? explicitIndex : this.numberOfExpensesOnPage(), roommate);
+    var roommateInputHtml = this.buildRoommateInputRow_hi9t74$(explicitIndex != null ? explicitIndex : this.numberOfRoommatesWithInputRows(), roommate);
     roommate.originalDOMElement = $(addARoommateRowSelector).before(roommateInputHtml).prev();
   };
   RentSplit.prototype.buildRoommateInputRow_hi9t74$ = function (index, roommate) {
     return this.buildRoommateInputRow_cefq5e$(index, roommate.name, roommate.monthlyIncome, roommate.isRenamable, roommate.isRemovable);
   };
   RentSplit.prototype.buildRoommateInputRow_cefq5e$ = function (index, name, income, isRenamable, isRemovable) {
-    var roommateNumber = this.numberOfRoommates() + 1 | 0;
-    var row = '<tr' + (' data-' + roommateRowDataName + "='" + roommateNumber + "'") + (' ' + roommateRenamabilityAttribute + "='" + isRenamable + "'") + (' ' + roommateRemovabilityAttribute + "='" + isRemovable + "'") + '>';
+    var roommateNumber = index + 1 | 0;
+    var row = '<tr' + (' data-' + roommateInputRowDataName + "='" + roommateNumber + "'") + (' ' + roommateRenamabilityAttribute + "='" + isRenamable + "'") + (' ' + roommateRemovabilityAttribute + "='" + isRemovable + "'") + '>';
     row += '<th class="plain">' + '<input' + ' type="text"' + ' class="roommate-name   text-right"' + (!(name == null || name.length === 0) ? ' value="' + name + '"' : '') + ' size="8"' + ' tabindex=0' + ' placeholder="Name"' + '/>' + '<\/th>';
     row += '<td class="plain vert-bottom">' + '<input' + ' type="number"' + ' class="roommate-income"' + ' required' + (' value=' + '"' + (income != null ? income : defaultRoommateIncome) + '"') + ' step="100"' + ' size="8"' + ' tabindex=0' + ' placeholder="Income"' + '/>' + '<\/td>';
     row += '<td class="roommate-proportion">Calculating<\/td>';
@@ -596,14 +598,14 @@ this['Rent Split 2'] = function (_, Kotlin) {
   RentSplit.prototype.numberOfRoommates = function () {
     return this.state.roommates.allRoommates.size;
   };
-  RentSplit.prototype.numberOfRoommatesOnPage = function () {
-    return $(roommateRowSelector).length;
+  RentSplit.prototype.numberOfRoommatesWithInputRows = function () {
+    return $(roommateInputRowSelector).length;
   };
   RentSplit.prototype.numberOfExpenses = function () {
     return this.state.expenses.allExpenses.size;
   };
-  RentSplit.prototype.numberOfExpensesOnPage = function () {
-    return $(expenseRowSelector).length;
+  RentSplit.prototype.numberOfExpensesWithInputRows = function () {
+    return $(expenseInputRowSelector).length;
   };
   RentSplit.prototype.didPressRemoveExpenseButton_9ojx7i$ = function (event) {
     var tmp$;
@@ -635,7 +637,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
     jq_resultsTableHeadRow.append('<th class="text-center">Total Cost<\/th>');
   };
   RentSplit.prototype.appendExpenseColumnHeader_w1v0qf$ = function (jq_resultsTableHeadRow, expense, index) {
-    jq_resultsTableHeadRow.append("<th class='hide-small'>" + RentExpense$Companion_getInstance().type_9d67ql$(nonEmptyOrNull(expense.type), index + 1 | 0) + '<\/th>');
+    jq_resultsTableHeadRow.append("<th class='hide-small'>" + nonEmptyType(expense, index) + '<\/th>');
   };
   RentSplit.prototype.fillOutResultsTableBody_ra4pb4$ = function (roommates, expenses) {
     var jq_resultsTableBody = $(resultsTableBodySelector);
@@ -656,7 +658,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
     };
   }
   RentSplit.prototype.buildResultRow_day3s3$ = function (rowIndex, roommate, expenses) {
-    var roommateName = RentRoommate$Companion_getInstance().name_9d67ql$(nonEmptyOrNull(roommate.name), rowIndex + 1 | 0);
+    var roommateName = nonEmptyName(roommate, rowIndex);
     var row = '<tr data-' + roommateResultRowDataName + "='" + roommateName + "'><th>" + roommateName + '<\/th>';
     row += joinToString(expenses.allExpenses, '', void 0, void 0, void 0, void 0, RentSplit$buildResultRow$lambda(roommate, this));
     row += '<th>' + get_dollarFormat(this.roommateTotalContributions_1jegqw$(roommate, expenses.totalExpenses)) + '<\/th>';
@@ -928,6 +930,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
   });
   var package$RentSplit = _.RentSplit || (_.RentSplit = {});
   package$RentSplit.RentExpense = RentExpense;
+  package$RentSplit.nonEmptyType_nyrmdb$ = nonEmptyType;
   package$RentSplit.RentExpenses = RentExpenses;
   Object.defineProperty(RentRoommate, 'Companion', {
     get: RentRoommate$Companion_getInstance
@@ -995,24 +998,24 @@ this['Rent Split 2'] = function (_, Kotlin) {
       return removeAnExpenseButtonSelector;
     }
   });
-  Object.defineProperty(package$RentSplit, 'roommateRowDataName', {
+  Object.defineProperty(package$RentSplit, 'roommateInputRowDataName', {
     get: function () {
-      return roommateRowDataName;
+      return roommateInputRowDataName;
     }
   });
-  Object.defineProperty(package$RentSplit, 'roommateRowSelector', {
+  Object.defineProperty(package$RentSplit, 'roommateInputRowSelector', {
     get: function () {
-      return roommateRowSelector;
+      return roommateInputRowSelector;
     }
   });
-  Object.defineProperty(package$RentSplit, 'expenseRowDataName', {
+  Object.defineProperty(package$RentSplit, 'expenseInputRowDataName', {
     get: function () {
-      return expenseRowDataName;
+      return expenseInputRowDataName;
     }
   });
-  Object.defineProperty(package$RentSplit, 'expenseRowSelector', {
+  Object.defineProperty(package$RentSplit, 'expenseInputRowSelector', {
     get: function () {
-      return expenseRowSelector;
+      return expenseInputRowSelector;
     }
   });
   Object.defineProperty(package$RentSplit, 'roommateResultRowDataName', {
@@ -1190,14 +1193,14 @@ this['Rent Split 2'] = function (_, Kotlin) {
       return resultsTableHeadRowSelector;
     }
   });
-  Object.defineProperty(package$RentSplit, 'rentExpenseTitle', {
+  Object.defineProperty(package$RentSplit, 'rentExpenseType', {
     get: function () {
-      return rentExpenseTitle;
+      return rentExpenseType;
     }
   });
-  Object.defineProperty(package$RentSplit, 'utilitiesExpenseTitle', {
+  Object.defineProperty(package$RentSplit, 'utilitiesExpenseType', {
     get: function () {
-      return utilitiesExpenseTitle;
+      return utilitiesExpenseType;
     }
   });
   Object.defineProperty(package$RentSplit, 'roommateNamePlaceholderText', {
@@ -1296,10 +1299,10 @@ this['Rent Split 2'] = function (_, Kotlin) {
   addAnExpenseButtonSelector = '#Add-Expense-Button';
   removeAnExpenseButtonClassName = 'remove-expense-button';
   removeAnExpenseButtonSelector = '.remove-expense-button';
-  roommateRowDataName = 'roommate-row';
-  roommateRowSelector = '[data-roommate-row]';
-  expenseRowDataName = 'expense-row';
-  expenseRowSelector = '[data-expense-row]';
+  roommateInputRowDataName = 'roommate-row';
+  roommateInputRowSelector = '[data-roommate-row]';
+  expenseInputRowDataName = 'expense-row';
+  expenseInputRowSelector = '[data-expense-row]';
   roommateResultRowDataName = 'result-roommate-row';
   roommateNameInputClassName = 'roommate-name';
   roommateNameInputSelector = '.' + roommateNameInputClassName;
@@ -1335,8 +1338,8 @@ this['Rent Split 2'] = function (_, Kotlin) {
   resultsTableSelector = '#Results';
   resultsTableBodySelector = '#Results>tbody';
   resultsTableHeadRowSelector = '#Results>thead>tr';
-  rentExpenseTitle = 'Rent';
-  utilitiesExpenseTitle = 'Utilities';
+  rentExpenseType = 'Rent';
+  utilitiesExpenseType = 'Utilities';
   roommateNamePlaceholderText = 'Name';
   roommateIncomePlaceholderText = 'Income';
   expenseTypePlaceholderText = 'Type';

@@ -34,11 +34,12 @@ val addAnExpenseButtonSelector = "#$addAnExpenseButtonId"
 val removeAnExpenseButtonClassName = "remove-expense-button"
 val removeAnExpenseButtonSelector = ".$removeAnExpenseButtonClassName"
 
-val roommateRowDataName = "roommate-row"
-val roommateRowSelector = "[data-$roommateRowDataName]"
-val expenseRowDataName = "expense-row"
-val expenseRowSelector = "[data-$expenseRowDataName]"
-val roommateResultRowDataName = "result-$roommateRowDataName"
+val roommateInputRowDataName = "roommate-row"
+val roommateInputRowSelector = "[data-$roommateInputRowDataName]"
+val expenseInputRowDataName = "expense-row"
+val expenseInputRowSelector = "[data-$expenseInputRowDataName]"
+
+val roommateResultRowDataName = "result-$roommateInputRowDataName"
 
 //val roommateTableId = "Roommate"
 //val roommateTableSelector = "#$roommateTableId"
@@ -90,8 +91,8 @@ val resultsTableHeadRowSelector = "$resultsTableSelector>thead>tr"
 
 /// Label text ///
 
-val rentExpenseTitle = "Rent"
-val utilitiesExpenseTitle = "Utilities"
+val rentExpenseType = "Rent"
+val utilitiesExpenseType = "Utilities"
 
 val roommateNamePlaceholderText = "Name"
 val roommateIncomePlaceholderText = "Income"
@@ -120,7 +121,9 @@ class RentSplit {
 
     ///// SETUP /////
 
-
+    /**
+     * The overall state of the app. If this is set, the app auto-refreshes
+     */
     var state: RentSplitState by observing(RentSplitState.load(), didSet = { _, _ ->
         this.regenerateInputTables()
         this.reRegisterListeners()
@@ -128,6 +131,9 @@ class RentSplit {
     })
 
 
+    /**
+     * Called when the page has loaded completely and is ready to be manipulated by JavaScript
+     */
     fun onReady() {
         this.regenerateInputTables()
         this.registerListeners()
@@ -157,6 +163,9 @@ class RentSplit {
     }
 
 
+    /**
+     * Called immediately after any input field changes
+     */
     fun anyInputFieldDidChange(event: Event?) {
         reloadStateFromPage()
         // implicit recalculateRentSplit()
@@ -188,6 +197,9 @@ class RentSplit {
     }
 
 
+    /**
+     * Presents the app to the user
+     */
     fun presentToUser() {
         jq(".rent").addClass("rent-ready")
     }
@@ -199,7 +211,7 @@ class RentSplit {
      * Finds all roommates in the DOM, parses them into RentRoommate objects, and returns them.
      */
     fun fetchRoommates(): RentRoommates {
-        return this.roommateRowsToRoommates(jq(roommateRowSelector))
+        return this.roommateRowsToRoommates(jq(roommateInputRowSelector))
     }
 
 
@@ -207,7 +219,7 @@ class RentSplit {
      * Finds all expenses in the DOM, parses them into RentExpense objects, and returns them.
      */
     fun fetchExpenses(): RentExpenses {
-        return this.expenseRowsToExpenses(jq(expenseRowSelector))
+        return this.expenseRowsToExpenses(jq(expenseInputRowSelector))
     }
 
 
@@ -300,12 +312,18 @@ class RentSplit {
 
     ///// INPUT TABLES /////
 
+    /**
+     * Regenerates all input tables
+     */
     fun regenerateInputTables() {
         this.regenerateRoommateInputTable()
         this.regenerateExpenseInputTable()
     }
 
 
+    /**
+     * The generalized form of [regenerateExpenseInputTable] and [regenerateRoommateInputTable]
+     */
     private fun <Resource> regenerateInputTable(rowSelector: String,
                                                 allResources: List<Resource>,
                                                 configureExistingInput: (existingInput: Element, resource: Resource) -> Unit,
@@ -324,8 +342,11 @@ class RentSplit {
     }
 
 
+    /**
+     * Re-generates the roommate input table based on the currently-stored state
+     */
     private fun regenerateExpenseInputTable() {
-        regenerateInputTable(expenseRowSelector, state.expenses.allExpenses,
+        regenerateInputTable(expenseInputRowSelector, state.expenses.allExpenses,
                              { existingExpenseInput, expense ->
                                  configureExistingExpenseInputRow(existingExpenseInput,
                                                                   expense)
@@ -333,6 +354,10 @@ class RentSplit {
     }
 
 
+    /**
+     * Given a roommate row on the page and raw roommate data, this reconfigures the existing row to reflect the
+     * given roommate data
+     */
     private fun configureExistingExpenseInputRow(existingExpenseInput: Element, expense: RentExpense) {
         val jq_existingExpenseInput = jq(existingExpenseInput)
 
@@ -345,11 +370,18 @@ class RentSplit {
     }
 
 
+    /**
+     * Re-generates the roommate input table based on the currently-stored state
+     */
     private fun regenerateRoommateInputTable() {
-        regenerateInputTable(roommateRowSelector, state.roommates.allRoommates, ::configureExistingRoommateInputRow, ::insertNewRoommateInputRow)
+        regenerateInputTable(roommateInputRowSelector, state.roommates.allRoommates, ::configureExistingRoommateInputRow, ::insertNewRoommateInputRow)
     }
 
 
+    /**
+     * Given a roommate row on the page and raw roommate data, this reconfigures the existing row to reflect the
+     * given roommate data
+     */
     private fun configureExistingRoommateInputRow(existingRoommateInputTableRow: Element, roommate: RentRoommate) {
         val jq_existingRoommateInputTableRow = jq(existingRoommateInputTableRow)
 
@@ -371,10 +403,7 @@ class RentSplit {
      */
     fun didPressNewExpenseButton(event: Event) {
         this.addNewExpense(event = event,
-                           newExpense = RentExpense("",
-                                                    monthlyCost = defaultExpenseCost,
-                                                    isRemovable = true,
-                                                    isRenamable = true))
+                           newExpense = RentExpense.defaultNewExpense)
     }
 
 
@@ -387,13 +416,24 @@ class RentSplit {
     }
 
 
+    /**
+     * Inserts a new expense input row for the given expense
+     *
+     * @param explicitIndex [ optional ] The expense's index. If not provided, it is assumed it will be equal to the
+     *                      number of expenses that currently have input rows
+     * @param expense       The expense whose data will pre-populate the input row
+     */
     fun insertNewExpenseInputRow(explicitIndex: Int? = null, expense: RentExpense) {
-        val expenseInputHtml = buildExpenseInputRow(index = explicitIndex ?: numberOfExpensesOnPage(),
+        val expenseInputHtml = buildExpenseInputRow(index = explicitIndex ?: numberOfExpensesWithInputRows(),
                                                     expense = expense)
         expense.originalDOMElement = jq(addAnExpenseRowSelector).before(expenseInputHtml).prev()
     }
 
 
+    /**
+     * Builds a new expense input row by using the given expense, assuming the given index. This does not add it to the
+     * page, but just creates an HTML string representing an element that is ready to be inserted into the page.
+     */
     fun buildExpenseInputRow(index: Int, expense: RentExpense): String {
         return buildExpenseInputRow(index = index,
                                     type = expense.type,
@@ -415,8 +455,10 @@ class RentSplit {
      */
     fun buildExpenseInputRow(index: Int, type: String?, cost: Double?, isRenamable: Boolean, isRemovable: Boolean): String {
 
+        val expenseNumber = index + 1
+
         var row = "<tr" +
-                " data-$expenseRowDataName=\"$index\"" +
+                " data-$expenseInputRowDataName=\"$expenseNumber\"" +
                 " $expenseRenamabilityAttribute='$isRenamable'" +
                 " $expenseRemovabilityAttribute='$isRemovable'" +
                 ">"
@@ -465,10 +507,7 @@ class RentSplit {
      */
     fun didPressNewRoommateButton(event: Event) {
         return this.addNewRoommate(event = event,
-                                   newRoommate = RentRoommate(name = "",
-                                                              monthlyIncome = defaultRoommateIncome,
-                                                              isRemovable = true,
-                                                              isRenamable = true))
+                                   newRoommate = RentRoommate.defaultNewRoommate)
     }
 
 
@@ -481,13 +520,26 @@ class RentSplit {
     }
 
 
+    /**
+     * Inserts a new roommate input row for the given roommate
+     *
+     * @param explicitIndex [ optional ] The roommate's index. If not provided, it is assumed it will be equal to the
+     *                      number of roommates who currently have input rows
+     * @param roommate      The roommate whose data will pre-populate the input row
+     */
     fun insertNewRoommateInputRow(explicitIndex: Int? = null, roommate: RentRoommate) {
-        val roommateInputHtml = buildRoommateInputRow(index = explicitIndex ?: numberOfExpensesOnPage(),
+        val roommateInputHtml = buildRoommateInputRow(index = explicitIndex ?: numberOfRoommatesWithInputRows(),
                                                       roommate = roommate)
         roommate.originalDOMElement = jq(addARoommateRowSelector).before(roommateInputHtml).prev()
     }
 
 
+    /**
+     * Builds a roommate input row using the given roommate (which exists at the given index)
+     *
+     * @param index    The index of the given roommate
+     * @param roommate The roommate who needs an input row
+     */
     fun buildRoommateInputRow(index: Int, roommate: RentRoommate): String {
         return buildRoommateInputRow(index = index,
                                      name = roommate.name,
@@ -509,10 +561,10 @@ class RentSplit {
      */
     fun buildRoommateInputRow(index: Int, name: String?, income: Double?, isRenamable: Boolean, isRemovable: Boolean): String  {
 
-        val roommateNumber = numberOfRoommates() + 1
+        val roommateNumber = index + 1
 
         var row = "<tr" +
-                " data-$roommateRowDataName='$roommateNumber'" +
+                " data-$roommateInputRowDataName='$roommateNumber'" +
                 " $roommateRenamabilityAttribute='$isRenamable'" +
                 " $roommateRemovabilityAttribute='$isRemovable'" +
                 ">"
@@ -555,23 +607,39 @@ class RentSplit {
     }
 
 
+    /**
+     * The number of roommates that are in this app's current state.
+     * This is not necessarily how many appear on the page, depending on when this is called.
+     */
     fun numberOfRoommates(): Int {
         return state.roommates.allRoommates.size
     }
 
 
-    fun numberOfRoommatesOnPage(): Int {
-        return jq(roommateRowSelector).length
+    /**
+     * The number of roommates that appear on the page.
+     * This is not necessarily how many are in the app's state, depending on when this is called.
+     */
+    fun numberOfRoommatesWithInputRows(): Int {
+        return jq(roommateInputRowSelector).length
     }
 
 
+    /**
+     * The number of expenses that are in this app's current state.
+     * This is not necessarily how many appear on the page, depending on when this is called.
+     */
     fun numberOfExpenses(): Int {
         return state.expenses.allExpenses.size
     }
 
 
-    fun numberOfExpensesOnPage(): Int {
-        return jq(expenseRowSelector).length
+    /**
+     * The number of expenses that appear on the page.
+     * This is not necessarily how many are in the app's state, depending on when this is called.
+     */
+    fun numberOfExpensesWithInputRows(): Int {
+        return jq(expenseInputRowSelector).length
     }
 
 
@@ -626,10 +694,7 @@ class RentSplit {
      * Using the given expense, generates and outputs the table column head to the Results output table
      */
     fun appendExpenseColumnHeader(jq_resultsTableHeadRow: JQuery, expense: RentExpense, index: Int) {
-        jq_resultsTableHeadRow.append(
-                "<th class='hide-small'>${
-                RentExpense.type(ideal = expense.type.nonEmptyOrNull(), backupNumber = index + 1)
-                }</th>")
+        jq_resultsTableHeadRow.append("<th class='hide-small'>${expense.nonEmptyType(index = index)}</th>")
     }
 
 
@@ -658,7 +723,7 @@ class RentSplit {
      * Builds a string representation of a Results table row.
      */
     fun buildResultRow(rowIndex: Int, roommate: RentRoommate, expenses: RentExpenses): String {
-        val roommateName = RentRoommate.name(ideal = roommate.name.nonEmptyOrNull(), backupNumber = rowIndex + 1)
+        val roommateName = roommate.nonEmptyName(index = rowIndex)
         var row = "<tr data-$roommateResultRowDataName='$roommateName'><th>$roommateName</th>"
         row += expenses.allExpenses.joinToString(
                 separator = "",
@@ -668,6 +733,9 @@ class RentSplit {
     }
 
 
+    /**
+     * Finds the amount that the given roommate contributes to the given expense
+     */
     fun roommateContribution(roommate: RentRoommate, expense: RentExpense): Double
             = (roommate.proportion ?: 0.0) * expense.monthlyCost
 
