@@ -189,10 +189,7 @@ class RentSplit {
         val expenses = state.expenses
 
         this.recalculateRoommateProportions(roommates)
-        //val totalExpenses = this.totalExpenses(expenses)
-
         this.fillOutResults(roommates, expenses)
-
         this.notifyOfProblems(roommates, expenses)
     }
 
