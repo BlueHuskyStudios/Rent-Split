@@ -4,8 +4,9 @@ if (typeof kotlin === 'undefined') {
 this['Rent Split 2'] = function (_, Kotlin) {
   'use strict';
   var $$importsForInline$$ = _.$$importsForInline$$ || (_.$$importsForInline$$ = {});
-  var Kind_OBJECT = Kotlin.Kind.OBJECT;
+  var Kind_INTERFACE = Kotlin.Kind.INTERFACE;
   var Kind_CLASS = Kotlin.Kind.CLASS;
+  var Kind_OBJECT = Kotlin.Kind.OBJECT;
   var getPropertyCallableRef = Kotlin.getPropertyCallableRef;
   var getCallableRef = Kotlin.getCallableRef;
   var PropertyMetadata = Kotlin.PropertyMetadata;
@@ -29,6 +30,134 @@ this['Rent Split 2'] = function (_, Kotlin) {
   var ObservableProperty = Kotlin.kotlin.properties.ObservableProperty;
   observing$ObjectLiteral.prototype = Object.create(ObservableProperty.prototype);
   observing$ObjectLiteral.prototype.constructor = observing$ObjectLiteral;
+  function CompressedDataStructure() {
+  }
+  CompressedDataStructure.$metadata$ = {
+    kind: Kind_INTERFACE,
+    simpleName: 'CompressedDataStructure',
+    interfaces: []
+  };
+  function CompressedRentSplitState(r, e) {
+    this.r = r;
+    this.e = e;
+  }
+  CompressedRentSplitState.prototype.uncompressed = function () {
+    return new RentSplitState(this.r.uncompressed(), this.e.uncompressed());
+  };
+  CompressedRentSplitState.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'CompressedRentSplitState',
+    interfaces: [CompressedDataStructure]
+  };
+  function CompressedRentSplitState_init(rentSplitState, $this) {
+    $this = $this || Object.create(CompressedRentSplitState.prototype);
+    CompressedRentSplitState.call($this, CompressedRentRoommates_init(rentSplitState.roommates), CompressedRentExpenses_init(rentSplitState.expenses));
+    return $this;
+  }
+  function CompressedRentRoommates(r) {
+    this.r = r;
+  }
+  var collectionSizeOrDefault = Kotlin.kotlin.collections.collectionSizeOrDefault_ba2ldo$;
+  var ArrayList_init = Kotlin.kotlin.collections.ArrayList_init_ww73n8$;
+  CompressedRentRoommates.prototype.uncompressed = function () {
+    var $receiver = this.r;
+    var destination = ArrayList_init(collectionSizeOrDefault($receiver, 10));
+    var tmp$;
+    tmp$ = $receiver.iterator();
+    while (tmp$.hasNext()) {
+      var item = tmp$.next();
+      destination.add_11rb$(item.uncompressed());
+    }
+    return new RentRoommates(destination);
+  };
+  CompressedRentRoommates.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'CompressedRentRoommates',
+    interfaces: [CompressedDataStructure]
+  };
+  function CompressedRentRoommates_init(rentRoommates, $this) {
+    $this = $this || Object.create(CompressedRentRoommates.prototype);
+    var $receiver = rentRoommates.allRoommates;
+    var destination = ArrayList_init(collectionSizeOrDefault($receiver, 10));
+    var tmp$;
+    tmp$ = $receiver.iterator();
+    while (tmp$.hasNext()) {
+      var item = tmp$.next();
+      destination.add_11rb$(CompressedRentRoommate_init(item));
+    }
+    CompressedRentRoommates.call($this, destination);
+    return $this;
+  }
+  function CompressedRentRoommate(n, d, x, r) {
+    this.n = n;
+    this.d = d;
+    this.x = x;
+    this.r = r;
+  }
+  CompressedRentRoommate.prototype.uncompressed = function () {
+    return new RentRoommate(this.n, this.d, this.x, this.r);
+  };
+  CompressedRentRoommate.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'CompressedRentRoommate',
+    interfaces: [CompressedDataStructure]
+  };
+  function CompressedRentRoommate_init(rentRoommate, $this) {
+    $this = $this || Object.create(CompressedRentRoommate.prototype);
+    CompressedRentRoommate.call($this, rentRoommate.name, rentRoommate.monthlyIncome, rentRoommate.isRemovable, rentRoommate.isRenamable);
+    return $this;
+  }
+  function CompressedRentExpenses(e) {
+    this.e = e;
+  }
+  CompressedRentExpenses.prototype.uncompressed = function () {
+    var $receiver = this.e;
+    var destination = ArrayList_init(collectionSizeOrDefault($receiver, 10));
+    var tmp$;
+    tmp$ = $receiver.iterator();
+    while (tmp$.hasNext()) {
+      var item = tmp$.next();
+      destination.add_11rb$(item.uncompressed());
+    }
+    return new RentExpenses(destination);
+  };
+  CompressedRentExpenses.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'CompressedRentExpenses',
+    interfaces: [CompressedDataStructure]
+  };
+  function CompressedRentExpenses_init(rentExpenses, $this) {
+    $this = $this || Object.create(CompressedRentExpenses.prototype);
+    var $receiver = rentExpenses.allExpenses;
+    var destination = ArrayList_init(collectionSizeOrDefault($receiver, 10));
+    var tmp$;
+    tmp$ = $receiver.iterator();
+    while (tmp$.hasNext()) {
+      var item = tmp$.next();
+      destination.add_11rb$(CompressedRentExpense_init(item));
+    }
+    CompressedRentExpenses.call($this, destination);
+    return $this;
+  }
+  function CompressedRentExpense(n, d, x, r) {
+    this.n = n;
+    this.d = d;
+    this.x = x;
+    this.r = r;
+  }
+  CompressedRentExpense.prototype.uncompressed = function () {
+    return new RentExpense(this.n, this.d, this.x, this.r);
+  };
+  CompressedRentExpense.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'CompressedRentExpense',
+    interfaces: [CompressedDataStructure]
+  };
+  function CompressedRentExpense_init(rentExpense, $this) {
+    $this = $this || Object.create(CompressedRentExpense.prototype);
+    CompressedRentExpense.call($this, rentExpense.type, rentExpense.monthlyCost, rentExpense.isRemovable, rentExpense.isRenamable);
+    return $this;
+  }
   function RentExpense(type, monthlyCost, isRemovable, isRenamable, originalDOMElement) {
     RentExpense$Companion_getInstance();
     if (originalDOMElement === void 0)
@@ -117,8 +246,6 @@ this['Rent Split 2'] = function (_, Kotlin) {
   function nonEmptyType($receiver, index) {
     return RentExpense$Companion_getInstance().type_9d67ql$($receiver.type, index + 1 | 0);
   }
-  var collectionSizeOrDefault = Kotlin.kotlin.collections.collectionSizeOrDefault_ba2ldo$;
-  var ArrayList_init = Kotlin.kotlin.collections.ArrayList_init_ww73n8$;
   function RentExpenses(allExpenses) {
     this.allExpenses = allExpenses;
     var $receiver = this.allExpenses;
@@ -781,6 +908,12 @@ this['Rent Split 2'] = function (_, Kotlin) {
   function addingNewExpense($receiver, newExpense) {
     return new RentSplitState($receiver.roommates, $receiver.expenses.adding_pbrwj2$(newExpense));
   }
+  function serialize($receiver) {
+    return JSON.stringify(CompressedRentSplitState_init($receiver));
+  }
+  function deserialize($receiver, jsonString) {
+    return JSON.parse(jsonString).uncompressed();
+  }
   var isNeitherNullNorEmpty = defineInlineFunction('Rent Split 2.RentSplit.isNeitherNullNorEmpty_5cw0du$', function ($receiver) {
     return !($receiver == null || $receiver.length === 0);
   });
@@ -925,10 +1058,21 @@ this['Rent Split 2'] = function (_, Kotlin) {
       didSet = NullDSB();
     return new observing$ObjectLiteral(shouldSet, willSet, didSet, initialValue);
   }
+  var package$RentSplit = _.RentSplit || (_.RentSplit = {});
+  package$RentSplit.CompressedDataStructure = CompressedDataStructure;
+  package$RentSplit.CompressedRentSplitState_init_vktcdf$ = CompressedRentSplitState_init;
+  package$RentSplit.CompressedRentSplitState = CompressedRentSplitState;
+  package$RentSplit.CompressedRentRoommates_init_4mt70t$ = CompressedRentRoommates_init;
+  package$RentSplit.CompressedRentRoommates = CompressedRentRoommates;
+  package$RentSplit.CompressedRentRoommate_init_pcqrmu$ = CompressedRentRoommate_init;
+  package$RentSplit.CompressedRentRoommate = CompressedRentRoommate;
+  package$RentSplit.CompressedRentExpenses_init_3sselb$ = CompressedRentExpenses_init;
+  package$RentSplit.CompressedRentExpenses = CompressedRentExpenses;
+  package$RentSplit.CompressedRentExpense_init_pbrwj2$ = CompressedRentExpense_init;
+  package$RentSplit.CompressedRentExpense = CompressedRentExpense;
   Object.defineProperty(RentExpense, 'Companion', {
     get: RentExpense$Companion_getInstance
   });
-  var package$RentSplit = _.RentSplit || (_.RentSplit = {});
   package$RentSplit.RentExpense = RentExpense;
   package$RentSplit.nonEmptyType_nyrmdb$ = nonEmptyType;
   package$RentSplit.RentExpenses = RentExpenses;
@@ -1264,6 +1408,8 @@ this['Rent Split 2'] = function (_, Kotlin) {
   package$RentSplit.load_3hsl3g$ = load;
   package$RentSplit.addingNewRoommate_40h57c$ = addingNewRoommate;
   package$RentSplit.addingNewExpense_9z58f4$ = addingNewExpense;
+  package$RentSplit.serialize_fib44y$ = serialize;
+  package$RentSplit.deserialize_sp9oty$ = deserialize;
   package$RentSplit.isNeitherNullNorEmpty_5cw0du$ = isNeitherNullNorEmpty;
   package$RentSplit.isNeitherNullNorBlank_5cw0du$ = isNeitherNullNorBlank;
   package$RentSplit.get_dollarFormat_yrwdxr$ = get_dollarFormat;

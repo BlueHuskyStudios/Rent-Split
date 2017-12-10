@@ -52,3 +52,16 @@ fun RentSplitState.addingNewRoommate(newRoommate: RentRoommate): RentSplitState 
 fun RentSplitState.addingNewExpense(newExpense: RentExpense): RentSplitState {
     return RentSplitState(roommates = this.roommates, expenses = this.expenses.adding(newExpense))
 }
+
+
+/**
+ * Converts this state into a string. First, all field names are shortened
+ */
+fun RentSplitState.serialize(): String = JSON.stringify(CompressedRentSplitState(this))
+
+
+/**
+ * Converts a shortened-name state string (as created with [serialize]) into a [RentSplitState]
+ */
+fun RentSplitState.Companion.deserialize(jsonString: String): RentSplitState
+        = JSON.parse<CompressedRentSplitState>(jsonString).uncompressed()
