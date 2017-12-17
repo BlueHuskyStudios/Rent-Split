@@ -11,6 +11,7 @@
 
 package RentSplit
 
+import RentSplit.UserConsent.*
 import jQueryInterface.*
 import org.bh.tools.base.func.observing
 import org.w3c.dom.Element
@@ -89,6 +90,16 @@ val resultsTableBodySelector = "$resultsTableSelector>tbody"
 val resultsTableHeadRowSelector = "$resultsTableSelector>thead>tr"
 
 
+/// State Saving ///
+
+val localStorageWarningId = "Local-Storage-Warning"
+val localStorageWarningSelector = "#$localStorageWarningId"
+val localStorageWarningExplicitRefusalButtonId = "Local-Storage-Warning-Decline-Button"
+val localStorageWarningExplicitRefusalButtonSelector = "#$localStorageWarningExplicitRefusalButtonId"
+val localStorageWarningExplicitConsentButtonId = "Local-Storage-Warning-Consent-Button"
+val localStorageWarningExplicitConsentButtonSelector = "#$localStorageWarningExplicitConsentButtonId"
+
+
 /// Label text ///
 
 val rentExpenseType = "Rent"
@@ -125,9 +136,8 @@ class RentSplit {
      * The overall state of the app. If this is set, the app auto-refreshes
      */
     var state: RentSplitState by observing(RentSplitState.load(), didSet = { _, _ ->
-        this.regenerateInputTables()
-        this.reRegisterListeners()
-        this.recalculateRentSplit()
+        this.reloadPageFromState()
+        state.save()
     })
 
 
@@ -135,10 +145,37 @@ class RentSplit {
      * Called when the page has loaded completely and is ready to be manipulated by JavaScript
      */
     fun onReady() {
+        this.reloadPageFromState(shouldReRegisterListeners = false)
         this.regenerateInputTables()
         this.registerListeners()
         this.recalculateRentSplit()
         this.presentToUser()
+    }
+
+
+    /**
+     * Reloads all objects on the page by reading the state variable
+     */
+    fun reloadPageFromState(shouldReRegisterListeners: Boolean = true) {
+        this.applyStateToLocalStorageWarning()
+        this.regenerateInputTables()
+        if (shouldReRegisterListeners) {
+            this.reRegisterListeners()
+        }
+        this.recalculateRentSplit()
+    }
+
+
+    /**
+     * Ensures the local storage warning reflects the current app state
+     */
+    fun applyStateToLocalStorageWarning() {
+        if (state.localDataPreferences.localStorageConsent != null) {
+            jq(localStorageWarningSelector).addClass("hidden")
+        }
+        else {
+            jq(localStorageWarningSelector).removeClass("hidden")
+        }
     }
 
 
@@ -160,6 +197,9 @@ class RentSplit {
         jq(removeAnExpenseButtonSelector).click(::didPressRemoveExpenseButton)
         jq(addARoommateButtonSelector).click(::didPressNewRoommateButton)
         jq(removeARoommateButtonSelector).click(::didPressRemoveRoommateButton)
+
+        jq(localStorageWarningExplicitConsentButtonSelector).click(::didPressLocalStorageWarningExplicitConsentButton)
+        jq(localStorageWarningExplicitRefusalButtonSelector).click(::didPressLocalStorageWarningExplicitRefusalButton)
     }
 
 
@@ -173,10 +213,26 @@ class RentSplit {
 
 
     /**
+     * Called when the user has pressed the "You can store stuff on my machine" button
+     */
+    fun didPressLocalStorageWarningExplicitConsentButton(event: Event) {
+        state = state.copy(localDataPreferences = state.localDataPreferences.copy(localStorageConsent = explicitConsent))
+    }
+
+
+    /**
+     * Called when the user has pressed the "I don't want you to store stuff on my machine" button
+     */
+    fun didPressLocalStorageWarningExplicitRefusalButton(event: Event) {
+        state = state.copy(localDataPreferences = state.localDataPreferences.copy(localStorageConsent = explicitRefusal))
+    }
+
+
+    /**
      * Re-loads the app state based on user input on the page
      */
     fun reloadStateFromPage() {
-        state = RentSplitState(roommates = fetchRoommates(), expenses = fetchExpenses())
+        state = state.copy(roommates = fetchRoommates(), expenses = fetchExpenses())
     }
 
 
@@ -764,6 +820,6 @@ class RentSplit {
 
 fun main(args: Array<String>) {
     jq({
-           RentSplit().onReady()
-       })
+        RentSplit().onReady()
+    })
 }
