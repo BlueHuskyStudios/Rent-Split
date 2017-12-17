@@ -32,13 +32,13 @@ data class RentSplitState(
 
         /** The user's preferences regarding storage of data locally */
         @JsName(localDataPreferencesSerializedName)
-        val localDataPreference: LocalDataPreference
+        val localDataPreferences: LocalDataPreferences
 ) {
 
     fun toJson(): Json {
         return json(rentRoommatesSerializedName to roommates.toJson(),
                     rentExpensesSerializedName to expenses.toJson(),
-                    localDataPreferencesSerializedName to localDataPreference.toJson())
+                    localDataPreferencesSerializedName to localDataPreferences.toJson())
     }
 
     companion object {
@@ -51,19 +51,19 @@ data class RentSplitState(
          * {
          *     "r": JSON<RentRoommates>,
          *     "e": JSON<RentExpenses>,
-         *     "l": JSON<LocalDataPreference>
+         *     "l": JSON<LocalDataPreferences>
          * }
          * ```
          *
          * @see RentRoommates
          * @see RentExpenses
-         * @see LocalDataPreference
+         * @see LocalDataPreferences
          */
         @Suppress("UNCHECKED_CAST_TO_NATIVE_INTERFACE")
         operator fun invoke(raw: Json): RentSplitState? {
             return RentSplitState(roommates = RentRoommates(raw = (raw[rentRoommatesSerializedName] as? Json) ?: return null) ?: return null,
                                   expenses = RentExpenses(raw = raw[rentExpensesSerializedName] as? Json ?: return null) ?: return null,
-                                  localDataPreference = LocalDataPreference(raw = raw[localDataPreferencesSerializedName] as? Json ?: return null) ?: return null)
+                                  localDataPreferences = LocalDataPreferences(raw = raw[localDataPreferencesSerializedName] as? Json ?: return null) ?: return null)
         }
 
 
@@ -73,7 +73,7 @@ data class RentSplitState(
         val default = RentSplitState(
                 RentRoommates(listOf(RentRoommate.initial, RentRoommate.initial)),
                 RentExpenses(listOf(RentExpense.initialRent, RentExpense.initialUtilities)),
-                LocalDataPreference.initial)
+                LocalDataPreferences.initial)
     }
 }
 
@@ -96,7 +96,7 @@ fun RentSplitState.save() {
     val jsonString = serialize()
 
     // Only save to the local storage if the user consented
-    when (this.localDataPreference.localStorageConsent) {
+    when (this.localDataPreferences.localStorageConsent) {
         UserConsent.explicitConsent ->
             window.localStorage.setItem(generalStateSerializedName, jsonString)
 

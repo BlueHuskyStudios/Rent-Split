@@ -167,7 +167,7 @@ class RentSplit {
 
 
     fun applyStateToLocalStorageWarning() {
-        if (state.localDataPreference.localStorageConsent != null) {
+        if (state.localDataPreferences.localStorageConsent != null) {
             jq(localStorageWarningSelector).addClass("hidden")
         }
     }
@@ -210,7 +210,7 @@ class RentSplit {
      * Called when the user has pressed the "You can store stuff on my machine" button
      */
     fun didPressLocalStorageWarningExplicitConsentButton(event: Event) {
-        state = state.copy(localDataPreference = state.localDataPreference.copy(localStorageConsent = explicitConsent))
+        state = state.copy(localDataPreferences = state.localDataPreferences.copy(localStorageConsent = explicitConsent))
     }
 
 
@@ -218,7 +218,7 @@ class RentSplit {
      * Called when the user has pressed the "I don't want you to store stuff on my machine" button
      */
     fun didPressLocalStorageWarningExplicitRefusalButton(event: Event) {
-        state = state.copy(localDataPreference = state.localDataPreference.copy(localStorageConsent = explicitRefusal))
+        state = state.copy(localDataPreferences = state.localDataPreferences.copy(localStorageConsent = explicitRefusal))
     }
 
 

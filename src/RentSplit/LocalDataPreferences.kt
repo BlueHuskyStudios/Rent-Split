@@ -14,7 +14,7 @@ const val localStorageConsentSerializedName = "c"
  * @author Ben Leggiero
  * @since 2017-12-16
  */
-data class LocalDataPreference(
+data class LocalDataPreferences(
     /**
      * The user's consent to using LocalStorage
      */
@@ -26,7 +26,7 @@ data class LocalDataPreference(
 
     companion object {
         /**
-         * Creates a [LocalDataPreference] instance out of JSON, or returns `null` if that can't be done.
+         * Creates a [LocalDataPreferences] instance out of JSON, or returns `null` if that can't be done.
          *
          * The given JSON must be formatted like one of these:
          *
@@ -39,12 +39,12 @@ data class LocalDataPreference(
          * }
          * ```
          */
-        operator fun invoke(raw: Json): LocalDataPreference? {
-            return LocalDataPreference(
+        operator fun invoke(raw: Json): LocalDataPreferences? {
+            return LocalDataPreferences(
                     localStorageConsent = (raw["c"] as? String)?.let { UserConsent(serialValue = it) })
         }
 
 
-        val initial = LocalDataPreference(localStorageConsent = null)
+        val initial = LocalDataPreferences(localStorageConsent = null)
     }
 }
