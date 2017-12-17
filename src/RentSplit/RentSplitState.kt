@@ -84,11 +84,11 @@ data class RentSplitState(
  * Right now, it just provides the default one.
  */
 fun RentSplitState.Companion.load(): RentSplitState {
-    val urlState = URL(window.location.href).searchParams.get(generalStateSerializedName)?.let(::deserialize)
+    val urlState = URL(window.location.href).searchParams.get(generalStateSerializedName)?.let(::deserializing)
     window.history.pushState(null, document.title, "?")
 
     return urlState
-            ?: (window.localStorage.getItem(generalStateSerializedName)?.let(::deserialize)
+            ?: (window.localStorage.getItem(generalStateSerializedName)?.let(::deserializing)
                 ?: this.default)
 }
 
@@ -97,7 +97,7 @@ fun RentSplitState.Companion.load(): RentSplitState {
  * Saves this state to the disk, if and only if the user has explicitly consented to such an action
  */
 fun RentSplitState.save() {
-    val jsonString = serialize()
+    val jsonString = serialized()
 
     // Only save to the local storage if the user consented
     when (this.localDataPreferences.localStorageConsent) {
@@ -130,14 +130,14 @@ fun RentSplitState.addingNewExpense(newExpense: RentExpense): RentSplitState {
 /**
  * Converts this state into a string. First, all field names are shortened
  */
-fun RentSplitState.serialize(): String = JSON.stringify(this.toJson())
+fun RentSplitState.serialized(): String = JSON.stringify(this.toJson())
 
 
 /**
- * Converts a shortened-name state string (as created with [serialize]) into a [RentSplitState]
+ * Converts a shortened-name state string (as created with [serialized]) into a [RentSplitState]
  */
 @Suppress("unused")
-fun RentSplitState.Companion.deserialize(jsonString: String): RentSplitState? =
+fun RentSplitState.Companion.deserializing(jsonString: String): RentSplitState? =
     safeTry {
         val raw = JSON.parse<Json>(jsonString)
         return@safeTry RentSplitState(raw = raw)
