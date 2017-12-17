@@ -5,63 +5,85 @@ import org.w3c.dom.events.Event
 import org.w3c.dom.events.EventTarget
 
 
+
+typealias EventHandler = (Event?) -> Unit
+
+
+
 /**
  * @author Ben Leggiero
  * @since 2017-11-25
  */
-public external class JQuery() {
-    public fun addClass(className: String): JQuery
-    public fun addClass(f: (Int, String) -> String): JQuery
+external class JQuery {
 
-    public fun attr(attrName: String): String
-    public fun attr(attrName: String, value: String): JQuery
+    fun addClass(className: String): JQuery
+    fun addClass(f: (Int, String) -> String): JQuery
 
-    public fun html(): String
-    public fun html(s: String): JQuery
-    public fun html(f: (Int, String) -> String): JQuery
+    fun attr(attrName: String): String?
+    fun attr(attrName: String, value: String?): JQuery
+    fun attr(attrName: String, value: Double?): JQuery
+
+    fun html(): String
+    fun html(s: String): JQuery
+    fun html(f: (Int, String) -> String): JQuery
 
 
-    public fun hasClass(className: String): Boolean
-    public fun removeClass(className: String): JQuery
-    public fun height(): Number
-    public fun width(): Number
+    fun hasClass(className: String): Boolean
+    fun removeClass(className: String): JQuery
+    fun height(): Number
+    fun width(): Number
 
-    public fun click(): JQuery
+    fun click(): JQuery
 
-    public fun mousedown(handler: (MouseEvent) -> Unit): JQuery
-    public fun mouseup(handler: (MouseEvent) -> Unit): JQuery
-    public fun mousemove(handler: (MouseEvent) -> Unit): JQuery
+    fun mousedown(handler: (MouseEvent) -> Unit): JQuery
+    fun mouseup(handler: (MouseEvent) -> Unit): JQuery
+    fun mousemove(handler: (MouseEvent) -> Unit): JQuery
 
-    public fun dblclick(handler: (MouseClickEvent) -> Unit): JQuery
-    public fun click(handler: (MouseClickEvent) -> Unit): JQuery
+    fun dblclick(handler: (MouseClickEvent) -> Unit): JQuery
+    fun click(handler: (MouseClickEvent) -> Unit): JQuery
 
-    public fun load(handler: () -> Unit): JQuery
-    public fun change(handler: () -> Unit): JQuery
+    fun load(handler: EventHandler): JQuery
+    fun change(handler: EventHandler): JQuery
 
-    public fun append(str: String): JQuery
-    public fun before(content: JQuery): JQuery
-    public fun before(content: String): JQuery
-    public fun empty()
-    public fun ready(handler: () -> Unit): JQuery
-    public fun text(text: String): JQuery
-    public fun slideUp(): JQuery
-    public fun hover(handlerInOut: () -> Unit): JQuery
-    public fun hover(handlerIn: () -> Unit, handlerOut: () -> Unit): JQuery
-    public fun next(): JQuery
-    public fun parent(): JQuery
-    public fun `val`(): String?
+    fun append(str: String): JQuery
+    fun before(content: JQuery): JQuery
+    fun before(content: String): JQuery
+    /**
+     * Remove the set of matched elements from the DOM.
+     *
+     * Similar to `.empty()`, the `.remove()` method takes elements out of the DOM. Use `.remove()` when you want to
+     * remove the element itself, as well as everything inside it. In addition to the elements themselves, all bound
+     * events and jQuery data associated with the elements are removed. To remove the elements without removing data
+     * and events, use `.detach()` instead.
+     */
+    fun remove(): JQuery
+    fun empty(): JQuery
+    fun detach(): JQuery
+    fun ready(handler: EventHandler): JQuery
+    fun text(text: String): JQuery
+    fun slideUp(): JQuery
+    fun hover(handlerInOut: EventHandler): JQuery
+    fun hover(handlerIn: EventHandler, handlerOut: EventHandler): JQuery
+    fun prev(): JQuery
+    fun next(): JQuery
+    fun parent(): JQuery
+    fun `val`(): String?
+    fun `val`(newValue: String?): JQuery
+    fun `val`(newValue: Double?): JQuery
+    fun `val`(newValue: Array<*>?): JQuery
 
-    public fun off(): JQuery
+    fun off(): JQuery
 
-    public fun <To> map(mapper: JQueryMapper1<To>): Array<To>
-    public fun <To> map(mapper: JQueryMapper2<To>): Array<To>
+    fun toArray(): Array<Element>
+    fun <To> map(mapper: JQueryMapper<To>): Array<To>
 
-    public val length: Int
-    public fun size(): Int
+    val length: Int
+    fun size(): Int
+
+    fun get(index: Int): Element
 }
 
-public typealias JQueryMapper2<To> = (row: Int, element: JQuery) -> To
-public typealias JQueryMapper1<To> = (row: Int, element: Element) -> To
+public typealias JQueryMapper<To> = (index: Int, element: Element) -> To
 
 open public external class MouseEvent(): Event {
     public val pageX: Double

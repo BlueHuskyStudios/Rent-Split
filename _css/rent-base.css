@@ -56,6 +56,10 @@ html.rent {
     }
 }
 
+.rent button {
+    border-radius: 2pt;
+}
+
 .rent button,
 .rent #Add-Roommate-Button,
 .rent #Add-Expense-Button,
@@ -132,4 +136,17 @@ html.rent {
 .rent input.expense-cost {
     width: 0;
     min-width: 100%;
+}
+
+
+.rent aside p {
+    margin: 0 0.5ex;
+}
+
+.rent .button-list button:not(:last-child) {
+    margin-right: 1rem;
+}
+
+.rent .button-list:last-child {
+    margin-top: 1ex;
 }
