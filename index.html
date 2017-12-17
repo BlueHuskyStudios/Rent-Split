@@ -46,11 +46,11 @@
     <link rel='stylesheet' href='https://prog.BHStudios.org/Husk/_css/Type.css'/>  <!-- CSS framework for typography -->
     <link rel='stylesheet' href='https://prog.BHStudios.org/Husk/_css/Print.css'/> <!-- CSS framework for printing -->
     <link rel="stylesheet" href="./_css/rent-green.css"/>                    <!-- Main styles -->
-    <script src="https://Code.jQuery.com/jquery-3.1.0.slim.min.js"></script>
-    <script src="https://use.fontawesome.com/5167d0f8d0.js"></script>
+    <script src="https://Code.jQuery.com/jquery-3.1.0.slim.min.js">/* jQuery 3.1.0 */</script>
+    <script src="https://use.fontawesome.com/5167d0f8d0.js">/* FontAwesome */</script>
 
-    <script src="./_js/production/Rent Split 2/lib/kotlin.js"></script>
-    <script src="./_js/production/Rent Split 2/Rent Split 2.js"></script>
+    <script src="./_js/production/Rent Split 2/lib/kotlin.js">/* Kotlin/JS */</script>
+    <script src="./_js/production/Rent Split 2/Rent Split 2.js">/* this Rent Split web app */</script>
 </head>
 <body>
 <header class="flex-row flex-horiz-space-between">
@@ -68,7 +68,10 @@
         </dialog>
     </noscript>
     
-    <aside class="warning-message show-tiny">Sorry, I don't support screens this thin, just yet. Don't worry; I will in the future! For now, if this is a phone, try turning it sideways. &#x1F638;</aside>
+    <aside class="warning-message show-tiny">
+        Sorry, I don't support screens this thin, just yet. Don't worry; I will in the future! For now, if this is a
+        phone, try turning it sideways. &#x1F638;
+    </aside>
 
     <h2 class="text-center">Calculate what your portion of the rent should be.</h2>
     <section id="input-vars" class="flex-row flex-wrap flex-horiz-space-around">
@@ -111,6 +114,22 @@
             <tbody></tbody>
         </table>
     </section>
+
+    <section id="State-Management" class="flex-column flex-horiz-space-around">
+    <aside id="Local-Storage-Warning" class="warning-message">
+        <p>I can tell your computer to save a little bit of data so it can remember what you put on this page when
+            you refresh it. This data will stay on your computer, and I will never send it to a server nor share
+            it or anything; it'll just be there so you don't lose your progress.</p>
+        <p>If you don't want me to do this, that's fine; just don't click the button and I won't save anything.</p>
+
+        <div class="flex-row flex-horiz-space-between flex-wrap   button-list">
+            <a href="https://en.wikipedia.org/wiki/HTTP_cookie#EU_cookie_directive" target="_blank">Learn more&nbsp;&raquo;</a>
+            <div class="flex-row flex-horiz-stretch flex-wrap">
+                <button id="Local-Storage-Warning-Decline-Button" class="inverse">No, thank you 🙂</button>
+                <button id="Local-Storage-Warning-Consent-Button">Sweet! 🍪</button>
+            </div>
+        </div>
+    </aside>
 </main>
 
 <footer class="flex-column flex-vert-bottom flex-horiz-center   text-uppercase">
