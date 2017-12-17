@@ -1,6 +1,5 @@
 package RentSplit
 
-import jQueryInterface.jq
 import org.bh.tools.base.util.safeTry
 import org.w3c.dom.url.URL
 import kotlin.browser.document

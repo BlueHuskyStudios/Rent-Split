@@ -173,6 +173,9 @@ class RentSplit {
         if (state.localDataPreferences.localStorageConsent != null) {
             jq(localStorageWarningSelector).addClass("hidden")
         }
+        else {
+            jq(localStorageWarningSelector).removeClass("hidden")
+        }
     }
 
 
