@@ -1,27 +1,75 @@
 package RentSplit
 
 import jQueryInterface.JQuery
+import kotlin.js.Json
+import kotlin.js.json
+
+
+
+// DO NOT CHANGE THESE
+const val resourceNameSerializedName = "n"
+const val resourceDollarAmountSerializedName = "d"
+const val resourceIsRemovableSerializedName = "x"
+const val resourceIsRenamableSerializedName = "r"
+const val allExpensesSerializedName = "e"
+
+
 
 /**
  * The RentExpense class represents an expense and its monthly cost.
  */
 data class RentExpense(
         /** The expense's type (name) */
+        @JsName(resourceNameSerializedName)
         val type: String,
 
         /** The dollar amount of the expense's monthly cost */
+        @JsName(resourceDollarAmountSerializedName)
         val monthlyCost: Double,
 
         /** Indicates whether this expense can be removed from the list of roommates */
+        @JsName(resourceIsRemovableSerializedName)
         val isRemovable: Boolean,
 
         /** [currently unused] Indicates whether this expense can be renamed */
+        @JsName(resourceIsRenamableSerializedName)
         val isRenamable: Boolean,
 
         /** The original DOM element, as a JQuery selector */
         var originalDOMElement: JQuery? = null) {
 
+    /**
+     * Converts this expense into a JSON object
+     */
+    fun toJson() = json(resourceNameSerializedName to type,
+                        resourceDollarAmountSerializedName to monthlyCost,
+                        resourceIsRemovableSerializedName to isRemovable,
+                        resourceIsRenamableSerializedName to isRenamable)
+
     companion object {
+
+        /**
+         * Creates a [RentExpense] out of JSON, or returns `null` if that can't be done.
+         *
+         * The given JSON must be formatted like one of these:
+         *
+         * ```
+         * {
+         *     "n": String,
+         *     "d": Double,
+         *     "x": Boolean,
+         *     "r": Boolean
+         * }
+         * ```
+         */
+        operator fun invoke(raw: Json): RentExpense? {
+            return RentExpense(type = raw[resourceNameSerializedName] as? String ?: return null,
+                               monthlyCost = raw[resourceDollarAmountSerializedName] as? Double ?: return null,
+                               isRemovable = raw[resourceIsRemovableSerializedName] as? Boolean ?: return null,
+                               isRenamable = raw[resourceIsRenamableSerializedName] as? Boolean ?: return null)
+        }
+
+
         /** The generic initial value for the Rent input row */
         val initialRent
             get() = RentExpense(rentExpenseType,
@@ -82,7 +130,10 @@ fun RentExpense.nonEmptyType(index: Int) = RentExpense.type(ideal = type, backup
 /**
  * A group of `RentRoommate`s
  */
-data class RentExpenses(val allExpenses: List<RentExpense>) {
+data class RentExpenses(
+        @JsName(allExpensesSerializedName)
+        val allExpenses: List<RentExpense>
+) {
 
     /**
      * The calculated total dollar amount of all expenses
@@ -96,5 +147,33 @@ data class RentExpenses(val allExpenses: List<RentExpense>) {
      */
     fun adding(newExpense: RentExpense): RentExpenses {
         return RentExpenses(allExpenses = allExpenses.adding(newExpense))
+    }
+
+
+    /**
+     * Converts this expense collection into a JSON object
+     */
+    fun toJson() = json(allExpensesSerializedName to allExpenses.map { it.toJson() })
+
+
+    companion object {
+        /**
+         * Creates a [RentExpenses] out of JSON, or returns `null` if that can't be done.
+         *
+         * The given JSON must be formatted like one of these:
+         *
+         * ```
+         * {
+         *     "e": [JSON<RentExpense>]
+         * }
+         * ```
+         */
+        @Suppress("UNCHECKED_CAST")
+        operator fun invoke(raw: Json): RentExpenses? {
+            return RentExpenses(allExpenses =
+                                (raw[allExpensesSerializedName] as? Array<Json> ?: return null)
+                                        .map { RentExpense(raw = it) ?: return null }
+            )
+        }
     }
 }
