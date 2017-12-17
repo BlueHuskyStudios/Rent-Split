@@ -37,54 +37,54 @@ this['Rent Split 2'] = function (_, Kotlin) {
   observing$ObjectLiteral.prototype = Object.create(ObservableProperty.prototype);
   observing$ObjectLiteral.prototype.constructor = observing$ObjectLiteral;
   var localStorageConsentSerializedName;
-  function LocalDataPreference(localStorageConsent) {
-    LocalDataPreference$Companion_getInstance();
+  function LocalDataPreferences(localStorageConsent) {
+    LocalDataPreferences$Companion_getInstance();
     this.c = localStorageConsent;
   }
-  LocalDataPreference.prototype.toJson = function () {
+  LocalDataPreferences.prototype.toJson = function () {
     var tmp$;
     return json([to(localStorageConsentSerializedName, (tmp$ = this.c) != null ? tmp$.toJson() : null)]);
   };
-  function LocalDataPreference$Companion() {
-    LocalDataPreference$Companion_instance = this;
-    this.initial = new LocalDataPreference(null);
+  function LocalDataPreferences$Companion() {
+    LocalDataPreferences$Companion_instance = this;
+    this.initial = new LocalDataPreferences(null);
   }
-  LocalDataPreference$Companion.prototype.invoke_qk3xy8$ = function (raw) {
+  LocalDataPreferences$Companion.prototype.invoke_qk3xy8$ = function (raw) {
     var tmp$, tmp$_0;
-    return new LocalDataPreference((tmp$_0 = typeof (tmp$ = raw['c']) === 'string' ? tmp$ : null) != null ? UserConsent$Companion_getInstance().invoke_61zpoe$(tmp$_0) : null);
+    return new LocalDataPreferences((tmp$_0 = typeof (tmp$ = raw[localStorageConsentSerializedName]) === 'string' ? tmp$ : null) != null ? UserConsent$Companion_getInstance().invoke_61zpoe$(tmp$_0) : null);
   };
-  LocalDataPreference$Companion.$metadata$ = {
+  LocalDataPreferences$Companion.$metadata$ = {
     kind: Kind_OBJECT,
     simpleName: 'Companion',
     interfaces: []
   };
-  var LocalDataPreference$Companion_instance = null;
-  function LocalDataPreference$Companion_getInstance() {
-    if (LocalDataPreference$Companion_instance === null) {
-      new LocalDataPreference$Companion();
+  var LocalDataPreferences$Companion_instance = null;
+  function LocalDataPreferences$Companion_getInstance() {
+    if (LocalDataPreferences$Companion_instance === null) {
+      new LocalDataPreferences$Companion();
     }
-    return LocalDataPreference$Companion_instance;
+    return LocalDataPreferences$Companion_instance;
   }
-  LocalDataPreference.$metadata$ = {
+  LocalDataPreferences.$metadata$ = {
     kind: Kind_CLASS,
-    simpleName: 'LocalDataPreference',
+    simpleName: 'LocalDataPreferences',
     interfaces: []
   };
-  LocalDataPreference.prototype.component1 = function () {
+  LocalDataPreferences.prototype.component1 = function () {
     return this.c;
   };
-  LocalDataPreference.prototype.copy_hombyb$ = function (localStorageConsent) {
-    return new LocalDataPreference(localStorageConsent === void 0 ? this.c : localStorageConsent);
+  LocalDataPreferences.prototype.copy_hombyb$ = function (localStorageConsent) {
+    return new LocalDataPreferences(localStorageConsent === void 0 ? this.c : localStorageConsent);
   };
-  LocalDataPreference.prototype.toString = function () {
-    return 'LocalDataPreference(localStorageConsent=' + Kotlin.toString(this.c) + ')';
+  LocalDataPreferences.prototype.toString = function () {
+    return 'LocalDataPreferences(localStorageConsent=' + Kotlin.toString(this.c) + ')';
   };
-  LocalDataPreference.prototype.hashCode = function () {
+  LocalDataPreferences.prototype.hashCode = function () {
     var result = 0;
     result = result * 31 + Kotlin.hashCode(this.c) | 0;
     return result;
   };
-  LocalDataPreference.prototype.equals = function (other) {
+  LocalDataPreferences.prototype.equals = function (other) {
     return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && Kotlin.equals(this.c, other.c))));
   };
   var resourceNameSerializedName;
@@ -550,10 +550,6 @@ this['Rent Split 2'] = function (_, Kotlin) {
   var resultsTableSelector;
   var resultsTableBodySelector;
   var resultsTableHeadRowSelector;
-  var copyStateUrlButtonId;
-  var copyStateUrlButtonSelector;
-  var stateUrlFieldId;
-  var stateUrlFieldSelector;
   var localStorageWarningId;
   var localStorageWarningSelector;
   var localStorageWarningExplicitRefusalButtonId;
@@ -604,6 +600,9 @@ this['Rent Split 2'] = function (_, Kotlin) {
     if (this.state.l.c != null) {
       $(localStorageWarningSelector).addClass('hidden');
     }
+     else {
+      $(localStorageWarningSelector).removeClass('hidden');
+    }
   };
   RentSplit.prototype.reRegisterListeners = function () {
     $(anyInputSelector).off();
@@ -636,13 +635,13 @@ this['Rent Split 2'] = function (_, Kotlin) {
     this.reloadStateFromPage();
   };
   RentSplit.prototype.didPressLocalStorageWarningExplicitConsentButton_9ojx7i$ = function (event) {
-    this.state = this.state.copy_2dgllj$(void 0, void 0, this.state.l.copy_hombyb$(UserConsent$explicitConsent_getInstance()));
+    this.state = this.state.copy_2k6jng$(void 0, void 0, this.state.l.copy_hombyb$(UserConsent$explicitConsent_getInstance()));
   };
   RentSplit.prototype.didPressLocalStorageWarningExplicitRefusalButton_9ojx7i$ = function (event) {
-    this.state = this.state.copy_2dgllj$(void 0, void 0, this.state.l.copy_hombyb$(UserConsent$explicitRefusal_getInstance()));
+    this.state = this.state.copy_2k6jng$(void 0, void 0, this.state.l.copy_hombyb$(UserConsent$explicitRefusal_getInstance()));
   };
   RentSplit.prototype.reloadStateFromPage = function () {
-    this.state = this.state.copy_2dgllj$(this.fetchRoommates(), this.fetchExpenses());
+    this.state = this.state.copy_2k6jng$(this.fetchRoommates(), this.fetchExpenses());
   };
   RentSplit.prototype.recalculateRentSplit = function () {
     var roommates = this.state.r;
@@ -967,25 +966,25 @@ this['Rent Split 2'] = function (_, Kotlin) {
   }
   var rentRoommatesSerializedName;
   var rentExpensesSerializedName;
-  var localDataPreferenceSerializedName;
+  var localDataPreferencesSerializedName;
   var generalStateSerializedName;
-  function RentSplitState(roommates, expenses, localDataPreference) {
+  function RentSplitState(roommates, expenses, localDataPreferences) {
     RentSplitState$Companion_getInstance();
     this.r = roommates;
     this.e = expenses;
-    this.l = localDataPreference;
+    this.l = localDataPreferences;
   }
   RentSplitState.prototype.toJson = function () {
-    return json([to(rentRoommatesSerializedName, this.r.toJson()), to(rentExpensesSerializedName, this.e.toJson()), to(localDataPreferenceSerializedName, this.l.toJson())]);
+    return json([to(rentRoommatesSerializedName, this.r.toJson()), to(rentExpensesSerializedName, this.e.toJson()), to(localDataPreferencesSerializedName, this.l.toJson())]);
   };
   function RentSplitState$Companion() {
     RentSplitState$Companion_instance = this;
-    this.default = new RentSplitState(new RentRoommates(listOf([RentRoommate$Companion_getInstance().initial, RentRoommate$Companion_getInstance().initial])), new RentExpenses(listOf([RentExpense$Companion_getInstance().initialRent, RentExpense$Companion_getInstance().initialUtilities])), LocalDataPreference$Companion_getInstance().initial);
+    this.default = new RentSplitState(new RentRoommates(listOf([RentRoommate$Companion_getInstance().initial, RentRoommate$Companion_getInstance().initial])), new RentExpenses(listOf([RentExpense$Companion_getInstance().initialRent, RentExpense$Companion_getInstance().initialUtilities])), LocalDataPreferences$Companion_getInstance().initial);
   }
   RentSplitState$Companion.prototype.invoke_qk3xy8$ = function (raw) {
     var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7, tmp$_8, tmp$_9, tmp$_10;
     tmp$_1 = RentRoommates$Companion_getInstance();
-    tmp$_0 = Kotlin.isType(tmp$ = raw['r'], Object) ? tmp$ : null;
+    tmp$_0 = Kotlin.isType(tmp$ = raw[rentRoommatesSerializedName], Object) ? tmp$ : null;
     if (tmp$_0 == null) {
       return null;
     }
@@ -994,7 +993,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
       return null;
     }
     tmp$_5 = RentExpenses$Companion_getInstance();
-    tmp$_4 = Kotlin.isType(tmp$_3 = raw['e'], Object) ? tmp$_3 : null;
+    tmp$_4 = Kotlin.isType(tmp$_3 = raw[rentExpensesSerializedName], Object) ? tmp$_3 : null;
     if (tmp$_4 == null) {
       return null;
     }
@@ -1002,8 +1001,8 @@ this['Rent Split 2'] = function (_, Kotlin) {
     if (tmp$_6 == null) {
       return null;
     }
-    tmp$_9 = LocalDataPreference$Companion_getInstance();
-    tmp$_8 = Kotlin.isType(tmp$_7 = raw['l'], Object) ? tmp$_7 : null;
+    tmp$_9 = LocalDataPreferences$Companion_getInstance();
+    tmp$_8 = Kotlin.isType(tmp$_7 = raw[localDataPreferencesSerializedName], Object) ? tmp$_7 : null;
     if (tmp$_8 == null) {
       return null;
     }
@@ -1039,11 +1038,11 @@ this['Rent Split 2'] = function (_, Kotlin) {
   RentSplitState.prototype.component3 = function () {
     return this.l;
   };
-  RentSplitState.prototype.copy_2dgllj$ = function (roommates, expenses, localDataPreference) {
-    return new RentSplitState(roommates === void 0 ? this.r : roommates, expenses === void 0 ? this.e : expenses, localDataPreference === void 0 ? this.l : localDataPreference);
+  RentSplitState.prototype.copy_2k6jng$ = function (roommates, expenses, localDataPreferences) {
+    return new RentSplitState(roommates === void 0 ? this.r : roommates, expenses === void 0 ? this.e : expenses, localDataPreferences === void 0 ? this.l : localDataPreferences);
   };
   RentSplitState.prototype.toString = function () {
-    return 'RentSplitState(roommates=' + Kotlin.toString(this.r) + (', expenses=' + Kotlin.toString(this.e)) + (', localDataPreference=' + Kotlin.toString(this.l)) + ')';
+    return 'RentSplitState(roommates=' + Kotlin.toString(this.r) + (', expenses=' + Kotlin.toString(this.e)) + (', localDataPreferences=' + Kotlin.toString(this.l)) + ')';
   };
   RentSplitState.prototype.hashCode = function () {
     var result = 0;
@@ -1057,18 +1056,17 @@ this['Rent Split 2'] = function (_, Kotlin) {
   };
   function load($receiver) {
     var tmp$, tmp$_0, tmp$_1;
-    var urlState = (tmp$ = (new URL(window.location.href)).searchParams.get(generalStateSerializedName)) != null ? getCallableRef('deserialize', function ($receiver, jsonString) {
-      return deserialize($receiver, jsonString);
+    var urlState = (tmp$ = (new URL(window.location.href)).searchParams.get(generalStateSerializedName)) != null ? getCallableRef('deserializing', function ($receiver, jsonString) {
+      return deserializing($receiver, jsonString);
     }.bind(null, this))(tmp$) : null;
     window.history.pushState(null, document.title, '?');
-    return urlState != null ? urlState : (tmp$_1 = (tmp$_0 = window.localStorage.getItem(generalStateSerializedName)) != null ? getCallableRef('deserialize', function ($receiver, jsonString) {
-      return deserialize($receiver, jsonString);
+    return urlState != null ? urlState : (tmp$_1 = (tmp$_0 = window.localStorage.getItem(generalStateSerializedName)) != null ? getCallableRef('deserializing', function ($receiver, jsonString) {
+      return deserializing($receiver, jsonString);
     }.bind(null, this))(tmp$_0) : null) != null ? tmp$_1 : $receiver.default;
   }
   function save($receiver) {
     var tmp$;
-    var jsonString = serialize($receiver);
-    $(stateUrlFieldSelector).val(jsonString);
+    var jsonString = serialized($receiver);
     tmp$ = $receiver.l.c;
     if (equals(tmp$, UserConsent$explicitConsent_getInstance()))
       window.localStorage.setItem(generalStateSerializedName, jsonString);
@@ -1078,22 +1076,22 @@ this['Rent Split 2'] = function (_, Kotlin) {
       console.log("Opted not to save anything locally; user never explicitly told us that's OK");
   }
   function addingNewRoommate($receiver, newRoommate) {
-    return $receiver.copy_2dgllj$($receiver.r.adding_pcqrmu$(newRoommate), $receiver.e);
+    return $receiver.copy_2k6jng$($receiver.r.adding_pcqrmu$(newRoommate), $receiver.e);
   }
   function addingNewExpense($receiver, newExpense) {
-    return $receiver.copy_2dgllj$($receiver.r, $receiver.e.adding_pbrwj2$(newExpense));
+    return $receiver.copy_2k6jng$($receiver.r, $receiver.e.adding_pbrwj2$(newExpense));
   }
-  function serialize($receiver) {
+  function serialized($receiver) {
     return JSON.stringify($receiver.toJson());
   }
-  function deserialize$lambda(closure$jsonString) {
+  function deserializing$lambda(closure$jsonString) {
     return function () {
       var raw = JSON.parse(closure$jsonString);
       return RentSplitState$Companion_getInstance().invoke_qk3xy8$(raw);
     };
   }
-  function deserialize($receiver, jsonString) {
-    return safeTry(deserialize$lambda(jsonString));
+  function deserializing($receiver, jsonString) {
+    return safeTry(deserializing$lambda(jsonString));
   }
   function UserConsent(name, ordinal, serialValue) {
     Enum.call(this);
@@ -1335,10 +1333,10 @@ this['Rent Split 2'] = function (_, Kotlin) {
       return localStorageConsentSerializedName;
     }
   });
-  Object.defineProperty(LocalDataPreference, 'Companion', {
-    get: LocalDataPreference$Companion_getInstance
+  Object.defineProperty(LocalDataPreferences, 'Companion', {
+    get: LocalDataPreferences$Companion_getInstance
   });
-  package$RentSplit.LocalDataPreference = LocalDataPreference;
+  package$RentSplit.LocalDataPreferences = LocalDataPreferences;
   Object.defineProperty(package$RentSplit, 'resourceNameSerializedName', {
     get: function () {
       return resourceNameSerializedName;
@@ -1642,26 +1640,6 @@ this['Rent Split 2'] = function (_, Kotlin) {
       return resultsTableHeadRowSelector;
     }
   });
-  Object.defineProperty(package$RentSplit, 'copyStateUrlButtonId', {
-    get: function () {
-      return copyStateUrlButtonId;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'copyStateUrlButtonSelector', {
-    get: function () {
-      return copyStateUrlButtonSelector;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'stateUrlFieldId', {
-    get: function () {
-      return stateUrlFieldId;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'stateUrlFieldSelector', {
-    get: function () {
-      return stateUrlFieldSelector;
-    }
-  });
   Object.defineProperty(package$RentSplit, 'localStorageWarningId', {
     get: function () {
       return localStorageWarningId;
@@ -1765,9 +1743,9 @@ this['Rent Split 2'] = function (_, Kotlin) {
       return rentExpensesSerializedName;
     }
   });
-  Object.defineProperty(package$RentSplit, 'localDataPreferenceSerializedName', {
+  Object.defineProperty(package$RentSplit, 'localDataPreferencesSerializedName', {
     get: function () {
-      return localDataPreferenceSerializedName;
+      return localDataPreferencesSerializedName;
     }
   });
   Object.defineProperty(package$RentSplit, 'generalStateSerializedName', {
@@ -1783,8 +1761,8 @@ this['Rent Split 2'] = function (_, Kotlin) {
   package$RentSplit.save_fib44y$ = save;
   package$RentSplit.addingNewRoommate_40h57c$ = addingNewRoommate;
   package$RentSplit.addingNewExpense_9z58f4$ = addingNewExpense;
-  package$RentSplit.serialize_fib44y$ = serialize;
-  package$RentSplit.deserialize_sp9oty$ = deserialize;
+  package$RentSplit.serialized_fib44y$ = serialized;
+  package$RentSplit.deserializing_sp9oty$ = deserializing;
   Object.defineProperty(UserConsent, 'explicitConsent', {
     get: UserConsent$explicitConsent_getInstance
   });
@@ -1878,10 +1856,6 @@ this['Rent Split 2'] = function (_, Kotlin) {
   resultsTableSelector = '#Results';
   resultsTableBodySelector = '#Results>tbody';
   resultsTableHeadRowSelector = '#Results>thead>tr';
-  copyStateUrlButtonId = 'Copy-URL-Button';
-  copyStateUrlButtonSelector = '#Copy-URL-Button';
-  stateUrlFieldId = 'State-URL-Field';
-  stateUrlFieldSelector = '#State-URL-Field';
   localStorageWarningId = 'Local-Storage-Warning';
   localStorageWarningSelector = '#Local-Storage-Warning';
   localStorageWarningExplicitRefusalButtonId = 'Local-Storage-Warning-Decline-Button';
@@ -1902,7 +1876,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
   defaultUtilitiesExpenseCost = 50.0;
   rentRoommatesSerializedName = 'r';
   rentExpensesSerializedName = 'e';
-  localDataPreferenceSerializedName = 'l';
+  localDataPreferencesSerializedName = 'l';
   generalStateSerializedName = 'generalState';
   main([]);
   Kotlin.defineModule('Rent Split 2', _);

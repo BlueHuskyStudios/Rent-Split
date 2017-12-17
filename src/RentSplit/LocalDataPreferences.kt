@@ -18,7 +18,7 @@ data class LocalDataPreferences(
     /**
      * The user's consent to using LocalStorage
      */
-    @JsName("c")
+    @JsName(localStorageConsentSerializedName)
     val localStorageConsent: UserConsent?
 ) {
 
@@ -44,7 +44,7 @@ data class LocalDataPreferences(
          */
         operator fun invoke(raw: Json): LocalDataPreferences? {
             return LocalDataPreferences(
-                    localStorageConsent = (raw["c"] as? String)?.let { UserConsent(serialValue = it) })
+                    localStorageConsent = (raw[localStorageConsentSerializedName] as? String)?.let { UserConsent(serialValue = it) })
         }
 
 
