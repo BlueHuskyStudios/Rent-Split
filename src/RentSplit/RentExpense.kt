@@ -38,10 +38,13 @@ data class RentExpense(
         /** The original DOM element, as a JQuery selector */
         var originalDOMElement: JQuery? = null) {
 
-    fun toJson(): Json = json(resourceNameSerializedName to type,
-                          resourceDollarAmountSerializedName to monthlyCost,
-                          resourceIsRemovableSerializedName to isRemovable,
-                          resourceIsRenamableSerializedName to isRenamable)
+    /**
+     * Converts this expense into a JSON object
+     */
+    fun toJson() = json(resourceNameSerializedName to type,
+                        resourceDollarAmountSerializedName to monthlyCost,
+                        resourceIsRemovableSerializedName to isRemovable,
+                        resourceIsRenamableSerializedName to isRenamable)
 
     companion object {
 
@@ -147,9 +150,10 @@ data class RentExpenses(
     }
 
 
-    fun toJson(): Json {
-        return json(allExpensesSerializedName to allExpenses.map { it.toJson() })
-    }
+    /**
+     * Converts this expense collection into a JSON object
+     */
+    fun toJson() = json(allExpensesSerializedName to allExpenses.map { it.toJson() })
 
 
     companion object {

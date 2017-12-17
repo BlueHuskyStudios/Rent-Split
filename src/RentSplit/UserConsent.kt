@@ -28,6 +28,9 @@ enum class UserConsent(
     ;
 
 
+    /**
+     * Converts this user consent into a JSON-compatible value
+     */
     fun toJson() = this.serialValue
 
 

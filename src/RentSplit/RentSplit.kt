@@ -166,6 +166,9 @@ class RentSplit {
     }
 
 
+    /**
+     * Ensures the local storage warning reflects the current app state
+     */
     fun applyStateToLocalStorageWarning() {
         if (state.localDataPreferences.localStorageConsent != null) {
             jq(localStorageWarningSelector).addClass("hidden")

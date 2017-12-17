@@ -22,6 +22,9 @@ data class LocalDataPreferences(
     val localStorageConsent: UserConsent?
 ) {
 
+    /**
+     * Converts these preferences into a JSON object
+     */
     fun toJson() = json(localStorageConsentSerializedName to localStorageConsent?.toJson())
 
     companion object {

@@ -37,10 +37,13 @@ data class RentRoommate(
         /** The cached percent of how much this roommate contributes to the overall income */
         var proportion: Double? = null) {
 
-    fun toJson(): Json = json(resourceNameSerializedName to name,
-                          resourceDollarAmountSerializedName to monthlyIncome,
-                          resourceIsRemovableSerializedName to isRemovable,
-                          resourceIsRenamableSerializedName to isRenamable)
+    /**
+     * Converts this roommate into a JSON object
+     */
+    fun toJson() = json(resourceNameSerializedName to name,
+                        resourceDollarAmountSerializedName to monthlyIncome,
+                        resourceIsRemovableSerializedName to isRemovable,
+                        resourceIsRenamableSerializedName to isRenamable)
 
     companion object {
 
@@ -120,6 +123,9 @@ fun RentRoommate.nonEmptyName(index: Int) = RentRoommate.name(ideal = name, back
  * A group of `RentRoommate`s
  */
 data class RentRoommates(
+        /**
+         * All roommates in this collection of roommates
+         */
         @JsName(allRoommatesSerializedName)
         val allRoommates: List<RentRoommate>
 ) {
@@ -139,7 +145,10 @@ data class RentRoommates(
     }
 
 
-    fun toJson(): Json = json(allRoommatesSerializedName to allRoommates.map { it.toJson() })
+    /**
+     * Converts this collection of roommates into a JSON object
+     */
+    fun toJson() = json(allRoommatesSerializedName to allRoommates.map { it.toJson() })
 
 
     companion object {

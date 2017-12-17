@@ -35,11 +35,12 @@ data class RentSplitState(
         val localDataPreferences: LocalDataPreferences
 ) {
 
-    fun toJson(): Json {
-        return json(rentRoommatesSerializedName to roommates.toJson(),
-                    rentExpensesSerializedName to expenses.toJson(),
-                    localDataPreferencesSerializedName to localDataPreferences.toJson())
-    }
+    /**
+     * Converts this state into a JSON object
+     */
+    fun toJson() = json(rentRoommatesSerializedName to roommates.toJson(),
+                        rentExpensesSerializedName to expenses.toJson(),
+                        localDataPreferencesSerializedName to localDataPreferences.toJson())
 
     companion object {
         /**
@@ -92,6 +93,9 @@ fun RentSplitState.Companion.load(): RentSplitState {
 }
 
 
+/**
+ * Saves this state to the disk, if and only if the user has explicitly consented to such an action
+ */
 fun RentSplitState.save() {
     val jsonString = serialize()
 
