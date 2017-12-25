@@ -7,7 +7,15 @@
  *  Copyright Blue Husky Studios 2017 BH-1-PS
  */
 
-@file:Suppress("MemberVisibilityCanPrivate", "LocalVariableName", "NOTHING_TO_INLINE")
+@file:Suppress(
+        "LocalVariableName",
+        "NOTHING_TO_INLINE",
+        "MemberVisibilityCanPrivate", // FIXME: Fix with #26
+        "MemberVisibilityCanBePrivate", // FIXME: Fix with #26
+        "MayBeConstant", // FIXME: Fix with #11
+        "unused", // FIXME: Fix with #11
+        "UNUSED_PARAMETER"
+)
 
 package RentSplit
 
@@ -16,6 +24,7 @@ import jQueryInterface.*
 import org.bh.tools.base.func.observing
 import org.w3c.dom.Element
 import org.w3c.dom.events.Event
+import kotlin.browser.window
 
 
 ///// APP-GLOBAL CONSTANTS /////
@@ -92,6 +101,11 @@ val resultsTableHeadRowSelector = "$resultsTableSelector>thead>tr"
 
 /// State Saving ///
 
+val copyStateUrlButtonId = "Copy-URL-Button"
+val copyStateUrlButtonSelector = "#$copyStateUrlButtonId"
+val stateUrlFieldId = "State-URL-Field"
+val stateUrlFieldSelector = "#$stateUrlFieldId"
+
 val localStorageWarningId = "Local-Storage-Warning"
 val localStorageWarningSelector = "#$localStorageWarningId"
 val localStorageWarningExplicitRefusalButtonId = "Local-Storage-Warning-Decline-Button"
@@ -149,6 +163,7 @@ class RentSplit {
         this.regenerateInputTables()
         this.registerListeners()
         this.recalculateRentSplit()
+        this.state.save()
         this.presentToUser()
     }
 
@@ -200,6 +215,8 @@ class RentSplit {
 
         jq(localStorageWarningExplicitConsentButtonSelector).click(::didPressLocalStorageWarningExplicitConsentButton)
         jq(localStorageWarningExplicitRefusalButtonSelector).click(::didPressLocalStorageWarningExplicitRefusalButton)
+
+        jq(copyStateUrlButtonSelector).click(::didPressCopyUrlButton)
     }
 
 
@@ -225,6 +242,20 @@ class RentSplit {
      */
     fun didPressLocalStorageWarningExplicitRefusalButton(event: Event) {
         state = state.copy(localDataPreferences = state.localDataPreferences.copy(localStorageConsent = explicitRefusal))
+    }
+
+
+    fun didPressCopyUrlButton(event: Event) {
+        try {
+            jq(stateUrlFieldSelector).copyToClipboardOrThrow()
+            jq(copyStateUrlButtonSelector).addClass("just-copied")
+            window.setTimeout({
+                jq(copyStateUrlButtonSelector).removeClass("just-copied")
+            }, 3000)
+        }
+        catch (error: Throwable) {
+            console.log("Failed to copy state URL!")
+        }
     }
 
 

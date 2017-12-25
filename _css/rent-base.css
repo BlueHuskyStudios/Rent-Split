@@ -2,7 +2,7 @@
  * Layout for Rent Split Calculator
  *
  * @since 2016-09-05
- * @author Kyli Rouge of Blue Husky Studios
+ * @author Kyli Rouge & Ben Leggiero of Blue Husky Studios
  *
  * @see https://BlueHuskyStudios.GitHub.IO/Rent-Split-Calculator
  */
@@ -47,12 +47,17 @@ html.rent {
     width: -moz-fit-content;
     width: -ms-fit-content;
     width: fit-content;
+    z-index: 10;
 }
 
 .rent body .warning-message {
     padding: 1em;
-    } @media screen and (max-width: 479px) { .rent body .warning-message {
-        margin: -1em;
+}
+.rent main .warning-message {
+    margin: 1em 0;
+    
+    } @media screen and (max-width: 479px) { .rent main .warning-message {
+        width: 100vw;
     }
 }
 
@@ -150,3 +155,29 @@ html.rent {
 .rent .button-list:last-child {
     margin-top: 1ex;
 }
+
+.rent input:read-only {
+    opacity: 0.5;
+}
+
+
+.copy-button {
+    position: relative;
+}
+    .copy-button::before {
+        content: "Copied!";
+        position: absolute;
+        bottom: 1ex;
+        left:0;
+        right: 0;
+        width: 100%;
+        color: rgba(0,0,0, 0);
+        z-index: -1;
+        transition-property: bottom, color;
+        transition-duration: 2s;
+    }
+    .copy-button.just-copied::before {
+        bottom: -3ex;
+        color: rgba(0,0,0, 0.8);
+        transition-duration: 0.3s;
+    }

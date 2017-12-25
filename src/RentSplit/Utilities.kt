@@ -1,5 +1,8 @@
 package RentSplit
 
+import jQueryInterface.JQuery
+import kotlin.browser.document
+
 
 /*
  * @author Ben Leggiero
@@ -78,3 +81,21 @@ fun <Element> List<Element>.adding(newElement: Element): List<Element> {
     newExpenses.add(newElement)
     return newExpenses.toList()
 }
+
+
+/**
+ * Attempts to copy the text within the element(s) selected by this JQuery selector. If that cannot be done, this
+ * throws an error andor returns `false`. If it succeeded, this returns `true`.
+ */
+fun JQuery.copyToClipboardOrThrow(): Boolean {
+    this.select()
+    return document.execCommand("copy")
+}
+
+
+/**
+ * A no-op; for use in branching statements like `when`, should you want to explicitly acknowledge that a branch should
+ * not do anything.
+ */
+@Suppress("NOTHING_TO_INLINE") // Inlined on-purpose to reduce output size
+inline fun doNothing() = Unit

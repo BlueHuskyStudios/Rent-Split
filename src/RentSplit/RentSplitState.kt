@@ -1,11 +1,14 @@
 package RentSplit
 
+import jQueryInterface.jq
 import org.bh.tools.base.util.safeTry
 import org.w3c.dom.url.URL
 import kotlin.browser.document
 import kotlin.browser.window
 import kotlin.js.Json
 import kotlin.js.json
+import RentSplit.SerializationPurpose.*
+import RentSplit.UserConsent.*
 
 
 
@@ -37,9 +40,14 @@ data class RentSplitState(
     /**
      * Converts this state into a JSON object
      */
-    fun toJson() = json(rentRoommatesSerializedName to roommates.toJson(),
-                        rentExpensesSerializedName to expenses.toJson(),
-                        localDataPreferencesSerializedName to localDataPreferences.toJson())
+    fun toJson(purpose: SerializationPurpose) = when(purpose) {
+        forLocalStorage -> json(rentRoommatesSerializedName to roommates.toJson(),
+                                rentExpensesSerializedName to expenses.toJson(),
+                                localDataPreferencesSerializedName to localDataPreferences.toJson())
+
+        forSharing -> json(rentRoommatesSerializedName to roommates.toJson(),
+                           rentExpensesSerializedName to expenses.toJson())
+    }
 
     companion object {
         /**
@@ -59,36 +67,51 @@ data class RentSplitState(
          * @see RentExpenses
          * @see LocalDataPreferences
          */
-        @Suppress("UNCHECKED_CAST_TO_NATIVE_INTERFACE")
+        @Suppress("UNCHECKED_CAST_TO_NATIVE_INTERFACE", "UNCHECKED_CAST_TO_EXTERNAL_INTERFACE")
         operator fun invoke(raw: Json): RentSplitState? {
-            return RentSplitState(roommates = RentRoommates(raw = (raw[rentRoommatesSerializedName] as? Json) ?: return null) ?: return null,
-                                  expenses = RentExpenses(raw = raw[rentExpensesSerializedName] as? Json ?: return null) ?: return null,
-                                  localDataPreferences = LocalDataPreferences(raw = raw[localDataPreferencesSerializedName] as? Json ?: return null) ?: return null)
+            return RentSplitState(roommates = (raw[rentRoommatesSerializedName] as? Json)?.let { RentRoommates(raw = it) } ?: RentRoommates.initial,
+                                  expenses = (raw[rentExpensesSerializedName] as? Json)?.let { RentExpenses(raw = it) } ?: RentExpenses.initial,
+                                  localDataPreferences = (raw[localDataPreferencesSerializedName] as? Json)?.let { LocalDataPreferences(raw = it) } ?: LocalDataPreferences.initial)
         }
 
 
         /**
-         * The default state to use when no other is available
+         * The initial state to use when no other is available
          */
-        val default = RentSplitState(
-                RentRoommates(listOf(RentRoommate.initial, RentRoommate.initial)),
-                RentExpenses(listOf(RentExpense.initialRent, RentExpense.initialUtilities)),
+        val initial = RentSplitState(
+                RentRoommates.initial,
+                RentExpenses.initial,
                 LocalDataPreferences.initial)
     }
 }
 
 
+
 /**
- * In the future, this will deserialize the state, or provide the default one.
- * Right now, it just provides the default one.
+ * Deserializes the state from the URL or local storage
  */
 fun RentSplitState.Companion.load(): RentSplitState {
-    val urlState = URL(window.location.href).searchParams.get(generalStateSerializedName)?.let(::deserializing)
-    window.history.pushState(null, document.title, "?")
+    val urlState = URL(window.location.href).searchParams.get(generalStateSerializedName)?.let { deserializing(it, forSharing) }
+    if (urlState != null) {
+        window.history.pushState(null, document.title, "?") // remove the ugly long JSON string from the URL
+    }
 
-    return urlState
-            ?: (window.localStorage.getItem(generalStateSerializedName)?.let(::deserializing)
-                ?: this.default)
+    (window.localStorage.getItem(generalStateSerializedName)?.let { deserializing(it, forLocalStorage) })?.let { locallyStored ->
+        if (urlState != null) {
+            // If there was a valid state shared in the URL, then the only data it cannot contain is the local data
+            // preferences. If we can get that out of local storage, we will use that.
+            return urlState.copy(localDataPreferences = locallyStored.localDataPreferences)
+        }
+        else if (locallyStored.localDataPreferences.localStorageConsent == explicitConsent) {
+            // If there was no valid state in the URL, but there was in local storage, and it indicates that the user
+            // previously explicitly consented to using local storage, then use that.
+            return locallyStored
+        }
+    }
+
+    // If there was no local storage, we got here. We might've still gotten a URL state so if we did then use that.
+    // Else, there's no state to be loaded so use the preset initial state.
+    return urlState ?: this.initial
 }
 
 
@@ -96,12 +119,14 @@ fun RentSplitState.Companion.load(): RentSplitState {
  * Saves this state to the disk, if and only if the user has explicitly consented to such an action
  */
 fun RentSplitState.save() {
-    val jsonString = serialized()
+    val jsonStringForLocalStorage = serialized(forLocalStorage)
+    val jsonStringForSharing = serialized(forSharing)
+    jq(stateUrlFieldSelector).`val`("${window.location.protocol}//${window.location.host}${window.location.pathname}?$generalStateSerializedName=$jsonStringForSharing")
 
     // Only save to the local storage if the user consented
     when (this.localDataPreferences.localStorageConsent) {
         UserConsent.explicitConsent ->
-            window.localStorage.setItem(generalStateSerializedName, jsonString)
+            window.localStorage.setItem(generalStateSerializedName, jsonStringForLocalStorage)
 
         UserConsent.explicitRefusal -> console.log("Opted not to save anything locally; user explicitly told us not to")
 
@@ -129,15 +154,40 @@ fun RentSplitState.addingNewExpense(newExpense: RentExpense): RentSplitState {
 /**
  * Converts this state into a string. First, all field names are shortened
  */
-fun RentSplitState.serialized(): String = JSON.stringify(this.toJson())
+fun RentSplitState.serialized(purpose: SerializationPurpose) = JSON.stringify(this.toJson(purpose))
 
 
 /**
  * Converts a shortened-name state string (as created with [serialized]) into a [RentSplitState]
  */
 @Suppress("unused")
-fun RentSplitState.Companion.deserializing(jsonString: String): RentSplitState? =
+fun RentSplitState.Companion.deserializing(jsonString: String, purpose: SerializationPurpose): RentSplitState? =
     safeTry {
         val raw = JSON.parse<Json>(jsonString)
+
+        when (purpose) {
+            forLocalStorage -> doNothing()
+            forSharing ->
+                @Suppress("UNCHECKED_CAST_TO_EXTERNAL_INTERFACE")
+                (raw[localDataPreferencesSerializedName] as? Json)?.set(localStorageConsentSerializedName, undefined)
+        }
         return@safeTry RentSplitState(raw = raw)
     }
+
+
+
+/**
+ * Describes why something was or should be (de)serialized. These should not imply incompatible (de)serialization
+ * approaches, but instead describe what to include/omit when (de)serializing
+ */
+enum class SerializationPurpose {
+    /**
+     * Serialized for keeping local storage on the client machine
+     */
+    forLocalStorage,
+
+    /**
+     * Serialized for sharing to another client's machine
+     */
+    forSharing
+}

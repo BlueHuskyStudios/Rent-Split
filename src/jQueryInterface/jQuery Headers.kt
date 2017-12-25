@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package jQueryInterface
 
 import org.w3c.dom.Element
@@ -41,6 +43,9 @@ external class JQuery {
 
     fun dblclick(handler: (MouseClickEvent) -> Unit): JQuery
     fun click(handler: (MouseClickEvent) -> Unit): JQuery
+
+    fun select(): JQuery
+    fun select(eventData: Any? = definedExternally, handler: (Event) -> Unit): JQuery
 
     fun load(handler: EventHandler): JQuery
     fun change(handler: EventHandler): JQuery
