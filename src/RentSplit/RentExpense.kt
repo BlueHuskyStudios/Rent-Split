@@ -157,6 +157,9 @@ data class RentExpenses(
 
 
     companion object {
+
+        val initial = RentExpenses(listOf(RentExpense.initialRent, RentExpense.initialUtilities))
+
         /**
          * Creates a [RentExpenses] out of JSON, or returns `null` if that can't be done.
          *

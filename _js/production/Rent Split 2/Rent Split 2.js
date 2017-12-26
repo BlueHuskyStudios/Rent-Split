@@ -8,10 +8,12 @@ this['Rent Split 2'] = function (_, Kotlin) {
   var json = Kotlin.kotlin.js.json_pyyo18$;
   var Kind_OBJECT = Kotlin.Kind.OBJECT;
   var Kind_CLASS = Kotlin.Kind.CLASS;
+  var listOf = Kotlin.kotlin.collections.listOf_i5x0yv$;
   var getPropertyCallableRef = Kotlin.getPropertyCallableRef;
   var getCallableRef = Kotlin.getCallableRef;
   var PropertyMetadata = Kotlin.PropertyMetadata;
   var Unit = Kotlin.kotlin.Unit;
+  var Throwable = Error;
   var asList = Kotlin.kotlin.collections.asList_us0mfu$;
   var toDoubleOrNull = Kotlin.kotlin.text.toDoubleOrNull_pdl1vz$;
   var kotlin_js_internal_DoubleCompanionObject = Kotlin.kotlin.js.internal.DoubleCompanionObject;
@@ -19,7 +21,6 @@ this['Rent Split 2'] = function (_, Kotlin) {
   var toString = Kotlin.toString;
   var joinToString = Kotlin.kotlin.collections.joinToString_fmv235$;
   var Pair = Kotlin.kotlin.Pair;
-  var listOf = Kotlin.kotlin.collections.listOf_i5x0yv$;
   var equals = Kotlin.equals;
   var Enum = Kotlin.kotlin.Enum;
   var throwISE = Kotlin.throwISE;
@@ -31,7 +32,8 @@ this['Rent Split 2'] = function (_, Kotlin) {
   var Any = Object;
   var ReadWriteProperty = Kotlin.kotlin.properties.ReadWriteProperty;
   var ObservableProperty = Kotlin.kotlin.properties.ObservableProperty;
-  var Throwable = Error;
+  SerializationPurpose.prototype = Object.create(Enum.prototype);
+  SerializationPurpose.prototype.constructor = SerializationPurpose;
   UserConsent.prototype = Object.create(Enum.prototype);
   UserConsent.prototype.constructor = UserConsent;
   observing$ObjectLiteral.prototype = Object.create(ObservableProperty.prototype);
@@ -240,6 +242,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
   };
   function RentExpenses$Companion() {
     RentExpenses$Companion_instance = this;
+    this.initial = new RentExpenses(listOf([RentExpense$Companion_getInstance().initialRent, RentExpense$Companion_getInstance().initialUtilities]));
   }
   RentExpenses$Companion.prototype.invoke_qk3xy8$ = function (raw) {
     var tmp$, tmp$_0;
@@ -444,6 +447,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
   };
   function RentRoommates$Companion() {
     RentRoommates$Companion_instance = this;
+    this.initial = new RentRoommates(listOf([RentRoommate$Companion_getInstance().initial, RentRoommate$Companion_getInstance().initial]));
   }
   RentRoommates$Companion.prototype.invoke_qk3xy8$ = function (raw) {
     var tmp$, tmp$_0;
@@ -550,6 +554,10 @@ this['Rent Split 2'] = function (_, Kotlin) {
   var resultsTableSelector;
   var resultsTableBodySelector;
   var resultsTableHeadRowSelector;
+  var copyStateUrlButtonId;
+  var copyStateUrlButtonSelector;
+  var stateUrlFieldId;
+  var stateUrlFieldSelector;
   var localStorageWarningId;
   var localStorageWarningSelector;
   var localStorageWarningExplicitRefusalButtonId;
@@ -571,12 +579,13 @@ this['Rent Split 2'] = function (_, Kotlin) {
   function RentSplit() {
     this.state_8j2skj$_0 = observing(load(RentSplitState$Companion_getInstance()), void 0, void 0, RentSplit$state$lambda(this));
   }
+  var RentSplit$state_metadata = new PropertyMetadata('state');
   Object.defineProperty(RentSplit.prototype, 'state', {
     get: function () {
-      return this.state_8j2skj$_0.getValue_lrcp0p$(this, new PropertyMetadata('state'));
+      return this.state_8j2skj$_0.getValue_lrcp0p$(this, RentSplit$state_metadata);
     },
     set: function (state) {
-      this.state_8j2skj$_0.setValue_9rddgb$(this, new PropertyMetadata('state'), state);
+      this.state_8j2skj$_0.setValue_9rddgb$(this, RentSplit$state_metadata, state);
     }
   });
   RentSplit.prototype.onReady = function () {
@@ -584,6 +593,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
     this.regenerateInputTables();
     this.registerListeners();
     this.recalculateRentSplit();
+    save(this.state);
     this.presentToUser();
   };
   RentSplit.prototype.reloadPageFromState_6taknv$ = function (shouldReRegisterListeners) {
@@ -630,6 +640,9 @@ this['Rent Split 2'] = function (_, Kotlin) {
     $(localStorageWarningExplicitRefusalButtonSelector).click(getCallableRef('didPressLocalStorageWarningExplicitRefusalButton', function ($receiver, event) {
       return $receiver.didPressLocalStorageWarningExplicitRefusalButton_9ojx7i$(event), Unit;
     }.bind(null, this)));
+    $(copyStateUrlButtonSelector).click(getCallableRef('didPressCopyUrlButton', function ($receiver, event) {
+      return $receiver.didPressCopyUrlButton_9ojx7i$(event), Unit;
+    }.bind(null, this)));
   };
   RentSplit.prototype.anyInputFieldDidChange_g0pdib$ = function (event) {
     this.reloadStateFromPage();
@@ -639,6 +652,23 @@ this['Rent Split 2'] = function (_, Kotlin) {
   };
   RentSplit.prototype.didPressLocalStorageWarningExplicitRefusalButton_9ojx7i$ = function (event) {
     this.state = this.state.copy_2k6jng$(void 0, void 0, this.state.l.copy_hombyb$(UserConsent$explicitRefusal_getInstance()));
+  };
+  function RentSplit$didPressCopyUrlButton$lambda() {
+    return $(copyStateUrlButtonSelector).removeClass('just-copied');
+  }
+  RentSplit.prototype.didPressCopyUrlButton_9ojx7i$ = function (event) {
+    try {
+      copyToClipboardOrThrow($(stateUrlFieldSelector));
+      $(copyStateUrlButtonSelector).addClass('just-copied');
+      window.setTimeout(RentSplit$didPressCopyUrlButton$lambda, 3000);
+    }
+     catch (error) {
+      if (Kotlin.isType(error, Throwable)) {
+        console.log('Failed to copy state URL!');
+      }
+       else
+        throw error;
+    }
   };
   RentSplit.prototype.reloadStateFromPage = function () {
     this.state = this.state.copy_2k6jng$(this.fetchRoommates(), this.fetchExpenses());
@@ -974,43 +1004,22 @@ this['Rent Split 2'] = function (_, Kotlin) {
     this.e = expenses;
     this.l = localDataPreferences;
   }
-  RentSplitState.prototype.toJson = function () {
-    return json([to(rentRoommatesSerializedName, this.r.toJson()), to(rentExpensesSerializedName, this.e.toJson()), to(localDataPreferencesSerializedName, this.l.toJson())]);
+  RentSplitState.prototype.toJson_i9b4g5$ = function (purpose) {
+    switch (purpose.name) {
+      case 'forLocalStorage':
+        return json([to(rentRoommatesSerializedName, this.r.toJson()), to(rentExpensesSerializedName, this.e.toJson()), to(localDataPreferencesSerializedName, this.l.toJson())]);
+      case 'forSharing':
+        return json([to(rentRoommatesSerializedName, this.r.toJson()), to(rentExpensesSerializedName, this.e.toJson())]);
+      default:return Kotlin.noWhenBranchMatched();
+    }
   };
   function RentSplitState$Companion() {
     RentSplitState$Companion_instance = this;
-    this.default = new RentSplitState(new RentRoommates(listOf([RentRoommate$Companion_getInstance().initial, RentRoommate$Companion_getInstance().initial])), new RentExpenses(listOf([RentExpense$Companion_getInstance().initialRent, RentExpense$Companion_getInstance().initialUtilities])), LocalDataPreferences$Companion_getInstance().initial);
+    this.initial = new RentSplitState(RentRoommates$Companion_getInstance().initial, RentExpenses$Companion_getInstance().initial, LocalDataPreferences$Companion_getInstance().initial);
   }
   RentSplitState$Companion.prototype.invoke_qk3xy8$ = function (raw) {
-    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7, tmp$_8, tmp$_9, tmp$_10;
-    tmp$_1 = RentRoommates$Companion_getInstance();
-    tmp$_0 = Kotlin.isType(tmp$ = raw[rentRoommatesSerializedName], Object) ? tmp$ : null;
-    if (tmp$_0 == null) {
-      return null;
-    }
-    tmp$_2 = tmp$_1.invoke_qk3xy8$(tmp$_0);
-    if (tmp$_2 == null) {
-      return null;
-    }
-    tmp$_5 = RentExpenses$Companion_getInstance();
-    tmp$_4 = Kotlin.isType(tmp$_3 = raw[rentExpensesSerializedName], Object) ? tmp$_3 : null;
-    if (tmp$_4 == null) {
-      return null;
-    }
-    tmp$_6 = tmp$_5.invoke_qk3xy8$(tmp$_4);
-    if (tmp$_6 == null) {
-      return null;
-    }
-    tmp$_9 = LocalDataPreferences$Companion_getInstance();
-    tmp$_8 = Kotlin.isType(tmp$_7 = raw[localDataPreferencesSerializedName], Object) ? tmp$_7 : null;
-    if (tmp$_8 == null) {
-      return null;
-    }
-    tmp$_10 = tmp$_9.invoke_qk3xy8$(tmp$_8);
-    if (tmp$_10 == null) {
-      return null;
-    }
-    return new RentSplitState(tmp$_2, tmp$_6, tmp$_10);
+    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7;
+    return new RentSplitState((tmp$_1 = (tmp$_0 = Kotlin.isType(tmp$ = raw[rentRoommatesSerializedName], Object) ? tmp$ : null) != null ? RentRoommates$Companion_getInstance().invoke_qk3xy8$(tmp$_0) : null) != null ? tmp$_1 : RentRoommates$Companion_getInstance().initial, (tmp$_4 = (tmp$_3 = Kotlin.isType(tmp$_2 = raw[rentExpensesSerializedName], Object) ? tmp$_2 : null) != null ? RentExpenses$Companion_getInstance().invoke_qk3xy8$(tmp$_3) : null) != null ? tmp$_4 : RentExpenses$Companion_getInstance().initial, (tmp$_7 = (tmp$_6 = Kotlin.isType(tmp$_5 = raw[localDataPreferencesSerializedName], Object) ? tmp$_5 : null) != null ? LocalDataPreferences$Companion_getInstance().invoke_qk3xy8$(tmp$_6) : null) != null ? tmp$_7 : LocalDataPreferences$Companion_getInstance().initial);
   };
   RentSplitState$Companion.$metadata$ = {
     kind: Kind_OBJECT,
@@ -1056,20 +1065,28 @@ this['Rent Split 2'] = function (_, Kotlin) {
   };
   function load($receiver) {
     var tmp$, tmp$_0, tmp$_1;
-    var urlState = (tmp$ = (new URL(window.location.href)).searchParams.get(generalStateSerializedName)) != null ? getCallableRef('deserializing', function ($receiver, jsonString) {
-      return deserializing($receiver, jsonString);
-    }.bind(null, this))(tmp$) : null;
-    window.history.pushState(null, document.title, '?');
-    return urlState != null ? urlState : (tmp$_1 = (tmp$_0 = window.localStorage.getItem(generalStateSerializedName)) != null ? getCallableRef('deserializing', function ($receiver, jsonString) {
-      return deserializing($receiver, jsonString);
-    }.bind(null, this))(tmp$_0) : null) != null ? tmp$_1 : $receiver.default;
+    var urlState = (tmp$ = (new URL(window.location.href)).searchParams.get(generalStateSerializedName)) != null ? deserializing($receiver, tmp$, SerializationPurpose$forSharing_getInstance()) : null;
+    if (urlState != null) {
+      window.history.pushState(null, document.title, '?');
+    }
+    if ((tmp$_1 = (tmp$_0 = window.localStorage.getItem(generalStateSerializedName)) != null ? deserializing($receiver, tmp$_0, SerializationPurpose$forLocalStorage_getInstance()) : null) != null) {
+      if (urlState != null) {
+        return urlState.copy_2k6jng$(void 0, void 0, tmp$_1.l);
+      }
+       else if (equals(tmp$_1.l.c, UserConsent$explicitConsent_getInstance())) {
+        return tmp$_1;
+      }
+    }
+    return urlState != null ? urlState : $receiver.initial;
   }
   function save($receiver) {
     var tmp$;
-    var jsonString = serialized($receiver);
+    var jsonStringForLocalStorage = serialized($receiver, SerializationPurpose$forLocalStorage_getInstance());
+    var jsonStringForSharing = serialized($receiver, SerializationPurpose$forSharing_getInstance());
+    $(stateUrlFieldSelector).val(window.location.protocol + '//' + window.location.host + window.location.pathname + '?' + generalStateSerializedName + '=' + jsonStringForSharing);
     tmp$ = $receiver.l.c;
     if (equals(tmp$, UserConsent$explicitConsent_getInstance()))
-      window.localStorage.setItem(generalStateSerializedName, jsonString);
+      window.localStorage.setItem(generalStateSerializedName, jsonStringForLocalStorage);
     else if (equals(tmp$, UserConsent$explicitRefusal_getInstance()))
       console.log('Opted not to save anything locally; user explicitly told us not to');
     else if (tmp$ == null)
@@ -1081,18 +1098,76 @@ this['Rent Split 2'] = function (_, Kotlin) {
   function addingNewExpense($receiver, newExpense) {
     return $receiver.copy_2k6jng$($receiver.r, $receiver.e.adding_pbrwj2$(newExpense));
   }
-  function serialized($receiver) {
-    return JSON.stringify($receiver.toJson());
+  function serialized($receiver, purpose) {
+    switch (purpose.name) {
+      case 'forLocalStorage':
+        return JSON.stringify($receiver.toJson_i9b4g5$(purpose));
+      case 'forSharing':
+        return encodeURIComponent(JSON.stringify($receiver.toJson_i9b4g5$(purpose)));
+      default:return Kotlin.noWhenBranchMatched();
+    }
   }
-  function deserializing$lambda(closure$jsonString) {
+  function deserializing$lambda(closure$purpose, closure$jsonString) {
     return function () {
-      var raw = JSON.parse(closure$jsonString);
+      var tmp$, tmp$_0;
+      var raw;
+      switch (closure$purpose.name) {
+        case 'forLocalStorage':
+          raw = JSON.parse(closure$jsonString);
+          break;
+        case 'forSharing':
+          raw = JSON.parse(decodeURIComponent(closure$jsonString));
+          (tmp$_0 = Kotlin.isType(tmp$ = raw[localDataPreferencesSerializedName], Object) ? tmp$ : null) != null ? (tmp$_0[localStorageConsentSerializedName] = undefined, Unit) : null;
+          break;
+        default:Kotlin.noWhenBranchMatched();
+          break;
+      }
       return RentSplitState$Companion_getInstance().invoke_qk3xy8$(raw);
     };
   }
-  function deserializing($receiver, jsonString) {
-    return safeTry(deserializing$lambda(jsonString));
+  function deserializing($receiver, jsonString, purpose) {
+    return safeTry(deserializing$lambda(purpose, jsonString));
   }
+  function SerializationPurpose(name, ordinal) {
+    Enum.call(this);
+    this.name$ = name;
+    this.ordinal$ = ordinal;
+  }
+  function SerializationPurpose_initFields() {
+    SerializationPurpose_initFields = function () {
+    };
+    SerializationPurpose$forLocalStorage_instance = new SerializationPurpose('forLocalStorage', 0);
+    SerializationPurpose$forSharing_instance = new SerializationPurpose('forSharing', 1);
+  }
+  var SerializationPurpose$forLocalStorage_instance;
+  function SerializationPurpose$forLocalStorage_getInstance() {
+    SerializationPurpose_initFields();
+    return SerializationPurpose$forLocalStorage_instance;
+  }
+  var SerializationPurpose$forSharing_instance;
+  function SerializationPurpose$forSharing_getInstance() {
+    SerializationPurpose_initFields();
+    return SerializationPurpose$forSharing_instance;
+  }
+  SerializationPurpose.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'SerializationPurpose',
+    interfaces: [Enum]
+  };
+  function SerializationPurpose$values() {
+    return [SerializationPurpose$forLocalStorage_getInstance(), SerializationPurpose$forSharing_getInstance()];
+  }
+  SerializationPurpose.values = SerializationPurpose$values;
+  function SerializationPurpose$valueOf(name) {
+    switch (name) {
+      case 'forLocalStorage':
+        return SerializationPurpose$forLocalStorage_getInstance();
+      case 'forSharing':
+        return SerializationPurpose$forSharing_getInstance();
+      default:throwISE('No enum constant RentSplit.SerializationPurpose.' + name);
+    }
+  }
+  SerializationPurpose.valueOf_61zpoe$ = SerializationPurpose$valueOf;
   function UserConsent(name, ordinal, serialValue) {
     Enum.call(this);
     this.serialValue = serialValue;
@@ -1191,17 +1266,26 @@ this['Rent Split 2'] = function (_, Kotlin) {
     return $receiver.length === 0 ? null : $receiver;
   }
   function toBooleanOrNull($receiver) {
-    var tmp$;
     if ($receiver.length === 0)
       return null;
     else {
-      tmp$ = $receiver.toLowerCase();
-      if (equals(tmp$, 'true') || equals(tmp$, 't') || equals(tmp$, 'yes') || equals(tmp$, 'y') || equals(tmp$, '1') || equals(tmp$, 'on'))
-        return true;
-      else if (equals(tmp$, 'false') || equals(tmp$, 'f') || equals(tmp$, 'no') || equals(tmp$, 'n') || equals(tmp$, '0') || equals(tmp$, 'off'))
-        return false;
-      else
-        return null;
+      switch ($receiver.toLowerCase()) {
+        case 'true':
+        case 't':
+        case 'yes':
+        case 'y':
+        case '1':
+        case 'on':
+          return true;
+        case 'false':
+        case 'f':
+        case 'no':
+        case 'n':
+        case '0':
+        case 'off':
+          return false;
+        default:return null;
+      }
     }
   }
   function toBoolean($receiver, valueIfInvalid) {
@@ -1225,6 +1309,12 @@ this['Rent Split 2'] = function (_, Kotlin) {
     newExpenses.add_11rb$(newElement);
     return toList(newExpenses);
   }
+  function copyToClipboardOrThrow($receiver) {
+    $receiver.select();
+    return document.execCommand('copy');
+  }
+  var doNothing = defineInlineFunction('Rent Split 2.RentSplit.doNothing', function () {
+  });
   var asList_0 = defineInlineFunction('Rent Split 2.jQueryInterface.asList_9ufosi$', wrapFunction(function () {
     var asList = Kotlin.kotlin.collections.asList_us0mfu$;
     return function ($receiver) {
@@ -1640,6 +1730,26 @@ this['Rent Split 2'] = function (_, Kotlin) {
       return resultsTableHeadRowSelector;
     }
   });
+  Object.defineProperty(package$RentSplit, 'copyStateUrlButtonId', {
+    get: function () {
+      return copyStateUrlButtonId;
+    }
+  });
+  Object.defineProperty(package$RentSplit, 'copyStateUrlButtonSelector', {
+    get: function () {
+      return copyStateUrlButtonSelector;
+    }
+  });
+  Object.defineProperty(package$RentSplit, 'stateUrlFieldId', {
+    get: function () {
+      return stateUrlFieldId;
+    }
+  });
+  Object.defineProperty(package$RentSplit, 'stateUrlFieldSelector', {
+    get: function () {
+      return stateUrlFieldSelector;
+    }
+  });
   Object.defineProperty(package$RentSplit, 'localStorageWarningId', {
     get: function () {
       return localStorageWarningId;
@@ -1761,8 +1871,15 @@ this['Rent Split 2'] = function (_, Kotlin) {
   package$RentSplit.save_fib44y$ = save;
   package$RentSplit.addingNewRoommate_40h57c$ = addingNewRoommate;
   package$RentSplit.addingNewExpense_9z58f4$ = addingNewExpense;
-  package$RentSplit.serialized_fib44y$ = serialized;
-  package$RentSplit.deserializing_sp9oty$ = deserializing;
+  package$RentSplit.serialized_6yyei5$ = serialized;
+  package$RentSplit.deserializing_ezm63n$ = deserializing;
+  Object.defineProperty(SerializationPurpose, 'forLocalStorage', {
+    get: SerializationPurpose$forLocalStorage_getInstance
+  });
+  Object.defineProperty(SerializationPurpose, 'forSharing', {
+    get: SerializationPurpose$forSharing_getInstance
+  });
+  package$RentSplit.SerializationPurpose = SerializationPurpose;
   Object.defineProperty(UserConsent, 'explicitConsent', {
     get: UserConsent$explicitConsent_getInstance
   });
@@ -1782,6 +1899,8 @@ this['Rent Split 2'] = function (_, Kotlin) {
   package$RentSplit.toBoolean_f4dhtg$ = toBoolean;
   package$RentSplit.reduceTo_i8uhts$ = reduceTo;
   package$RentSplit.adding_bv23uc$ = adding;
+  package$RentSplit.copyToClipboardOrThrow_9ufosi$ = copyToClipboardOrThrow;
+  package$RentSplit.doNothing = doNothing;
   var package$jQueryInterface = _.jQueryInterface || (_.jQueryInterface = {});
   package$jQueryInterface.asList_9ufosi$ = asList_0;
   package$jQueryInterface.attr_mndj09$ = attr;
@@ -1856,6 +1975,10 @@ this['Rent Split 2'] = function (_, Kotlin) {
   resultsTableSelector = '#Results';
   resultsTableBodySelector = '#Results>tbody';
   resultsTableHeadRowSelector = '#Results>thead>tr';
+  copyStateUrlButtonId = 'Copy-URL-Button';
+  copyStateUrlButtonSelector = '#Copy-URL-Button';
+  stateUrlFieldId = 'State-URL-Field';
+  stateUrlFieldSelector = '#State-URL-Field';
   localStorageWarningId = 'Local-Storage-Warning';
   localStorageWarningSelector = '#Local-Storage-Warning';
   localStorageWarningExplicitRefusalButtonId = 'Local-Storage-Warning-Decline-Button';
