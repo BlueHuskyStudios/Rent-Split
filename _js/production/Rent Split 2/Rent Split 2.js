@@ -1099,16 +1099,24 @@ this['Rent Split 2'] = function (_, Kotlin) {
     return $receiver.copy_2k6jng$($receiver.r, $receiver.e.adding_pbrwj2$(newExpense));
   }
   function serialized($receiver, purpose) {
-    return JSON.stringify($receiver.toJson_i9b4g5$(purpose));
+    switch (purpose.name) {
+      case 'forLocalStorage':
+        return JSON.stringify($receiver.toJson_i9b4g5$(purpose));
+      case 'forSharing':
+        return encodeURIComponent(JSON.stringify($receiver.toJson_i9b4g5$(purpose)));
+      default:return Kotlin.noWhenBranchMatched();
+    }
   }
-  function deserializing$lambda(closure$jsonString, closure$purpose) {
+  function deserializing$lambda(closure$purpose, closure$jsonString) {
     return function () {
       var tmp$, tmp$_0;
-      var raw = JSON.parse(closure$jsonString);
+      var raw;
       switch (closure$purpose.name) {
         case 'forLocalStorage':
+          raw = JSON.parse(closure$jsonString);
           break;
         case 'forSharing':
+          raw = JSON.parse(decodeURIComponent(closure$jsonString));
           (tmp$_0 = Kotlin.isType(tmp$ = raw[localDataPreferencesSerializedName], Object) ? tmp$ : null) != null ? (tmp$_0[localStorageConsentSerializedName] = undefined, Unit) : null;
           break;
         default:Kotlin.noWhenBranchMatched();
@@ -1118,7 +1126,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
     };
   }
   function deserializing($receiver, jsonString, purpose) {
-    return safeTry(deserializing$lambda(jsonString, purpose));
+    return safeTry(deserializing$lambda(purpose, jsonString));
   }
   function SerializationPurpose(name, ordinal) {
     Enum.call(this);

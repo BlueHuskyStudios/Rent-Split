@@ -1,6 +1,7 @@
 package RentSplit
 
 import jQueryInterface.JQuery
+import org.w3c.dom.Window
 import kotlin.browser.document
 
 
@@ -8,6 +9,11 @@ import kotlin.browser.document
  * @author Ben Leggiero
  * @since 2017-11-26
  */
+
+
+
+external fun encodeURIComponent(raw: String): String
+external fun decodeURIComponent(raw: String): String
 
 
 /**

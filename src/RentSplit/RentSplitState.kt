@@ -154,7 +154,10 @@ fun RentSplitState.addingNewExpense(newExpense: RentExpense): RentSplitState {
 /**
  * Converts this state into a string. First, all field names are shortened
  */
-fun RentSplitState.serialized(purpose: SerializationPurpose) = JSON.stringify(this.toJson(purpose))
+fun RentSplitState.serialized(purpose: SerializationPurpose) = when (purpose) {
+    forLocalStorage -> JSON.stringify(this.toJson(purpose))
+    forSharing -> encodeURIComponent(JSON.stringify(this.toJson(purpose)))
+}
 
 
 /**
@@ -163,13 +166,15 @@ fun RentSplitState.serialized(purpose: SerializationPurpose) = JSON.stringify(th
 @Suppress("unused")
 fun RentSplitState.Companion.deserializing(jsonString: String, purpose: SerializationPurpose): RentSplitState? =
     safeTry {
-        val raw = JSON.parse<Json>(jsonString)
+        val raw: Json
 
         when (purpose) {
-            forLocalStorage -> doNothing()
-            forSharing ->
+            forLocalStorage -> raw = JSON.parse(jsonString)
+            forSharing -> {
+                raw = JSON.parse(decodeURIComponent(jsonString))
                 @Suppress("UNCHECKED_CAST_TO_EXTERNAL_INTERFACE")
                 (raw[localDataPreferencesSerializedName] as? Json)?.set(localStorageConsentSerializedName, undefined)
+            }
         }
         return@safeTry RentSplitState(raw = raw)
     }
