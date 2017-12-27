@@ -152,6 +152,9 @@ data class RentRoommates(
 
 
     companion object {
+
+        val initial = RentRoommates(listOf(RentRoommate.initial, RentRoommate.initial))
+
         /**
          * Creates a [RentRoommates] out of JSON, or returns `null` if that can't be done.
          *

@@ -2,7 +2,7 @@
  * Typography for Rent Split
  *
  * @since 2016-09-05
- * @author Kyli Rouge of Blue Husky Studios
+ * @author Kyli Rouge & Ben Leggiero of Blue Husky Studios
  *
  * @see https://BlueHuskyStudios.GitHub.IO/Rent-Split-Calculator
  */
@@ -13,4 +13,16 @@
     font-weight: 300;
     margin: 0;
     padding: 0 1ex;
+}
+
+.copy-button::before {
+    font-family: "Roboto Condensed",
+                 "Roboto Cn",
+                 "Helvetica Condensed",
+                 condensed,
+                 "Roboto",
+                 "Helvetica",
+                 sans-serif;
+    font-weight: 600;
+    text-transform: UPPERCASE;
 }

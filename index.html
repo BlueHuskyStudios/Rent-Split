@@ -61,17 +61,21 @@
         </a>
     </aside>
 </header>
+
+<noscript>
+    <dialog class="big hero" open>
+        This page requires JavaScript to work. &#x1F640;
+    </dialog>
+</noscript>
+
+<aside class="warning-message show-tiny">
+    Sorry, I don't support screens this thin, just yet. Don't worry; I will in the future! For now, if this is a
+    phone, try turning it sideways. &#x1F638;
+</aside>
+
+
+
 <main class="flex-column flex-vert-space-between">
-    <noscript>
-        <dialog class="big hero" open>
-            This page requires JavaScript to work. &#x1F640;
-        </dialog>
-    </noscript>
-    
-    <aside class="warning-message show-tiny">
-        Sorry, I don't support screens this thin, just yet. Don't worry; I will in the future! For now, if this is a
-        phone, try turning it sideways. &#x1F638;
-    </aside>
 
     <h2 class="text-center">Calculate what your portion of the rent should be.</h2>
     <section id="input-vars" class="flex-row flex-wrap flex-horiz-space-around">
@@ -116,6 +120,17 @@
     </section>
 
     <section id="State-Management" class="flex-column flex-horiz-space-around">
+        <section id="Share-State">
+            <label class="flex-row flex-wrap flex-horiz-stretch flex-vert-bottom">Share this split with your roommates:&nbsp;
+                <div class="flex-row flex-horiz-stretch">
+                    <input type="text" id="State-URL-Field" readonly />
+                    <button type="button" id="Copy-URL-Button" title="Copy", class="copy-button"><i class="fa fa-share-alt fa-lg"></i></button>
+                </div>
+            </label>
+        </section>
+        <!--br/>
+        <button type="reset" id="Reset-State-Button" class="big">Reset</button-->
+
         <aside id="Local-Storage-Warning" class="warning-message">
             <p>I can tell your computer to save a little bit of data, which will let me remember what you did on this
                 page even after you refresh it. This data will stay on your computer, and I will never send it to a
@@ -134,6 +149,8 @@
     </section>
 </main>
 
+
+
 <footer class="flex-column flex-vert-bottom flex-horiz-center   text-uppercase text-center">
     <aside class="text-normal">
         Like this project and want to keep it rolling?
@@ -146,7 +163,7 @@
     <aside>
         &copy; <a href="https://BHStudios.org" target="_blank">Blue Husky Studios</a> 2017, <a href="https://bit.ly/BH-1-PS">BH-1-PS</a>
         <span class="hide-tiny">&ensp;&mdash;&ensp;</span><br class="show-tiny"/>
-        <a href="https://github.com/BlueHuskyStudios/Rent-Split-Calculator/releases/tag/2.2.1" target="_blank">Version 2.2.1</a>
+        <a href="https://github.com/BlueHuskyStudios/Rent-Split-Calculator/releases/tag/2.3.0" target="_blank">Version 2.3.0</a>
     </aside>
 </footer>
 
