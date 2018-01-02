@@ -1,5 +1,6 @@
 package RentSplit
 
+import RentSplit.RentExpenses.Companion.allRoommates
 import jQueryInterface.JQuery
 import kotlin.js.Json
 import kotlin.js.json
@@ -7,8 +8,10 @@ import kotlin.js.json
 
 
 // DO NOT CHANGE THESE
+const val resourceIdSerializedName = "i"
 const val resourceNameSerializedName = "n"
 const val resourceDollarAmountSerializedName = "d"
+const val expenseApplicableRoommatesSerializedName = "f"
 const val resourceIsRemovableSerializedName = "x"
 const val resourceIsRenamableSerializedName = "r"
 const val allExpensesSerializedName = "e"
@@ -19,6 +22,10 @@ const val allExpensesSerializedName = "e"
  * The RentExpense class represents an expense and its monthly cost.
  */
 data class RentExpense(
+        /** The internally-unique identifier of this expense */
+        @JsName(resourceIdSerializedName)
+        val id: String,
+
         /** The expense's type (name) */
         @JsName(resourceNameSerializedName)
         val type: String,
@@ -26,6 +33,13 @@ data class RentExpense(
         /** The dollar amount of the expense's monthly cost */
         @JsName(resourceDollarAmountSerializedName)
         val monthlyCost: Double,
+
+        /**
+         * The IDs of any and all roommates to whom this expense applies.
+         * The empty set (`allRoommates`) implies that all roommates help with this expense.
+         */
+        @JsName(expenseApplicableRoommatesSerializedName)
+        val applicableRoommates: Set<ID>,
 
         /** Indicates whether this expense can be removed from the list of roommates */
         @JsName(resourceIsRemovableSerializedName)
@@ -41,10 +55,13 @@ data class RentExpense(
     /**
      * Converts this expense into a JSON object
      */
-    fun toJson() = json(resourceNameSerializedName to type,
-                        resourceDollarAmountSerializedName to monthlyCost,
-                        resourceIsRemovableSerializedName to isRemovable,
-                        resourceIsRenamableSerializedName to isRenamable)
+    fun toJson() = json(
+            resourceIdSerializedName to id,
+            resourceNameSerializedName to type,
+            resourceDollarAmountSerializedName to monthlyCost,
+            resourceIsRemovableSerializedName to isRemovable,
+            resourceIsRenamableSerializedName to isRenamable
+    )
 
     companion object {
 
@@ -55,41 +72,51 @@ data class RentExpense(
          *
          * ```
          * {
+         *     "i": String,        // optional; Introduced in RS-6
          *     "n": String,
          *     "d": Double,
+         *     "f": Array<String>, // optional; Introduced in RS-6
          *     "x": Boolean,
          *     "r": Boolean
          * }
          * ```
          */
         operator fun invoke(raw: Json): RentExpense? {
-            return RentExpense(type = raw[resourceNameSerializedName] as? String ?: return null,
-                               monthlyCost = raw[resourceDollarAmountSerializedName] as? Double ?: return null,
-                               isRemovable = raw[resourceIsRemovableSerializedName] as? Boolean ?: return null,
-                               isRenamable = raw[resourceIsRenamableSerializedName] as? Boolean ?: return null)
+            return RentExpense(id = raw[resourceIdSerializedName] as? String ?: generateNewId().alsoLog("No serialized expense ID; generating one to migrate it"),
+                               type = raw[resourceNameSerializedName] as? String ?: return null.alsoLog("No serialized expense type"),
+                               monthlyCost = raw[resourceDollarAmountSerializedName] as? Double ?: return null.alsoLog("No serialized expense cost"),
+                               applicableRoommates = (raw[expenseApplicableRoommatesSerializedName] as? String)?.toSetOfIds() ?: emptySet(),
+                               isRemovable = raw[resourceIsRemovableSerializedName] as? Boolean ?: return null.alsoLog("No serialized removability"),
+                               isRenamable = raw[resourceIsRenamableSerializedName] as? Boolean ?: return null.alsoLog("No serialized renamability"))
         }
 
 
         /** The generic initial value for the Rent input row */
         val initialRent
-            get() = RentExpense(rentExpenseType,
-                                defaultRentExpenseCost,
-                                isRemovable = false,
-                                isRenamable = false)
+                by lazy { RentExpense(id = generateNewId(),
+                                      type = rentExpenseType,
+                                      monthlyCost = defaultRentExpenseCost,
+                                      applicableRoommates = allRoommates,
+                                      isRemovable = false,
+                                      isRenamable = false)}
 
         /** The generic initial value for the Utilities input row */
         val initialUtilities
-            get() = RentExpense(utilitiesExpenseType,
-                                defaultUtilitiesExpenseCost,
-                                isRemovable = false,
-                                isRenamable = false)
+                by lazy { RentExpense(id = generateNewId(),
+                                      type = utilitiesExpenseType,
+                                      monthlyCost = defaultUtilitiesExpenseCost,
+                                      applicableRoommates = allRoommates,
+                                      isRemovable = false,
+                                      isRenamable = false)}
 
         /** The generic default value to place on new expense rows */
-        val defaultNewExpense
-            get() = RentExpense("",
-                                defaultExpenseCost,
-                                isRemovable = true,
-                                isRenamable = true)
+        fun generateNewExpense()
+                = RentExpense(id = generateNewId(),
+                              type = "",
+                              monthlyCost = defaultExpenseCost,
+                              applicableRoommates = allRoommates,
+                              isRemovable = true,
+                              isRenamable = true)
 
 
         /**
@@ -158,7 +185,7 @@ data class RentExpenses(
 
     companion object {
 
-        val initial = RentExpenses(listOf(RentExpense.initialRent, RentExpense.initialUtilities))
+        fun generateInitial() = RentExpenses(listOf(RentExpense.initialRent, RentExpense.initialUtilities))
 
         /**
          * Creates a [RentExpenses] out of JSON, or returns `null` if that can't be done.
@@ -178,5 +205,8 @@ data class RentExpenses(
                                         .map { RentExpense(raw = it) ?: return null }
             )
         }
+
+
+        val allRoommates: Set<ID> = emptySet()
     }
 }

@@ -1,7 +1,6 @@
 package RentSplit
 
 import jQueryInterface.JQuery
-import org.w3c.dom.Window
 import kotlin.browser.document
 
 
@@ -105,3 +104,21 @@ fun JQuery.copyToClipboardOrThrow(): Boolean {
  */
 @Suppress("NOTHING_TO_INLINE") // Inlined on-purpose to reduce output size
 inline fun doNothing() = Unit
+
+
+/**
+ * Logs a message and then returns the this value
+ */
+fun <ValueType> ValueType.alsoLog(message: String, logger: (String) -> Unit = ::consoleLogString) = also { logger(message) }
+
+
+@Suppress("NOTHING_TO_INLINE") // Inlined on-purpose because this is an alias for console.log
+inline fun consoleLogString(message: String) {
+    console.log(message)
+}
+
+
+fun String.toSetOfIds(): Set<ID> = split('[', ',', ']').toSet()
+
+
+fun Set<ID>.serializedSetOfIds() = joinToString(prefix = "[", separator = ",", postfix = "]")

@@ -8,15 +8,16 @@ this['Rent Split 2'] = function (_, Kotlin) {
   var json = Kotlin.kotlin.js.json_pyyo18$;
   var Kind_OBJECT = Kotlin.Kind.OBJECT;
   var Kind_CLASS = Kotlin.Kind.CLASS;
+  var emptySet = Kotlin.kotlin.collections.emptySet_287e2$;
+  var PropertyMetadata = Kotlin.PropertyMetadata;
+  var lazy = Kotlin.kotlin.lazy_klfg04$;
   var listOf = Kotlin.kotlin.collections.listOf_i5x0yv$;
   var getPropertyCallableRef = Kotlin.getPropertyCallableRef;
   var getCallableRef = Kotlin.getCallableRef;
-  var PropertyMetadata = Kotlin.PropertyMetadata;
   var Unit = Kotlin.kotlin.Unit;
   var Throwable = Error;
   var asList = Kotlin.kotlin.collections.asList_us0mfu$;
   var toDoubleOrNull = Kotlin.kotlin.text.toDoubleOrNull_pdl1vz$;
-  var kotlin_js_internal_DoubleCompanionObject = Kotlin.kotlin.js.internal.DoubleCompanionObject;
   var zip = Kotlin.kotlin.collections.zip_45mdf7$;
   var toString = Kotlin.toString;
   var joinToString = Kotlin.kotlin.collections.joinToString_fmv235$;
@@ -29,6 +30,9 @@ this['Rent Split 2'] = function (_, Kotlin) {
   var throwCCE = Kotlin.throwCCE;
   var toMutableList = Kotlin.kotlin.collections.toMutableList_4c7yge$;
   var toList = Kotlin.kotlin.collections.toList_7wnvza$;
+  var split = Kotlin.kotlin.text.split_o64adg$;
+  var toSet = Kotlin.kotlin.collections.toSet_7wnvza$;
+  var Iterator = Kotlin.kotlin.collections.Iterator;
   var Any = Object;
   var ReadWriteProperty = Kotlin.kotlin.properties.ReadWriteProperty;
   var ObservableProperty = Kotlin.kotlin.properties.ObservableProperty;
@@ -38,6 +42,11 @@ this['Rent Split 2'] = function (_, Kotlin) {
   UserConsent.prototype.constructor = UserConsent;
   observing$ObjectLiteral.prototype = Object.create(ObservableProperty.prototype);
   observing$ObjectLiteral.prototype.constructor = observing$ObjectLiteral;
+  var lastGeneratedId;
+  function generateNewId() {
+    lastGeneratedId = lastGeneratedId + 1 | 0;
+    return lastGeneratedId.toString();
+  }
   var localStorageConsentSerializedName;
   function LocalDataPreferences(localStorageConsent) {
     LocalDataPreferences$Companion_getInstance();
@@ -49,11 +58,13 @@ this['Rent Split 2'] = function (_, Kotlin) {
   };
   function LocalDataPreferences$Companion() {
     LocalDataPreferences$Companion_instance = this;
-    this.initial = new LocalDataPreferences(null);
   }
   LocalDataPreferences$Companion.prototype.invoke_qk3xy8$ = function (raw) {
     var tmp$, tmp$_0;
     return new LocalDataPreferences((tmp$_0 = typeof (tmp$ = raw[localStorageConsentSerializedName]) === 'string' ? tmp$ : null) != null ? UserConsent$Companion_getInstance().invoke_61zpoe$(tmp$_0) : null);
+  };
+  LocalDataPreferences$Companion.prototype.generateInitial = function () {
+    return new LocalDataPreferences(null);
   };
   LocalDataPreferences$Companion.$metadata$ = {
     kind: Kind_OBJECT,
@@ -89,62 +100,68 @@ this['Rent Split 2'] = function (_, Kotlin) {
   LocalDataPreferences.prototype.equals = function (other) {
     return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && Kotlin.equals(this.c, other.c))));
   };
+  var resourceIdSerializedName;
   var resourceNameSerializedName;
   var resourceDollarAmountSerializedName;
+  var expenseApplicableRoommatesSerializedName;
   var resourceIsRemovableSerializedName;
   var resourceIsRenamableSerializedName;
   var allExpensesSerializedName;
-  function RentExpense(type, monthlyCost, isRemovable, isRenamable, originalDOMElement) {
+  function RentExpense(id, type, monthlyCost, applicableRoommates, isRemovable, isRenamable, originalDOMElement) {
     RentExpense$Companion_getInstance();
     if (originalDOMElement === void 0)
       originalDOMElement = null;
+    this.i = id;
     this.n = type;
     this.d = monthlyCost;
+    this.f = applicableRoommates;
     this.x = isRemovable;
     this.r = isRenamable;
     this.originalDOMElement = originalDOMElement;
   }
   RentExpense.prototype.toJson = function () {
-    return json([to(resourceNameSerializedName, this.n), to(resourceDollarAmountSerializedName, this.d), to(resourceIsRemovableSerializedName, this.x), to(resourceIsRenamableSerializedName, this.r)]);
+    return json([to(resourceIdSerializedName, this.i), to(resourceNameSerializedName, this.n), to(resourceDollarAmountSerializedName, this.d), to(resourceIsRemovableSerializedName, this.x), to(resourceIsRenamableSerializedName, this.r)]);
   };
   function RentExpense$Companion() {
     RentExpense$Companion_instance = this;
+    this.initialRent_r4hy5h$_0 = lazy(RentExpense$Companion$initialRent$lambda);
+    this.initialUtilities_8549hm$_0 = lazy(RentExpense$Companion$initialUtilities$lambda);
   }
   RentExpense$Companion.prototype.invoke_qk3xy8$ = function (raw) {
-    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6;
-    tmp$_0 = typeof (tmp$ = raw[resourceNameSerializedName]) === 'string' ? tmp$ : null;
-    if (tmp$_0 == null) {
-      return null;
+    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7, tmp$_8, tmp$_9, tmp$_10, tmp$_11, tmp$_12, tmp$_13;
+    tmp$_1 = (tmp$_0 = typeof (tmp$ = raw[resourceIdSerializedName]) === 'string' ? tmp$ : null) != null ? tmp$_0 : alsoLog(generateNewId(), 'No serialized expense ID; generating one to migrate it');
+    tmp$_3 = typeof (tmp$_2 = raw[resourceNameSerializedName]) === 'string' ? tmp$_2 : null;
+    if (tmp$_3 == null) {
+      return alsoLog(null, 'No serialized expense type');
     }
-    tmp$_2 = typeof (tmp$_1 = raw[resourceDollarAmountSerializedName]) === 'number' ? tmp$_1 : null;
-    if (tmp$_2 == null) {
-      return null;
+    tmp$_5 = typeof (tmp$_4 = raw[resourceDollarAmountSerializedName]) === 'number' ? tmp$_4 : null;
+    if (tmp$_5 == null) {
+      return alsoLog(null, 'No serialized expense cost');
     }
-    tmp$_4 = typeof (tmp$_3 = raw[resourceIsRemovableSerializedName]) === 'boolean' ? tmp$_3 : null;
-    if (tmp$_4 == null) {
-      return null;
+    tmp$_9 = (tmp$_8 = (tmp$_7 = typeof (tmp$_6 = raw[expenseApplicableRoommatesSerializedName]) === 'string' ? tmp$_6 : null) != null ? toSetOfIds(tmp$_7) : null) != null ? tmp$_8 : emptySet();
+    tmp$_11 = typeof (tmp$_10 = raw[resourceIsRemovableSerializedName]) === 'boolean' ? tmp$_10 : null;
+    if (tmp$_11 == null) {
+      return alsoLog(null, 'No serialized removability');
     }
-    tmp$_6 = typeof (tmp$_5 = raw[resourceIsRenamableSerializedName]) === 'boolean' ? tmp$_5 : null;
-    if (tmp$_6 == null) {
-      return null;
+    tmp$_13 = typeof (tmp$_12 = raw[resourceIsRenamableSerializedName]) === 'boolean' ? tmp$_12 : null;
+    if (tmp$_13 == null) {
+      return alsoLog(null, 'No serialized renamability');
     }
-    return new RentExpense(tmp$_0, tmp$_2, tmp$_4, tmp$_6);
+    return new RentExpense(tmp$_1, tmp$_3, tmp$_5, tmp$_9, tmp$_11, tmp$_13);
   };
   Object.defineProperty(RentExpense$Companion.prototype, 'initialRent', {
     get: function () {
-      return new RentExpense(rentExpenseType, defaultRentExpenseCost, false, false);
+      return this.initialRent_r4hy5h$_0.value;
     }
   });
   Object.defineProperty(RentExpense$Companion.prototype, 'initialUtilities', {
     get: function () {
-      return new RentExpense(utilitiesExpenseType, defaultUtilitiesExpenseCost, false, false);
+      return this.initialUtilities_8549hm$_0.value;
     }
   });
-  Object.defineProperty(RentExpense$Companion.prototype, 'defaultNewExpense', {
-    get: function () {
-      return new RentExpense('', defaultExpenseCost, true, true);
-    }
-  });
+  RentExpense$Companion.prototype.generateNewExpense = function () {
+    return new RentExpense(generateNewId(), '', defaultExpenseCost, RentExpenses$Companion_getInstance().allRoommates, true, true);
+  };
   RentExpense$Companion.prototype.type_9d67ql$ = function (ideal, backupNumber) {
     var tmp$;
     return (tmp$ = ideal != null ? nonEmptyOrNull(ideal) : null) != null ? tmp$ : this.numberedType_za3lpa$(backupNumber);
@@ -152,6 +169,12 @@ this['Rent Split 2'] = function (_, Kotlin) {
   RentExpense$Companion.prototype.numberedType_za3lpa$ = function (number) {
     return 'Expense #' + number;
   };
+  function RentExpense$Companion$initialRent$lambda() {
+    return new RentExpense(generateNewId(), rentExpenseType, defaultRentExpenseCost, RentExpenses$Companion_getInstance().allRoommates, false, false);
+  }
+  function RentExpense$Companion$initialUtilities$lambda() {
+    return new RentExpense(generateNewId(), utilitiesExpenseType, defaultUtilitiesExpenseCost, RentExpenses$Companion_getInstance().allRoommates, false, false);
+  }
   RentExpense$Companion.$metadata$ = {
     kind: Kind_OBJECT,
     simpleName: 'Companion',
@@ -170,37 +193,45 @@ this['Rent Split 2'] = function (_, Kotlin) {
     interfaces: []
   };
   RentExpense.prototype.component1 = function () {
-    return this.n;
+    return this.i;
   };
   RentExpense.prototype.component2 = function () {
-    return this.d;
+    return this.n;
   };
   RentExpense.prototype.component3 = function () {
-    return this.x;
+    return this.d;
   };
   RentExpense.prototype.component4 = function () {
-    return this.r;
+    return this.f;
   };
   RentExpense.prototype.component5 = function () {
+    return this.x;
+  };
+  RentExpense.prototype.component6 = function () {
+    return this.r;
+  };
+  RentExpense.prototype.component7 = function () {
     return this.originalDOMElement;
   };
-  RentExpense.prototype.copy_tt7xri$ = function (type, monthlyCost, isRemovable, isRenamable, originalDOMElement) {
-    return new RentExpense(type === void 0 ? this.n : type, monthlyCost === void 0 ? this.d : monthlyCost, isRemovable === void 0 ? this.x : isRemovable, isRenamable === void 0 ? this.r : isRenamable, originalDOMElement === void 0 ? this.originalDOMElement : originalDOMElement);
+  RentExpense.prototype.copy_6n4jlj$ = function (id, type, monthlyCost, applicableRoommates, isRemovable, isRenamable, originalDOMElement) {
+    return new RentExpense(id === void 0 ? this.i : id, type === void 0 ? this.n : type, monthlyCost === void 0 ? this.d : monthlyCost, applicableRoommates === void 0 ? this.f : applicableRoommates, isRemovable === void 0 ? this.x : isRemovable, isRenamable === void 0 ? this.r : isRenamable, originalDOMElement === void 0 ? this.originalDOMElement : originalDOMElement);
   };
   RentExpense.prototype.toString = function () {
-    return 'RentExpense(type=' + Kotlin.toString(this.n) + (', monthlyCost=' + Kotlin.toString(this.d)) + (', isRemovable=' + Kotlin.toString(this.x)) + (', isRenamable=' + Kotlin.toString(this.r)) + (', originalDOMElement=' + Kotlin.toString(this.originalDOMElement)) + ')';
+    return 'RentExpense(id=' + Kotlin.toString(this.i) + (', type=' + Kotlin.toString(this.n)) + (', monthlyCost=' + Kotlin.toString(this.d)) + (', applicableRoommates=' + Kotlin.toString(this.f)) + (', isRemovable=' + Kotlin.toString(this.x)) + (', isRenamable=' + Kotlin.toString(this.r)) + (', originalDOMElement=' + Kotlin.toString(this.originalDOMElement)) + ')';
   };
   RentExpense.prototype.hashCode = function () {
     var result = 0;
+    result = result * 31 + Kotlin.hashCode(this.i) | 0;
     result = result * 31 + Kotlin.hashCode(this.n) | 0;
     result = result * 31 + Kotlin.hashCode(this.d) | 0;
+    result = result * 31 + Kotlin.hashCode(this.f) | 0;
     result = result * 31 + Kotlin.hashCode(this.x) | 0;
     result = result * 31 + Kotlin.hashCode(this.r) | 0;
     result = result * 31 + Kotlin.hashCode(this.originalDOMElement) | 0;
     return result;
   };
   RentExpense.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.n, other.n) && Kotlin.equals(this.d, other.d) && Kotlin.equals(this.x, other.x) && Kotlin.equals(this.r, other.r) && Kotlin.equals(this.originalDOMElement, other.originalDOMElement)))));
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.i, other.i) && Kotlin.equals(this.n, other.n) && Kotlin.equals(this.d, other.d) && Kotlin.equals(this.f, other.f) && Kotlin.equals(this.x, other.x) && Kotlin.equals(this.r, other.r) && Kotlin.equals(this.originalDOMElement, other.originalDOMElement)))));
   };
   function nonEmptyType($receiver, index) {
     return RentExpense$Companion_getInstance().type_9d67ql$($receiver.n, index + 1 | 0);
@@ -242,8 +273,11 @@ this['Rent Split 2'] = function (_, Kotlin) {
   };
   function RentExpenses$Companion() {
     RentExpenses$Companion_instance = this;
-    this.initial = new RentExpenses(listOf([RentExpense$Companion_getInstance().initialRent, RentExpense$Companion_getInstance().initialUtilities]));
+    this.allRoommates = emptySet();
   }
+  RentExpenses$Companion.prototype.generateInitial = function () {
+    return new RentExpenses(listOf([RentExpense$Companion_getInstance().initialRent, RentExpense$Companion_getInstance().initialUtilities]));
+  };
   RentExpenses$Companion.prototype.invoke_qk3xy8$ = function (raw) {
     var tmp$, tmp$_0;
     tmp$_0 = Kotlin.isArray(tmp$ = raw[allExpensesSerializedName]) ? tmp$ : null;
@@ -299,12 +333,13 @@ this['Rent Split 2'] = function (_, Kotlin) {
     return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && Kotlin.equals(this.e, other.e))));
   };
   var allRoommatesSerializedName;
-  function RentRoommate(name, monthlyIncome, isRemovable, isRenamable, originalDOMElement, proportion) {
+  function RentRoommate(id, name, monthlyIncome, isRemovable, isRenamable, originalDOMElement, proportion) {
     RentRoommate$Companion_getInstance();
     if (originalDOMElement === void 0)
       originalDOMElement = null;
     if (proportion === void 0)
       proportion = null;
+    this.i = id;
     this.n = name;
     this.d = monthlyIncome;
     this.x = isRemovable;
@@ -313,41 +348,38 @@ this['Rent Split 2'] = function (_, Kotlin) {
     this.proportion = proportion;
   }
   RentRoommate.prototype.toJson = function () {
-    return json([to(resourceNameSerializedName, this.n), to(resourceDollarAmountSerializedName, this.d), to(resourceIsRemovableSerializedName, this.x), to(resourceIsRenamableSerializedName, this.r)]);
+    return json([to(resourceIdSerializedName, this.i), to(resourceNameSerializedName, this.n), to(resourceDollarAmountSerializedName, this.d), to(resourceIsRemovableSerializedName, this.x), to(resourceIsRenamableSerializedName, this.r)]);
   };
   function RentRoommate$Companion() {
     RentRoommate$Companion_instance = this;
   }
   RentRoommate$Companion.prototype.invoke_qk3xy8$ = function (raw) {
-    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6;
-    tmp$_0 = typeof (tmp$ = raw[resourceNameSerializedName]) === 'string' ? tmp$ : null;
-    if (tmp$_0 == null) {
-      return null;
+    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7, tmp$_8, tmp$_9;
+    tmp$_1 = (tmp$_0 = typeof (tmp$ = raw[resourceIdSerializedName]) === 'string' ? tmp$ : null) != null ? tmp$_0 : alsoLog(generateNewId(), 'No serialized roommate ID; generating one to migrate it');
+    tmp$_3 = typeof (tmp$_2 = raw[resourceNameSerializedName]) === 'string' ? tmp$_2 : null;
+    if (tmp$_3 == null) {
+      return alsoLog(null, 'No serialized roommate name');
     }
-    tmp$_2 = typeof (tmp$_1 = raw[resourceDollarAmountSerializedName]) === 'number' ? tmp$_1 : null;
-    if (tmp$_2 == null) {
-      return null;
+    tmp$_5 = typeof (tmp$_4 = raw[resourceDollarAmountSerializedName]) === 'number' ? tmp$_4 : null;
+    if (tmp$_5 == null) {
+      return alsoLog(null, 'No serialized roommate income');
     }
-    tmp$_4 = typeof (tmp$_3 = raw[resourceIsRemovableSerializedName]) === 'boolean' ? tmp$_3 : null;
-    if (tmp$_4 == null) {
-      return null;
+    tmp$_7 = typeof (tmp$_6 = raw[resourceIsRemovableSerializedName]) === 'boolean' ? tmp$_6 : null;
+    if (tmp$_7 == null) {
+      return alsoLog(null, 'No serialized removability');
     }
-    tmp$_6 = typeof (tmp$_5 = raw[resourceIsRenamableSerializedName]) === 'boolean' ? tmp$_5 : null;
-    if (tmp$_6 == null) {
-      return null;
+    tmp$_9 = typeof (tmp$_8 = raw[resourceIsRenamableSerializedName]) === 'boolean' ? tmp$_8 : null;
+    if (tmp$_9 == null) {
+      return alsoLog(null, 'No serialized renamability');
     }
-    return new RentRoommate(tmp$_0, tmp$_2, tmp$_4, tmp$_6);
+    return new RentRoommate(tmp$_1, tmp$_3, tmp$_5, tmp$_7, tmp$_9);
   };
-  Object.defineProperty(RentRoommate$Companion.prototype, 'initial', {
-    get: function () {
-      return new RentRoommate('', defaultRoommateIncome, false, true);
-    }
-  });
-  Object.defineProperty(RentRoommate$Companion.prototype, 'defaultNewRoommate', {
-    get: function () {
-      return new RentRoommate('', defaultRoommateIncome, true, true);
-    }
-  });
+  RentRoommate$Companion.prototype.generateInitial = function () {
+    return new RentRoommate(generateNewId(), '', defaultRoommateIncome, false, true);
+  };
+  RentRoommate$Companion.prototype.generateNewRoommate = function () {
+    return new RentRoommate(generateNewId(), '', defaultRoommateIncome, true, true);
+  };
   RentRoommate$Companion.prototype.name_9d67ql$ = function (ideal, backupNumber) {
     var tmp$;
     return (tmp$ = ideal != null ? nonEmptyOrNull(ideal) : null) != null ? tmp$ : this.numberedName_za3lpa$(backupNumber);
@@ -373,31 +405,35 @@ this['Rent Split 2'] = function (_, Kotlin) {
     interfaces: []
   };
   RentRoommate.prototype.component1 = function () {
-    return this.n;
+    return this.i;
   };
   RentRoommate.prototype.component2 = function () {
-    return this.d;
+    return this.n;
   };
   RentRoommate.prototype.component3 = function () {
-    return this.x;
+    return this.d;
   };
   RentRoommate.prototype.component4 = function () {
-    return this.r;
+    return this.x;
   };
   RentRoommate.prototype.component5 = function () {
-    return this.originalDOMElement;
+    return this.r;
   };
   RentRoommate.prototype.component6 = function () {
+    return this.originalDOMElement;
+  };
+  RentRoommate.prototype.component7 = function () {
     return this.proportion;
   };
-  RentRoommate.prototype.copy_m0fch1$ = function (name, monthlyIncome, isRemovable, isRenamable, originalDOMElement, proportion) {
-    return new RentRoommate(name === void 0 ? this.n : name, monthlyIncome === void 0 ? this.d : monthlyIncome, isRemovable === void 0 ? this.x : isRemovable, isRenamable === void 0 ? this.r : isRenamable, originalDOMElement === void 0 ? this.originalDOMElement : originalDOMElement, proportion === void 0 ? this.proportion : proportion);
+  RentRoommate.prototype.copy_1brih5$ = function (id, name, monthlyIncome, isRemovable, isRenamable, originalDOMElement, proportion) {
+    return new RentRoommate(id === void 0 ? this.i : id, name === void 0 ? this.n : name, monthlyIncome === void 0 ? this.d : monthlyIncome, isRemovable === void 0 ? this.x : isRemovable, isRenamable === void 0 ? this.r : isRenamable, originalDOMElement === void 0 ? this.originalDOMElement : originalDOMElement, proportion === void 0 ? this.proportion : proportion);
   };
   RentRoommate.prototype.toString = function () {
-    return 'RentRoommate(name=' + Kotlin.toString(this.n) + (', monthlyIncome=' + Kotlin.toString(this.d)) + (', isRemovable=' + Kotlin.toString(this.x)) + (', isRenamable=' + Kotlin.toString(this.r)) + (', originalDOMElement=' + Kotlin.toString(this.originalDOMElement)) + (', proportion=' + Kotlin.toString(this.proportion)) + ')';
+    return 'RentRoommate(id=' + Kotlin.toString(this.i) + (', name=' + Kotlin.toString(this.n)) + (', monthlyIncome=' + Kotlin.toString(this.d)) + (', isRemovable=' + Kotlin.toString(this.x)) + (', isRenamable=' + Kotlin.toString(this.r)) + (', originalDOMElement=' + Kotlin.toString(this.originalDOMElement)) + (', proportion=' + Kotlin.toString(this.proportion)) + ')';
   };
   RentRoommate.prototype.hashCode = function () {
     var result = 0;
+    result = result * 31 + Kotlin.hashCode(this.i) | 0;
     result = result * 31 + Kotlin.hashCode(this.n) | 0;
     result = result * 31 + Kotlin.hashCode(this.d) | 0;
     result = result * 31 + Kotlin.hashCode(this.x) | 0;
@@ -407,7 +443,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
     return result;
   };
   RentRoommate.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.n, other.n) && Kotlin.equals(this.d, other.d) && Kotlin.equals(this.x, other.x) && Kotlin.equals(this.r, other.r) && Kotlin.equals(this.originalDOMElement, other.originalDOMElement) && Kotlin.equals(this.proportion, other.proportion)))));
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.i, other.i) && Kotlin.equals(this.n, other.n) && Kotlin.equals(this.d, other.d) && Kotlin.equals(this.x, other.x) && Kotlin.equals(this.r, other.r) && Kotlin.equals(this.originalDOMElement, other.originalDOMElement) && Kotlin.equals(this.proportion, other.proportion)))));
   };
   function nonEmptyName($receiver, index) {
     return RentRoommate$Companion_getInstance().name_9d67ql$($receiver.n, index + 1 | 0);
@@ -447,8 +483,10 @@ this['Rent Split 2'] = function (_, Kotlin) {
   };
   function RentRoommates$Companion() {
     RentRoommates$Companion_instance = this;
-    this.initial = new RentRoommates(listOf([RentRoommate$Companion_getInstance().initial, RentRoommate$Companion_getInstance().initial]));
   }
+  RentRoommates$Companion.prototype.generateInitial = function () {
+    return new RentRoommates(listOf([RentRoommate$Companion_getInstance().generateInitial(), RentRoommate$Companion_getInstance().generateInitial()]));
+  };
   RentRoommates$Companion.prototype.invoke_qk3xy8$ = function (raw) {
     var tmp$, tmp$_0;
     tmp$_0 = Kotlin.isArray(tmp$ = raw[allRoommatesSerializedName]) ? tmp$ : null;
@@ -554,6 +592,12 @@ this['Rent Split 2'] = function (_, Kotlin) {
   var resultsTableSelector;
   var resultsTableBodySelector;
   var resultsTableHeadRowSelector;
+  var resourceIdDataName;
+  var resourceIdAttribute;
+  var resourceIdSelector;
+  var expenseApplicableRoommatesDataName;
+  var expenseApplicableRoommatesAttribute;
+  var expenseApplicableRoommatesSelector;
   var copyStateUrlButtonId;
   var copyStateUrlButtonSelector;
   var stateUrlFieldId;
@@ -695,7 +739,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
     };
   }
   RentSplit.prototype.roommateRowsToRoommates_r6ezyp$ = function (jq_roommateRows) {
-    return new RentRoommates(asList(jq_roommateRows.map(RentSplit$roommateRowsToRoommates$lambda(this))));
+    return new RentRoommates(asList(mapNotNull(jq_roommateRows, RentSplit$roommateRowsToRoommates$lambda(this))));
   };
   function RentSplit$expenseRowsToExpenses$lambda(this$RentSplit) {
     return function (index, expenseRow) {
@@ -703,15 +747,39 @@ this['Rent Split 2'] = function (_, Kotlin) {
     };
   }
   RentSplit.prototype.expenseRowsToExpenses_r6ezyp$ = function (jq_expenseRows) {
-    return new RentExpenses(asList(jq_expenseRows.map(RentSplit$expenseRowsToExpenses$lambda(this))));
+    return new RentExpenses(asList(mapNotNull(jq_expenseRows, RentSplit$expenseRowsToExpenses$lambda(this))));
   };
   RentSplit.prototype.roommateRowToRoommate_folkv9$ = function (index, jq_roommateRow) {
-    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5;
-    return new RentRoommate((tmp$ = $(roommateNameInputSelector, jq_roommateRow).val()) != null ? tmp$ : '', (tmp$_1 = (tmp$_0 = $(roommateIncomeInputSelector, jq_roommateRow).val()) != null ? toDoubleOrNull(tmp$_0) : null) != null ? tmp$_1 : kotlin_js_internal_DoubleCompanionObject.NaN, (tmp$_3 = (tmp$_2 = jq_roommateRow.attr(roommateRemovabilityAttribute)) != null ? toBooleanOrNull(tmp$_2) : null) != null ? tmp$_3 : true, (tmp$_5 = (tmp$_4 = jq_roommateRow.attr(roommateRenamabilityAttribute)) != null ? toBooleanOrNull(tmp$_4) : null) != null ? tmp$_5 : true, jq_roommateRow);
+    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7, tmp$_8;
+    tmp$_0 = (tmp$ = $(jq_roommateRow).data(resourceIdDataName)) != null ? tmp$.toString() : null;
+    if (tmp$_0 == null) {
+      return alsoLog(null, 'No ID on page!');
+    }
+    tmp$_2 = (tmp$_1 = $(roommateNameInputSelector, jq_roommateRow).val()) != null ? tmp$_1 : '';
+    tmp$_4 = (tmp$_3 = $(roommateIncomeInputSelector, jq_roommateRow).val()) != null ? toDoubleOrNull(tmp$_3) : null;
+    if (tmp$_4 == null) {
+      return alsoLog(null, 'No monthly income on page!');
+    }
+    return new RentRoommate(tmp$_0, tmp$_2, tmp$_4, (tmp$_6 = (tmp$_5 = jq_roommateRow.attr(roommateRemovabilityAttribute)) != null ? toBooleanOrNull(tmp$_5) : null) != null ? tmp$_6 : true, (tmp$_8 = (tmp$_7 = jq_roommateRow.attr(roommateRenamabilityAttribute)) != null ? toBooleanOrNull(tmp$_7) : null) != null ? tmp$_8 : true, jq_roommateRow);
   };
   RentSplit.prototype.expenseRowToExpense_folkv9$ = function (index, jq_expenseRow) {
-    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5;
-    return new RentExpense((tmp$ = $(expenseTypeInputSelector, jq_expenseRow).val()) != null ? tmp$ : '', (tmp$_1 = (tmp$_0 = $(expenseCostInputSelector, jq_expenseRow).val()) != null ? toDoubleOrNull(tmp$_0) : null) != null ? tmp$_1 : kotlin_js_internal_DoubleCompanionObject.NaN, (tmp$_3 = (tmp$_2 = jq_expenseRow.attr(expenseRemovabilityAttribute)) != null ? toBooleanOrNull(tmp$_2) : null) != null ? tmp$_3 : true, (tmp$_5 = (tmp$_4 = jq_expenseRow.attr(expenseRenamabilityAttribute)) != null ? toBooleanOrNull(tmp$_4) : null) != null ? tmp$_5 : true, jq_expenseRow);
+    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7, tmp$_8, tmp$_9, tmp$_10, tmp$_11, tmp$_12;
+    tmp$_0 = (tmp$ = $(jq_expenseRow).data(resourceIdDataName)) != null ? tmp$.toString() : null;
+    if (tmp$_0 == null) {
+      return alsoLog(null, 'No ID on page!');
+    }
+    tmp$_2 = (tmp$_1 = $(expenseTypeInputSelector, jq_expenseRow).val()) != null ? tmp$_1 : '';
+    tmp$_6 = (tmp$_5 = (tmp$_4 = (tmp$_3 = $(jq_expenseRow).data(expenseApplicableRoommatesDataName)) != null ? tmp$_3.toString() : null) != null ? getCallableRef('expenseApplicableRoommatesFromString', function ($receiver, expenseApplicableRoommatesString) {
+      return $receiver.expenseApplicableRoommatesFromString_61zpoe$(expenseApplicableRoommatesString);
+    }.bind(null, this))(tmp$_4) : null) != null ? tmp$_5 : emptySet();
+    tmp$_8 = (tmp$_7 = $(expenseCostInputSelector, jq_expenseRow).val()) != null ? toDoubleOrNull(tmp$_7) : null;
+    if (tmp$_8 == null) {
+      return alsoLog(null, 'No monthly cost on page!');
+    }
+    return new RentExpense(tmp$_0, tmp$_2, tmp$_8, tmp$_6, (tmp$_10 = (tmp$_9 = jq_expenseRow.attr(expenseRemovabilityAttribute)) != null ? toBooleanOrNull(tmp$_9) : null) != null ? tmp$_10 : true, (tmp$_12 = (tmp$_11 = jq_expenseRow.attr(expenseRenamabilityAttribute)) != null ? toBooleanOrNull(tmp$_11) : null) != null ? tmp$_12 : true, jq_expenseRow);
+  };
+  RentSplit.prototype.expenseApplicableRoommatesFromString_61zpoe$ = function (expenseApplicableRoommatesString) {
+    return toSetOfIds(expenseApplicableRoommatesString);
   };
   RentSplit.prototype.recalculateRoommateProportions_4mt70t$ = function (roommates) {
     var totalIncome = roommates.totalIncome;
@@ -809,7 +877,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
     attr(jq_existingRoommateInputTableRow, roommateRemovabilityAttribute, roommate.x);
   };
   RentSplit.prototype.didPressNewExpenseButton_9ojx7i$ = function (event) {
-    this.addNewExpense_rhtjr1$(RentExpense$Companion_getInstance().defaultNewExpense, event);
+    this.addNewExpense_rhtjr1$(RentExpense$Companion_getInstance().generateNewExpense(), event);
   };
   RentSplit.prototype.addNewExpense_rhtjr1$ = function (newExpense, event) {
     if (event === void 0)
@@ -823,11 +891,11 @@ this['Rent Split 2'] = function (_, Kotlin) {
     expense.originalDOMElement = $(addAnExpenseRowSelector).before(expenseInputHtml).prev();
   };
   RentSplit.prototype.buildExpenseInputRow_cymhq0$ = function (index, expense) {
-    return this.buildExpenseInputRow_cefq5e$(index, expense.n, expense.d, expense.r, expense.x);
+    return this.buildExpenseInputRow_6sp1b7$(index, expense.i, expense.n, expense.d, expense.f, expense.r, expense.x);
   };
-  RentSplit.prototype.buildExpenseInputRow_cefq5e$ = function (index, type, cost, isRenamable, isRemovable) {
+  RentSplit.prototype.buildExpenseInputRow_6sp1b7$ = function (index, id, type, cost, applicableRoommates, isRenamable, isRemovable) {
     var expenseNumber = index + 1 | 0;
-    var row = '<tr' + (' data-' + expenseInputRowDataName + '=' + '"' + expenseNumber + '"') + (' ' + expenseRenamabilityAttribute + "='" + isRenamable + "'") + (' ' + expenseRemovabilityAttribute + "='" + isRemovable + "'") + '>';
+    var row = '<tr' + (' ' + resourceIdAttribute + "='" + id + "'") + (' data-' + expenseInputRowDataName + '=' + '"' + expenseNumber + '"') + (' ' + expenseRenamabilityAttribute + "='" + isRenamable + "'") + (' ' + expenseRemovabilityAttribute + "='" + isRemovable + "'") + (' ' + expenseApplicableRoommatesAttribute + "='" + serializedSetOfIds(applicableRoommates) + "'") + '>';
     var tmp$ = '<th' + (isRenamable ? ' class="plain"' : '') + '>' + '<input' + (' type=' + '"' + (isRenamable ? 'text' : 'hidden') + '"') + ' class="expense-type   text-right"' + (!(type == null || type.length === 0) ? ' value=' + '"' + toString(type) + '"' : '') + ' size="8"' + ' tabindex=0' + ' placeholder="Type"' + '/>';
     var tmp$_0 = !isRenamable;
     if (tmp$_0) {
@@ -841,7 +909,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
     return row + '<\/tr>';
   };
   RentSplit.prototype.didPressNewRoommateButton_9ojx7i$ = function (event) {
-    return this.addNewRoommate_an8xux$(RentRoommate$Companion_getInstance().defaultNewRoommate, event);
+    return this.addNewRoommate_an8xux$(RentRoommate$Companion_getInstance().generateNewRoommate(), event);
   };
   RentSplit.prototype.addNewRoommate_an8xux$ = function (newRoommate, event) {
     if (event === void 0)
@@ -855,11 +923,11 @@ this['Rent Split 2'] = function (_, Kotlin) {
     roommate.originalDOMElement = $(addARoommateRowSelector).before(roommateInputHtml).prev();
   };
   RentSplit.prototype.buildRoommateInputRow_hi9t74$ = function (index, roommate) {
-    return this.buildRoommateInputRow_cefq5e$(index, roommate.n, roommate.d, roommate.r, roommate.x);
+    return this.buildRoommateInputRow_yi75pw$(index, roommate.i, roommate.n, roommate.d, roommate.r, roommate.x);
   };
-  RentSplit.prototype.buildRoommateInputRow_cefq5e$ = function (index, name, income, isRenamable, isRemovable) {
+  RentSplit.prototype.buildRoommateInputRow_yi75pw$ = function (index, id, name, income, isRenamable, isRemovable) {
     var roommateNumber = index + 1 | 0;
-    var row = '<tr' + (' data-' + roommateInputRowDataName + "='" + roommateNumber + "'") + (' ' + roommateRenamabilityAttribute + "='" + isRenamable + "'") + (' ' + roommateRemovabilityAttribute + "='" + isRemovable + "'") + '>';
+    var row = '<tr' + (' ' + resourceIdAttribute + "='" + id + "'") + (' data-' + roommateInputRowDataName + "='" + roommateNumber + "'") + (' ' + roommateRenamabilityAttribute + "='" + isRenamable + "'") + (' ' + roommateRemovabilityAttribute + "='" + isRemovable + "'") + '>';
     row += '<th class="plain">' + '<input' + ' type="text"' + ' class="roommate-name   text-right"' + (!(name == null || name.length === 0) ? ' value="' + name + '"' : '') + ' size="8"' + ' tabindex=0' + ' placeholder="Name"' + '/>' + '<\/th>';
     row += '<td class="plain vert-bottom">' + '<input' + ' type="number"' + ' class="roommate-income"' + ' required' + (' value=' + '"' + (income != null ? income : defaultRoommateIncome) + '"') + ' step="100"' + ' size="8"' + ' tabindex=0' + ' placeholder="Income"' + '/>' + '<\/td>';
     row += '<td class="roommate-proportion">Calculating<\/td>';
@@ -1015,12 +1083,20 @@ this['Rent Split 2'] = function (_, Kotlin) {
   };
   function RentSplitState$Companion() {
     RentSplitState$Companion_instance = this;
-    this.initial = new RentSplitState(RentRoommates$Companion_getInstance().initial, RentExpenses$Companion_getInstance().initial, LocalDataPreferences$Companion_getInstance().initial);
+    this.initial_3lnauh$_0 = lazy(RentSplitState$Companion$initial$lambda);
   }
   RentSplitState$Companion.prototype.invoke_qk3xy8$ = function (raw) {
     var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7;
-    return new RentSplitState((tmp$_1 = (tmp$_0 = Kotlin.isType(tmp$ = raw[rentRoommatesSerializedName], Object) ? tmp$ : null) != null ? RentRoommates$Companion_getInstance().invoke_qk3xy8$(tmp$_0) : null) != null ? tmp$_1 : RentRoommates$Companion_getInstance().initial, (tmp$_4 = (tmp$_3 = Kotlin.isType(tmp$_2 = raw[rentExpensesSerializedName], Object) ? tmp$_2 : null) != null ? RentExpenses$Companion_getInstance().invoke_qk3xy8$(tmp$_3) : null) != null ? tmp$_4 : RentExpenses$Companion_getInstance().initial, (tmp$_7 = (tmp$_6 = Kotlin.isType(tmp$_5 = raw[localDataPreferencesSerializedName], Object) ? tmp$_5 : null) != null ? LocalDataPreferences$Companion_getInstance().invoke_qk3xy8$(tmp$_6) : null) != null ? tmp$_7 : LocalDataPreferences$Companion_getInstance().initial);
+    return new RentSplitState((tmp$_1 = (tmp$_0 = Kotlin.isType(tmp$ = raw[rentRoommatesSerializedName], Object) ? tmp$ : null) != null ? RentRoommates$Companion_getInstance().invoke_qk3xy8$(tmp$_0) : null) != null ? tmp$_1 : RentRoommates$Companion_getInstance().generateInitial(), (tmp$_4 = (tmp$_3 = Kotlin.isType(tmp$_2 = raw[rentExpensesSerializedName], Object) ? tmp$_2 : null) != null ? RentExpenses$Companion_getInstance().invoke_qk3xy8$(tmp$_3) : null) != null ? tmp$_4 : RentExpenses$Companion_getInstance().generateInitial(), (tmp$_7 = (tmp$_6 = Kotlin.isType(tmp$_5 = raw[localDataPreferencesSerializedName], Object) ? tmp$_5 : null) != null ? LocalDataPreferences$Companion_getInstance().invoke_qk3xy8$(tmp$_6) : null) != null ? tmp$_7 : LocalDataPreferences$Companion_getInstance().generateInitial());
   };
+  Object.defineProperty(RentSplitState$Companion.prototype, 'initial', {
+    get: function () {
+      return this.initial_3lnauh$_0.value;
+    }
+  });
+  function RentSplitState$Companion$initial$lambda() {
+    return new RentSplitState(RentRoommates$Companion_getInstance().generateInitial(), RentExpenses$Companion_getInstance().generateInitial(), LocalDataPreferences$Companion_getInstance().generateInitial());
+  }
   RentSplitState$Companion.$metadata$ = {
     kind: Kind_OBJECT,
     simpleName: 'Companion',
@@ -1315,6 +1391,24 @@ this['Rent Split 2'] = function (_, Kotlin) {
   }
   var doNothing = defineInlineFunction('Rent Split 2.RentSplit.doNothing', function () {
   });
+  function alsoLog($receiver, message, logger) {
+    if (logger === void 0)
+      logger = getCallableRef('consoleLogString', function (message) {
+        console.log(message);
+        return Unit;
+      });
+    logger(message);
+    return $receiver;
+  }
+  var consoleLogString = defineInlineFunction('Rent Split 2.RentSplit.consoleLogString_61zpoe$', function (message) {
+    console.log(message);
+  });
+  function toSetOfIds($receiver) {
+    return toSet(split($receiver, Kotlin.charArrayOf(91, 44, 93)));
+  }
+  function serializedSetOfIds($receiver) {
+    return joinToString($receiver, ',', '[', ']');
+  }
   var asList_0 = defineInlineFunction('Rent Split 2.jQueryInterface.asList_9ufosi$', wrapFunction(function () {
     var asList = Kotlin.kotlin.collections.asList_us0mfu$;
     return function ($receiver) {
@@ -1323,6 +1417,60 @@ this['Rent Split 2'] = function (_, Kotlin) {
   }));
   function attr($receiver, attrName, newValue) {
     return $receiver.attr(attrName, newValue.toString());
+  }
+  function mapNotNull$lambda(closure$mapper, closure$newArray) {
+    return function (index, element) {
+      var mapped = closure$mapper(index, element);
+      if (mapped != null) {
+        closure$newArray.v = closure$newArray.v.concat([mapped]);
+      }
+      return Unit;
+    };
+  }
+  function mapNotNull($receiver, mapper) {
+    var newArray = {v: []};
+    forEachIndexed($receiver, mapNotNull$lambda(mapper, newArray));
+    return newArray.v;
+  }
+  function iterator$ObjectLiteral(this$iterator) {
+    this.this$iterator = this$iterator;
+    this.iteratorIndex = 0;
+  }
+  iterator$ObjectLiteral.prototype.hasNext = function () {
+    return this.iteratorIndex < this.this$iterator.length;
+  };
+  iterator$ObjectLiteral.prototype.next = function () {
+    var next = this.this$iterator.get(this.iteratorIndex);
+    this.iteratorIndex = this.iteratorIndex + 1 | 0;
+    return next;
+  };
+  iterator$ObjectLiteral.$metadata$ = {
+    kind: Kind_CLASS,
+    interfaces: [Iterator]
+  };
+  function iterator($receiver) {
+    if ($receiver.length === 0) {
+      return Kotlin.arrayIterator([]);
+    }
+    return new iterator$ObjectLiteral($receiver);
+  }
+  function forEach($receiver, iterator_0) {
+    var tmp$;
+    tmp$ = iterator($receiver);
+    while (tmp$.hasNext()) {
+      var it = tmp$.next();
+      iterator_0(it);
+    }
+  }
+  function forEachIndexed($receiver, iterator_0) {
+    var tmp$;
+    var index = 0;
+    tmp$ = iterator($receiver);
+    while (tmp$.hasNext()) {
+      var it = tmp$.next();
+      iterator_0(index, it);
+      index = index + 1 | 0;
+    }
   }
   var get_parentElement = defineInlineFunction('Rent Split 2.jQueryInterface.get_parentElement_s15u7w$', function ($receiver) {
     return $receiver.parentElement;
@@ -1405,6 +1553,28 @@ this['Rent Split 2'] = function (_, Kotlin) {
       didSet = NullDSB();
     return new observing$ObjectLiteral(shouldSet, willSet, didSet, initialValue);
   }
+  var get_crypto = defineInlineFunction('Rent Split 2.org.bh.tools.base.jsShim.get_crypto_nz12v2$', function ($receiver) {
+    return $receiver.crypto;
+  });
+  var get_msCrypto = defineInlineFunction('Rent Split 2.org.bh.tools.base.jsShim.get_msCrypto_nz12v2$', function ($receiver) {
+    return $receiver.msCrypto;
+  });
+  var crypto;
+  var toString_0 = defineInlineFunction('Rent Split 2.org.bh.tools.base.jsShim.toString_798l30$', function ($receiver, base) {
+    return $receiver.toString(base);
+  });
+  var toString_1 = defineInlineFunction('Rent Split 2.org.bh.tools.base.jsShim.toString_di2vk2$', function ($receiver, base) {
+    return $receiver.toString(base);
+  });
+  var toString_2 = defineInlineFunction('Rent Split 2.org.bh.tools.base.jsShim.toString_dqglrj$', function ($receiver, base) {
+    return $receiver.toString(base);
+  });
+  var toString_3 = defineInlineFunction('Rent Split 2.org.bh.tools.base.jsShim.toString_if0zpk$', function ($receiver, base) {
+    return $receiver.toString(base);
+  });
+  var replace = defineInlineFunction('Rent Split 2.org.bh.tools.base.jsShim.replace_he2ph6$', function ($receiver, regExp, replacer) {
+    return $receiver.replace(regExp, replacer);
+  });
   function safeTry(closure) {
     try {
       return closure();
@@ -1418,6 +1588,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
     }
   }
   var package$RentSplit = _.RentSplit || (_.RentSplit = {});
+  package$RentSplit.generateNewId = generateNewId;
   Object.defineProperty(package$RentSplit, 'localStorageConsentSerializedName', {
     get: function () {
       return localStorageConsentSerializedName;
@@ -1427,6 +1598,11 @@ this['Rent Split 2'] = function (_, Kotlin) {
     get: LocalDataPreferences$Companion_getInstance
   });
   package$RentSplit.LocalDataPreferences = LocalDataPreferences;
+  Object.defineProperty(package$RentSplit, 'resourceIdSerializedName', {
+    get: function () {
+      return resourceIdSerializedName;
+    }
+  });
   Object.defineProperty(package$RentSplit, 'resourceNameSerializedName', {
     get: function () {
       return resourceNameSerializedName;
@@ -1435,6 +1611,11 @@ this['Rent Split 2'] = function (_, Kotlin) {
   Object.defineProperty(package$RentSplit, 'resourceDollarAmountSerializedName', {
     get: function () {
       return resourceDollarAmountSerializedName;
+    }
+  });
+  Object.defineProperty(package$RentSplit, 'expenseApplicableRoommatesSerializedName', {
+    get: function () {
+      return expenseApplicableRoommatesSerializedName;
     }
   });
   Object.defineProperty(package$RentSplit, 'resourceIsRemovableSerializedName', {
@@ -1730,6 +1911,36 @@ this['Rent Split 2'] = function (_, Kotlin) {
       return resultsTableHeadRowSelector;
     }
   });
+  Object.defineProperty(package$RentSplit, 'resourceIdDataName', {
+    get: function () {
+      return resourceIdDataName;
+    }
+  });
+  Object.defineProperty(package$RentSplit, 'resourceIdAttribute', {
+    get: function () {
+      return resourceIdAttribute;
+    }
+  });
+  Object.defineProperty(package$RentSplit, 'resourceIdSelector', {
+    get: function () {
+      return resourceIdSelector;
+    }
+  });
+  Object.defineProperty(package$RentSplit, 'expenseApplicableRoommatesDataName', {
+    get: function () {
+      return expenseApplicableRoommatesDataName;
+    }
+  });
+  Object.defineProperty(package$RentSplit, 'expenseApplicableRoommatesAttribute', {
+    get: function () {
+      return expenseApplicableRoommatesAttribute;
+    }
+  });
+  Object.defineProperty(package$RentSplit, 'expenseApplicableRoommatesSelector', {
+    get: function () {
+      return expenseApplicableRoommatesSelector;
+    }
+  });
   Object.defineProperty(package$RentSplit, 'copyStateUrlButtonId', {
     get: function () {
       return copyStateUrlButtonId;
@@ -1901,9 +2112,17 @@ this['Rent Split 2'] = function (_, Kotlin) {
   package$RentSplit.adding_bv23uc$ = adding;
   package$RentSplit.copyToClipboardOrThrow_9ufosi$ = copyToClipboardOrThrow;
   package$RentSplit.doNothing = doNothing;
+  package$RentSplit.alsoLog_vxumlc$ = alsoLog;
+  package$RentSplit.consoleLogString_61zpoe$ = consoleLogString;
+  package$RentSplit.toSetOfIds_pdl1vz$ = toSetOfIds;
+  package$RentSplit.serializedSetOfIds_gevexo$ = serializedSetOfIds;
   var package$jQueryInterface = _.jQueryInterface || (_.jQueryInterface = {});
   package$jQueryInterface.asList_9ufosi$ = asList_0;
   package$jQueryInterface.attr_mndj09$ = attr;
+  package$jQueryInterface.mapNotNull_fo801r$ = mapNotNull;
+  package$jQueryInterface.iterator_9ufosi$ = iterator;
+  package$jQueryInterface.forEach_f8zjg0$ = forEach;
+  package$jQueryInterface.forEachIndexed_53xvis$ = forEachIndexed;
   package$jQueryInterface.get_parentElement_s15u7w$ = get_parentElement;
   var package$org = _.org || (_.org = {});
   var package$bh = package$org.bh || (package$org.bh = {});
@@ -1915,11 +2134,27 @@ this['Rent Split 2'] = function (_, Kotlin) {
   package$func.NullSSB_287e2$ = NullSSB;
   package$func.NullDSB_287e2$ = NullDSB;
   package$func.observing_bjs5ud$ = observing;
+  var package$jsShim = package$base.jsShim || (package$base.jsShim = {});
+  package$jsShim.get_crypto_nz12v2$ = get_crypto;
+  package$jsShim.get_msCrypto_nz12v2$ = get_msCrypto;
+  Object.defineProperty(package$jsShim, 'crypto', {
+    get: function () {
+      return crypto;
+    }
+  });
+  package$jsShim.toString_798l30$ = toString_0;
+  package$jsShim.toString_di2vk2$ = toString_1;
+  package$jsShim.toString_dqglrj$ = toString_2;
+  package$jsShim.toString_if0zpk$ = toString_3;
+  package$jsShim.replace_he2ph6$ = replace;
   var package$util = package$base.util || (package$base.util = {});
   package$util.safeTry_klfg04$ = safeTry;
+  lastGeneratedId = 0;
   localStorageConsentSerializedName = 'c';
+  resourceIdSerializedName = 'i';
   resourceNameSerializedName = 'n';
   resourceDollarAmountSerializedName = 'd';
+  expenseApplicableRoommatesSerializedName = 'f';
   resourceIsRemovableSerializedName = 'x';
   resourceIsRenamableSerializedName = 'r';
   allExpensesSerializedName = 'e';
@@ -1975,6 +2210,12 @@ this['Rent Split 2'] = function (_, Kotlin) {
   resultsTableSelector = '#Results';
   resultsTableBodySelector = '#Results>tbody';
   resultsTableHeadRowSelector = '#Results>thead>tr';
+  resourceIdDataName = 'id';
+  resourceIdAttribute = 'data-id';
+  resourceIdSelector = '[data-id]';
+  expenseApplicableRoommatesDataName = 'applicableRoommates';
+  expenseApplicableRoommatesAttribute = 'data-applicableRoommates';
+  expenseApplicableRoommatesSelector = '[data-applicableRoommates]';
   copyStateUrlButtonId = 'Copy-URL-Button';
   copyStateUrlButtonSelector = '#Copy-URL-Button';
   stateUrlFieldId = 'State-URL-Field';
@@ -2001,6 +2242,8 @@ this['Rent Split 2'] = function (_, Kotlin) {
   rentExpensesSerializedName = 'e';
   localDataPreferencesSerializedName = 'l';
   generalStateSerializedName = 'generalState';
+  var tmp$;
+  crypto = (tmp$ = window.crypto) != null ? tmp$ : window.msCrypto;
   main([]);
   Kotlin.defineModule('Rent Split 2', _);
   return _;

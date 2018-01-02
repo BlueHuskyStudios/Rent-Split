@@ -24,6 +24,14 @@ external class JQuery {
     fun attr(attrName: String): String?
     fun attr(attrName: String, value: String?): JQuery
     fun attr(attrName: String, value: Double?): JQuery
+    fun data(): Map<String, Any>
+    fun data(key: String): Any?
+    fun data(key: String, value: Any?): JQuery
+    fun data(keyValuePairs: Map<String, Any>): JQuery
+    fun `val`(): String?
+    fun `val`(newValue: String?): JQuery
+    fun `val`(newValue: Double?): JQuery
+    fun `val`(newValue: Array<*>?): JQuery
 
     fun html(): String
     fun html(s: String): JQuery
@@ -72,10 +80,6 @@ external class JQuery {
     fun prev(): JQuery
     fun next(): JQuery
     fun parent(): JQuery
-    fun `val`(): String?
-    fun `val`(newValue: String?): JQuery
-    fun `val`(newValue: Double?): JQuery
-    fun `val`(newValue: Array<*>?): JQuery
 
     fun off(): JQuery
 
@@ -88,7 +92,7 @@ external class JQuery {
     fun get(index: Int): Element
 }
 
-public typealias JQueryMapper<To> = (index: Int, element: Element) -> To
+typealias JQueryMapper<To> = (index: Int, element: Element) -> To
 
 open public external class MouseEvent(): Event {
     public val pageX: Double

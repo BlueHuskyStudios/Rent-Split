@@ -15,6 +15,10 @@ const val allRoommatesSerializedName = "r"
  * The `RentRoommate` class represents a roommate and their monthly income.
  */
 data class RentRoommate(
+        /** The internally-unique identifier of this roommate */
+        @JsName(resourceIdSerializedName)
+        val id: String,
+
         /** The roommate's name */
         @JsName(resourceNameSerializedName)
         val name: String,
@@ -40,10 +44,13 @@ data class RentRoommate(
     /**
      * Converts this roommate into a JSON object
      */
-    fun toJson() = json(resourceNameSerializedName to name,
+    fun toJson() = json(resourceIdSerializedName to id,
+                        resourceNameSerializedName to name,
                         resourceDollarAmountSerializedName to monthlyIncome,
                         resourceIsRemovableSerializedName to isRemovable,
                         resourceIsRenamableSerializedName to isRenamable)
+
+
 
     companion object {
 
@@ -54,6 +61,7 @@ data class RentRoommate(
          *
          * ```
          * {
+         *     "i": String, // optional; Introduced in RS-6
          *     "n": String,
          *     "d": Double,
          *     "x": Boolean,
@@ -62,26 +70,28 @@ data class RentRoommate(
          * ```
          */
         operator fun invoke(raw: Json): RentRoommate? {
-            return RentRoommate(name = raw[resourceNameSerializedName] as? String ?: return null,
-                               monthlyIncome = raw[resourceDollarAmountSerializedName] as? Double ?: return null,
-                               isRemovable = raw[resourceIsRemovableSerializedName] as? Boolean ?: return null,
-                               isRenamable = raw[resourceIsRenamableSerializedName] as? Boolean ?: return null)
+            return RentRoommate(id = raw[resourceIdSerializedName] as? String ?: generateNewId().alsoLog("No serialized roommate ID; generating one to migrate it"),
+                                name = raw[resourceNameSerializedName] as? String ?: return null.alsoLog("No serialized roommate name"),
+                                monthlyIncome = raw[resourceDollarAmountSerializedName] as? Double ?: return null.alsoLog("No serialized roommate income"),
+                                isRemovable = raw[resourceIsRemovableSerializedName] as? Boolean ?: return null.alsoLog("No serialized removability"),
+                                isRenamable = raw[resourceIsRenamableSerializedName] as? Boolean ?: return null.alsoLog("No serialized renamability"))
         }
 
 
         /** The generic initial value to place on the first two roommate rows */
-        val initial
-            get() = RentRoommate("",
-                                 defaultRoommateIncome,
-                                 isRemovable = false,
-                                 isRenamable = true)
+        fun generateInitial() = RentRoommate(id = generateNewId(),
+                                             name = "",
+                                             monthlyIncome = defaultRoommateIncome,
+                                             isRemovable = false,
+                                             isRenamable = true)
 
         /** The generic default value to place on new roommate rows */
-        val defaultNewRoommate
-            get() = RentRoommate("",
-                                 defaultRoommateIncome,
-                                 isRemovable = true,
-                                 isRenamable = true)
+        fun generateNewRoommate()
+                = RentRoommate(id = generateNewId(),
+                               name = "",
+                               monthlyIncome = defaultRoommateIncome,
+                               isRemovable = true,
+                               isRenamable = true)
 
 
         /**
@@ -153,7 +163,7 @@ data class RentRoommates(
 
     companion object {
 
-        val initial = RentRoommates(listOf(RentRoommate.initial, RentRoommate.initial))
+        fun generateInitial() = RentRoommates(listOf(RentRoommate.generateInitial(), RentRoommate.generateInitial()))
 
         /**
          * Creates a [RentRoommates] out of JSON, or returns `null` if that can't be done.

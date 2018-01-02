@@ -48,6 +48,6 @@ data class LocalDataPreferences(
         }
 
 
-        val initial = LocalDataPreferences(localStorageConsent = null)
+        fun generateInitial() = LocalDataPreferences(localStorageConsent = null)
     }
 }
