@@ -5,8 +5,7 @@ import RentSplit.IdManager.registerId
 import RentSplit.RentExpenses.Companion.allRoommates
 import jQueryInterface.JQuery
 import org.bh.tools.base.collections.indexOfFirstOrNull
-import kotlin.js.Json
-import kotlin.js.json
+import kotlin.js.*
 
 
 
@@ -67,7 +66,8 @@ data class RentExpense(
             resourceNameSerializedName to type,
             resourceDollarAmountSerializedName to monthlyCost,
             resourceIsRemovableSerializedName to isRemovable,
-            resourceIsRenamableSerializedName to isRenamable
+            resourceIsRenamableSerializedName to isRenamable,
+            expenseApplicableRoommatesSerializedName to applicableRoommateIds?.toTypedArray()
     )
 
     companion object {
@@ -89,10 +89,11 @@ data class RentExpense(
          * ```
          */
         operator fun invoke(raw: Json): RentExpense? {
+            @Suppress("UNCHECKED_CAST")
             return RentExpense(id = raw[resourceIdSerializedName] as? String ?: generateNewId().alsoLog("No serialized expense ID; generating one to migrate it"),
                                type = raw[resourceNameSerializedName] as? String ?: return null.alsoLog("No serialized expense type"),
                                monthlyCost = raw[resourceDollarAmountSerializedName] as? Double ?: return null.alsoLog("No serialized expense cost"),
-                               applicableRoommateIds = (raw[expenseApplicableRoommatesSerializedName] as? String)?.toSetOfIds() ?: allRoommates,
+                               applicableRoommateIds = (raw[expenseApplicableRoommatesSerializedName] as? Array<String>)?.toSet() ?: allRoommates,
                                isRemovable = raw[resourceIsRemovableSerializedName] as? Boolean ?: return null.alsoLog("No serialized removability"),
                                isRenamable = raw[resourceIsRenamableSerializedName] as? Boolean ?: return null.alsoLog("No serialized renamability"))
         }

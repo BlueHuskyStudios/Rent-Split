@@ -10,6 +10,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
   var to = Kotlin.kotlin.to_ujzrz7$;
   var json = Kotlin.kotlin.js.json_pyyo18$;
   var Kind_CLASS = Kotlin.Kind.CLASS;
+  var toSet = Kotlin.kotlin.collections.toSet_us0mfu$;
   var PropertyMetadata = Kotlin.PropertyMetadata;
   var lazy = Kotlin.kotlin.lazy_klfg04$;
   var equals = Kotlin.equals;
@@ -24,7 +25,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
   var Pair = Kotlin.kotlin.Pair;
   var toString = Kotlin.toString;
   var filterNotNull = Kotlin.kotlin.collections.filterNotNull_emfgvx$;
-  var toSet = Kotlin.kotlin.collections.toSet_7wnvza$;
+  var toSet_0 = Kotlin.kotlin.collections.toSet_7wnvza$;
   var zip = Kotlin.kotlin.collections.zip_45mdf7$;
   var joinToString = Kotlin.kotlin.collections.joinToString_fmv235$;
   var throwCCE = Kotlin.throwCCE;
@@ -166,8 +167,10 @@ this['Rent Split 2'] = function (_, Kotlin) {
     this.originalDOMElement = originalDOMElement;
     IdManager_getInstance().registerId_61zpoe$(this.i);
   }
+  var copyToArray = Kotlin.kotlin.collections.copyToArray;
   RentExpense.prototype.toJson = function () {
-    return json([to(resourceIdSerializedName, this.i), to(resourceNameSerializedName, this.n), to(resourceDollarAmountSerializedName, this.d), to(resourceIsRemovableSerializedName, this.x), to(resourceIsRenamableSerializedName, this.r)]);
+    var tmp$;
+    return json([to(resourceIdSerializedName, this.i), to(resourceNameSerializedName, this.n), to(resourceDollarAmountSerializedName, this.d), to(resourceIsRemovableSerializedName, this.x), to(resourceIsRenamableSerializedName, this.r), to(expenseApplicableRoommatesSerializedName, (tmp$ = this.f) != null ? copyToArray(tmp$) : null)]);
   };
   function RentExpense$Companion() {
     RentExpense$Companion_instance = this;
@@ -198,7 +201,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
       console.log(message_1);
       return null;
     }
-    tmp$_9 = (tmp$_8 = (tmp$_7 = typeof (tmp$_6 = raw[expenseApplicableRoommatesSerializedName]) === 'string' ? tmp$_6 : null) != null ? toSetOfIds(tmp$_7) : null) != null ? tmp$_8 : RentExpenses$Companion_getInstance().allRoommates;
+    tmp$_9 = (tmp$_8 = (tmp$_7 = Kotlin.isArray(tmp$_6 = raw[expenseApplicableRoommatesSerializedName]) ? tmp$_6 : null) != null ? toSet(tmp$_7) : null) != null ? tmp$_8 : RentExpenses$Companion_getInstance().allRoommates;
     tmp$_11 = typeof (tmp$_10 = raw[resourceIsRemovableSerializedName]) === 'boolean' ? tmp$_10 : null;
     if (tmp$_11 == null) {
       var message_2 = 'No serialized removability';
@@ -1073,7 +1076,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
           tmp$_7 = new FiniteAmountSummary$some(checkedRoommateIds.size, allCheckboxes.length);
         }
       }
-      tmp$ = new Pair(tmp$_7, toSet(checkedRoommateIds));
+      tmp$ = new Pair(tmp$_7, toSet_0(checkedRoommateIds));
     }
     return tmp$;
   };
@@ -1814,7 +1817,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
     console.log(message);
   });
   function toSetOfIds($receiver) {
-    return toSet(split($receiver, Kotlin.charArrayOf(91, 44, 93)));
+    return toSet_0(split($receiver, Kotlin.charArrayOf(91, 44, 93)));
   }
   function serializedSetOfIds($receiver) {
     return joinToString($receiver, ',', '[', ']');
