@@ -1,7 +1,10 @@
 package RentSplit
 
+import RentSplit.IdManager.generateNewId
+import RentSplit.IdManager.registerId
 import RentSplit.RentExpenses.Companion.allRoommates
 import jQueryInterface.JQuery
+import org.bh.tools.base.collections.indexOfFirstOrNull
 import kotlin.js.Json
 import kotlin.js.json
 
@@ -39,7 +42,7 @@ data class RentExpense(
          * The empty set (`allRoommates`) implies that all roommates help with this expense.
          */
         @JsName(expenseApplicableRoommatesSerializedName)
-        val applicableRoommates: Set<ID>,
+        val applicableRoommateIds: Set<ID>?,
 
         /** Indicates whether this expense can be removed from the list of roommates */
         @JsName(resourceIsRemovableSerializedName)
@@ -51,6 +54,10 @@ data class RentExpense(
 
         /** The original DOM element, as a JQuery selector */
         var originalDOMElement: JQuery? = null) {
+
+    init {
+        registerId(id)
+    }
 
     /**
      * Converts this expense into a JSON object
@@ -85,7 +92,7 @@ data class RentExpense(
             return RentExpense(id = raw[resourceIdSerializedName] as? String ?: generateNewId().alsoLog("No serialized expense ID; generating one to migrate it"),
                                type = raw[resourceNameSerializedName] as? String ?: return null.alsoLog("No serialized expense type"),
                                monthlyCost = raw[resourceDollarAmountSerializedName] as? Double ?: return null.alsoLog("No serialized expense cost"),
-                               applicableRoommates = (raw[expenseApplicableRoommatesSerializedName] as? String)?.toSetOfIds() ?: emptySet(),
+                               applicableRoommateIds = (raw[expenseApplicableRoommatesSerializedName] as? String)?.toSetOfIds() ?: allRoommates,
                                isRemovable = raw[resourceIsRemovableSerializedName] as? Boolean ?: return null.alsoLog("No serialized removability"),
                                isRenamable = raw[resourceIsRenamableSerializedName] as? Boolean ?: return null.alsoLog("No serialized renamability"))
         }
@@ -96,7 +103,7 @@ data class RentExpense(
                 by lazy { RentExpense(id = generateNewId(),
                                       type = rentExpenseType,
                                       monthlyCost = defaultRentExpenseCost,
-                                      applicableRoommates = allRoommates,
+                                      applicableRoommateIds = allRoommates,
                                       isRemovable = false,
                                       isRenamable = false)}
 
@@ -105,7 +112,7 @@ data class RentExpense(
                 by lazy { RentExpense(id = generateNewId(),
                                       type = utilitiesExpenseType,
                                       monthlyCost = defaultUtilitiesExpenseCost,
-                                      applicableRoommates = allRoommates,
+                                      applicableRoommateIds = allRoommates,
                                       isRemovable = false,
                                       isRenamable = false)}
 
@@ -114,7 +121,7 @@ data class RentExpense(
                 = RentExpense(id = generateNewId(),
                               type = "",
                               monthlyCost = defaultExpenseCost,
-                              applicableRoommates = allRoommates,
+                              applicableRoommateIds = allRoommates,
                               isRemovable = true,
                               isRenamable = true)
 
@@ -122,13 +129,13 @@ data class RentExpense(
         /**
          * Generates an expense type
          *
-         * @param ideal        If non-null and non-empty, this is used. Otherwise, one is generated with `backupNumber`
-         * @param backupNumber The number to use in the generated type
+         * @param ideal        If non-null and non-empty, this is used. Otherwise, one is generated with `backup`
+         * @param backup The number to use in the generated type
          *
          * @return A type for an expense
          */
-        fun type(ideal: String?, backupNumber: Int): String {
-            return ideal?.nonEmptyOrNull() ?: numberedType(backupNumber)
+        fun type(ideal: String?, backup: String): String {
+            return ideal?.nonEmptyOrNull() ?: numberedType(backup)
         }
 
 
@@ -138,7 +145,7 @@ data class RentExpense(
          * @param number The number to use in the expense type
          * @return A type for an expense
          */
-        fun numberedType(number: Int): String {
+        fun numberedType(number: String): String {
             return "Expense #$number"
         }
     }
@@ -150,7 +157,7 @@ data class RentExpense(
  * Returns a type for this expense that is never an empty string. If [type][RentExpense.type] is an empty string,
  * a generated one is returned
  */
-fun RentExpense.nonEmptyType(index: Int) = RentExpense.type(ideal = type, backupNumber = index + 1)
+val RentExpense.nonEmptyType get() = RentExpense.type(ideal = type, backup = id)
 
 
 
@@ -183,6 +190,29 @@ data class RentExpenses(
     fun toJson() = json(allExpensesSerializedName to allExpenses.map { it.toJson() })
 
 
+    /**
+     * Returns the first instance of an expense that has the given ID, or `null` if no such expense is found
+     */
+    fun expenseForId(id: ID) = allExpenses.firstOrNull { it.id == id }
+
+
+    /**
+     * If this contains an expense with the same ID as the given one, then a copy of this is returned where that
+     * expense is replaced with the given one. Else, [adding] is called, passing the given expense.
+     */
+    fun setting(expense: RentExpense): RentExpenses {
+        val existingExpenseIndex = this.allExpenses.indexOfFirstOrNull { it.id == expense.id }
+        return if (existingExpenseIndex != null) {
+            val expensesCopy = this.allExpenses.toMutableList()
+            expensesCopy[existingExpenseIndex] = expense
+            copy(allExpenses = expensesCopy)
+        }
+        else {
+            adding(expense)
+        }
+    }
+
+
     companion object {
 
         fun generateInitial() = RentExpenses(listOf(RentExpense.initialRent, RentExpense.initialUtilities))
@@ -207,6 +237,6 @@ data class RentExpenses(
         }
 
 
-        val allRoommates: Set<ID> = emptySet()
+        val allRoommates: Set<ID>? = null
     }
 }

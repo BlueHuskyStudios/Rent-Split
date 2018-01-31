@@ -28,7 +28,8 @@ html.rent {
 }
 
 .rent dialog {
-    box-shadow: 0 2em 5em rgba(0, 0, 0, .8), 0 0 0 .5em #FF1744, 0 1em 2em rgba(0, 0, 0, .5), 0 1pt 4pt rgba(0, 0, 0, .2);
+    box-shadow: 0 2em 5em rgba(0, 0, 0, 0.1), 0 1em 2em rgba(0, 0, 0, 0.2), 0 1pt 4pt rgba(0, 0, 0, 0.3);
+    border: none;
     border-radius: 2pt;
     position: fixed;
     top: 10%;
@@ -48,7 +49,19 @@ html.rent {
     width: -ms-fit-content;
     width: fit-content;
     z-index: 10;
+
+    transition-property: opacity;
+    transition-duration: 1s;
+
+    opacity: 0;
 }
+    .rent dialog.severe {
+        box-shadow: 0 2em 5em rgba(0, 0, 0, .8), 0 0 0 .5em #FF1744, 0 1em 2em rgba(0, 0, 0, .5), 0 1pt 4pt rgba(0, 0, 0, .2);
+    }
+
+    .rent dialog[open] {
+        opacity: 1;
+    }
 
 .rent body .warning-message {
     padding: 1em;
@@ -64,6 +77,10 @@ html.rent {
 .rent button {
     border-radius: 2pt;
 }
+    .rent dialog button {
+        padding: 3px 1em;
+        min-width: 64px;
+    }
 
 .rent button,
 .rent #Add-Roommate-Button,
@@ -180,4 +197,53 @@ html.rent {
         bottom: -3ex;
         color: rgba(0,0,0, 0.8);
         transition-duration: 0.3s;
+    }
+
+
+
+/* MARK: - Hidden floating row buttons */
+
+.has-floating-button {
+    position: relative;
+}
+
+.floats-to-left {
+    position: absolute;
+    left: -3em;
+    top: calc(50% - 1.5ex);
+}
+
+
+.hides-something-until-hover .hidden-until-parent-hover {
+    transition-property: opacity;
+    transition-timing-function: ease-in-out;
+    transition-delay: 1s;
+    transition-duration: 1s;
+}
+
+.touch-not-supported .hides-something-until-hover:hover .hidden-until-parent-hover,
+.touch-not-supported .hides-something-until-hover:focus .hidden-until-parent-hover,
+.touch-not-supported .hides-something-until-hover .hidden-until-parent-hover:hover,
+.touch-not-supported .hides-something-until-hover .hidden-until-parent-hover:focus {
+    transition-delay: 0s;
+    transition-duration: 0.2s;
+}
+
+.touch-not-supported .hides-something-until-hover:not(:hover):not(:focus) .hidden-until-parent-hover:not(:hover):not(:focus) {
+    opacity: 0;
+}
+
+
+.rent .checklist {
+    list-style-type: none;
+    margin: 1em 0;
+}
+    .rent .checklist li {
+        margin: 0;
+    }
+    .rent .checklist .checklist-item {
+        margin: 1ex 1em;
+    }
+    .rent .checklist hr {
+        margin: 1ex 0;
     }

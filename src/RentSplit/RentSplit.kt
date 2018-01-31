@@ -19,10 +19,15 @@
 
 package RentSplit
 
+import RentSplit.RentExpenses.Companion.allRoommates
 import RentSplit.UserConsent.*
 import jQueryInterface.*
 import org.bh.tools.base.func.observing
-import org.w3c.dom.Element
+import org.bh.tools.base.struct.FiniteAmountSummary
+import org.bh.tools.base.struct.FiniteAmountSummary.*
+import org.bh.tools.ui.touch.TouchBasics
+import org.bh.tools.ui.widget.js.*
+import org.w3c.dom.*
 import org.w3c.dom.events.Event
 import kotlin.browser.window
 
@@ -88,10 +93,6 @@ val resultRowDataName = "result-roommate-row"
 val resultRowAttribute = "data-$resultRowDataName"
 val resultRowSelector = "[$resultRowAttribute]"
 
-val anyInputFieldSelector = "$roommateAnyInputFieldSelector,$expenseAnyInputFieldSelector"
-val anyInputButtonSelector = "$addARoommateButtonSelector,$addAnExpenseButtonSelector,$removeAnExpenseButtonSelector"
-val anyInputSelector = "$anyInputFieldSelector,$anyInputButtonSelector"
-
 //val moneyAmountInputSelector = "$roommateIncomeInputSelector,$expenseCostInputSelector"
 
 val resultsTableSelector = "#Results"
@@ -102,7 +103,7 @@ val resourceIdDataName = "id"
 val resourceIdAttribute = "data-$resourceIdDataName"
 val resourceIdSelector = "[$resourceIdAttribute]"
 
-val expenseApplicableRoommatesDataName = "applicableRoommates"
+val expenseApplicableRoommatesDataName = "applicableRoommateIds"
 val expenseApplicableRoommatesAttribute = "data-$expenseApplicableRoommatesDataName"
 val expenseApplicableRoommatesSelector = "[$expenseApplicableRoommatesAttribute]"
 
@@ -120,6 +121,46 @@ val localStorageWarningExplicitRefusalButtonId = "Local-Storage-Warning-Decline-
 val localStorageWarningExplicitRefusalButtonSelector = "#$localStorageWarningExplicitRefusalButtonId"
 val localStorageWarningExplicitConsentButtonId = "Local-Storage-Warning-Consent-Button"
 val localStorageWarningExplicitConsentButtonSelector = "#$localStorageWarningExplicitConsentButtonId"
+
+
+/// Expense Filters ///
+
+val expenseFilterButtonClass = "filter-button"
+val expenseFilterButtonSelector = ".$expenseFilterButtonClass"
+val expenseFilterDialogId = "filter-dialog"
+val expenseFilterDialogSelector = "#$expenseFilterDialogId"
+val expenseFilterDialogCancelButtonId = "filter-dialog-cancel-button"
+val expenseFilterDialogCancelButtonSelector = "#$expenseFilterDialogCancelButtonId"
+val expenseFilterDialogOkButtonId = "filter-dialog-ok-button"
+val expenseFilterDialogOkButtonSelector = "#$expenseFilterDialogOkButtonId"
+val expenseFilterDialogExpenseNameClassName = "expense-name"
+val expenseFilterDialogExpenseNameSelector = ".$expenseFilterDialogExpenseNameClassName"
+val expenseFilterApplicableRoommateChecklistId = "expense-filter-applicable-roommate-checklist"
+val expenseFilterApplicableRoommateChecklistSelector = "#$expenseFilterApplicableRoommateChecklistId"
+val expenseFilterApplicableRoommateChecklistItemClass = "expense-filter-applicable-roommate"
+val expenseFilterApplicableRoommateChecklistItemSelector = ".$expenseFilterApplicableRoommateChecklistItemClass"
+val expenseFilterEveryoneCheckboxId = "roommate-filter-everyone-checkbox"
+val expenseFilterEveryoneCheckboxSelector = "#$expenseFilterEveryoneCheckboxId"
+val expenseFilterApplicableRoommateCheckboxClass = "expense-filter-applicable-roommate-checkbox"
+val expenseFilterApplicableRoommateCheckboxSelector = ".$expenseFilterApplicableRoommateCheckboxClass"
+val expenseFilterDialogCurrentExpenseDataName = "current-expense"
+val expenseFilterDialogCurrentExpenseAttribute = "data-$expenseFilterDialogCurrentExpenseDataName"
+val expenseFilterDialogCurrentExpenseSelector = "[$expenseFilterDialogCurrentExpenseAttribute]"
+val expenseFilterAnyCheckboxSelector = "$expenseFilterDialogSelector input[type=checkbox]"
+
+val expenseFilterButtonExpenseRelationDataName = "expense"
+val expenseFilterButtonExpenseRelationAttribute = "data-$expenseFilterButtonExpenseRelationDataName"
+val expenseFilterButtonExpenseRelationSelector = "[$expenseFilterButtonExpenseRelationAttribute]"
+
+
+
+/// Aggregates ///
+
+val anyInputFieldSelector = "input,$roommateAnyInputFieldSelector,$expenseAnyInputFieldSelector"
+val anyInputButtonSelector = "$addARoommateButtonSelector,$addAnExpenseButtonSelector," +
+        "$removeARoommateButtonSelector,$removeAnExpenseButtonSelector," +
+        expenseFilterButtonSelector
+val anyInputSelector = "$anyInputFieldSelector,$anyInputButtonSelector"
 
 
 //// Label text ////
@@ -162,17 +203,30 @@ class RentSplit {
         state.save()
     })
 
+    var expenseFilterChecklistController: JSTernaryCheckboxTreeController? by observing(null as JSTernaryCheckboxTreeController?, didSet = { oldValue, _ ->
+        oldValue?.deinit()
+    })
+
 
     /**
      * Called when the page has loaded completely and is ready to be manipulated by JavaScript
      */
     fun onReady() {
+        this.preLoadConfigurations()
         this.reloadPageFromState(shouldReRegisterListeners = false)
         this.regenerateInputTables()
         this.registerListeners()
         this.recalculateRentSplit()
         this.state.save()
         this.presentToUser()
+    }
+
+
+    /**
+     * Configures the page _before_ any state is loaded
+     */
+    fun preLoadConfigurations() {
+        jq("html").addClass(if (TouchBasics.isTouchSupported()) "touch-supported" else "touch-not-supported")
     }
 
 
@@ -211,6 +265,12 @@ class RentSplit {
     }
 
 
+    fun reRegisterFilterDialogListeners() {
+        jq(anyInputSelector, jq(expenseFilterDialogSelector)).off()
+        registerFilterDialogListeners()
+    }
+
+
     /**
      * Registers every listener
      */
@@ -225,6 +285,15 @@ class RentSplit {
         jq(localStorageWarningExplicitRefusalButtonSelector).click(::didPressLocalStorageWarningExplicitRefusalButton)
 
         jq(copyStateUrlButtonSelector).click(::didPressCopyUrlButton)
+
+        registerFilterDialogListeners()
+    }
+
+
+    fun registerFilterDialogListeners() {
+        jq(expenseFilterButtonSelector).click(::didPressFilterButton)
+        jq(expenseFilterDialogCancelButtonSelector).click(::didPressFilterDialogCancelButton)
+        jq(expenseFilterDialogOkButtonSelector).click(::didPressFilterDialogOkButton)
     }
 
 
@@ -262,8 +331,32 @@ class RentSplit {
             }, 3000)
         }
         catch (error: Throwable) {
-            console.log("Failed to copy state URL!")
+            log("Failed to copy state URL!")
         }
+    }
+
+
+    fun didPressFilterButton(event: Event) {
+        showExpenseDialog(expense = expenseForFilterButton(event.currentTarget as? Element
+                                                                   ?: return Unit.alsoLog("No element targeted in the filter button click event"))
+                ?: return Unit.alsoLog("No expense matching ID in filter button"))
+    }
+
+
+    fun didPressFilterDialogCancelButton(event: Event) {
+        expenseFilterDialog?.close()
+    }
+
+
+    fun didPressFilterDialogOkButton(event: Event) {
+        val expense = expenseInFilterDialog()
+        if (expense != null) {
+            state = state.setting(expense.copy(applicableRoommateIds = applicableRoommateIdsInFilterDialog()))
+        }
+        else {
+            log("No expense found in filter dialog!")
+        }
+        expenseFilterDialog?.close()
     }
 
 
@@ -355,9 +448,9 @@ class RentSplit {
     @Suppress("UNUSED_PARAMETER")
     fun expenseRowToExpense(index: Int, jq_expenseRow: JQuery): RentExpense? {
         return RentExpense(
-                id = jq(jq_expenseRow).data(resourceIdDataName)?.toString() ?: return null.alsoLog("No ID on page!"),
+                id = jq_expenseRow.data(resourceIdDataName)?.toString() ?: return null.alsoLog("No ID on page!"),
                 type = jq(expenseTypeInputSelector, jq_expenseRow).`val`() ?: "",
-                applicableRoommates = (jq(jq_expenseRow).data(expenseApplicableRoommatesDataName)?.toString())?.let(::expenseApplicableRoommatesFromString) ?: emptySet(),
+                applicableRoommateIds = (jq_expenseRow.data(expenseApplicableRoommatesDataName)?.toString())?.let(::expenseApplicableRoommatesFromString) ?: allRoommates,
                 monthlyCost = jq(expenseCostInputSelector, jq_expenseRow).`val`()?.toDoubleOrNull() ?: return null.alsoLog("No monthly cost on page!"),
                 isRemovable = jq_expenseRow.attr(expenseRemovabilityAttribute)?.toBooleanOrNull() ?: true,
                 isRenamable = jq_expenseRow.attr(expenseRenamabilityAttribute)?.toBooleanOrNull() ?: true,
@@ -368,6 +461,55 @@ class RentSplit {
 
     fun expenseApplicableRoommatesFromString(expenseApplicableRoommatesString: String): Set<ID> =
             expenseApplicableRoommatesString.toSetOfIds()
+
+
+    fun expenseForFilterButton(filterButton: Element): RentExpense?
+            = jq(filterButton)
+            .data(expenseFilterButtonExpenseRelationDataName)
+            ?.let { "$it" }
+            ?.let(this::expenseForId)
+
+
+    fun expenseForId(id: ID) = this.state.expenses.expenseForId(id)
+
+
+    fun expenseInFilterDialog(): RentExpense? =
+            expenseFilterDialog
+                ?.let { jq(it) }
+                ?.data(expenseFilterDialogCurrentExpenseDataName)
+                ?.let { expenseForId("$it") }
+
+
+    fun applicableRoommateIdsInFilterDialog(ignoreEveryoneCheckbox: Boolean = false): Set<ID>? {
+        val (summary, set) = summarizeFilterDialogApplicableRoommates(ignoreEveryoneCheckbox = ignoreEveryoneCheckbox)
+        return when (summary) {
+            is all -> RentExpenses.allRoommates
+            is some, is none -> set
+        }
+    }
+
+
+    fun summarizeFilterDialogApplicableRoommates(ignoreEveryoneCheckbox: Boolean = false): Pair<FiniteAmountSummary<Int>, Set<ID>> {
+        val allCheckboxes = jq(expenseFilterApplicableRoommateCheckboxSelector)
+
+        return if (!ignoreEveryoneCheckbox
+                && jq(expenseFilterEveryoneCheckboxSelector).checkedNotIndeterminate()) {
+            Pair(all(allCheckboxes.length), emptySet())
+        }
+        else {
+            allCheckboxes.map { _, element ->
+                ("${jq(element).data(resourceIdDataName)}").let { id -> if (jq(element).checked()) id else null }
+            }
+                    .filterNotNull()
+                    .let { checkedRoommateIds ->
+                        Pair(when (checkedRoommateIds.count()) {
+                                 0 -> none()
+                                 state.roommates.allRoommates.count() -> all(allCheckboxes.length)
+                                 else -> some(checkedRoommateIds.count(), maximumPossibleAmount = allCheckboxes.length)
+                             }, checkedRoommateIds.toSet())
+                    }
+        }
+    }
 
 
     ///// CALCULATION /////
@@ -495,6 +637,58 @@ class RentSplit {
     }
 
 
+    fun reconfigureExpenseDialog(expense: RentExpense) {
+        jq(expenseFilterDialogSelector).data(expenseFilterDialogCurrentExpenseDataName, expense.id)
+        jq(expenseFilterDialogExpenseNameSelector).text(expense.nonEmptyType.sanitizedForHtml())
+        fillExpenseFilterApplicableRoommateList(expense = expense)
+
+        reRegisterFilterDialogListeners()
+    }
+
+
+    fun fillExpenseFilterApplicableRoommateList(expense: RentExpense) {
+        jq(expenseFilterApplicableRoommateChecklistItemSelector).remove()
+        jq(expenseFilterApplicableRoommateChecklistSelector).append(buildExpenseFilterApplicableRoommateList(expense = expense))
+
+        val everyoneCheckbox = jq(expenseFilterEveryoneCheckboxSelector)[0] as? HTMLCheckboxElement ?: return
+        val roommateCheckboxes = jq(expenseFilterApplicableRoommateCheckboxSelector)
+                .map { _, element -> element }
+                .map { it as? HTMLCheckboxElement ?: return }
+
+        expenseFilterChecklistController = JSTernaryCheckboxTreeController(everyoneCheckbox, roommateCheckboxes)
+    }
+
+
+    fun buildExpenseFilterApplicableRoommateList(expense: RentExpense) =
+            state.roommates.allRoommates.reduceTo("") { htmlString, roommate ->
+                return@reduceTo htmlString + buildExpenseFilterApplicableRoommateListItem(expense = expense, roommate = roommate)
+            }
+
+
+    fun buildExpenseFilterApplicableRoommateListItem(expense: RentExpense, roommate: RentRoommate) =
+            "<li" +
+                " class='checklist-item $expenseFilterApplicableRoommateChecklistItemClass'>" +
+                "<label>" +
+                    "<input" +
+                        " $resourceIdAttribute='${roommate.id}'" +
+                        " class='$expenseFilterApplicableRoommateCheckboxClass'" +
+                        " type='checkbox'" +
+                        " ${if (expense.appliesTo(roommate)) "checked" else ""}" +
+                    "/>" +
+                    " ${roommate.nonEmptyName.sanitizedForHtml()}" +
+                "</label>" +
+            "</li>"
+
+
+    fun showExpenseDialog(expense: RentExpense) {
+        reconfigureExpenseDialog(expense = expense)
+        expenseFilterDialog?.showModal()
+    }
+
+
+    val expenseFilterDialog: HTMLDialogElement? get() = (jq(expenseFilterDialogSelector)[0] as? HTMLDialogElement) ?: null.alsoLog("Could not find dialog element!")
+
+
     ///// ADDING ROWS /////
 
     /**
@@ -538,7 +732,7 @@ class RentSplit {
                                     id = expense.id,
                                     type = expense.type,
                                     cost = expense.monthlyCost,
-                                    applicableRoommates = expense.applicableRoommates,
+                                    applicableRoommates = expense.applicableRoommateIds,
                                     isRenamable = expense.isRenamable,
                                     isRemovable = expense.isRemovable)
     }
@@ -552,7 +746,7 @@ class RentSplit {
      * @param id                  The ID of this expense
      * @param type                The type of expense; its name
      * @param cost                The monthly cost of the expense
-     * @param applicableRoommates The UUIDs of the roommates that this applies to
+     * @param applicableRoommates The UUIDs of the roommates that this applies to. `null` signifies all.
      * @param isRenamable         Indicates whether the type should be editable
      * @param isRemovable         Indicates whether the row should be removable
      */
@@ -560,28 +754,30 @@ class RentSplit {
                              id: ID,
                              type: String?,
                              cost: Double?,
-                             applicableRoommates: Set<ID>,
+                             applicableRoommates: Set<ID>?,
                              isRenamable: Boolean,
                              isRemovable: Boolean): String {
 
         val expenseNumber = index + 1
 
         var row = "<tr" +
+                " class='hides-something-until-hover'" +
                 " $resourceIdAttribute='$id'" +
                 " data-$expenseInputRowDataName=\"$expenseNumber\"" +
                 " $expenseRenamabilityAttribute='$isRenamable'" +
                 " $expenseRemovabilityAttribute='$isRemovable'" +
-                " $expenseApplicableRoommatesAttribute='${applicableRoommates.serializedSetOfIds()}'" +
+                (if (applicableRoommates == null) "" else " $expenseApplicableRoommatesAttribute='${applicableRoommates.serializedSetOfIds()}'") +
                 ">"
         row +=
-                "<th${(if (isRenamable) " class=\"plain\"" else "")}>" +
+                "<th class=\"${(if (isRenamable) "plain   " else "")}has-floating-button\">" +
+                        "<button class='$expenseFilterButtonClass   floats-to-left   hidden-until-parent-hover' $expenseFilterButtonExpenseRelationAttribute='$id'><i class='fa fa-filter'></i></button>" +
                         "<input" +
-                        " type=\"${if (isRenamable) "text" else "hidden"}\"" +
-                        " class=\"$expenseTypeInputClassName   text-right\"" +
-                        (if (type.isNeitherNullNorEmpty()) " value=\"$type\"" else "") +
-                        " size=\"8\"" +
-                        " tabindex=0" +
-                        " placeholder=\"$expenseTypePlaceholderText\"" +
+                            " type=\"${if (isRenamable) "text" else "hidden"}\"" +
+                            " class=\"$expenseTypeInputClassName   text-right\"" +
+                            (if (type.isNeitherNullNorEmpty()) " value=\"$type\"" else "") +
+                            " size=\"8\"" +
+                            " tabindex=0" +
+                            " placeholder=\"${RentExpense.numberedType(id)}\"" +
                         "/>" +
                         (if (!isRenamable && type.isNeitherNullNorEmpty()) type else "") +
                         "</th>"
@@ -672,7 +868,12 @@ class RentSplit {
      * @param isRenamable Indicates whether the row should be renamable (currently unused)
      * @param isRemovable Indicates whether the row should be removable
      */
-    fun buildRoommateInputRow(index: Int, id: ID, name: String?, income: Double?, isRenamable: Boolean, isRemovable: Boolean): String  {
+    fun buildRoommateInputRow(index: Int,
+                              id: ID,
+                              name: String?,
+                              income: Double?,
+                              isRenamable: Boolean,
+                              isRemovable: Boolean): String  {
 
         val roommateNumber = index + 1
 
@@ -690,7 +891,7 @@ class RentSplit {
                         (if (name.isNeitherNullNorEmpty()) " value=\"" + name + "\"" else "") +
                         " size=\"8\"" +
                         " tabindex=0" +
-                        " placeholder=\"$roommateNamePlaceholderText\"" +
+                        " placeholder=\"${RentRoommate.numberedName(id)}\"" +
                         "/>" +
                         "</th>"
 
@@ -799,7 +1000,7 @@ class RentSplit {
         val jq_resultsTableHeadRow = jq(resultsTableHeadRowSelector)
         jq_resultsTableHeadRow.empty()
         jq_resultsTableHeadRow.append("<th class=\"text-center\">$roommateNameColumnTitle</th>")
-        expenses.allExpenses.forEachIndexed { index, expense -> this.appendExpenseColumnHeader(jq_resultsTableHeadRow, expense, index) }
+        expenses.allExpenses.forEach { expense -> this.appendExpenseColumnHeader(jq_resultsTableHeadRow, expense) }
         jq_resultsTableHeadRow.append("<th class=\"text-center\">$totalColumnTitle</th>")
     }
 
@@ -807,8 +1008,8 @@ class RentSplit {
     /**
      * Using the given expense, generates and outputs the table column head to the Results output table
      */
-    fun appendExpenseColumnHeader(jq_resultsTableHeadRow: JQuery, expense: RentExpense, index: Int) {
-        jq_resultsTableHeadRow.append("<th class='hide-small'>${expense.nonEmptyType(index = index)}</th>")
+    fun appendExpenseColumnHeader(jq_resultsTableHeadRow: JQuery, expense: RentExpense) {
+        jq_resultsTableHeadRow.append("<th class='hide-small'>${expense.nonEmptyType.sanitizedForHtml()}</th>")
     }
 
 
@@ -837,7 +1038,7 @@ class RentSplit {
      * Builds a string representation of a Results table row.
      */
     fun buildResultRow(rowIndex: Int, roommate: RentRoommate, expenses: RentExpenses): String {
-        val roommateName = roommate.nonEmptyName(index = rowIndex)
+        val roommateName = roommate.nonEmptyName.sanitizedForHtml()
         var row = "<tr data-$roommateResultRowDataName='$roommateName'><th>$roommateName</th>"
         row += expenses.allExpenses.joinToString(
                 separator = "",
@@ -869,10 +1070,30 @@ class RentSplit {
             return@filter roommateTotalContributions > roommate.monthlyIncome
         }
 
-        roommatesWhoOweTooMuch.forEach { (index, roommate) ->
-            jq("[data-$roommateResultRowDataName='${roommate.nonEmptyName(index = index) }']")
+        roommatesWhoOweTooMuch.forEach { (_, roommate) ->
+            jq("[data-$roommateResultRowDataName='${roommate.nonEmptyName.sanitizedForHtml()}']")
                     .addClass(roommateWhoOwesTooMuchClassName)
                     .attr("title", "This roommate owes too much!")
+        }
+    }
+
+
+
+    //// EXTENSIONS ////
+
+    fun RentExpense.appliesTo(roommate: RentRoommate): Boolean =
+            applicableRoommateIds?.contains(roommate.id) ?: true
+
+    val RentExpense.appliesToAllRoommates: Boolean get() = applicableRoommateIds?.containsAll(state.roommates.allRoommateIds) ?: false
+
+    fun RentExpense.applicableRoommateSummary(applicableRoommateIds: Set<ID>? = this.applicableRoommateIds): FiniteAmountSummary<Int> {
+        val totalRoommateCount = state.roommates.allRoommates.size
+        val applicableRoommateCount = applicableRoommateIds?.size ?: totalRoommateCount
+        val difference = totalRoommateCount - applicableRoommateCount
+        return when (difference) {
+            totalRoommateCount -> none()
+            0 -> all(applicableRoommateCount)
+            else -> some(applicableRoommateCount, totalRoommateCount)
         }
     }
 }

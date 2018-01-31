@@ -63,7 +63,7 @@
 </header>
 
 <noscript>
-    <dialog class="big hero" open>
+    <dialog class="big severe hero" open>
         This page requires JavaScript to work. &#x1F640;
     </dialog>
 </noscript>
@@ -166,6 +166,21 @@
         <a href="https://github.com/BlueHuskyStudios/Rent-Split-Calculator/releases/tag/2.3.0" target="_blank">Version 2.3.0</a>
     </aside>
 </footer>
+
+
+<dialog id="filter-dialog">
+    Who should pay <b class="expense-name">this expense</b>?
+
+    <ul id="expense-filter-applicable-roommate-checklist" class="checklist">
+        <li class="checklist-item"><label><input type="checkbox" id="roommate-filter-everyone-checkbox" checked> Everyone</label></li>
+        <li><hr /></li>
+    </ul>
+
+    <footer class="flex-row flex-horiz-right   button-list">
+        <button id="filter-dialog-cancel-button" class="inverse">Cancel</button>
+        <button id="filter-dialog-ok-button">OK</button>
+    </footer>
+</dialog>
 
 
 <script>

@@ -1,5 +1,7 @@
 package RentSplit
 
+import RentSplit.IdManager.generateNewId
+import RentSplit.IdManager.registerId
 import jQueryInterface.JQuery
 import kotlin.js.Json
 import kotlin.js.json
@@ -40,6 +42,10 @@ data class RentRoommate(
 
         /** The cached percent of how much this roommate contributes to the overall income */
         var proportion: Double? = null) {
+
+    init {
+        registerId(id)
+    }
 
     /**
      * Converts this roommate into a JSON object
@@ -97,13 +103,13 @@ data class RentRoommate(
         /**
          * Generates a roommate name
          *
-         * @param ideal        If non-null and non-empty, this is used. Otherwise, one is generated with `backupNumber`
-         * @param backupNumber The number to use in the generated name
+         * @param ideal        If non-null and non-empty, this is used. Otherwise, one is generated with `backup`
+         * @param backup The number to use in the generated name
          *
          * @return A name for a roommate
          */
-        fun name(ideal: String?, backupNumber: Int): String {
-            return ideal?.nonEmptyOrNull() ?: numberedName(backupNumber)
+        fun name(ideal: String?, backup: String): String {
+            return ideal?.nonEmptyOrNull() ?: numberedName(backup)
         }
 
 
@@ -113,7 +119,7 @@ data class RentRoommate(
          * @param number The number to use in the roommate name
          * @return A name for a roommate
          */
-        fun numberedName(number: Int): String {
+        fun numberedName(number: String): String {
             return "Room\u00ADmate #$number"
         }
     }
@@ -125,7 +131,7 @@ data class RentRoommate(
  * Returns a name for this roommate that is never an empty string. If [name][RentRoommate.name] is an empty string,
  * a generated one is returned
  */
-fun RentRoommate.nonEmptyName(index: Int) = RentRoommate.name(ideal = name, backupNumber = index + 1)
+val RentRoommate.nonEmptyName get() = RentRoommate.name(ideal = name, backup = id)
 
 
 
@@ -185,4 +191,6 @@ data class RentRoommates(
                                          .map { RentRoommate(raw = it) ?: return null })
         }
     }
+
+    val allRoommateIds: List<ID> = allRoommates.map(RentRoommate::id)
 }

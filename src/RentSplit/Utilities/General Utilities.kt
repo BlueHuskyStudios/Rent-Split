@@ -50,9 +50,13 @@ fun String.nonEmptyOrNull(): String? = if (isEmpty()) null else this
 /**
  * If this can be turned into a `Boolean`, then it is. Otherwise, `null` is returned.
  */
-fun String.toBooleanOrNull(): Boolean? = if (isEmpty()) null else when (toLowerCase()) {
-    "true",  "t", "yes", "y", "1", "on"  -> true
-    "false", "f", "no",  "n", "0", "off" -> false
+fun Any.toBooleanOrNull(): Boolean? = when(this) {
+    is Boolean -> this
+    is String -> if (isEmpty()) null else when (toLowerCase()) {
+        "true", "t", "yes", "y", "1", "on" -> true
+        "false", "f", "no", "n", "0", "off" -> false
+        else -> null
+    }
     else -> null
 }
 
@@ -109,7 +113,13 @@ inline fun doNothing() = Unit
 /**
  * Logs a message and then returns the this value
  */
-fun <ValueType> ValueType.alsoLog(message: String, logger: (String) -> Unit = ::consoleLogString) = also { logger(message) }
+inline fun <ValueType> ValueType.alsoLog(message: String, logger: (String) -> Unit = ::consoleLogString) = also { log(message, logger) }
+
+
+/**
+ * Simply logs the given message using the given logger (defaults to console.log)
+ */
+inline fun log(message: String, logger: (String) -> Unit = ::consoleLogString) = logger(message)
 
 
 @Suppress("NOTHING_TO_INLINE") // Inlined on-purpose because this is an alias for console.log
@@ -122,3 +132,11 @@ fun String.toSetOfIds(): Set<ID> = split('[', ',', ']').toSet()
 
 
 fun Set<ID>.serializedSetOfIds() = joinToString(prefix = "[", separator = ",", postfix = "]")
+
+
+fun String.sanitizedForHtml(): String {
+    return this
+            .replace(Regex("&(?!amp;amp;)"), "&amp;") // Replace "&" with "&amp;", but not when that's already been done
+            .replace(oldValue = "<", newValue = "&lt;")
+            .replace(oldValue = ">", newValue = "&gt;")
+}

@@ -1,15 +1,12 @@
 package RentSplit
 
+import RentSplit.SerializationPurpose.*
+import RentSplit.UserConsent.explicitConsent
 import jQueryInterface.jq
 import org.bh.tools.base.util.safeTry
 import org.w3c.dom.url.URL
-import kotlin.browser.document
-import kotlin.browser.window
-import kotlin.js.Json
-import kotlin.js.json
-import RentSplit.SerializationPurpose.*
-import RentSplit.UserConsent.*
-
+import kotlin.browser.*
+import kotlin.js.*
 
 
 // DO NOT CHANGE THESE
@@ -84,6 +81,10 @@ data class RentSplitState(
                     RentExpenses.generateInitial(),
                     LocalDataPreferences.generateInitial())
         }
+    }
+
+    fun setting(expense: RentExpense): RentSplitState {
+        return copy(expenses = expenses.setting(expense))
     }
 }
 

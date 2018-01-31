@@ -3,9 +3,7 @@
 package jQueryInterface
 
 import org.w3c.dom.Element
-import org.w3c.dom.events.Event
-import org.w3c.dom.events.EventTarget
-
+import org.w3c.dom.events.*
 
 
 typealias EventHandler = (Event?) -> Unit
@@ -21,9 +19,14 @@ external class JQuery {
     fun addClass(className: String): JQuery
     fun addClass(f: (Int, String) -> String): JQuery
 
-    fun attr(attrName: String): String?
+    fun attr(attrName: String): Any?
     fun attr(attrName: String, value: String?): JQuery
     fun attr(attrName: String, value: Double?): JQuery
+    fun attr(attrName: String, value: Boolean?): JQuery
+    fun prop(propertyName: String): Any?
+    fun prop(propertyName: String, value: String?): JQuery
+    fun prop(propertyName: String, value: Double?): JQuery
+    fun prop(propertyName: String, value: Boolean?): JQuery
     fun data(): Map<String, Any>
     fun data(key: String): Any?
     fun data(key: String, value: Any?): JQuery
@@ -89,7 +92,7 @@ external class JQuery {
     val length: Int
     fun size(): Int
 
-    fun get(index: Int): Element
+    operator fun get(index: Int): Element
 }
 
 typealias JQueryMapper<To> = (index: Int, element: Element) -> To

@@ -1,5 +1,6 @@
 package jQueryInterface
 
+import RentSplit.toBooleanOrNull
 import org.w3c.dom.Element
 
 /*
@@ -61,3 +62,17 @@ fun JQuery.forEachIndexed(iterator: (index: Int, element: Element) -> Unit) {
         index += 1
     }
 }
+
+
+inline fun JQuery.checked(): Boolean = prop("checked")?.toBooleanOrNull() ?: false
+fun JQuery.checked(newValue: Boolean?): JQuery {
+    indeterminate(false)
+    return prop("checked", newValue)
+}
+
+
+inline fun JQuery.indeterminate(): Boolean = prop("indeterminate")?.toBooleanOrNull() ?: false
+inline fun JQuery.indeterminate(newValue: Boolean?) = prop("indeterminate", newValue)
+
+/** @return `true` iff this is checked but not indeterminate */
+inline fun JQuery.checkedNotIndeterminate() = checked() && !indeterminate()
