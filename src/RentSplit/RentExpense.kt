@@ -70,6 +70,10 @@ data class RentExpense(
             expenseApplicableRoommatesSerializedName to applicableRoommateIds?.toTypedArray()
     )
 
+
+    fun appliesTo(rentRoommate: RentRoommate) = applicableRoommateIds?.contains(rentRoommate.id) ?: true
+
+
     companion object {
 
         /**
@@ -212,6 +216,9 @@ data class RentExpenses(
             adding(expense)
         }
     }
+
+
+    inline fun filter(function: (RentExpense) -> Boolean) = RentExpenses(allExpenses.filter(function))
 
 
     companion object {

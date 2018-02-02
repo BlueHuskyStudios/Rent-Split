@@ -11,7 +11,7 @@ import org.w3c.dom.Element
 
 inline fun JQuery.asList(): List<Element> = toArray().asList()
 
-fun JQuery.attr(attrName: String, newValue: Boolean) = attr(attrName, newValue.toString())
+//fun JQuery.attr(attrName: String, newValue: Boolean?) = attr(attrName, newValue.toString())
 
 fun <To> JQuery.mapNotNull(mapper: JQueryMapper<To?>): Array<To> {
     var newArray = emptyArray<To>()

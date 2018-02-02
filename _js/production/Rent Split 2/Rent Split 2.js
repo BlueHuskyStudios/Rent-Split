@@ -15,6 +15,8 @@ this['Rent Split 2'] = function (_, Kotlin) {
   var lazy = Kotlin.kotlin.lazy_klfg04$;
   var equals = Kotlin.equals;
   var toMutableList = Kotlin.kotlin.collections.toMutableList_4c7yge$;
+  var defineInlineFunction = Kotlin.defineInlineFunction;
+  var wrapFunction = Kotlin.wrapFunction;
   var listOf = Kotlin.kotlin.collections.listOf_i5x0yv$;
   var getPropertyCallableRef = Kotlin.getPropertyCallableRef;
   var getCallableRef = Kotlin.getCallableRef;
@@ -27,12 +29,10 @@ this['Rent Split 2'] = function (_, Kotlin) {
   var filterNotNull = Kotlin.kotlin.collections.filterNotNull_emfgvx$;
   var toSet_0 = Kotlin.kotlin.collections.toSet_7wnvza$;
   var zip = Kotlin.kotlin.collections.zip_45mdf7$;
-  var joinToString = Kotlin.kotlin.collections.joinToString_fmv235$;
   var throwCCE = Kotlin.throwCCE;
   var Enum = Kotlin.kotlin.Enum;
   var throwISE = Kotlin.throwISE;
-  var defineInlineFunction = Kotlin.defineInlineFunction;
-  var wrapFunction = Kotlin.wrapFunction;
+  var joinToString = Kotlin.kotlin.collections.joinToString_fmv235$;
   var toList = Kotlin.kotlin.collections.toList_7wnvza$;
   var split = Kotlin.kotlin.text.split_o64adg$;
   var Regex_init = Kotlin.kotlin.text.Regex_init_61zpoe$;
@@ -171,6 +171,10 @@ this['Rent Split 2'] = function (_, Kotlin) {
   RentExpense.prototype.toJson = function () {
     var tmp$;
     return json([to(resourceIdSerializedName, this.i), to(resourceNameSerializedName, this.n), to(resourceDollarAmountSerializedName, this.d), to(resourceIsRemovableSerializedName, this.x), to(resourceIsRenamableSerializedName, this.r), to(expenseApplicableRoommatesSerializedName, (tmp$ = this.f) != null ? copyToArray(tmp$) : null)]);
+  };
+  RentExpense.prototype.appliesTo_pcqrmu$ = function (rentRoommate) {
+    var tmp$, tmp$_0;
+    return (tmp$_0 = (tmp$ = this.f) != null ? tmp$.contains_11rb$(rentRoommate.i) : null) != null ? tmp$_0 : true;
   };
   function RentExpense$Companion() {
     RentExpense$Companion_instance = this;
@@ -374,6 +378,22 @@ this['Rent Split 2'] = function (_, Kotlin) {
     }
     return tmp$;
   };
+  RentExpenses.prototype.filter_8h766n$ = defineInlineFunction('Rent Split 2.RentSplit.RentExpenses.filter_8h766n$', wrapFunction(function () {
+    var RentExpenses_init = _.RentSplit.RentExpenses;
+    var ArrayList_init = Kotlin.kotlin.collections.ArrayList_init_ww73n8$;
+    return function (function_0) {
+      var $receiver = this.e;
+      var destination = ArrayList_init();
+      var tmp$;
+      tmp$ = $receiver.iterator();
+      while (tmp$.hasNext()) {
+        var element = tmp$.next();
+        if (function_0(element))
+          destination.add_11rb$(element);
+      }
+      return new RentExpenses_init(destination);
+    };
+  }));
   function RentExpenses$Companion() {
     RentExpenses$Companion_instance = this;
     this.allRoommates = null;
@@ -436,23 +456,24 @@ this['Rent Split 2'] = function (_, Kotlin) {
     return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && Kotlin.equals(this.e, other.e))));
   };
   var allRoommatesSerializedName;
-  function RentRoommate(id, name, monthlyIncome, isRemovable, isRenamable, originalDOMElement, proportion) {
+  function RentRoommate(id, name, monthlyIncome, isRemovable, isRenamable, originalDOMElement) {
     RentRoommate$Companion_getInstance();
     if (originalDOMElement === void 0)
       originalDOMElement = null;
-    if (proportion === void 0)
-      proportion = null;
     this.i = id;
     this.n = name;
     this.d = monthlyIncome;
     this.x = isRemovable;
     this.r = isRenamable;
     this.originalDOMElement = originalDOMElement;
-    this.proportion = proportion;
     IdManager_getInstance().registerId_61zpoe$(this.i);
   }
   RentRoommate.prototype.toJson = function () {
     return json([to(resourceIdSerializedName, this.i), to(resourceNameSerializedName, this.n), to(resourceDollarAmountSerializedName, this.d), to(resourceIsRemovableSerializedName, this.x), to(resourceIsRenamableSerializedName, this.r)]);
+  };
+  RentRoommate.prototype.contribution_qsnaur$ = function (to, allRoommates) {
+    var tmp$;
+    return ((tmp$ = allRoommates.incomePieChart.get_11rb$(this.i)) != null ? tmp$ : 0.0) * to.d;
   };
   function RentRoommate$Companion() {
     RentRoommate$Companion_instance = this;
@@ -543,14 +564,11 @@ this['Rent Split 2'] = function (_, Kotlin) {
   RentRoommate.prototype.component6 = function () {
     return this.originalDOMElement;
   };
-  RentRoommate.prototype.component7 = function () {
-    return this.proportion;
-  };
-  RentRoommate.prototype.copy_1brih5$ = function (id, name, monthlyIncome, isRemovable, isRenamable, originalDOMElement, proportion) {
-    return new RentRoommate(id === void 0 ? this.i : id, name === void 0 ? this.n : name, monthlyIncome === void 0 ? this.d : monthlyIncome, isRemovable === void 0 ? this.x : isRemovable, isRenamable === void 0 ? this.r : isRenamable, originalDOMElement === void 0 ? this.originalDOMElement : originalDOMElement, proportion === void 0 ? this.proportion : proportion);
+  RentRoommate.prototype.copy_b4bw84$ = function (id, name, monthlyIncome, isRemovable, isRenamable, originalDOMElement) {
+    return new RentRoommate(id === void 0 ? this.i : id, name === void 0 ? this.n : name, monthlyIncome === void 0 ? this.d : monthlyIncome, isRemovable === void 0 ? this.x : isRemovable, isRenamable === void 0 ? this.r : isRenamable, originalDOMElement === void 0 ? this.originalDOMElement : originalDOMElement);
   };
   RentRoommate.prototype.toString = function () {
-    return 'RentRoommate(id=' + Kotlin.toString(this.i) + (', name=' + Kotlin.toString(this.n)) + (', monthlyIncome=' + Kotlin.toString(this.d)) + (', isRemovable=' + Kotlin.toString(this.x)) + (', isRenamable=' + Kotlin.toString(this.r)) + (', originalDOMElement=' + Kotlin.toString(this.originalDOMElement)) + (', proportion=' + Kotlin.toString(this.proportion)) + ')';
+    return 'RentRoommate(id=' + Kotlin.toString(this.i) + (', name=' + Kotlin.toString(this.n)) + (', monthlyIncome=' + Kotlin.toString(this.d)) + (', isRemovable=' + Kotlin.toString(this.x)) + (', isRenamable=' + Kotlin.toString(this.r)) + (', originalDOMElement=' + Kotlin.toString(this.originalDOMElement)) + ')';
   };
   RentRoommate.prototype.hashCode = function () {
     var result = 0;
@@ -560,11 +578,10 @@ this['Rent Split 2'] = function (_, Kotlin) {
     result = result * 31 + Kotlin.hashCode(this.x) | 0;
     result = result * 31 + Kotlin.hashCode(this.r) | 0;
     result = result * 31 + Kotlin.hashCode(this.originalDOMElement) | 0;
-    result = result * 31 + Kotlin.hashCode(this.proportion) | 0;
     return result;
   };
   RentRoommate.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.i, other.i) && Kotlin.equals(this.n, other.n) && Kotlin.equals(this.d, other.d) && Kotlin.equals(this.x, other.x) && Kotlin.equals(this.r, other.r) && Kotlin.equals(this.originalDOMElement, other.originalDOMElement) && Kotlin.equals(this.proportion, other.proportion)))));
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.i, other.i) && Kotlin.equals(this.n, other.n) && Kotlin.equals(this.d, other.d) && Kotlin.equals(this.x, other.x) && Kotlin.equals(this.r, other.r) && Kotlin.equals(this.originalDOMElement, other.originalDOMElement)))));
   };
   function get_nonEmptyName($receiver) {
     return RentRoommate$Companion_getInstance().name_f5e6j7$($receiver.n, $receiver.i);
@@ -586,6 +603,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
     this.totalIncome = reduceTo(destination, 0.0, getCallableRef('plus', function ($receiver, other) {
       return $receiver + other;
     }));
+    this.incomePieChart_xues5a$_0 = lazy(RentRoommates$incomePieChart$lambda(this));
     var $receiver_0 = this.r;
     var transform_0 = getPropertyCallableRef('id', 1, function ($receiver) {
       return $receiver.i;
@@ -614,6 +632,27 @@ this['Rent Split 2'] = function (_, Kotlin) {
     }
     return json([to(tmp$, destination)]);
   };
+  RentRoommates.prototype.filter_44cvmn$ = defineInlineFunction('Rent Split 2.RentSplit.RentRoommates.filter_44cvmn$', wrapFunction(function () {
+    var RentRoommates_init = _.RentSplit.RentRoommates;
+    var ArrayList_init = Kotlin.kotlin.collections.ArrayList_init_ww73n8$;
+    return function (function_0) {
+      var $receiver = this.r;
+      var destination = ArrayList_init();
+      var tmp$;
+      tmp$ = $receiver.iterator();
+      while (tmp$.hasNext()) {
+        var element = tmp$.next();
+        if (function_0(element))
+          destination.add_11rb$(element);
+      }
+      return new RentRoommates_init(destination);
+    };
+  }));
+  Object.defineProperty(RentRoommates.prototype, 'incomePieChart', {
+    get: function () {
+      return this.incomePieChart_xues5a$_0.value;
+    }
+  });
   function RentRoommates$Companion() {
     RentRoommates$Companion_instance = this;
   }
@@ -651,6 +690,20 @@ this['Rent Split 2'] = function (_, Kotlin) {
       new RentRoommates$Companion();
     }
     return RentRoommates$Companion_instance;
+  }
+  function RentRoommates$incomePieChart$lambda$lambda(this$RentRoommates) {
+    return function (pieChart, roommate) {
+      var key = roommate.i;
+      var value = roommate.d / this$RentRoommates.totalIncome;
+      pieChart.put_xwzc9p$(key, value);
+      return pieChart;
+    };
+  }
+  var LinkedHashMap_init = Kotlin.kotlin.collections.LinkedHashMap_init_q3lmfv$;
+  function RentRoommates$incomePieChart$lambda(this$RentRoommates) {
+    return function () {
+      return reduceTo(this$RentRoommates.r, LinkedHashMap_init(), RentRoommates$incomePieChart$lambda$lambda(this$RentRoommates));
+    };
   }
   RentRoommates.$metadata$ = {
     kind: Kind_CLASS,
@@ -935,16 +988,15 @@ this['Rent Split 2'] = function (_, Kotlin) {
       console.log(message);
     }
     (tmp$ = this.expenseFilterDialog) != null ? (tmp$.close(), Unit) : null;
+    this.reloadPageFromState_6taknv$();
   };
   RentSplit.prototype.reloadStateFromPage = function () {
     this.state = this.state.copy_2k6jng$(this.fetchRoommates(), this.fetchExpenses());
   };
   RentSplit.prototype.recalculateRentSplit = function () {
-    var roommates = this.state.r;
-    var expenses = this.state.e;
-    this.recalculateRoommateProportions_4mt70t$(roommates);
-    this.fillOutResults_ra4pb4$(roommates, expenses);
-    this.notifyOfProblems_ra4pb4$(roommates, expenses);
+    var resultsTable = resultsTableModel(this.state);
+    RentSplitViewGenerator_getInstance().fillOutResults_1a4gu5$(resultsTable);
+    this.notifyOfProblems_1a4gu5$(resultsTable);
   };
   RentSplit.prototype.presentToUser = function () {
     $('.rent').addClass('rent-ready');
@@ -1080,38 +1132,6 @@ this['Rent Split 2'] = function (_, Kotlin) {
     }
     return tmp$;
   };
-  RentSplit.prototype.recalculateRoommateProportions_4mt70t$ = function (roommates) {
-    var totalIncome = roommates.totalIncome;
-    var tmp$;
-    tmp$ = roommates.r.iterator();
-    while (tmp$.hasNext()) {
-      var element = tmp$.next();
-      this.recalculateRoommateProportion_1jegqw$(element, totalIncome);
-    }
-    this.displayRoommateProportions_4mt70t$(roommates);
-  };
-  RentSplit.prototype.recalculateRoommateProportion_1jegqw$ = function (roommate, totalIncome) {
-    roommate.proportion = roommate.d / totalIncome;
-  };
-  RentSplit.prototype.displayRoommateProportions_4mt70t$ = function (roommates) {
-    var $receiver = roommates.r;
-    var action = getCallableRef('displayRoommateProportion', function ($receiver, roommate) {
-      return $receiver.displayRoommateProportion_pcqrmu$(roommate), Unit;
-    }.bind(null, this));
-    var tmp$;
-    tmp$ = $receiver.iterator();
-    while (tmp$.hasNext()) {
-      var element = tmp$.next();
-      action(element);
-    }
-  };
-  RentSplit.prototype.displayRoommateProportion_pcqrmu$ = function (roommate) {
-    var tmp$;
-    if ((tmp$ = roommate.originalDOMElement) != null) {
-      var tmp$_0;
-      $(roommateProportionSelector, tmp$).html(toFixed(((tmp$_0 = roommate.proportion) != null ? tmp$_0 : 0.0) * 100, 2) + '%');
-    }
-  };
   RentSplit.prototype.regenerateInputTables = function () {
     this.regenerateRoommateInputTable_0();
     this.regenerateExpenseInputTable_0();
@@ -1171,7 +1191,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
     roommate.originalDOMElement = jq_existingRoommateInputTableRow;
     $(roommateNameInputSelector, existingRoommateInputTableRow).val(roommate.n);
     $(roommateIncomeInputSelector, existingRoommateInputTableRow).val(roommate.d);
-    this.displayRoommateProportion_pcqrmu$(roommate);
+    RentSplitViewGenerator_getInstance().displayRoommateProportion_zem1ah$(rentSplitResultRow(roommate, this.state));
     jq_existingRoommateInputTableRow.attr(roommateRenamabilityAttribute, roommate.r);
     jq_existingRoommateInputTableRow.attr(roommateRemovabilityAttribute, roommate.x);
   };
@@ -1218,7 +1238,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
     return reduceTo(this.state.r.r, '', RentSplit$buildExpenseFilterApplicableRoommateList$lambda(expense, this));
   };
   RentSplit.prototype.buildExpenseFilterApplicableRoommateListItem_m1r9kw$ = function (expense, roommate) {
-    return '<li' + " class='checklist-item expense-filter-applicable-roommate'>" + '<label>' + '<input' + (' ' + resourceIdAttribute + "='" + roommate.i + "'") + " class='expense-filter-applicable-roommate-checkbox'" + " type='checkbox'" + (' ' + (this.appliesTo_vbkgal$(expense, roommate) ? 'checked' : '')) + '/>' + (' ' + sanitizedForHtml(get_nonEmptyName(roommate))) + '<\/label>' + '<\/li>';
+    return '<li' + " class='checklist-item expense-filter-applicable-roommate'>" + '<label>' + '<input' + (' ' + resourceIdAttribute + "='" + roommate.i + "'") + " class='expense-filter-applicable-roommate-checkbox'" + " type='checkbox'" + (' ' + (expense.appliesTo_pcqrmu$(roommate) ? 'checked' : '')) + '/>' + (' ' + sanitizedForHtml(get_nonEmptyName(roommate))) + '<\/label>' + '<\/li>';
   };
   RentSplit.prototype.showExpenseDialog_pbrwj2$ = function (expense) {
     var tmp$;
@@ -1323,90 +1343,24 @@ this['Rent Split 2'] = function (_, Kotlin) {
     roommateRow != null ? (roommateRow.remove(), Unit) : null;
     this.reloadStateFromPage();
   };
-  RentSplit.prototype.fillOutResults_ra4pb4$ = function (roommates, expenses) {
-    this.fillOutResultsTableHead_ra4pb4$(roommates, expenses);
-    this.fillOutResultsTableBody_ra4pb4$(roommates, expenses);
-  };
-  RentSplit.prototype.fillOutResultsTableHead_ra4pb4$ = function (roommates, expenses) {
-    var jq_resultsTableHeadRow = $(resultsTableHeadRowSelector);
-    jq_resultsTableHeadRow.empty();
-    jq_resultsTableHeadRow.append('<th class="text-center">Name<\/th>');
+  RentSplit.prototype.notifyOfProblems_1a4gu5$ = function (table) {
+    var $receiver = table.rows;
+    var destination = ArrayList_init();
     var tmp$;
-    tmp$ = expenses.e.iterator();
-    while (tmp$.hasNext()) {
-      var element = tmp$.next();
-      this.appendExpenseColumnHeader_7jb809$(jq_resultsTableHeadRow, element);
-    }
-    jq_resultsTableHeadRow.append('<th class="text-center">Total Cost<\/th>');
-  };
-  RentSplit.prototype.appendExpenseColumnHeader_7jb809$ = function (jq_resultsTableHeadRow, expense) {
-    jq_resultsTableHeadRow.append("<th class='hide-small'>" + sanitizedForHtml(get_nonEmptyType(expense)) + '<\/th>');
-  };
-  RentSplit.prototype.fillOutResultsTableBody_ra4pb4$ = function (roommates, expenses) {
-    var jq_resultsTableBody = $(resultsTableBodySelector);
-    jq_resultsTableBody.empty();
-    var tmp$;
-    tmp$ = roommates.r.iterator();
-    while (tmp$.hasNext()) {
-      var element = tmp$.next();
-      this.appendResultRow_sx45l8$(jq_resultsTableBody, element, expenses);
-    }
-  };
-  RentSplit.prototype.appendResultRow_sx45l8$ = function (jq_resultsTableBody, roommate, expenses) {
-    jq_resultsTableBody.append(this.buildResultRow_day3s3$($(resultRowSelector).length, roommate, expenses));
-  };
-  function RentSplit$buildResultRow$lambda(closure$roommate, this$RentSplit) {
-    return function (it) {
-      return "<td class='hide-small'>" + get_dollarFormat(this$RentSplit.roommateContribution_ykbhv8$(closure$roommate, it)) + '<\/td>';
-    };
-  }
-  RentSplit.prototype.buildResultRow_day3s3$ = function (rowIndex, roommate, expenses) {
-    var roommateName = sanitizedForHtml(get_nonEmptyName(roommate));
-    var row = '<tr data-' + roommateResultRowDataName + "='" + roommateName + "'><th>" + roommateName + '<\/th>';
-    row += joinToString(expenses.e, '', void 0, void 0, void 0, void 0, RentSplit$buildResultRow$lambda(roommate, this));
-    row += '<th>' + get_dollarFormat(this.roommateTotalContributions_1jegqw$(roommate, expenses.totalExpenses)) + '<\/th>';
-    return row + '<\/tr>';
-  };
-  RentSplit.prototype.roommateContribution_ykbhv8$ = function (roommate, expense) {
-    var tmp$;
-    return ((tmp$ = roommate.proportion) != null ? tmp$ : 0.0) * expense.d;
-  };
-  RentSplit.prototype.roommateTotalContributions_1jegqw$ = function (roommate, totalExpenses) {
-    var tmp$;
-    return ((tmp$ = roommate.proportion) != null ? tmp$ : 0.0) * totalExpenses;
-  };
-  RentSplit.prototype.notifyOfProblems_ra4pb4$ = function (roommates, expenses) {
-    var $receiver = roommates.r;
-    var destination = ArrayList_init(collectionSizeOrDefault($receiver, 10));
-    var tmp$, tmp$_0;
-    var index = 0;
     tmp$ = $receiver.iterator();
     while (tmp$.hasNext()) {
-      var item = tmp$.next();
-      destination.add_11rb$(new Pair((tmp$_0 = index, index = tmp$_0 + 1 | 0, tmp$_0), item));
+      var element = tmp$.next();
+      if (element.totalContributions > element.representedRoommate.d)
+        destination.add_11rb$(element);
     }
-    var destination_0 = ArrayList_init();
-    var tmp$_1;
-    tmp$_1 = destination.iterator();
-    while (tmp$_1.hasNext()) {
-      var element = tmp$_1.next();
-      var roommate = element.component2();
-      var roommateTotalContributions = this.roommateTotalContributions_1jegqw$(roommate, expenses.totalExpenses);
-      if (roommateTotalContributions > roommate.d)
-        destination_0.add_11rb$(element);
+    var roommatesWhoOweTooMuch = destination;
+    var tmp$_0;
+    tmp$_0 = roommatesWhoOweTooMuch.iterator();
+    while (tmp$_0.hasNext()) {
+      var element_0 = tmp$_0.next();
+      var name = sanitizedForHtml(get_nonEmptyName(element_0.representedRoommate));
+      $('[data-' + roommateResultRowDataName + "='" + name + "']").addClass(roommateWhoOwesTooMuchClassName).attr('title', name + ' owes ' + (element_0.totalContributions - element_0.representedRoommate.d) + ' too much!');
     }
-    var roommatesWhoOweTooMuch = destination_0;
-    var tmp$_2;
-    tmp$_2 = roommatesWhoOweTooMuch.iterator();
-    while (tmp$_2.hasNext()) {
-      var element_0 = tmp$_2.next();
-      var roommate_0 = element_0.component2();
-      $('[data-' + roommateResultRowDataName + "='" + sanitizedForHtml(get_nonEmptyName(roommate_0)) + "']").addClass(roommateWhoOwesTooMuchClassName).attr('title', 'This roommate owes too much!');
-    }
-  };
-  RentSplit.prototype.appliesTo_vbkgal$ = function ($receiver, roommate) {
-    var tmp$, tmp$_0;
-    return (tmp$_0 = (tmp$ = $receiver.f) != null ? tmp$.contains_11rb$(roommate.i) : null) != null ? tmp$_0 : true;
   };
   RentSplit.prototype.get_appliesToAllRoommates_3ssen7$ = function ($receiver) {
     var tmp$, tmp$_0;
@@ -1450,6 +1404,134 @@ this['Rent Split 2'] = function (_, Kotlin) {
   function main(args) {
     $(main$lambda);
   }
+  function resultsTableModel($receiver) {
+    var $receiver_0 = $receiver.e.e;
+    var destination = ArrayList_init(collectionSizeOrDefault($receiver_0, 10));
+    var tmp$;
+    tmp$ = $receiver_0.iterator();
+    while (tmp$.hasNext()) {
+      var item = tmp$.next();
+      destination.add_11rb$(sanitizedForHtml(get_nonEmptyType(item)));
+    }
+    var $receiver_1 = $receiver.r.r;
+    var destination_0 = ArrayList_init(collectionSizeOrDefault($receiver_1, 10));
+    var tmp$_0;
+    tmp$_0 = $receiver_1.iterator();
+    while (tmp$_0.hasNext()) {
+      var item_0 = tmp$_0.next();
+      destination_0.add_11rb$(rentSplitResultRow(item_0, $receiver));
+    }
+    return new RentSplitResultTable(destination, destination_0);
+  }
+  function rentSplitResultRow$lambda(rowTotal, cell) {
+    return rowTotal + (cell != null ? cell : 0.0);
+  }
+  function rentSplitResultRow($receiver, overallState) {
+    var tmp$;
+    var $receiver_0 = overallState.e.e;
+    var destination = ArrayList_init(collectionSizeOrDefault($receiver_0, 10));
+    var tmp$_0;
+    tmp$_0 = $receiver_0.iterator();
+    while (tmp$_0.hasNext()) {
+      var item = tmp$_0.next();
+      var tmp$_1 = destination.add_11rb$;
+      var transform$result;
+      if (item.appliesTo_pcqrmu$($receiver)) {
+        var $receiver_1 = overallState.r.r;
+        var destination_0 = ArrayList_init();
+        var tmp$_2;
+        tmp$_2 = $receiver_1.iterator();
+        while (tmp$_2.hasNext()) {
+          var element = tmp$_2.next();
+          if (item.appliesTo_pcqrmu$(element))
+            destination_0.add_11rb$(element);
+        }
+        transform$result = $receiver.contribution_qsnaur$(item, new RentRoommates(destination_0));
+      }
+       else {
+        transform$result = null;
+      }
+      tmp$_1.call(destination, transform$result);
+    }
+    var cells = destination;
+    var rowTotal = reduceTo(cells, 0.0, rentSplitResultRow$lambda);
+    return new RentSplitResultRow($receiver, sanitizedForHtml(get_nonEmptyName($receiver)), cells, rowTotal, (tmp$ = overallState.r.incomePieChart.get_11rb$($receiver.i)) != null ? tmp$ : 0.0);
+  }
+  function RentSplitResultTable(columnHeaders, rows) {
+    this.columnHeaders = columnHeaders;
+    this.rows = rows;
+  }
+  RentSplitResultTable.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'RentSplitResultTable',
+    interfaces: []
+  };
+  RentSplitResultTable.prototype.component1 = function () {
+    return this.columnHeaders;
+  };
+  RentSplitResultTable.prototype.component2 = function () {
+    return this.rows;
+  };
+  RentSplitResultTable.prototype.copy_nnrplx$ = function (columnHeaders, rows) {
+    return new RentSplitResultTable(columnHeaders === void 0 ? this.columnHeaders : columnHeaders, rows === void 0 ? this.rows : rows);
+  };
+  RentSplitResultTable.prototype.toString = function () {
+    return 'RentSplitResultTable(columnHeaders=' + Kotlin.toString(this.columnHeaders) + (', rows=' + Kotlin.toString(this.rows)) + ')';
+  };
+  RentSplitResultTable.prototype.hashCode = function () {
+    var result = 0;
+    result = result * 31 + Kotlin.hashCode(this.columnHeaders) | 0;
+    result = result * 31 + Kotlin.hashCode(this.rows) | 0;
+    return result;
+  };
+  RentSplitResultTable.prototype.equals = function (other) {
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.columnHeaders, other.columnHeaders) && Kotlin.equals(this.rows, other.rows)))));
+  };
+  function RentSplitResultRow(representedRoommate, rowHeader, cells, totalContributions, incomeProportion) {
+    this.representedRoommate = representedRoommate;
+    this.rowHeader = rowHeader;
+    this.cells = cells;
+    this.totalContributions = totalContributions;
+    this.incomeProportion = incomeProportion;
+  }
+  RentSplitResultRow.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'RentSplitResultRow',
+    interfaces: []
+  };
+  RentSplitResultRow.prototype.component1 = function () {
+    return this.representedRoommate;
+  };
+  RentSplitResultRow.prototype.component2 = function () {
+    return this.rowHeader;
+  };
+  RentSplitResultRow.prototype.component3 = function () {
+    return this.cells;
+  };
+  RentSplitResultRow.prototype.component4 = function () {
+    return this.totalContributions;
+  };
+  RentSplitResultRow.prototype.component5 = function () {
+    return this.incomeProportion;
+  };
+  RentSplitResultRow.prototype.copy_8a21sy$ = function (representedRoommate, rowHeader, cells, totalContributions, incomeProportion) {
+    return new RentSplitResultRow(representedRoommate === void 0 ? this.representedRoommate : representedRoommate, rowHeader === void 0 ? this.rowHeader : rowHeader, cells === void 0 ? this.cells : cells, totalContributions === void 0 ? this.totalContributions : totalContributions, incomeProportion === void 0 ? this.incomeProportion : incomeProportion);
+  };
+  RentSplitResultRow.prototype.toString = function () {
+    return 'RentSplitResultRow(representedRoommate=' + Kotlin.toString(this.representedRoommate) + (', rowHeader=' + Kotlin.toString(this.rowHeader)) + (', cells=' + Kotlin.toString(this.cells)) + (', totalContributions=' + Kotlin.toString(this.totalContributions)) + (', incomeProportion=' + Kotlin.toString(this.incomeProportion)) + ')';
+  };
+  RentSplitResultRow.prototype.hashCode = function () {
+    var result = 0;
+    result = result * 31 + Kotlin.hashCode(this.representedRoommate) | 0;
+    result = result * 31 + Kotlin.hashCode(this.rowHeader) | 0;
+    result = result * 31 + Kotlin.hashCode(this.cells) | 0;
+    result = result * 31 + Kotlin.hashCode(this.totalContributions) | 0;
+    result = result * 31 + Kotlin.hashCode(this.incomeProportion) | 0;
+    return result;
+  };
+  RentSplitResultRow.prototype.equals = function (other) {
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.representedRoommate, other.representedRoommate) && Kotlin.equals(this.rowHeader, other.rowHeader) && Kotlin.equals(this.cells, other.cells) && Kotlin.equals(this.totalContributions, other.totalContributions) && Kotlin.equals(this.incomeProportion, other.incomeProportion)))));
+  };
   var rentRoommatesSerializedName;
   var rentExpensesSerializedName;
   var localDataPreferencesSerializedName;
@@ -1635,6 +1717,88 @@ this['Rent Split 2'] = function (_, Kotlin) {
     }
   }
   SerializationPurpose.valueOf_61zpoe$ = SerializationPurpose$valueOf;
+  function RentSplitViewGenerator() {
+    RentSplitViewGenerator_instance = this;
+  }
+  RentSplitViewGenerator.prototype.addExpenseColumnHeaderToDom_i0mql$ = function (jq_resultsTableHeadRow, headerText) {
+    jq_resultsTableHeadRow.append(this.buildExpenseColumnHeader_61zpoe$(headerText));
+  };
+  RentSplitViewGenerator.prototype.buildExpenseColumnHeader_61zpoe$ = function (headerText) {
+    return "<th class='hide-small'>" + headerText + '<\/th>';
+  };
+  function RentSplitViewGenerator$buildResultRow$lambda(cell) {
+    var tmp$;
+    return "<td class='hide-small'>" + ((tmp$ = cell != null ? get_dollarFormat(cell) : null) != null ? tmp$ : '\u2014') + '<\/td>';
+  }
+  RentSplitViewGenerator.prototype.buildResultRow_zem1ah$ = function (model) {
+    var roommateName = model.rowHeader;
+    var row = '<tr data-' + roommateResultRowDataName + "='" + roommateName + "'><th>" + roommateName + '<\/th>';
+    row += joinToString(model.cells, '', void 0, void 0, void 0, void 0, RentSplitViewGenerator$buildResultRow$lambda);
+    row += '<th>' + get_dollarFormat(model.totalContributions) + '<\/th>';
+    return row + '<\/tr>';
+  };
+  RentSplitViewGenerator.prototype.fillOutResults_1a4gu5$ = function (model) {
+    this.fillOutResultsTableHead_1a4gu5$(model);
+    this.fillOutResultsTableBody_1a4gu5$(model);
+    this.displayRoommateProportions_1a4gu5$(model);
+  };
+  RentSplitViewGenerator.prototype.fillOutResultsTableHead_1a4gu5$ = function (model) {
+    var jq_resultsTableHeadRow = $(resultsTableHeadRowSelector);
+    jq_resultsTableHeadRow.empty();
+    jq_resultsTableHeadRow.append(this.buildResultsTableHeadRoommateNameColumnTitle());
+    var tmp$;
+    tmp$ = model.columnHeaders.iterator();
+    while (tmp$.hasNext()) {
+      var element = tmp$.next();
+      this.addExpenseColumnHeaderToDom_i0mql$(jq_resultsTableHeadRow, element);
+    }
+    jq_resultsTableHeadRow.append(this.buildResultsTableHeadRoommateTotalContributionsColumnTitle());
+  };
+  RentSplitViewGenerator.prototype.buildResultsTableHeadRoommateNameColumnTitle = function () {
+    return '<th class="text-center">Name<\/th>';
+  };
+  RentSplitViewGenerator.prototype.buildResultsTableHeadRoommateTotalContributionsColumnTitle = function () {
+    return '<th class="text-center">Total Cost<\/th>';
+  };
+  RentSplitViewGenerator.prototype.fillOutResultsTableBody_1a4gu5$ = function (model) {
+    var jq_resultsTableBody = $(resultsTableBodySelector);
+    jq_resultsTableBody.empty();
+    var tmp$;
+    tmp$ = model.rows.iterator();
+    while (tmp$.hasNext()) {
+      var element = tmp$.next();
+      this.addResultRowToDom_2qskos$(jq_resultsTableBody, element);
+    }
+  };
+  RentSplitViewGenerator.prototype.addResultRowToDom_2qskos$ = function (jq_resultsTableBody, model) {
+    jq_resultsTableBody.append(this.buildResultRow_zem1ah$(model));
+  };
+  RentSplitViewGenerator.prototype.displayRoommateProportions_1a4gu5$ = function (model) {
+    var tmp$;
+    tmp$ = model.rows.iterator();
+    while (tmp$.hasNext()) {
+      var element = tmp$.next();
+      this.displayRoommateProportion_zem1ah$(element);
+    }
+  };
+  RentSplitViewGenerator.prototype.displayRoommateProportion_zem1ah$ = function (model) {
+    var tmp$;
+    if ((tmp$ = model.representedRoommate.originalDOMElement) != null) {
+      $(roommateProportionSelector, tmp$).html(toFixed(model.incomeProportion * 100.0, 2) + '%');
+    }
+  };
+  RentSplitViewGenerator.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'RentSplitViewGenerator',
+    interfaces: []
+  };
+  var RentSplitViewGenerator_instance = null;
+  function RentSplitViewGenerator_getInstance() {
+    if (RentSplitViewGenerator_instance === null) {
+      new RentSplitViewGenerator();
+    }
+    return RentSplitViewGenerator_instance;
+  }
   function UserConsent(name, ordinal, serialValue) {
     Enum.call(this);
     this.serialValue = serialValue;
@@ -1854,9 +2018,6 @@ this['Rent Split 2'] = function (_, Kotlin) {
       return asList($receiver.toArray());
     };
   }));
-  function attr($receiver, attrName, newValue) {
-    return $receiver.attr(attrName, newValue.toString());
-  }
   function mapNotNull$lambda(closure$mapper, closure$newArray) {
     return function (index, element) {
       var mapped = closure$mapper(index, element);
@@ -2544,13 +2705,13 @@ this['Rent Split 2'] = function (_, Kotlin) {
     return JSTernaryCheckboxTreeController$Companion_instance;
   }
   function JSTernaryCheckboxTreeController_init$lambda(this$JSTernaryCheckboxTreeController) {
-    return function (oldState, newState) {
+    return function (f, newState) {
       this$JSTernaryCheckboxTreeController.state = newState;
       return Unit;
     };
   }
   function JSTernaryCheckboxTreeController_init$lambda_0(this$JSTernaryCheckboxTreeController) {
-    return function (oldState, newState) {
+    return function (f, newState) {
       this$JSTernaryCheckboxTreeController.rootCheckbox.state = newState;
       return Unit;
     };
@@ -3167,6 +3328,10 @@ this['Rent Split 2'] = function (_, Kotlin) {
   });
   package$RentSplit.RentSplit = RentSplit;
   package$RentSplit.main_kand9s$ = main;
+  package$RentSplit.resultsTableModel_fib44y$ = resultsTableModel;
+  package$RentSplit.rentSplitResultRow_8fwuai$ = rentSplitResultRow;
+  package$RentSplit.RentSplitResultTable = RentSplitResultTable;
+  package$RentSplit.RentSplitResultRow = RentSplitResultRow;
   Object.defineProperty(package$RentSplit, 'rentRoommatesSerializedName', {
     get: function () {
       return rentRoommatesSerializedName;
@@ -3204,6 +3369,9 @@ this['Rent Split 2'] = function (_, Kotlin) {
     get: SerializationPurpose$forSharing_getInstance
   });
   package$RentSplit.SerializationPurpose = SerializationPurpose;
+  Object.defineProperty(package$RentSplit, 'RentSplitViewGenerator', {
+    get: RentSplitViewGenerator_getInstance
+  });
   Object.defineProperty(UserConsent, 'explicitConsent', {
     get: UserConsent$explicitConsent_getInstance
   });
@@ -3237,7 +3405,6 @@ this['Rent Split 2'] = function (_, Kotlin) {
   package$RentSplit.TouchEventHandler = TouchEventHandler;
   var package$jQueryInterface = _.jQueryInterface || (_.jQueryInterface = {});
   package$jQueryInterface.asList_9ufosi$ = asList_0;
-  package$jQueryInterface.attr_mndj09$ = attr;
   package$jQueryInterface.mapNotNull_fo801r$ = mapNotNull;
   package$jQueryInterface.iterator_9ufosi$ = iterator;
   package$jQueryInterface.forEach_f8zjg0$ = forEach;
@@ -3391,9 +3558,9 @@ this['Rent Split 2'] = function (_, Kotlin) {
   resourceIdDataName = 'id';
   resourceIdAttribute = 'data-id';
   resourceIdSelector = '[data-id]';
-  expenseApplicableRoommatesDataName = 'applicableRoommateIds';
-  expenseApplicableRoommatesAttribute = 'data-applicableRoommateIds';
-  expenseApplicableRoommatesSelector = '[data-applicableRoommateIds]';
+  expenseApplicableRoommatesDataName = 'applicable-roommate-ids';
+  expenseApplicableRoommatesAttribute = 'data-applicable-roommate-ids';
+  expenseApplicableRoommatesSelector = '[data-applicable-roommate-ids]';
   copyStateUrlButtonId = 'Copy-URL-Button';
   copyStateUrlButtonSelector = '#Copy-URL-Button';
   stateUrlFieldId = 'State-URL-Field';

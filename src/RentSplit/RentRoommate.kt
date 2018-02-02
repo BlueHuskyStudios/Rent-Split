@@ -3,8 +3,7 @@ package RentSplit
 import RentSplit.IdManager.generateNewId
 import RentSplit.IdManager.registerId
 import jQueryInterface.JQuery
-import kotlin.js.Json
-import kotlin.js.json
+import kotlin.js.*
 
 
 
@@ -38,10 +37,7 @@ data class RentRoommate(
         val isRenamable: Boolean,
 
         /** The original DOM element, as a JQuery selector */
-        var originalDOMElement: JQuery? = null,
-
-        /** The cached percent of how much this roommate contributes to the overall income */
-        var proportion: Double? = null) {
+        var originalDOMElement: JQuery? = null) {
 
     init {
         registerId(id)
@@ -55,6 +51,14 @@ data class RentRoommate(
                         resourceDollarAmountSerializedName to monthlyIncome,
                         resourceIsRemovableSerializedName to isRemovable,
                         resourceIsRenamableSerializedName to isRenamable)
+
+
+    /**
+     * Finds this roommate's contribution to the given expense, in the context of all the roommates
+     */
+    fun contribution(to: RentExpense, allRoommates: RentRoommates): Double? {
+        return (allRoommates.incomePieChart[this.id] ?: 0.0) * to.monthlyCost
+    }
 
 
 
@@ -165,6 +169,20 @@ data class RentRoommates(
      * Converts this collection of roommates into a JSON object
      */
     fun toJson() = json(allRoommatesSerializedName to allRoommates.map { it.toJson() })
+
+
+    inline fun filter(function: (RentRoommate) -> Boolean) = RentRoommates(allRoommates.filter(function))
+
+
+    /**
+     * The pie chart of each roommate's monthly income to the rest, with each slice labeled with that roommate
+     */
+    val incomePieChart: Map<ID, Double> by lazy {
+        allRoommates.reduceTo(mutableMapOf<ID, Double>()) { pieChart, roommate ->
+            pieChart[roommate.id] = roommate.monthlyIncome / totalIncome
+            return@reduceTo pieChart
+        }
+    }
 
 
     companion object {

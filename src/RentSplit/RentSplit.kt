@@ -103,7 +103,7 @@ val resourceIdDataName = "id"
 val resourceIdAttribute = "data-$resourceIdDataName"
 val resourceIdSelector = "[$resourceIdAttribute]"
 
-val expenseApplicableRoommatesDataName = "applicableRoommateIds"
+val expenseApplicableRoommatesDataName = "applicable-roommate-ids"
 val expenseApplicableRoommatesAttribute = "data-$expenseApplicableRoommatesDataName"
 val expenseApplicableRoommatesSelector = "[$expenseApplicableRoommatesAttribute]"
 
@@ -357,6 +357,7 @@ class RentSplit {
             log("No expense found in filter dialog!")
         }
         expenseFilterDialog?.close()
+        reloadPageFromState()
     }
 
 
@@ -373,12 +374,9 @@ class RentSplit {
      * the output
      */
     fun recalculateRentSplit() {
-        val roommates = state.roommates
-        val expenses = state.expenses
-
-        this.recalculateRoommateProportions(roommates)
-        this.fillOutResults(roommates, expenses)
-        this.notifyOfProblems(roommates, expenses)
+        val resultsTable = state.resultsTableModel()
+        RentSplitViewGenerator.fillOutResults(resultsTable)
+        this.notifyOfProblems(resultsTable)
     }
 
 
@@ -512,45 +510,6 @@ class RentSplit {
     }
 
 
-    ///// CALCULATION /////
-
-    /**
-     * Trows away and recalculates the total income and each roommate's proportion of that, then displays the
-     * proportions in the roommate input table
-     */
-    fun recalculateRoommateProportions(roommates: RentRoommates) {
-        val totalIncome = roommates.totalIncome
-        roommates.allRoommates.forEach { this.recalculateRoommateProportion(it, totalIncome) }
-        this.displayRoommateProportions(roommates)
-    }
-
-
-    /**
-     * Throws away and recalculates each roommate's proportion of the total income
-     */
-    fun recalculateRoommateProportion(roommate: RentRoommate, totalIncome: Double) {
-        roommate.proportion = roommate.monthlyIncome / totalIncome
-    }
-
-
-    /**
-     * Displays each roommate's proportions of the total income in their input row
-     */
-    fun displayRoommateProportions(roommates: RentRoommates) {
-        roommates.allRoommates.forEach(this::displayRoommateProportion)
-    }
-
-
-    /**
-     * Displays a single roommate's proportions of the total income in their input row
-     */
-    fun displayRoommateProportion(roommate: RentRoommate) {
-        roommate.originalDOMElement?.let { originalDOMElement ->
-            jq(roommateProportionSelector, originalDOMElement).html("${((roommate.proportion ?: 0.0) * 100).toFixed(2)}%")
-        }
-    }
-
-
     ///// INPUT TABLES /////
 
     /**
@@ -630,7 +589,8 @@ class RentSplit {
         jq(roommateNameInputSelector, existingRoommateInputTableRow).`val`(roommate.name)
         jq(roommateIncomeInputSelector, existingRoommateInputTableRow).`val`(roommate.monthlyIncome)
 
-        this.displayRoommateProportion(roommate)
+
+        RentSplitViewGenerator.displayRoommateProportion(roommate.rentSplitResultRow(state))
 
         jq_existingRoommateInputTableRow.attr(roommateRenamabilityAttribute, roommate.isRenamable)
         jq_existingRoommateInputTableRow.attr(roommateRemovabilityAttribute, roommate.isRemovable)
@@ -980,109 +940,23 @@ class RentSplit {
     }
 
 
-    ///// OUTPUT /////
-
-    /**
-     * Using the given roommates and expenses, this throws away and regenerates the Results output table
-     */
-    fun fillOutResults(roommates: RentRoommates, expenses: RentExpenses) {
-        this.fillOutResultsTableHead(roommates, expenses)
-        this.fillOutResultsTableBody(roommates, expenses)
-    }
-
-
-    /**
-     * Using the given roommates and expenses, generates and outputs the table column heads to the Results
-     * output table
-     */
-    @Suppress("UNUSED_PARAMETER")
-    fun fillOutResultsTableHead(roommates: RentRoommates, expenses: RentExpenses) {
-        val jq_resultsTableHeadRow = jq(resultsTableHeadRowSelector)
-        jq_resultsTableHeadRow.empty()
-        jq_resultsTableHeadRow.append("<th class=\"text-center\">$roommateNameColumnTitle</th>")
-        expenses.allExpenses.forEach { expense -> this.appendExpenseColumnHeader(jq_resultsTableHeadRow, expense) }
-        jq_resultsTableHeadRow.append("<th class=\"text-center\">$totalColumnTitle</th>")
-    }
-
-
-    /**
-     * Using the given expense, generates and outputs the table column head to the Results output table
-     */
-    fun appendExpenseColumnHeader(jq_resultsTableHeadRow: JQuery, expense: RentExpense) {
-        jq_resultsTableHeadRow.append("<th class='hide-small'>${expense.nonEmptyType.sanitizedForHtml()}</th>")
-    }
-
-
-    /**
-     * Using the given roommates and expenses, generates and outputs the roommate table rows to the Results
-     * output table
-     */
-    fun fillOutResultsTableBody(roommates: RentRoommates, expenses: RentExpenses) {
-        val jq_resultsTableBody = jq(resultsTableBodySelector)
-        jq_resultsTableBody.empty()
-        roommates.allRoommates.forEach { this.appendResultRow(jq_resultsTableBody, it, expenses) }
-    }
-
-
-    /**
-     * Using the given roommate and expenses, generates and outputs the table row to the Results output table
-     */
-    fun appendResultRow(jq_resultsTableBody: JQuery, roommate: RentRoommate, expenses: RentExpenses) {
-        jq_resultsTableBody.append(this.buildResultRow(rowIndex = jq(resultRowSelector).length,
-                                                       roommate = roommate,
-                                                       expenses = expenses))
-    }
-
-
-    /**
-     * Builds a string representation of a Results table row.
-     */
-    fun buildResultRow(rowIndex: Int, roommate: RentRoommate, expenses: RentExpenses): String {
-        val roommateName = roommate.nonEmptyName.sanitizedForHtml()
-        var row = "<tr data-$roommateResultRowDataName='$roommateName'><th>$roommateName</th>"
-        row += expenses.allExpenses.joinToString(
-                separator = "",
-                transform = { "<td class='hide-small'>${roommateContribution(roommate, it).dollarFormat}</td>" })
-        row += "<th>${roommateTotalContributions(roommate, totalExpenses = expenses.totalExpenses).dollarFormat}</th>"
-        return "$row</tr>"
-    }
-
-
-    /**
-     * Finds the amount that the given roommate contributes to the given expense
-     */
-    fun roommateContribution(roommate: RentRoommate, expense: RentExpense): Double
-            = (roommate.proportion ?: 0.0) * expense.monthlyCost
-
-
-    /**
-     * Finds the total amount that the given roommate will contribute
-     */
-    fun roommateTotalContributions(roommate: RentRoommate, totalExpenses: Double): Double
-            = (roommate.proportion ?: 0.0) * totalExpenses
-
-
     ///// CHECKING /////
 
-    fun notifyOfProblems(roommates: RentRoommates, expenses: RentExpenses) {
-        val roommatesWhoOweTooMuch = roommates.allRoommates.mapIndexed { index, roommate ->  Pair(index, roommate) }.filter { (_, roommate) ->
-            val roommateTotalContributions = roommateTotalContributions(roommate, expenses.totalExpenses)
-            return@filter roommateTotalContributions > roommate.monthlyIncome
-        }
+    fun notifyOfProblems(table: RentSplitResultTable) {
+        val roommatesWhoOweTooMuch = table.rows
+                .filter { row -> row.totalContributions > row.representedRoommate.monthlyIncome }
 
-        roommatesWhoOweTooMuch.forEach { (_, roommate) ->
-            jq("[data-$roommateResultRowDataName='${roommate.nonEmptyName.sanitizedForHtml()}']")
+        roommatesWhoOweTooMuch.forEach { row ->
+            val name = row.representedRoommate.nonEmptyName.sanitizedForHtml()
+            jq("[data-$roommateResultRowDataName='$name']")
                     .addClass(roommateWhoOwesTooMuchClassName)
-                    .attr("title", "This roommate owes too much!")
+                    .attr("title", "$name owes ${row.totalContributions - row.representedRoommate.monthlyIncome} too much!")
         }
     }
 
 
 
     //// EXTENSIONS ////
-
-    fun RentExpense.appliesTo(roommate: RentRoommate): Boolean =
-            applicableRoommateIds?.contains(roommate.id) ?: true
 
     val RentExpense.appliesToAllRoommates: Boolean get() = applicableRoommateIds?.containsAll(state.roommates.allRoommateIds) ?: false
 

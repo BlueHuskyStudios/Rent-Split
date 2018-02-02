@@ -75,10 +75,10 @@ class JSTernaryCheckboxTreeController(val rootCheckbox: JSCheckboxController, ch
     init {
         rootCheckbox.state = this.state
 
-        rootCheckbox.onStateChange { oldState, newState ->
+        rootCheckbox.onStateChange { _, newState ->
             this.state = newState
         }
-        this.onStateChange { oldState, newState ->
+        this.onStateChange { _, newState ->
             rootCheckbox.state = newState
         }
     }
