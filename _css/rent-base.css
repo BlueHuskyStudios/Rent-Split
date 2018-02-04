@@ -211,6 +211,19 @@ html.rent {
     position: absolute;
     left: -3em;
     top: calc(50% - 1.5ex);
+
+    } @media (max-width: 479px) { .floats-to-left {
+        left: -4.5em;
+        top: calc(50% - 3.5ex);
+    }
+}
+
+th.plain.has-floating-button .floats-to-left {
+    left: -2.25em;
+
+    } @media (max-width: 479px) { th.plain.has-floating-button .floats-to-left {
+        left: -3.75em;
+    }
 }
 
 
@@ -229,8 +242,14 @@ html.rent {
     transition-duration: 0.2s;
 }
 
-.touch-not-supported .hides-something-until-hover:not(:hover):not(:focus) .hidden-until-parent-hover:not(:hover):not(:focus) {
-    opacity: 0;
+@media (min-width: 480px) { /* Tiny screens always get the buttons, and when we detect touch devices, those do too */
+    .touch-not-supported .hides-something-until-hover:not(:hover):not(:focus) .hidden-until-parent-hover:not(:hover):not(:focus) {
+        opacity: 0;
+    }
+}
+
+#Expenses {
+    padding-left: 1em;
 }
 
 
