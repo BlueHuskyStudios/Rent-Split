@@ -2,7 +2,7 @@
 
 package org.bh.tools.base.jsShim
 
-import kotlin.js.RegExp
+import kotlin.js.*
 
 /*
  * @author Ben Leggiero
@@ -34,4 +34,9 @@ inline fun Int.toString(base: Int): String = asDynamic().toString(base)
 inline fun Long.toString(base: Int): String = asDynamic().toString(base)
 
 
+/**
+ * Replaces any instances matching the given regular expression with what the `replacer` returns
+ *
+ * @param replacer Takes in a match and returns a transformed (or not) string to replace it with
+ */
 inline fun String.replace(regExp: RegExp, noinline replacer: (matchValue: String) -> String): String = asDynamic().replace(regExp, replacer)

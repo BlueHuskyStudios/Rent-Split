@@ -1,7 +1,7 @@
 package jQueryInterface
 
-import RentSplit.toBooleanOrNull
-import org.w3c.dom.Element
+import RentSplit.*
+import org.w3c.dom.*
 
 /*
  * @author Ben Leggiero
@@ -9,10 +9,16 @@ import org.w3c.dom.Element
  */
 
 
+/**
+ * Gives all elements matched by this query as a list
+ */
 inline fun JQuery.asList(): List<Element> = toArray().asList()
 
-//fun JQuery.attr(attrName: String, newValue: Boolean?) = attr(attrName, newValue.toString())
 
+/**
+ * Maps all elements matched by this query.
+ * If the mapper returns `null`, then its item is not included in the resulting array.
+ */
 fun <To> JQuery.mapNotNull(mapper: JQueryMapper<To?>): Array<To> {
     var newArray = emptyArray<To>()
 
@@ -27,6 +33,9 @@ fun <To> JQuery.mapNotNull(mapper: JQueryMapper<To?>): Array<To> {
 }
 
 
+/**
+ * A Kotlin iterator which iterates over all elements matched by this query
+ */
 operator fun JQuery.iterator(): Iterator<Element> {
     if (length == 0) {
         return emptyArray<Element>().iterator()
@@ -48,6 +57,9 @@ operator fun JQuery.iterator(): Iterator<Element> {
 }
 
 
+/**
+ * Iterates over each element matched by this query
+ */
 fun JQuery.forEach(iterator: (Element) -> Unit) {
     for (it in this) {
         iterator(it)
@@ -55,6 +67,9 @@ fun JQuery.forEach(iterator: (Element) -> Unit) {
 }
 
 
+/**
+ * Like `forEach`, but the index is also passed with each call
+ */
 fun JQuery.forEachIndexed(iterator: (index: Int, element: Element) -> Unit) {
     var index = 0
     for (it in this) {
@@ -64,7 +79,14 @@ fun JQuery.forEachIndexed(iterator: (index: Int, element: Element) -> Unit) {
 }
 
 
+/**
+ * Gets the boolean attribute with the given name (e.g. `"checked"`, `"disabled"`, etc.)
+ */
 inline fun JQuery.booleanAttr(name: String): Boolean = prop(name)?.toBooleanOrNull() ?: false
+
+/**
+ * Sets the boolean attribute with the given name (e.g. `"checked"`, `"disabled"`, etc.) to the given value
+ */
 fun JQuery.booleanAttr(name: String, newValue: Boolean?): JQuery {
     return if (newValue == true) {
         prop(name, name)

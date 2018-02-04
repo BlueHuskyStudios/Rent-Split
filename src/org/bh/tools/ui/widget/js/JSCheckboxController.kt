@@ -2,9 +2,9 @@ package org.bh.tools.ui.widget.js
 
 import org.bh.tools.base.struct.*
 import org.bh.tools.base.struct.Ternary.*
-import org.bh.tools.ui.behavior.TernaryCheckboxTree
+import org.bh.tools.ui.behavior.*
 import org.bh.tools.ui.widget.*
-import org.w3c.dom.HTMLInputElement
+import org.w3c.dom.*
 
 
 typealias HTMLCheckboxElement = HTMLInputElement
@@ -12,6 +12,8 @@ typealias HTMLCheckboxElement = HTMLInputElement
 
 
 /**
+ * A controller that connects the [TernaryCheckbox] model and the [HTMLCheckboxElement] view
+ *
  * @author Ben Leggiero
  * @since 2018-01-22
  */
@@ -43,6 +45,9 @@ class JSCheckboxController(val controlledElement: HTMLCheckboxElement): TernaryC
 
 
 
+/**
+ * Reads the state of this checkbox view and returns it as a clean [Ternary] value
+ */
 var HTMLCheckboxElement.ternaryState: Ternary
     get() = when (this.indeterminate) {
         true -> Ternary.indeterminate
@@ -66,6 +71,9 @@ var HTMLCheckboxElement.ternaryState: Ternary
 
 
 
+/**
+ * Like [JSCheckboxController], but for a [TernaryCheckboxTree]
+ */
 class JSTernaryCheckboxTreeController(val rootCheckbox: JSCheckboxController, children: List<JSCheckboxController>)
     : TernaryCheckboxTree(children = children, id = rootCheckbox.id, text = rootCheckbox.text) {
 
@@ -84,7 +92,7 @@ class JSTernaryCheckboxTreeController(val rootCheckbox: JSCheckboxController, ch
     }
 
 
-    override fun deinit(): Unit {
+    override fun deinit() {
         rootCheckbox.onStateChange { _, _ ->  }
         super.deinit()
     }

@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Standard" type="K2JSConfigurationType" factoryName="Kotlin (JavaScript)">
+    <K2JSConfigurationSettings>
+      <option name="browserFamily" value="Chrome" />
+      <option name="generatedFilePath" value="$PROJECT_DIR$/_js/production/Rent Split 2" />
+      <option name="pageToOpenFilePath" value="$PROJECT_DIR$/index.html" />
+      <option name="shouldOpenInBrowserAfterTranslation" value="true" />
+    </K2JSConfigurationSettings>
+    <method />
+  </configuration>
+</component>

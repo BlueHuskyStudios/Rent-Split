@@ -1,8 +1,6 @@
 package RentSplit
 
-import kotlin.js.Json
-import kotlin.js.json
-
+import kotlin.js.*
 
 
 // DO NOT CHANGE THESE

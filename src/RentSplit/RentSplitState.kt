@@ -1,10 +1,10 @@
 package RentSplit
 
 import RentSplit.SerializationPurpose.*
-import RentSplit.UserConsent.explicitConsent
-import jQueryInterface.jq
-import org.bh.tools.base.util.safeTry
-import org.w3c.dom.url.URL
+import RentSplit.UserConsent.*
+import jQueryInterface.*
+import org.bh.tools.base.util.*
+import org.w3c.dom.url.*
 import kotlin.browser.*
 import kotlin.js.*
 

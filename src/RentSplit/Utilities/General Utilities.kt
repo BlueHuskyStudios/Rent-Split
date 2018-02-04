@@ -1,7 +1,7 @@
 package RentSplit
 
-import jQueryInterface.JQuery
-import kotlin.browser.document
+import jQueryInterface.*
+import kotlin.browser.*
 
 
 /*
@@ -127,18 +127,30 @@ inline fun <ValueType> ValueType.alsoLog(message: String, logger: (String) -> Un
 inline fun log(message: String, logger: (String) -> Unit = ::consoleLogString) = logger(message)
 
 
+/**
+ * An alias for `console.log` that can only log `String`s
+ */
 @Suppress("NOTHING_TO_INLINE") // Inlined on-purpose because this is an alias for console.log
 inline fun consoleLogString(message: String) {
     console.log(message)
 }
 
 
+/**
+ * Turns this string into a set of IDs, assuming it's formatted like `[1,2,3]`
+ */
 fun String.toSetOfIds(): Set<ID> = split('[', ',', ']').toSet()
 
 
+/**
+ * Turns this set of IDs into a string, formatted like `[1,2,3]`
+ */
 fun Set<ID>.serializedSetOfIds() = joinToString(prefix = "[", separator = ",", postfix = "]")
 
 
+/**
+ * Prepares this string to be placed on the page as raw HTML. This is useful for user-given input.
+ */
 fun String.sanitizedForHtml(): String {
     return this
             .replace(Regex("&(?!amp;amp;)"), "&amp;") // Replace "&" with "&amp;", but not when that's already been done

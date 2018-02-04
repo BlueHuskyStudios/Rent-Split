@@ -2,7 +2,7 @@ package RentSplit
 
 import RentSplit.IdManager.generateNewId
 import RentSplit.IdManager.registerId
-import jQueryInterface.JQuery
+import jQueryInterface.*
 import kotlin.js.*
 
 
@@ -107,7 +107,7 @@ data class RentRoommate(
         /**
          * Generates a roommate name
          *
-         * @param ideal        If non-null and non-empty, this is used. Otherwise, one is generated with `backup`
+         * @param ideal  If non-null and non-empty, this is used. Otherwise, one is generated with `backup`
          * @param backup The number to use in the generated name
          *
          * @return A name for a roommate

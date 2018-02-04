@@ -62,9 +62,15 @@ object RentSplitViewGenerator {
     }
 
 
+    /**
+     * Generates the table heading for the Roommates names' column
+     */
     fun buildResultsTableHeadRoommateNameColumnTitle() = "<th class=\"text-center\">$roommateNameColumnTitle</th>"
 
 
+    /**
+     * Generates the table heading for the Total column
+     */
     fun buildResultsTableHeadRoommateTotalContributionsColumnTitle() = "<th class=\"text-center\">$totalColumnTitle</th>"
 
 

@@ -3,10 +3,9 @@ package RentSplit
 import RentSplit.IdManager.generateNewId
 import RentSplit.IdManager.registerId
 import RentSplit.RentExpenses.Companion.allRoommates
-import jQueryInterface.JQuery
-import org.bh.tools.base.collections.indexOfFirstOrNull
+import jQueryInterface.*
+import org.bh.tools.base.collections.*
 import kotlin.js.*
-
 
 
 // DO NOT CHANGE THESE

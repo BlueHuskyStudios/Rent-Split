@@ -57,12 +57,6 @@ this['Rent Split 2'] = function (_, Kotlin) {
   FiniteAmountSummary$none.prototype.constructor = FiniteAmountSummary$none;
   Ternary.prototype = Object.create(Enum.prototype);
   Ternary.prototype.constructor = Ternary;
-  CSSStyleDeclarationBlackhole.prototype = Object.create(CSSStyleDeclaration.prototype);
-  CSSStyleDeclarationBlackhole.prototype.constructor = CSSStyleDeclarationBlackhole;
-  HTMLCollectionBlackhole.prototype = Object.create(HTMLCollection.prototype);
-  HTMLCollectionBlackhole.prototype.constructor = HTMLCollectionBlackhole;
-  NodeListBlackhole.prototype = Object.create(NodeList.prototype);
-  NodeListBlackhole.prototype.constructor = NodeListBlackhole;
   JSTernaryCheckboxTreeController.prototype = Object.create(TernaryCheckboxTree.prototype);
   JSTernaryCheckboxTreeController.prototype.constructor = JSTernaryCheckboxTreeController;
   function IdManager() {
@@ -2013,29 +2007,6 @@ this['Rent Split 2'] = function (_, Kotlin) {
   function sanitizedForHtml($receiver) {
     return replace(replace(Regex_init('&(?!amp;amp;)').replace_x2uqeu$($receiver, '&amp;'), '<', '&lt;'), '>', '&gt;');
   }
-  function TouchManager() {
-    TouchManager_instance = this;
-    this.listeners_0 = emptySet();
-  }
-  TouchManager.$metadata$ = {
-    kind: Kind_OBJECT,
-    simpleName: 'TouchManager',
-    interfaces: []
-  };
-  var TouchManager_instance = null;
-  function TouchManager_getInstance() {
-    if (TouchManager_instance === null) {
-      new TouchManager();
-    }
-    return TouchManager_instance;
-  }
-  function TouchEventHandler() {
-  }
-  TouchEventHandler.$metadata$ = {
-    kind: Kind_CLASS,
-    simpleName: 'TouchEventHandler',
-    interfaces: []
-  };
   var asList_0 = defineInlineFunction('Rent Split 2.jQueryInterface.asList_9ufosi$', wrapFunction(function () {
     var asList = Kotlin.kotlin.collections.asList_us0mfu$;
     return function ($receiver) {
@@ -2261,13 +2232,6 @@ this['Rent Split 2'] = function (_, Kotlin) {
       didSet = NullDSB();
     return new observing$ObjectLiteral(shouldSet, willSet, didSet, initialValue);
   }
-  var get_crypto = defineInlineFunction('Rent Split 2.org.bh.tools.base.jsShim.get_crypto_nz12v2$', function ($receiver) {
-    return $receiver.crypto;
-  });
-  var get_msCrypto = defineInlineFunction('Rent Split 2.org.bh.tools.base.jsShim.get_msCrypto_nz12v2$', function ($receiver) {
-    return $receiver.msCrypto;
-  });
-  var crypto;
   var toString_0 = defineInlineFunction('Rent Split 2.org.bh.tools.base.jsShim.toString_798l30$', function ($receiver, base) {
     return $receiver.toString(base);
   });
@@ -2426,6 +2390,16 @@ this['Rent Split 2'] = function (_, Kotlin) {
     else
       return Kotlin.noWhenBranchMatched();
   }
+  function invoke_2($receiver, fromBoolean) {
+    if (fromBoolean === true)
+      return Ternary$true_getInstance();
+    else if (fromBoolean === false)
+      return Ternary$false_getInstance();
+    else if (fromBoolean == null)
+      return Ternary$indeterminate_getInstance();
+    else
+      return Kotlin.noWhenBranchMatched();
+  }
   function safeTry(closure) {
     try {
       return closure();
@@ -2503,7 +2477,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
       return;
     }
     this.shouldUpdateChildrenBasedOnState_uc0g85$_0 = false;
-    tmp$ = invoke_2(FiniteAmountSummary$Companion_getInstance(), this.children);
+    tmp$ = invoke_3(FiniteAmountSummary$Companion_getInstance(), this.children);
     if (Kotlin.isType(tmp$, FiniteAmountSummary$all))
       tmp$_0 = Ternary$true_getInstance();
     else if (Kotlin.isType(tmp$, FiniteAmountSummary$none))
@@ -2558,7 +2532,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
     }
     return count + tmp$;
   }
-  function invoke_2($receiver, checkboxes) {
+  function invoke_3($receiver, checkboxes) {
     return invoke_0(FiniteAmountSummary$Companion_getInstance(), reduceTo(checkboxes, 0.0, invoke$lambda), checkboxes.size);
   }
   function TouchBasics() {
@@ -2578,54 +2552,6 @@ this['Rent Split 2'] = function (_, Kotlin) {
       new TouchBasics();
     }
     return TouchBasics_instance;
-  }
-  function CSSStyleDeclarationBlackhole() {
-    CSSStyleDeclarationBlackhole_instance = this;
-    CSSStyleDeclaration.call(this);
-  }
-  CSSStyleDeclarationBlackhole.$metadata$ = {
-    kind: Kind_OBJECT,
-    simpleName: 'CSSStyleDeclarationBlackhole',
-    interfaces: []
-  };
-  var CSSStyleDeclarationBlackhole_instance = null;
-  function CSSStyleDeclarationBlackhole_getInstance() {
-    if (CSSStyleDeclarationBlackhole_instance === null) {
-      new CSSStyleDeclarationBlackhole();
-    }
-    return CSSStyleDeclarationBlackhole_instance;
-  }
-  function HTMLCollectionBlackhole() {
-    HTMLCollectionBlackhole_instance = this;
-    HTMLCollection.call(this);
-  }
-  HTMLCollectionBlackhole.$metadata$ = {
-    kind: Kind_OBJECT,
-    simpleName: 'HTMLCollectionBlackhole',
-    interfaces: []
-  };
-  var HTMLCollectionBlackhole_instance = null;
-  function HTMLCollectionBlackhole_getInstance() {
-    if (HTMLCollectionBlackhole_instance === null) {
-      new HTMLCollectionBlackhole();
-    }
-    return HTMLCollectionBlackhole_instance;
-  }
-  function NodeListBlackhole() {
-    NodeListBlackhole_instance = this;
-    NodeList.call(this);
-  }
-  NodeListBlackhole.$metadata$ = {
-    kind: Kind_OBJECT,
-    simpleName: 'NodeListBlackhole',
-    interfaces: []
-  };
-  var NodeListBlackhole_instance = null;
-  function NodeListBlackhole_getInstance() {
-    if (NodeListBlackhole_instance === null) {
-      new NodeListBlackhole();
-    }
-    return NodeListBlackhole_instance;
   }
   function Checkbox() {
   }
@@ -3464,10 +3390,6 @@ this['Rent Split 2'] = function (_, Kotlin) {
   package$RentSplit.toSetOfIds_pdl1vz$ = toSetOfIds;
   package$RentSplit.serializedSetOfIds_gevexo$ = serializedSetOfIds;
   package$RentSplit.sanitizedForHtml_pdl1vz$ = sanitizedForHtml;
-  Object.defineProperty(package$RentSplit, 'TouchManager', {
-    get: TouchManager_getInstance
-  });
-  package$RentSplit.TouchEventHandler = TouchEventHandler;
   var package$jQueryInterface = _.jQueryInterface || (_.jQueryInterface = {});
   package$jQueryInterface.asList_9ufosi$ = asList_0;
   package$jQueryInterface.mapNotNull_fo801r$ = mapNotNull;
@@ -3497,13 +3419,6 @@ this['Rent Split 2'] = function (_, Kotlin) {
   package$func.NullDSB_287e2$ = NullDSB;
   package$func.observing_bjs5ud$ = observing;
   var package$jsShim = package$base.jsShim || (package$base.jsShim = {});
-  package$jsShim.get_crypto_nz12v2$ = get_crypto;
-  package$jsShim.get_msCrypto_nz12v2$ = get_msCrypto;
-  Object.defineProperty(package$jsShim, 'crypto', {
-    get: function () {
-      return crypto;
-    }
-  });
   package$jsShim.toString_798l30$ = toString_0;
   package$jsShim.toString_di2vk2$ = toString_1;
   package$jsShim.toString_dqglrj$ = toString_2;
@@ -3533,25 +3448,16 @@ this['Rent Split 2'] = function (_, Kotlin) {
   });
   package$struct.Ternary = Ternary;
   package$struct.invoke_aa6xk2$ = invoke_1;
+  package$struct.invoke_yniobj$ = invoke_2;
   var package$util = package$base.util || (package$base.util = {});
   package$util.safeTry_klfg04$ = safeTry;
   var package$ui = package$tools.ui || (package$tools.ui = {});
   var package$behavior = package$ui.behavior || (package$ui.behavior = {});
   package$behavior.TernaryCheckboxTree = TernaryCheckboxTree;
-  package$behavior.invoke_ujmawj$ = invoke_2;
+  package$behavior.invoke_ujmawj$ = invoke_3;
   var package$touch = package$ui.touch || (package$ui.touch = {});
   Object.defineProperty(package$touch, 'TouchBasics', {
     get: TouchBasics_getInstance
-  });
-  var package$utilities = package$ui.utilities || (package$ui.utilities = {});
-  Object.defineProperty(package$utilities, 'CSSStyleDeclarationBlackhole', {
-    get: CSSStyleDeclarationBlackhole_getInstance
-  });
-  Object.defineProperty(package$utilities, 'HTMLCollectionBlackhole', {
-    get: HTMLCollectionBlackhole_getInstance
-  });
-  Object.defineProperty(package$utilities, 'NodeListBlackhole', {
-    get: NodeListBlackhole_getInstance
   });
   var package$widget = package$ui.widget || (package$ui.widget = {});
   package$widget.Checkbox = Checkbox;
@@ -3686,8 +3592,6 @@ this['Rent Split 2'] = function (_, Kotlin) {
   rentExpensesSerializedName = 'e';
   localDataPreferencesSerializedName = 'l';
   generalStateSerializedName = 'generalState';
-  var tmp$;
-  crypto = (tmp$ = window.crypto) != null ? tmp$ : window.msCrypto;
   main([]);
   Kotlin.defineModule('Rent Split 2', _);
   return _;
