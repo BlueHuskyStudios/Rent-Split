@@ -159,7 +159,7 @@ val expenseFilterButtonExpenseRelationSelector = "[$expenseFilterButtonExpenseRe
 val anyInputFieldSelector = "input,$roommateAnyInputFieldSelector,$expenseAnyInputFieldSelector"
 val anyInputButtonSelector = "$addARoommateButtonSelector,$addAnExpenseButtonSelector," +
         "$removeARoommateButtonSelector,$removeAnExpenseButtonSelector," +
-        expenseFilterButtonSelector
+        "$expenseFilterButtonSelector,$expenseFilterDialogCancelButtonSelector,$expenseFilterDialogOkButtonSelector"
 val anyInputSelector = "$anyInputFieldSelector,$anyInputButtonSelector"
 
 
@@ -357,7 +357,6 @@ class RentSplit {
             log("No expense found in filter dialog!")
         }
         expenseFilterDialog?.close()
-        reloadPageFromState()
     }
 
 
@@ -567,6 +566,8 @@ class RentSplit {
 
         jq_existingExpenseInput.attr(expenseRenamabilityAttribute, expense.isRenamable)
         jq_existingExpenseInput.attr(expenseRemovabilityAttribute, expense.isRemovable)
+
+        jq_existingExpenseInput.data(expenseApplicableRoommatesDataName, expense.applicableRoommateIds?.toTypedArray())
     }
 
 

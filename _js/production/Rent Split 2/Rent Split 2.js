@@ -988,7 +988,6 @@ this['Rent Split 2'] = function (_, Kotlin) {
       console.log(message);
     }
     (tmp$ = this.expenseFilterDialog) != null ? (tmp$.close(), Unit) : null;
-    this.reloadPageFromState_6taknv$();
   };
   RentSplit.prototype.reloadStateFromPage = function () {
     this.state = this.state.copy_2k6jng$(this.fetchRoommates(), this.fetchExpenses());
@@ -1172,12 +1171,14 @@ this['Rent Split 2'] = function (_, Kotlin) {
     this.regenerateInputTable_0(expenseInputRowSelector, this.state.e.e, RentSplit$regenerateExpenseInputTable$lambda(this), RentSplit$regenerateExpenseInputTable$lambda_0(this));
   };
   RentSplit.prototype.configureExistingExpenseInputRow_0 = function (existingExpenseInput, expense) {
+    var tmp$;
     var jq_existingExpenseInput = $(existingExpenseInput);
     expense.originalDOMElement = jq_existingExpenseInput;
     $(expenseTypeInputSelector, existingExpenseInput).val(expense.n);
     $(expenseCostInputSelector, existingExpenseInput).val(expense.d);
     jq_existingExpenseInput.attr(expenseRenamabilityAttribute, expense.r);
     jq_existingExpenseInput.attr(expenseRemovabilityAttribute, expense.x);
+    jq_existingExpenseInput.data(expenseApplicableRoommatesDataName, (tmp$ = expense.f) != null ? copyToArray(tmp$) : null);
   };
   RentSplit.prototype.regenerateRoommateInputTable_0 = function () {
     this.regenerateInputTable_0(roommateInputRowSelector, this.state.r.r, getCallableRef('configureExistingRoommateInputRow', function ($receiver, existingRoommateInputTableRow, roommate) {
@@ -3597,8 +3598,8 @@ this['Rent Split 2'] = function (_, Kotlin) {
   expenseFilterButtonExpenseRelationAttribute = 'data-expense';
   expenseFilterButtonExpenseRelationSelector = '[data-expense]';
   anyInputFieldSelector = 'input,.roommate-name,.roommate-income,.expense-type,.expense-cost';
-  anyInputButtonSelector = '#Add-Roommate-Button,#Add-Expense-Button,' + '.remove-roommate-button,.remove-expense-button,' + expenseFilterButtonSelector;
-  anyInputSelector = 'input,.roommate-name,.roommate-income,.expense-type,.expense-cost,#Add-Roommate-Button,#Add-Expense-Button,.remove-roommate-button,.remove-expense-button,.filter-button';
+  anyInputButtonSelector = '#Add-Roommate-Button,#Add-Expense-Button,' + '.remove-roommate-button,.remove-expense-button,' + '.filter-button,#filter-dialog-cancel-button,#filter-dialog-ok-button';
+  anyInputSelector = 'input,.roommate-name,.roommate-income,.expense-type,.expense-cost,#Add-Roommate-Button,#Add-Expense-Button,.remove-roommate-button,.remove-expense-button,.filter-button,#filter-dialog-cancel-button,#filter-dialog-ok-button';
   rentExpenseType = 'Rent';
   utilitiesExpenseType = 'Utilities';
   roommateNamePlaceholderText = 'Name';
