@@ -54,6 +54,11 @@ html.rent {
     transition-duration: 1s;
 
     opacity: 0;
+
+    } @media (max-width: 479px) { .rent dialog {
+        width: 95vw;
+        width: calc(100vw - 1em);
+    }
 }
     .rent dialog.severe {
         box-shadow: 0 2em 5em rgba(0, 0, 0, .8), 0 0 0 .5em #FF1744, 0 1em 2em rgba(0, 0, 0, .5), 0 1pt 4pt rgba(0, 0, 0, .2);
@@ -78,8 +83,10 @@ html.rent {
     border-radius: 2pt;
 }
     .rent dialog button {
-        padding: 3px 1em;
-        min-width: 64px;
+        } @media (min-width: 480px) { .rent dialog button {
+            padding: 3px 1em;
+            min-width: 64px;
+        }
     }
 
 .rent button,
