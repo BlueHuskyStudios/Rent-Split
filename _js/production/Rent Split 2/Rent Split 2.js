@@ -771,6 +771,8 @@ this['Rent Split 2'] = function (_, Kotlin) {
   var expenseApplicableRoommatesDataName;
   var expenseApplicableRoommatesAttribute;
   var expenseApplicableRoommatesSelector;
+  var expenseHasApplicableRoommatesClassName;
+  var expenseHasApplicableRoommatesSelector;
   var copyStateUrlButtonId;
   var copyStateUrlButtonSelector;
   var stateUrlFieldId;
@@ -1160,15 +1162,21 @@ this['Rent Split 2'] = function (_, Kotlin) {
   RentSplit.prototype.regenerateExpenseInputTable_0 = function () {
     this.regenerateInputTable_0(expenseInputRowSelector, this.state.e.e, RentSplit$regenerateExpenseInputTable$lambda(this), RentSplit$regenerateExpenseInputTable$lambda_0(this));
   };
-  RentSplit.prototype.configureExistingExpenseInputRow_0 = function (existingExpenseInput, expense) {
-    var tmp$;
-    var jq_existingExpenseInput = $(existingExpenseInput);
-    expense.originalDOMElement = jq_existingExpenseInput;
-    $(expenseTypeInputSelector, existingExpenseInput).val(expense.n);
-    $(expenseCostInputSelector, existingExpenseInput).val(expense.d);
-    jq_existingExpenseInput.attr(expenseRenamabilityAttribute, expense.r);
-    jq_existingExpenseInput.attr(expenseRemovabilityAttribute, expense.x);
-    jq_existingExpenseInput.data(expenseApplicableRoommatesDataName, (tmp$ = expense.f) != null ? copyToArray(tmp$) : null);
+  RentSplit.prototype.configureExistingExpenseInputRow_0 = function (existingExpenseInputRow, expense) {
+    var jq_existingExpenseInputRow = $(existingExpenseInputRow);
+    expense.originalDOMElement = jq_existingExpenseInputRow;
+    $(expenseTypeInputSelector, existingExpenseInputRow).val(expense.n);
+    $(expenseCostInputSelector, existingExpenseInputRow).val(expense.d);
+    jq_existingExpenseInputRow.attr(expenseRenamabilityAttribute, expense.r);
+    jq_existingExpenseInputRow.attr(expenseRemovabilityAttribute, expense.x);
+    if (expense.f == null) {
+      jq_existingExpenseInputRow.data(expenseApplicableRoommatesDataName, null);
+      jq_existingExpenseInputRow.removeClass(expenseHasApplicableRoommatesClassName);
+    }
+     else {
+      jq_existingExpenseInputRow.data(expenseApplicableRoommatesDataName, copyToArray(expense.f));
+      jq_existingExpenseInputRow.addClass(expenseHasApplicableRoommatesClassName);
+    }
   };
   RentSplit.prototype.regenerateRoommateInputTable_0 = function () {
     this.regenerateInputTable_0(roommateInputRowSelector, this.state.r.r, getCallableRef('configureExistingRoommateInputRow', function ($receiver, existingRoommateInputTableRow, roommate) {
@@ -3076,6 +3084,16 @@ this['Rent Split 2'] = function (_, Kotlin) {
       return expenseApplicableRoommatesSelector;
     }
   });
+  Object.defineProperty(package$RentSplit, 'expenseHasApplicableRoommatesClassName', {
+    get: function () {
+      return expenseHasApplicableRoommatesClassName;
+    }
+  });
+  Object.defineProperty(package$RentSplit, 'expenseHasApplicableRoommatesSelector', {
+    get: function () {
+      return expenseHasApplicableRoommatesSelector;
+    }
+  });
   Object.defineProperty(package$RentSplit, 'copyStateUrlButtonId', {
     get: function () {
       return copyStateUrlButtonId;
@@ -3561,6 +3579,8 @@ this['Rent Split 2'] = function (_, Kotlin) {
   expenseApplicableRoommatesDataName = 'applicable-roommate-ids';
   expenseApplicableRoommatesAttribute = 'data-applicable-roommate-ids';
   expenseApplicableRoommatesSelector = '[data-applicable-roommate-ids]';
+  expenseHasApplicableRoommatesClassName = 'has-applicable-roommates';
+  expenseHasApplicableRoommatesSelector = '.has-applicable-roommates';
   copyStateUrlButtonId = 'Copy-URL-Button';
   copyStateUrlButtonSelector = '#Copy-URL-Button';
   stateUrlFieldId = 'State-URL-Field';

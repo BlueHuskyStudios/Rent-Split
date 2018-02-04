@@ -55,6 +55,9 @@ external class JQuery {
     fun dblclick(handler: (MouseClickEvent) -> Unit): JQuery
     fun click(handler: (MouseClickEvent) -> Unit): JQuery
 
+    fun trigger(eventName: String): JQuery
+    fun trigger(event: Event): JQuery
+
     fun select(): JQuery
     fun select(eventData: Any? = definedExternally, handler: (Event) -> Unit): JQuery
 

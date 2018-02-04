@@ -106,6 +106,8 @@ val resourceIdSelector = "[$resourceIdAttribute]"
 val expenseApplicableRoommatesDataName = "applicable-roommate-ids"
 val expenseApplicableRoommatesAttribute = "data-$expenseApplicableRoommatesDataName"
 val expenseApplicableRoommatesSelector = "[$expenseApplicableRoommatesAttribute]"
+val expenseHasApplicableRoommatesClassName = "has-applicable-roommates"
+val expenseHasApplicableRoommatesSelector = ".$expenseHasApplicableRoommatesClassName"
 
 
 /// State Saving ///
@@ -557,17 +559,24 @@ class RentSplit {
      * Given a roommate row on the page and raw roommate data, this reconfigures the existing row to reflect the
      * given roommate data
      */
-    private fun configureExistingExpenseInputRow(existingExpenseInput: Element, expense: RentExpense) {
-        val jq_existingExpenseInput = jq(existingExpenseInput)
+    private fun configureExistingExpenseInputRow(existingExpenseInputRow: Element, expense: RentExpense) {
+        val jq_existingExpenseInputRow = jq(existingExpenseInputRow)
 
-        expense.originalDOMElement = jq_existingExpenseInput
-        jq(expenseTypeInputSelector, existingExpenseInput).`val`(expense.type)
-        jq(expenseCostInputSelector, existingExpenseInput).`val`(expense.monthlyCost)
+        expense.originalDOMElement = jq_existingExpenseInputRow
+        jq(expenseTypeInputSelector, existingExpenseInputRow).`val`(expense.type)
+        jq(expenseCostInputSelector, existingExpenseInputRow).`val`(expense.monthlyCost)
 
-        jq_existingExpenseInput.attr(expenseRenamabilityAttribute, expense.isRenamable)
-        jq_existingExpenseInput.attr(expenseRemovabilityAttribute, expense.isRemovable)
+        jq_existingExpenseInputRow.attr(expenseRenamabilityAttribute, expense.isRenamable)
+        jq_existingExpenseInputRow.attr(expenseRemovabilityAttribute, expense.isRemovable)
 
-        jq_existingExpenseInput.data(expenseApplicableRoommatesDataName, expense.applicableRoommateIds?.toTypedArray())
+        if (expense.applicableRoommateIds == null) {
+            jq_existingExpenseInputRow.data(expenseApplicableRoommatesDataName, null)
+            jq_existingExpenseInputRow.removeClass(expenseHasApplicableRoommatesClassName)
+        }
+        else {
+            jq_existingExpenseInputRow.data(expenseApplicableRoommatesDataName, expense.applicableRoommateIds.toTypedArray())
+            jq_existingExpenseInputRow.addClass(expenseHasApplicableRoommatesClassName)
+        }
     }
 
 
@@ -976,7 +985,7 @@ class RentSplit {
 
 
 fun main(args: Array<String>) {
-    jq({
+    jq {
         RentSplit().onReady()
-    })
+    }
 }

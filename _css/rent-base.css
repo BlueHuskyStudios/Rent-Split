@@ -228,7 +228,7 @@ th.plain.has-floating-button .floats-to-left {
 
 
 .hides-something-until-hover .hidden-until-parent-hover {
-    transition-property: opacity;
+    transition-property: opacity, box-shadow, background-color;
     transition-timing-function: ease-in-out;
     transition-delay: 1s;
     transition-duration: 1s;
@@ -246,6 +246,10 @@ th.plain.has-floating-button .floats-to-left {
     .touch-not-supported .hides-something-until-hover:not(:hover):not(:focus) .hidden-until-parent-hover:not(:hover):not(:focus) {
         opacity: 0;
     }
+}
+
+.rent .has-applicable-roommates .filter-button {
+    opacity: 1 !important;
 }
 
 #Expenses {
