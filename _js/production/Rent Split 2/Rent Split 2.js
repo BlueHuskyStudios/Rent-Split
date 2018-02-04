@@ -826,7 +826,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
   function RentSplit() {
     this.state_8j2skj$_0 = observing(load(RentSplitState$Companion_getInstance()), void 0, void 0, RentSplit$state$lambda(this));
     var tmp$;
-    this.expenseFilterChecklistController_ttpzpq$_0 = observing((tmp$ = null) == null || Kotlin.isType(tmp$, JSTernaryCheckboxTreeController) ? tmp$ : throwCCE(), void 0, void 0, RentSplit$expenseFilterChecklistController$lambda);
+    this.expenseFilterChecklistController_ttpzpq$_0 = observing((tmp$ = null) == null || Kotlin.isType(tmp$, JSTernaryCheckboxTreeController) ? tmp$ : throwCCE(), void 0, void 0, RentSplit$expenseFilterChecklistController$lambda(this));
   }
   var RentSplit$state_metadata = new PropertyMetadata('state');
   Object.defineProperty(RentSplit.prototype, 'state', {
@@ -964,6 +964,9 @@ this['Rent Split 2'] = function (_, Kotlin) {
       return Unit;
     }
     this.showExpenseDialog_pbrwj2$(tmp$_1);
+  };
+  RentSplit.prototype.applicableRoommateCheckboxesDidChange_fsqkh5$ = function (oldValue, newValue) {
+    booleanAttr_0($(expenseFilterDialogOkButtonSelector), 'disabled', newValue === Ternary$false_getInstance());
   };
   RentSplit.prototype.didPressFilterDialogCancelButton_9ojx7i$ = function (event) {
     var tmp$;
@@ -1387,9 +1390,22 @@ this['Rent Split 2'] = function (_, Kotlin) {
       return Unit;
     };
   }
-  function RentSplit$expenseFilterChecklistController$lambda(oldValue, f) {
-    oldValue != null ? (oldValue.deinit(), Unit) : null;
-    return Unit;
+  function RentSplit$expenseFilterChecklistController$lambda$lambda(this$RentSplit) {
+    return function (oldState, newState) {
+      this$RentSplit.applicableRoommateCheckboxesDidChange_fsqkh5$(oldState, newState);
+      return Unit;
+    };
+  }
+  function RentSplit$expenseFilterChecklistController$lambda(this$RentSplit) {
+    return function (oldValue, newValue) {
+      var tmp$, tmp$_0, tmp$_1;
+      oldValue != null ? (oldValue.deinit(), Unit) : null;
+      newValue != null ? (newValue.onStateChange_nrmh93$(RentSplit$expenseFilterChecklistController$lambda$lambda(this$RentSplit)), Unit) : null;
+      tmp$ = oldValue != null ? oldValue.state : null;
+      tmp$_1 = (tmp$_0 = newValue != null ? newValue.state : null) != null ? tmp$_0 : Ternary$indeterminate_getInstance();
+      this$RentSplit.applicableRoommateCheckboxesDidChange_fsqkh5$(tmp$, tmp$_1);
+      return Unit;
+    };
   }
   RentSplit.$metadata$ = {
     kind: Kind_CLASS,
@@ -2080,6 +2096,37 @@ this['Rent Split 2'] = function (_, Kotlin) {
       index = index + 1 | 0;
     }
   }
+  var booleanAttr = defineInlineFunction('Rent Split 2.jQueryInterface.booleanAttr_pl09c0$', wrapFunction(function () {
+    var toBooleanOrNull = _.RentSplit.toBooleanOrNull_s8jyvk$;
+    return function ($receiver, name) {
+      var tmp$, tmp$_0;
+      return (tmp$_0 = (tmp$ = $receiver.prop(name)) != null ? toBooleanOrNull(tmp$) : null) != null ? tmp$_0 : false;
+    };
+  }));
+  function booleanAttr_0($receiver, name, newValue) {
+    var tmp$, tmp$_0;
+    if (newValue === true) {
+      tmp$_0 = $receiver.prop(name, name);
+    }
+     else {
+      $receiver.prop(name, (tmp$ = null) == null || typeof tmp$ === 'string' ? tmp$ : throwCCE());
+      tmp$_0 = $receiver.removeProp(name);
+    }
+    return tmp$_0;
+  }
+  var disabled = defineInlineFunction('Rent Split 2.jQueryInterface.disabled_9ufosi$', wrapFunction(function () {
+    var toBooleanOrNull = _.RentSplit.toBooleanOrNull_s8jyvk$;
+    return function ($receiver) {
+      var tmp$, tmp$_0;
+      return (tmp$_0 = (tmp$ = $receiver.prop('disabled')) != null ? toBooleanOrNull(tmp$) : null) != null ? tmp$_0 : false;
+    };
+  }));
+  var disabled_0 = defineInlineFunction('Rent Split 2.jQueryInterface.disabled_5laha2$', wrapFunction(function () {
+    var booleanAttr = _.jQueryInterface.booleanAttr_86h6l4$;
+    return function ($receiver, newValue) {
+      return booleanAttr($receiver, 'disabled', newValue);
+    };
+  }));
   var checked = defineInlineFunction('Rent Split 2.jQueryInterface.checked_9ufosi$', wrapFunction(function () {
     var toBooleanOrNull = _.RentSplit.toBooleanOrNull_s8jyvk$;
     return function ($receiver) {
@@ -2089,7 +2136,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
   }));
   function checked_0($receiver, newValue) {
     $receiver.prop('indeterminate', false);
-    return $receiver.prop('checked', newValue);
+    return booleanAttr_0($receiver, 'checked', newValue);
   }
   var indeterminate = defineInlineFunction('Rent Split 2.jQueryInterface.indeterminate_9ufosi$', wrapFunction(function () {
     var toBooleanOrNull = _.RentSplit.toBooleanOrNull_s8jyvk$;
@@ -3427,6 +3474,10 @@ this['Rent Split 2'] = function (_, Kotlin) {
   package$jQueryInterface.iterator_9ufosi$ = iterator;
   package$jQueryInterface.forEach_f8zjg0$ = forEach;
   package$jQueryInterface.forEachIndexed_53xvis$ = forEachIndexed;
+  package$jQueryInterface.booleanAttr_pl09c0$ = booleanAttr;
+  package$jQueryInterface.booleanAttr_86h6l4$ = booleanAttr_0;
+  package$jQueryInterface.disabled_9ufosi$ = disabled;
+  package$jQueryInterface.disabled_5laha2$ = disabled_0;
   package$jQueryInterface.checked_9ufosi$ = checked;
   package$jQueryInterface.checked_5laha2$ = checked_0;
   package$jQueryInterface.indeterminate_9ufosi$ = indeterminate;

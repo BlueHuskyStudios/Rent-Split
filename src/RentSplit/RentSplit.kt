@@ -22,14 +22,15 @@ package RentSplit
 import RentSplit.RentExpenses.Companion.allRoommates
 import RentSplit.UserConsent.*
 import jQueryInterface.*
-import org.bh.tools.base.func.observing
-import org.bh.tools.base.struct.FiniteAmountSummary
+import org.bh.tools.base.func.*
+import org.bh.tools.base.struct.*
 import org.bh.tools.base.struct.FiniteAmountSummary.*
-import org.bh.tools.ui.touch.TouchBasics
+import org.bh.tools.base.struct.Ternary.*
+import org.bh.tools.ui.touch.*
 import org.bh.tools.ui.widget.js.*
 import org.w3c.dom.*
-import org.w3c.dom.events.Event
-import kotlin.browser.window
+import org.w3c.dom.events.*
+import kotlin.browser.*
 
 
 ///// APP-GLOBAL CONSTANTS /////
@@ -205,8 +206,12 @@ class RentSplit {
         state.save()
     })
 
-    var expenseFilterChecklistController: JSTernaryCheckboxTreeController? by observing(null as JSTernaryCheckboxTreeController?, didSet = { oldValue, _ ->
+    var expenseFilterChecklistController: JSTernaryCheckboxTreeController? by observing(null as JSTernaryCheckboxTreeController?, didSet = { oldValue, newValue ->
         oldValue?.deinit()
+        newValue?.onStateChange { oldState, newState ->
+            applicableRoommateCheckboxesDidChange(oldState, newState)
+        }
+        applicableRoommateCheckboxesDidChange(oldValue?.state, newValue?.state ?: indeterminate)
     })
 
 
@@ -342,6 +347,11 @@ class RentSplit {
         showExpenseDialog(expense = expenseForFilterButton(event.currentTarget as? Element
                                                                    ?: return Unit.alsoLog("No element targeted in the filter button click event"))
                 ?: return Unit.alsoLog("No expense matching ID in filter button"))
+    }
+
+
+    fun applicableRoommateCheckboxesDidChange(oldValue: Ternary?, newValue: Ternary) {
+        jq(expenseFilterDialogOkButtonSelector).disabled(newValue == `false`)
     }
 
 

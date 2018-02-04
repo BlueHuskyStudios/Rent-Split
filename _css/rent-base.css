@@ -92,8 +92,8 @@ html.rent {
     transition-property: box-shadow;
 }
 
-.rent button:hover,
-.rent button:focus,
+.rent button:not(:disabled):hover,
+.rent button:not(:disabled):focus,
 .rent #Add-Roommate-Button:hover,
 .rent #Add-Roommate-Button:focus,
 .rent #Add-Expense-Button:hover,

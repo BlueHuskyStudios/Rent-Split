@@ -27,6 +27,7 @@ external class JQuery {
     fun prop(propertyName: String, value: String?): JQuery
     fun prop(propertyName: String, value: Double?): JQuery
     fun prop(propertyName: String, value: Boolean?): JQuery
+    fun removeProp(propertyName: String): JQuery
     fun data(): Map<String, Any>
     fun data(key: String): Any?
     fun data(key: String, value: Any?): JQuery

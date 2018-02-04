@@ -64,10 +64,26 @@ fun JQuery.forEachIndexed(iterator: (index: Int, element: Element) -> Unit) {
 }
 
 
-inline fun JQuery.checked(): Boolean = prop("checked")?.toBooleanOrNull() ?: false
+inline fun JQuery.booleanAttr(name: String): Boolean = prop(name)?.toBooleanOrNull() ?: false
+fun JQuery.booleanAttr(name: String, newValue: Boolean?): JQuery {
+    return if (newValue == true) {
+        prop(name, name)
+    }
+    else {
+        prop(name, null as String?)
+        removeProp(name)
+    }
+}
+
+
+inline fun JQuery.disabled(): Boolean = booleanAttr("disabled")
+inline fun JQuery.disabled(newValue: Boolean?) = booleanAttr("disabled", newValue)
+
+
+inline fun JQuery.checked(): Boolean = booleanAttr("checked")
 fun JQuery.checked(newValue: Boolean?): JQuery {
     indeterminate(false)
-    return prop("checked", newValue)
+    return booleanAttr("checked", newValue)
 }
 
 
