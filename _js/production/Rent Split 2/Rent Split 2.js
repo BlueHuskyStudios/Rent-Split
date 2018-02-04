@@ -307,29 +307,16 @@ this['Rent Split 2'] = function (_, Kotlin) {
   function get_nonEmptyType($receiver) {
     return RentExpense$Companion_getInstance().type_f5e6j7$($receiver.n, $receiver.i);
   }
-  var collectionSizeOrDefault = Kotlin.kotlin.collections.collectionSizeOrDefault_ba2ldo$;
-  var ArrayList_init = Kotlin.kotlin.collections.ArrayList_init_ww73n8$;
   function RentExpenses(allExpenses) {
     RentExpenses$Companion_getInstance();
     this.e = allExpenses;
-    var $receiver = this.e;
-    var transform = getPropertyCallableRef('monthlyCost', 1, function ($receiver) {
-      return $receiver.d;
-    });
-    var destination = ArrayList_init(collectionSizeOrDefault($receiver, 10));
-    var tmp$;
-    tmp$ = $receiver.iterator();
-    while (tmp$.hasNext()) {
-      var item = tmp$.next();
-      destination.add_11rb$(transform(item));
-    }
-    this.totalExpenses = reduceTo(destination, 0.0, getCallableRef('plus', function ($receiver, other) {
-      return $receiver + other;
-    }));
+    this.totalExpenses = reduceTo(this.e, 0.0, RentExpenses$totalExpenses$lambda);
   }
   RentExpenses.prototype.adding_pbrwj2$ = function (newExpense) {
     return new RentExpenses(adding(this.e, newExpense));
   };
+  var collectionSizeOrDefault = Kotlin.kotlin.collections.collectionSizeOrDefault_ba2ldo$;
+  var ArrayList_init = Kotlin.kotlin.collections.ArrayList_init_ww73n8$;
   RentExpenses.prototype.toJson = function () {
     var tmp$ = allExpensesSerializedName;
     var $receiver = this.e;
@@ -432,6 +419,9 @@ this['Rent Split 2'] = function (_, Kotlin) {
       new RentExpenses$Companion();
     }
     return RentExpenses$Companion_instance;
+  }
+  function RentExpenses$totalExpenses$lambda(total, expense) {
+    return total + expense.d;
   }
   RentExpenses.$metadata$ = {
     kind: Kind_CLASS,
@@ -1921,6 +1911,15 @@ this['Rent Split 2'] = function (_, Kotlin) {
             return false;
           default:return null;
         }
+      }
+    }
+     else if (typeof $receiver === 'number') {
+      switch ($receiver) {
+        case 0:
+          return false;
+        case 1:
+          return true;
+        default:return null;
       }
     }
      else

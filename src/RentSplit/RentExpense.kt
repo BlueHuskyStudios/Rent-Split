@@ -177,8 +177,7 @@ data class RentExpenses(
     /**
      * The calculated total dollar amount of all expenses
      */
-    val totalExpenses: Double = allExpenses.map(RentExpense::monthlyCost)
-            .reduceTo(0.0, Double::plus)
+    val totalExpenses: Double = allExpenses.reduceTo(0.0) { total, expense -> total + expense.monthlyCost }
 
 
     /**

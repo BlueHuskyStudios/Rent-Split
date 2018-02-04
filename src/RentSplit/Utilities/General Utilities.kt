@@ -57,6 +57,11 @@ fun Any.toBooleanOrNull(): Boolean? = when(this) {
         "false", "f", "no", "n", "0", "off" -> false
         else -> null
     }
+    is Int -> when (this) {
+        0 -> false
+        1 -> true
+        else -> null
+    }
     else -> null
 }
 
