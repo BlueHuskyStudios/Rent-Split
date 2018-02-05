@@ -30,3 +30,7 @@
 .rent input:read-only {
     background: rgba(127,127,127, 0.2) !important;
 }
+
+.rent .has-applicable-roommates .filter-button {
+    background-color: #9C27B0 !important; /* Material Purple 500: https://www.materialui.co/colors/purple/500 */
+}

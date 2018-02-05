@@ -2,10 +2,8 @@
 
 package jQueryInterface
 
-import org.w3c.dom.Element
-import org.w3c.dom.events.Event
-import org.w3c.dom.events.EventTarget
-
+import org.w3c.dom.*
+import org.w3c.dom.events.*
 
 
 typealias EventHandler = (Event?) -> Unit
@@ -21,9 +19,23 @@ external class JQuery {
     fun addClass(className: String): JQuery
     fun addClass(f: (Int, String) -> String): JQuery
 
-    fun attr(attrName: String): String?
+    fun attr(attrName: String): Any?
     fun attr(attrName: String, value: String?): JQuery
     fun attr(attrName: String, value: Double?): JQuery
+    fun attr(attrName: String, value: Boolean?): JQuery
+    fun prop(propertyName: String): Any?
+    fun prop(propertyName: String, value: String?): JQuery
+    fun prop(propertyName: String, value: Double?): JQuery
+    fun prop(propertyName: String, value: Boolean?): JQuery
+    fun removeProp(propertyName: String): JQuery
+    fun data(): Map<String, Any>
+    fun data(key: String): Any?
+    fun data(key: String, value: Any?): JQuery
+    fun data(keyValuePairs: Map<String, Any>): JQuery
+    fun `val`(): String?
+    fun `val`(newValue: String?): JQuery
+    fun `val`(newValue: Double?): JQuery
+    fun `val`(newValue: Array<*>?): JQuery
 
     fun html(): String
     fun html(s: String): JQuery
@@ -43,6 +55,9 @@ external class JQuery {
 
     fun dblclick(handler: (MouseClickEvent) -> Unit): JQuery
     fun click(handler: (MouseClickEvent) -> Unit): JQuery
+
+    fun trigger(eventName: String): JQuery
+    fun trigger(event: Event): JQuery
 
     fun select(): JQuery
     fun select(eventData: Any? = definedExternally, handler: (Event) -> Unit): JQuery
@@ -72,10 +87,6 @@ external class JQuery {
     fun prev(): JQuery
     fun next(): JQuery
     fun parent(): JQuery
-    fun `val`(): String?
-    fun `val`(newValue: String?): JQuery
-    fun `val`(newValue: Double?): JQuery
-    fun `val`(newValue: Array<*>?): JQuery
 
     fun off(): JQuery
 
@@ -85,10 +96,10 @@ external class JQuery {
     val length: Int
     fun size(): Int
 
-    fun get(index: Int): Element
+    operator fun get(index: Int): Element
 }
 
-public typealias JQueryMapper<To> = (index: Int, element: Element) -> To
+typealias JQueryMapper<To> = (index: Int, element: Element) -> To
 
 open public external class MouseEvent(): Event {
     public val pageX: Double

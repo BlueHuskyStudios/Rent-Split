@@ -1,8 +1,6 @@
 package RentSplit
 
-import kotlin.js.Json
-import kotlin.js.json
-
+import kotlin.js.*
 
 
 // DO NOT CHANGE THESE
@@ -48,6 +46,6 @@ data class LocalDataPreferences(
         }
 
 
-        val initial = LocalDataPreferences(localStorageConsent = null)
+        fun generateInitial() = LocalDataPreferences(localStorageConsent = null)
     }
 }

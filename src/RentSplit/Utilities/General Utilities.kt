@@ -1,8 +1,7 @@
 package RentSplit
 
-import jQueryInterface.JQuery
-import org.w3c.dom.Window
-import kotlin.browser.document
+import jQueryInterface.*
+import kotlin.browser.*
 
 
 /*
@@ -51,9 +50,18 @@ fun String.nonEmptyOrNull(): String? = if (isEmpty()) null else this
 /**
  * If this can be turned into a `Boolean`, then it is. Otherwise, `null` is returned.
  */
-fun String.toBooleanOrNull(): Boolean? = if (isEmpty()) null else when (toLowerCase()) {
-    "true",  "t", "yes", "y", "1", "on"  -> true
-    "false", "f", "no",  "n", "0", "off" -> false
+fun Any.toBooleanOrNull(): Boolean? = when(this) {
+    is Boolean -> this
+    is String -> if (isEmpty()) null else when (toLowerCase()) {
+        "true", "t", "yes", "y", "1", "on" -> true
+        "false", "f", "no", "n", "0", "off" -> false
+        else -> null
+    }
+    is Int -> when (this) {
+        0 -> false
+        1 -> true
+        else -> null
+    }
     else -> null
 }
 
@@ -105,3 +113,47 @@ fun JQuery.copyToClipboardOrThrow(): Boolean {
  */
 @Suppress("NOTHING_TO_INLINE") // Inlined on-purpose to reduce output size
 inline fun doNothing() = Unit
+
+
+/**
+ * Logs a message and then returns the this value
+ */
+inline fun <ValueType> ValueType.alsoLog(message: String, logger: (String) -> Unit = ::consoleLogString) = also { log(message, logger) }
+
+
+/**
+ * Simply logs the given message using the given logger (defaults to console.log)
+ */
+inline fun log(message: String, logger: (String) -> Unit = ::consoleLogString) = logger(message)
+
+
+/**
+ * An alias for `console.log` that can only log `String`s
+ */
+@Suppress("NOTHING_TO_INLINE") // Inlined on-purpose because this is an alias for console.log
+inline fun consoleLogString(message: String) {
+    console.log(message)
+}
+
+
+/**
+ * Turns this string into a set of IDs, assuming it's formatted like `[1,2,3]`
+ */
+fun String.toSetOfIds(): Set<ID> = split('[', ',', ']').toSet()
+
+
+/**
+ * Turns this set of IDs into a string, formatted like `[1,2,3]`
+ */
+fun Set<ID>.serializedSetOfIds() = joinToString(prefix = "[", separator = ",", postfix = "]")
+
+
+/**
+ * Prepares this string to be placed on the page as raw HTML. This is useful for user-given input.
+ */
+fun String.sanitizedForHtml(): String {
+    return this
+            .replace(Regex("&(?!amp;amp;)"), "&amp;") // Replace "&" with "&amp;", but not when that's already been done
+            .replace(oldValue = "<", newValue = "&lt;")
+            .replace(oldValue = ">", newValue = "&gt;")
+}

@@ -1,15 +1,12 @@
 package RentSplit
 
-import jQueryInterface.jq
-import org.bh.tools.base.util.safeTry
-import org.w3c.dom.url.URL
-import kotlin.browser.document
-import kotlin.browser.window
-import kotlin.js.Json
-import kotlin.js.json
 import RentSplit.SerializationPurpose.*
 import RentSplit.UserConsent.*
-
+import jQueryInterface.*
+import org.bh.tools.base.util.*
+import org.w3c.dom.url.*
+import kotlin.browser.*
+import kotlin.js.*
 
 
 // DO NOT CHANGE THESE
@@ -69,19 +66,25 @@ data class RentSplitState(
          */
         @Suppress("UNCHECKED_CAST_TO_NATIVE_INTERFACE", "UNCHECKED_CAST_TO_EXTERNAL_INTERFACE")
         operator fun invoke(raw: Json): RentSplitState? {
-            return RentSplitState(roommates = (raw[rentRoommatesSerializedName] as? Json)?.let { RentRoommates(raw = it) } ?: RentRoommates.initial,
-                                  expenses = (raw[rentExpensesSerializedName] as? Json)?.let { RentExpenses(raw = it) } ?: RentExpenses.initial,
-                                  localDataPreferences = (raw[localDataPreferencesSerializedName] as? Json)?.let { LocalDataPreferences(raw = it) } ?: LocalDataPreferences.initial)
+            return RentSplitState(roommates = (raw[rentRoommatesSerializedName] as? Json)?.let { RentRoommates(raw = it) } ?: RentRoommates.generateInitial(),
+                                  expenses = (raw[rentExpensesSerializedName] as? Json)?.let { RentExpenses(raw = it) } ?: RentExpenses.generateInitial(),
+                                  localDataPreferences = (raw[localDataPreferencesSerializedName] as? Json)?.let { LocalDataPreferences(raw = it) } ?: LocalDataPreferences.generateInitial())
         }
 
 
         /**
          * The initial state to use when no other is available
          */
-        val initial = RentSplitState(
-                RentRoommates.initial,
-                RentExpenses.initial,
-                LocalDataPreferences.initial)
+        val initial by lazy {
+            RentSplitState(
+                    RentRoommates.generateInitial(),
+                    RentExpenses.generateInitial(),
+                    LocalDataPreferences.generateInitial())
+        }
+    }
+
+    fun setting(expense: RentExpense): RentSplitState {
+        return copy(expenses = expenses.setting(expense))
     }
 }
 
