@@ -172,6 +172,10 @@ html.rent {
     margin: 0 0.5ex;
 }
 
+.rent footer aside {
+    line-height: 1.5;
+}
+
 .rent .button-list button:not(:last-child) {
     margin-right: 1rem;
 }
