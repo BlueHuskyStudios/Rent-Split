@@ -7,18 +7,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
   var toIntOrNull = Kotlin.kotlin.text.toIntOrNull_pdl1vz$;
   var Unit = Kotlin.kotlin.Unit;
   var Kind_OBJECT = Kotlin.Kind.OBJECT;
-  var to = Kotlin.kotlin.to_ujzrz7$;
-  var json = Kotlin.kotlin.js.json_pyyo18$;
-  var Kind_CLASS = Kotlin.Kind.CLASS;
-  var toSet = Kotlin.kotlin.collections.toSet_us0mfu$;
   var PropertyMetadata = Kotlin.PropertyMetadata;
-  var lazy = Kotlin.kotlin.lazy_klfg04$;
-  var equals = Kotlin.equals;
-  var toMutableList = Kotlin.kotlin.collections.toMutableList_4c7yge$;
-  var defineInlineFunction = Kotlin.defineInlineFunction;
-  var wrapFunction = Kotlin.wrapFunction;
-  var listOf = Kotlin.kotlin.collections.listOf_i5x0yv$;
-  var getPropertyCallableRef = Kotlin.getPropertyCallableRef;
   var getCallableRef = Kotlin.getCallableRef;
   var Throwable = Error;
   var asList = Kotlin.kotlin.collections.asList_us0mfu$;
@@ -27,12 +16,24 @@ this['Rent Split 2'] = function (_, Kotlin) {
   var Pair = Kotlin.kotlin.Pair;
   var toString = Kotlin.toString;
   var filterNotNull = Kotlin.kotlin.collections.filterNotNull_emfgvx$;
-  var toSet_0 = Kotlin.kotlin.collections.toSet_7wnvza$;
+  var toSet = Kotlin.kotlin.collections.toSet_7wnvza$;
   var zip = Kotlin.kotlin.collections.zip_45mdf7$;
   var throwCCE = Kotlin.throwCCE;
+  var Kind_CLASS = Kotlin.Kind.CLASS;
+  var joinToString = Kotlin.kotlin.collections.joinToString_fmv235$;
+  var Kind_INTERFACE = Kotlin.Kind.INTERFACE;
+  var lazy = Kotlin.kotlin.lazy_klfg04$;
+  var defineInlineFunction = Kotlin.defineInlineFunction;
+  var wrapFunction = Kotlin.wrapFunction;
+  var to = Kotlin.kotlin.to_ujzrz7$;
+  var json = Kotlin.kotlin.js.json_pyyo18$;
+  var toSet_0 = Kotlin.kotlin.collections.toSet_us0mfu$;
+  var equals = Kotlin.equals;
+  var toMutableList = Kotlin.kotlin.collections.toMutableList_4c7yge$;
+  var listOf = Kotlin.kotlin.collections.listOf_i5x0yv$;
+  var getPropertyCallableRef = Kotlin.getPropertyCallableRef;
   var Enum = Kotlin.kotlin.Enum;
   var throwISE = Kotlin.throwISE;
-  var joinToString = Kotlin.kotlin.collections.joinToString_fmv235$;
   var toList = Kotlin.kotlin.collections.toList_7wnvza$;
   var split = Kotlin.kotlin.text.split_o64adg$;
   var Regex_init = Kotlin.kotlin.text.Regex_init_61zpoe$;
@@ -42,7 +43,28 @@ this['Rent Split 2'] = function (_, Kotlin) {
   var ReadWriteProperty = Kotlin.kotlin.properties.ReadWriteProperty;
   var ObservableProperty = Kotlin.kotlin.properties.ObservableProperty;
   var roundToInt = Kotlin.kotlin.math.roundToInt_yrwdxr$;
-  var Kind_INTERFACE = Kotlin.Kind.INTERFACE;
+  CssParameterForSelector$exactly.prototype = Object.create(CssParameterForSelector.prototype);
+  CssParameterForSelector$exactly.prototype.constructor = CssParameterForSelector$exactly;
+  CssParameterForSelector$listContainsExactly.prototype = Object.create(CssParameterForSelector.prototype);
+  CssParameterForSelector$listContainsExactly.prototype.constructor = CssParameterForSelector$listContainsExactly;
+  CssParameterForSelector$languageSubCode.prototype = Object.create(CssParameterForSelector.prototype);
+  CssParameterForSelector$languageSubCode.prototype.constructor = CssParameterForSelector$languageSubCode;
+  CssParameterForSelector$startsWith.prototype = Object.create(CssParameterForSelector.prototype);
+  CssParameterForSelector$startsWith.prototype.constructor = CssParameterForSelector$startsWith;
+  CssParameterForSelector$endsWith.prototype = Object.create(CssParameterForSelector.prototype);
+  CssParameterForSelector$endsWith.prototype.constructor = CssParameterForSelector$endsWith;
+  CssParameterForSelector$contains.prototype = Object.create(CssParameterForSelector.prototype);
+  CssParameterForSelector$contains.prototype.constructor = CssParameterForSelector$contains;
+  SelectorCombiner$BinaryCombinator.prototype = Object.create(SelectorCombiner.prototype);
+  SelectorCombiner$BinaryCombinator.prototype.constructor = SelectorCombiner$BinaryCombinator;
+  SelectorCombiner$either.prototype = Object.create(SelectorCombiner$BinaryCombinator.prototype);
+  SelectorCombiner$either.prototype.constructor = SelectorCombiner$either;
+  SelectorCombiner$container.prototype = Object.create(SelectorCombiner$BinaryCombinator.prototype);
+  SelectorCombiner$container.prototype.constructor = SelectorCombiner$container;
+  SelectorCombiner$sibling.prototype = Object.create(SelectorCombiner$BinaryCombinator.prototype);
+  SelectorCombiner$sibling.prototype.constructor = SelectorCombiner$sibling;
+  SelectorCombiner$immediateSibling.prototype = Object.create(SelectorCombiner$BinaryCombinator.prototype);
+  SelectorCombiner$immediateSibling.prototype.constructor = SelectorCombiner$immediateSibling;
   SerializationPurpose.prototype = Object.create(Enum.prototype);
   SerializationPurpose.prototype.constructor = SerializationPurpose;
   UserConsent.prototype = Object.create(Enum.prototype);
@@ -59,6 +81,66 @@ this['Rent Split 2'] = function (_, Kotlin) {
   Ternary.prototype.constructor = Ternary;
   JSTernaryCheckboxTreeController.prototype = Object.create(TernaryCheckboxTree.prototype);
   JSTernaryCheckboxTreeController.prototype.constructor = JSTernaryCheckboxTreeController;
+  var addARoommateRow;
+  var addARoommateButton;
+  var removeARoommateButton;
+  var addAnExpenseRow;
+  var addAnExpenseButton;
+  var removeAnExpenseButton;
+  var roommateInputRow;
+  var expenseInputRow;
+  var roommateResultRow;
+  var roommateNameInput;
+  var roommateIncomeInput;
+  var roommateProportion;
+  var roommateAnyInputField;
+  var roommateWhoOwesTooMuch;
+  var roommateRemovability;
+  var roommateRenamability;
+  var expenseTypeInput;
+  var expenseCostInput;
+  var expenseAnyInputField;
+  var expenseRemovability;
+  var expenseRenamability;
+  var resultRow;
+  var resultsTable;
+  var resultsTableBody;
+  var resultsTableHeadRow;
+  var resourceId;
+  var expenseApplicableRoommates;
+  var expenseHasApplicableRoommates;
+  var copyStateUrlButton;
+  var stateUrlField;
+  var localStorageWarning;
+  var localStorageWarningExplicitRefusalButton;
+  var localStorageWarningExplicitConsentButton;
+  var expenseFilterButton;
+  var expenseFilterDialog;
+  var expenseFilterDialogCancelButton;
+  var expenseFilterDialogOkButton;
+  var expenseFilterDialogExpenseName;
+  var expenseFilterApplicableRoommateChecklist;
+  var expenseFilterApplicableRoommateChecklistItem;
+  var expenseFilterEveryoneCheckbox;
+  var expenseFilterApplicableRoommateCheckbox;
+  var expenseFilterDialogCurrentExpense;
+  var expenseFilterAnyCheckboxSelector;
+  var expenseFilterButtonExpenseRelation;
+  var anyInputField;
+  var anyInputButton;
+  var anyInput;
+  var rentExpenseType;
+  var utilitiesExpenseType;
+  var roommateNamePlaceholderText;
+  var roommateIncomePlaceholderText;
+  var expenseTypePlaceholderText;
+  var expenseCostPlaceholderText;
+  var roommateNameColumnTitle;
+  var totalColumnTitle;
+  var defaultRoommateIncome;
+  var defaultExpenseCost;
+  var defaultRentExpenseCost;
+  var defaultUtilitiesExpenseCost;
   function IdManager() {
     IdManager_instance = this;
     this.lastGeneratedId_0 = 0;
@@ -88,6 +170,1095 @@ this['Rent Split 2'] = function (_, Kotlin) {
     }
     return IdManager_instance;
   }
+  function RentSplitApp() {
+    this.state_h4a1g6$_0 = observing(load(RentSplitState$Companion_getInstance()), void 0, void 0, RentSplitApp$state$lambda(this));
+    var tmp$;
+    this.expenseFilterChecklistController_qbygrd$_0 = observing((tmp$ = null) == null || Kotlin.isType(tmp$, JSTernaryCheckboxTreeController) ? tmp$ : throwCCE(), void 0, void 0, RentSplitApp$expenseFilterChecklistController$lambda(this));
+  }
+  var RentSplitApp$state_metadata = new PropertyMetadata('state');
+  Object.defineProperty(RentSplitApp.prototype, 'state', {
+    get: function () {
+      return this.state_h4a1g6$_0.getValue_lrcp0p$(this, RentSplitApp$state_metadata);
+    },
+    set: function (state) {
+      this.state_h4a1g6$_0.setValue_9rddgb$(this, RentSplitApp$state_metadata, state);
+    }
+  });
+  var RentSplitApp$expenseFilterChecklistController_metadata = new PropertyMetadata('expenseFilterChecklistController');
+  Object.defineProperty(RentSplitApp.prototype, 'expenseFilterChecklistController', {
+    get: function () {
+      return this.expenseFilterChecklistController_qbygrd$_0.getValue_lrcp0p$(this, RentSplitApp$expenseFilterChecklistController_metadata);
+    },
+    set: function (expenseFilterChecklistController) {
+      this.expenseFilterChecklistController_qbygrd$_0.setValue_9rddgb$(this, RentSplitApp$expenseFilterChecklistController_metadata, expenseFilterChecklistController);
+    }
+  });
+  RentSplitApp.prototype.onReady = function () {
+    this.preLoadConfigurations();
+    this.reloadPageFromState_6taknv$(false);
+    this.regenerateInputTables();
+    this.registerListeners();
+    this.recalculateRentSplit();
+    save(this.state);
+    this.presentToUser();
+  };
+  RentSplitApp.prototype.preLoadConfigurations = function () {
+    $('html').addClass(TouchBasics_getInstance().isTouchSupported() ? 'touch-supported' : 'touch-not-supported');
+  };
+  RentSplitApp.prototype.reloadPageFromState_6taknv$ = function (shouldReRegisterListeners) {
+    if (shouldReRegisterListeners === void 0)
+      shouldReRegisterListeners = true;
+    this.applyStateToLocalStorageWarning();
+    this.regenerateInputTables();
+    if (shouldReRegisterListeners) {
+      this.reRegisterListeners();
+    }
+    this.recalculateRentSplit();
+  };
+  var jq = $;
+  RentSplitApp.prototype.applyStateToLocalStorageWarning = function () {
+    if (this.state.l.c != null) {
+      jq(localStorageWarning.cssSelectorString).addClass('hidden');
+    }
+     else {
+      jq(localStorageWarning.cssSelectorString).removeClass('hidden');
+    }
+  };
+  RentSplitApp.prototype.reRegisterListeners = function () {
+    jq(anyInput.cssSelectorString).off();
+    this.registerListeners();
+  };
+  RentSplitApp.prototype.reRegisterFilterDialogListeners = function () {
+    var cssSelector = anyInput;
+    var context = jq(expenseFilterDialog.cssSelectorString);
+    jq(cssSelector.cssSelectorString, context).off();
+    this.registerFilterDialogListeners();
+  };
+  RentSplitApp.prototype.registerListeners = function () {
+    jq(anyInputField.cssSelectorString).change(getCallableRef('anyInputFieldDidChange', function ($receiver, event) {
+      return $receiver.anyInputFieldDidChange_g0pdib$(event), Unit;
+    }.bind(null, this)));
+    jq(addAnExpenseButton.cssSelectorString).click(getCallableRef('didPressNewExpenseButton', function ($receiver, event) {
+      return $receiver.didPressNewExpenseButton_9ojx7i$(event), Unit;
+    }.bind(null, this)));
+    jq(removeAnExpenseButton.cssSelectorString).click(getCallableRef('didPressRemoveExpenseButton', function ($receiver, event) {
+      return $receiver.didPressRemoveExpenseButton_9ojx7i$(event), Unit;
+    }.bind(null, this)));
+    jq(addARoommateButton.cssSelectorString).click(getCallableRef('didPressNewRoommateButton', function ($receiver, event) {
+      return $receiver.didPressNewRoommateButton_9ojx7i$(event), Unit;
+    }.bind(null, this)));
+    jq(removeARoommateButton.cssSelectorString).click(getCallableRef('didPressRemoveRoommateButton', function ($receiver, event) {
+      return $receiver.didPressRemoveRoommateButton_9ojx7i$(event), Unit;
+    }.bind(null, this)));
+    jq(localStorageWarningExplicitConsentButton.cssSelectorString).click(getCallableRef('didPressLocalStorageWarningExplicitConsentButton', function ($receiver, event) {
+      return $receiver.didPressLocalStorageWarningExplicitConsentButton_9ojx7i$(event), Unit;
+    }.bind(null, this)));
+    jq(localStorageWarningExplicitRefusalButton.cssSelectorString).click(getCallableRef('didPressLocalStorageWarningExplicitRefusalButton', function ($receiver, event) {
+      return $receiver.didPressLocalStorageWarningExplicitRefusalButton_9ojx7i$(event), Unit;
+    }.bind(null, this)));
+    jq(copyStateUrlButton.cssSelectorString).click(getCallableRef('didPressCopyUrlButton', function ($receiver, event) {
+      return $receiver.didPressCopyUrlButton_9ojx7i$(event), Unit;
+    }.bind(null, this)));
+    this.registerFilterDialogListeners();
+  };
+  RentSplitApp.prototype.registerFilterDialogListeners = function () {
+    jq(expenseFilterButton.cssSelectorString).click(getCallableRef('didPressFilterButton', function ($receiver, event) {
+      return $receiver.didPressFilterButton_9ojx7i$(event), Unit;
+    }.bind(null, this)));
+    jq(expenseFilterDialogCancelButton.cssSelectorString).click(getCallableRef('didPressFilterDialogCancelButton', function ($receiver, event) {
+      return $receiver.didPressFilterDialogCancelButton_9ojx7i$(event), Unit;
+    }.bind(null, this)));
+    jq(expenseFilterDialogOkButton.cssSelectorString).click(getCallableRef('didPressFilterDialogOkButton', function ($receiver, event) {
+      return $receiver.didPressFilterDialogOkButton_9ojx7i$(event), Unit;
+    }.bind(null, this)));
+  };
+  RentSplitApp.prototype.anyInputFieldDidChange_g0pdib$ = function (event) {
+    this.reloadStateFromPage();
+  };
+  RentSplitApp.prototype.didPressLocalStorageWarningExplicitConsentButton_9ojx7i$ = function (event) {
+    this.state = this.state.copy_2k6jng$(void 0, void 0, this.state.l.copy_hombyb$(UserConsent$explicitConsent_getInstance()));
+  };
+  RentSplitApp.prototype.didPressLocalStorageWarningExplicitRefusalButton_9ojx7i$ = function (event) {
+    this.state = this.state.copy_2k6jng$(void 0, void 0, this.state.l.copy_hombyb$(UserConsent$explicitRefusal_getInstance()));
+  };
+  function RentSplitApp$didPressCopyUrlButton$lambda() {
+    return jq(copyStateUrlButton.cssSelectorString).removeClass('just-copied');
+  }
+  RentSplitApp.prototype.didPressCopyUrlButton_9ojx7i$ = function (event) {
+    try {
+      copyToClipboardOrThrow(jq(stateUrlField.cssSelectorString));
+      jq(copyStateUrlButton.cssSelectorString).addClass('just-copied');
+      window.setTimeout(RentSplitApp$didPressCopyUrlButton$lambda, 3000);
+    }
+     catch (error) {
+      if (Kotlin.isType(error, Throwable)) {
+        var message = 'Failed to copy state URL!';
+        console.log(message);
+      }
+       else
+        throw error;
+    }
+  };
+  RentSplitApp.prototype.didPressFilterButton_9ojx7i$ = function (event) {
+    var tmp$, tmp$_0, tmp$_1;
+    tmp$_0 = Kotlin.isType(tmp$ = event.currentTarget, Element) ? tmp$ : null;
+    if (tmp$_0 == null) {
+      var message = 'No element targeted in the filter button click event';
+      console.log(message);
+      return Unit;
+    }
+    tmp$_1 = this.expenseForFilterButton_2rdptt$(tmp$_0);
+    if (tmp$_1 == null) {
+      var message_0 = 'No expense matching ID in filter button';
+      console.log(message_0);
+      return Unit;
+    }
+    this.showExpenseDialog_pbrwj2$(tmp$_1);
+  };
+  RentSplitApp.prototype.applicableRoommateCheckboxesDidChange_esuzu6$ = function (newValue) {
+    booleanAttr_0(jq(expenseFilterDialogOkButton.cssSelectorString), 'disabled', newValue === Ternary$false_getInstance());
+  };
+  RentSplitApp.prototype.didPressFilterDialogCancelButton_9ojx7i$ = function (event) {
+    var tmp$;
+    (tmp$ = this.expenseFilterDialogElement) != null ? (tmp$.close(), Unit) : null;
+  };
+  RentSplitApp.prototype.didPressFilterDialogOkButton_9ojx7i$ = function (event) {
+    var tmp$;
+    var expense = this.expenseInFilterDialog();
+    if (expense != null) {
+      this.state = this.state.setting_pbrwj2$(expense.copy_7xqv4k$(void 0, void 0, void 0, this.applicableRoommateIdsInFilterDialog_6taknv$()));
+    }
+     else {
+      var message = 'No expense found in filter dialog!';
+      console.log(message);
+    }
+    (tmp$ = this.expenseFilterDialogElement) != null ? (tmp$.close(), Unit) : null;
+  };
+  RentSplitApp.prototype.reloadStateFromPage = function () {
+    this.state = this.state.copy_2k6jng$(this.fetchRoommates(), this.fetchExpenses());
+  };
+  RentSplitApp.prototype.recalculateRentSplit = function () {
+    var resultsTable = resultsTableModel(this.state);
+    RentSplitViewGenerator_getInstance().fillOutResults_1a4gu5$(resultsTable);
+    this.notifyOfProblems_1a4gu5$(resultsTable);
+  };
+  RentSplitApp.prototype.presentToUser = function () {
+    $('.rent').addClass('rent-ready');
+  };
+  RentSplitApp.prototype.fetchRoommates = function () {
+    return this.roommateRowsToRoommates_r6ezyp$(jq(roommateInputRow.cssSelectorString));
+  };
+  RentSplitApp.prototype.fetchExpenses = function () {
+    return this.expenseRowsToExpenses_r6ezyp$(jq(expenseInputRow.cssSelectorString));
+  };
+  function RentSplitApp$roommateRowsToRoommates$lambda(this$RentSplitApp) {
+    return function (index, roommateRow) {
+      return this$RentSplitApp.roommateRowToRoommate_folkv9$(index, $(roommateRow));
+    };
+  }
+  RentSplitApp.prototype.roommateRowsToRoommates_r6ezyp$ = function (jq_roommateRows) {
+    return new RentRoommates(asList(mapNotNull(jq_roommateRows, RentSplitApp$roommateRowsToRoommates$lambda(this))));
+  };
+  function RentSplitApp$expenseRowsToExpenses$lambda(this$RentSplitApp) {
+    return function (index, expenseRow) {
+      return this$RentSplitApp.expenseRowToExpense_folkv9$(index, $(expenseRow));
+    };
+  }
+  RentSplitApp.prototype.expenseRowsToExpenses_r6ezyp$ = function (jq_expenseRows) {
+    return new RentExpenses(asList(mapNotNull(jq_expenseRows, RentSplitApp$expenseRowsToExpenses$lambda(this))));
+  };
+  RentSplitApp.prototype.roommateRowToRoommate_folkv9$ = function (index, jq_roommateRow) {
+    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7, tmp$_8;
+    tmp$_0 = (tmp$ = $(jq_roommateRow).data(resourceId.dataName)) != null ? tmp$.toString() : null;
+    if (tmp$_0 == null) {
+      var message = 'No ID on page!';
+      console.log(message);
+      return null;
+    }
+    tmp$_2 = (tmp$_1 = jq(roommateNameInput.cssSelectorString, jq_roommateRow).val()) != null ? tmp$_1 : '';
+    tmp$_4 = (tmp$_3 = jq(roommateIncomeInput.cssSelectorString, jq_roommateRow).val()) != null ? toDoubleOrNull(tmp$_3) : null;
+    if (tmp$_4 == null) {
+      var message_0 = 'No monthly income on page!';
+      console.log(message_0);
+      return null;
+    }
+    return new RentRoommate(tmp$_0, tmp$_2, tmp$_4, (tmp$_6 = (tmp$_5 = jq_roommateRow.attr(roommateRemovability.htmlAttributeName)) != null ? toBooleanOrNull(tmp$_5) : null) != null ? tmp$_6 : true, (tmp$_8 = (tmp$_7 = jq_roommateRow.attr(roommateRenamability.htmlAttributeName)) != null ? toBooleanOrNull(tmp$_7) : null) != null ? tmp$_8 : true, jq_roommateRow);
+  };
+  RentSplitApp.prototype.expenseRowToExpense_folkv9$ = function (index, jq_expenseRow) {
+    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7, tmp$_8, tmp$_9, tmp$_10, tmp$_11, tmp$_12;
+    tmp$_0 = (tmp$ = jq_expenseRow.data(resourceId.dataName)) != null ? tmp$.toString() : null;
+    if (tmp$_0 == null) {
+      var message = 'No ID on page!';
+      console.log(message);
+      return null;
+    }
+    tmp$_2 = (tmp$_1 = jq(expenseTypeInput.cssSelectorString, jq_expenseRow).val()) != null ? tmp$_1 : '';
+    tmp$_6 = (tmp$_5 = (tmp$_4 = (tmp$_3 = jq_expenseRow.data(expenseApplicableRoommates.dataName)) != null ? tmp$_3.toString() : null) != null ? getCallableRef('expenseApplicableRoommatesFromString', function ($receiver, expenseApplicableRoommatesString) {
+      return $receiver.expenseApplicableRoommatesFromString_61zpoe$(expenseApplicableRoommatesString);
+    }.bind(null, this))(tmp$_4) : null) != null ? tmp$_5 : RentExpenses$Companion_getInstance().allRoommates;
+    tmp$_8 = (tmp$_7 = jq(expenseCostInput.cssSelectorString, jq_expenseRow).val()) != null ? toDoubleOrNull(tmp$_7) : null;
+    if (tmp$_8 == null) {
+      var message_0 = 'No monthly cost on page!';
+      console.log(message_0);
+      return null;
+    }
+    return new RentExpense(tmp$_0, tmp$_2, tmp$_8, tmp$_6, (tmp$_10 = (tmp$_9 = jq_expenseRow.attr(expenseRemovability.htmlAttributeName)) != null ? toBooleanOrNull(tmp$_9) : null) != null ? tmp$_10 : true, (tmp$_12 = (tmp$_11 = jq_expenseRow.attr(expenseRenamability.htmlAttributeName)) != null ? toBooleanOrNull(tmp$_11) : null) != null ? tmp$_12 : true, jq_expenseRow);
+  };
+  RentSplitApp.prototype.expenseApplicableRoommatesFromString_61zpoe$ = function (expenseApplicableRoommatesString) {
+    return toSetOfIds(expenseApplicableRoommatesString);
+  };
+  RentSplitApp.prototype.expenseForFilterButton_2rdptt$ = function (filterButton) {
+    var tmp$, tmp$_0;
+    return (tmp$_0 = (tmp$ = $(filterButton).data(expenseFilterButtonExpenseRelation.dataName)) != null ? tmp$.toString() : null) != null ? getCallableRef('expenseForId', function ($receiver, id) {
+      return $receiver.expenseForId_61zpoe$(id);
+    }.bind(null, this))(tmp$_0) : null;
+  };
+  RentSplitApp.prototype.expenseForId_61zpoe$ = function (id) {
+    return this.state.e.expenseForId_61zpoe$(id);
+  };
+  RentSplitApp.prototype.expenseInFilterDialog = function () {
+    var tmp$, tmp$_0, tmp$_1;
+    return (tmp$_1 = (tmp$_0 = (tmp$ = this.expenseFilterDialogElement) != null ? $(tmp$) : null) != null ? tmp$_0.data(expenseFilterDialogCurrentExpense.dataName) : null) != null ? this.expenseForId_61zpoe$(tmp$_1.toString()) : null;
+  };
+  RentSplitApp.prototype.applicableRoommateIdsInFilterDialog_6taknv$ = function (ignoreEveryoneCheckbox) {
+    if (ignoreEveryoneCheckbox === void 0)
+      ignoreEveryoneCheckbox = false;
+    var tmp$;
+    var tmp$_0 = this.summarizeFilterDialogApplicableRoommates_6taknv$(ignoreEveryoneCheckbox);
+    var summary = tmp$_0.component1()
+    , set = tmp$_0.component2();
+    if (Kotlin.isType(summary, FiniteAmountSummary$all))
+      tmp$ = RentExpenses$Companion_getInstance().allRoommates;
+    else if (Kotlin.isType(summary, FiniteAmountSummary$some) || Kotlin.isType(summary, FiniteAmountSummary$none))
+      tmp$ = set;
+    else
+      tmp$ = Kotlin.noWhenBranchMatched();
+    return tmp$;
+  };
+  function RentSplitApp$summarizeFilterDialogApplicableRoommates$lambda(f, element) {
+    var id = toString($(element).data(resourceId.dataName));
+    var tmp$, tmp$_0;
+    return ((tmp$_0 = (tmp$ = $(element).prop('checked')) != null ? toBooleanOrNull(tmp$) : null) != null ? tmp$_0 : false) ? id : null;
+  }
+  RentSplitApp.prototype.summarizeFilterDialogApplicableRoommates_6taknv$ = function (ignoreEveryoneCheckbox) {
+    if (ignoreEveryoneCheckbox === void 0)
+      ignoreEveryoneCheckbox = false;
+    var tmp$;
+    var allCheckboxes = jq(expenseFilterApplicableRoommateCheckbox.cssSelectorString);
+    var tmp$_0 = !ignoreEveryoneCheckbox;
+    if (tmp$_0) {
+      var $receiver = jq(expenseFilterEveryoneCheckbox.cssSelectorString);
+      var tmp$_1, tmp$_2;
+      var tmp$_3 = (tmp$_2 = (tmp$_1 = $receiver.prop('checked')) != null ? toBooleanOrNull(tmp$_1) : null) != null ? tmp$_2 : false;
+      if (tmp$_3) {
+        var tmp$_4, tmp$_5;
+        tmp$_3 = !((tmp$_5 = (tmp$_4 = $receiver.prop('indeterminate')) != null ? toBooleanOrNull(tmp$_4) : null) != null ? tmp$_5 : false);
+      }
+      tmp$_0 = tmp$_3;
+    }
+    if (tmp$_0) {
+      tmp$ = new Pair(new FiniteAmountSummary$all(allCheckboxes.length), emptySet());
+    }
+     else {
+      var checkedRoommateIds = filterNotNull(allCheckboxes.map(RentSplitApp$summarizeFilterDialogApplicableRoommates$lambda));
+      var tmp$_6, tmp$_7;
+      tmp$_6 = checkedRoommateIds.size;
+      if (tmp$_6 === 0)
+        tmp$_7 = new FiniteAmountSummary$none();
+      else {
+        if (tmp$_6 === this.state.r.r.size)
+          tmp$_7 = new FiniteAmountSummary$all(allCheckboxes.length);
+        else {
+          tmp$_7 = new FiniteAmountSummary$some(checkedRoommateIds.size, allCheckboxes.length);
+        }
+      }
+      tmp$ = new Pair(tmp$_7, toSet(checkedRoommateIds));
+    }
+    return tmp$;
+  };
+  RentSplitApp.prototype.regenerateInputTables = function () {
+    this.regenerateRoommateInputTable_0();
+    this.regenerateExpenseInputTable_0();
+  };
+  RentSplitApp.prototype.regenerateInputTable_0 = function (rowSelector, allResources, configureExistingInput, insertNewInput) {
+    var existingInputs = asList(jq(rowSelector.cssSelectorString).toArray());
+    var offset = existingInputs.size;
+    var newResources = allResources.subList_vux9f0$(offset, allResources.size);
+    var tmp$;
+    tmp$ = zip(existingInputs, allResources).iterator();
+    while (tmp$.hasNext()) {
+      var element = tmp$.next();
+      var existingInput = element.component1()
+      , expense = element.component2();
+      configureExistingInput(existingInput, expense);
+    }
+    var tmp$_0, tmp$_0_0;
+    var index = 0;
+    tmp$_0 = newResources.iterator();
+    while (tmp$_0.hasNext()) {
+      var item = tmp$_0.next();
+      insertNewInput((tmp$_0_0 = index, index = tmp$_0_0 + 1 | 0, tmp$_0_0) + offset | 0, item);
+    }
+  };
+  function RentSplitApp$regenerateExpenseInputTable$lambda(this$RentSplitApp) {
+    return function (existingExpenseInput, expense) {
+      this$RentSplitApp.configureExistingExpenseInputRow_0(existingExpenseInput, expense);
+      return Unit;
+    };
+  }
+  function RentSplitApp$regenerateExpenseInputTable$lambda_0(this$RentSplitApp) {
+    return function (explicitIndex, expense) {
+      this$RentSplitApp.insertNewExpenseInputRow_nly0u5$(explicitIndex, expense);
+      return Unit;
+    };
+  }
+  RentSplitApp.prototype.regenerateExpenseInputTable_0 = function () {
+    this.regenerateInputTable_0(expenseInputRow, this.state.e.e, RentSplitApp$regenerateExpenseInputTable$lambda(this), RentSplitApp$regenerateExpenseInputTable$lambda_0(this));
+  };
+  var copyToArray = Kotlin.kotlin.collections.copyToArray;
+  RentSplitApp.prototype.configureExistingExpenseInputRow_0 = function (existingExpenseInputRow, expense) {
+    var jq_existingExpenseInputRow = $(existingExpenseInputRow);
+    expense.originalDOMElement = jq_existingExpenseInputRow;
+    jq(expenseTypeInput.cssSelectorString, existingExpenseInputRow).val(expense.n);
+    jq(expenseCostInput.cssSelectorString, existingExpenseInputRow).val(expense.d);
+    jq_existingExpenseInputRow.attr(expenseRenamability.htmlAttributeName, expense.r);
+    jq_existingExpenseInputRow.attr(expenseRemovability.htmlAttributeName, expense.x);
+    if (expense.f == null) {
+      jq_existingExpenseInputRow.data(expenseApplicableRoommates.dataName, null);
+      jq_existingExpenseInputRow.removeClass(expenseHasApplicableRoommates.className);
+    }
+     else {
+      jq_existingExpenseInputRow.data(expenseApplicableRoommates.dataName, copyToArray(expense.f));
+      jq_existingExpenseInputRow.addClass(expenseHasApplicableRoommates.className);
+    }
+  };
+  RentSplitApp.prototype.regenerateRoommateInputTable_0 = function () {
+    this.regenerateInputTable_0(roommateInputRow, this.state.r.r, getCallableRef('configureExistingRoommateInputRow', function ($receiver, existingRoommateInputTableRow, roommate) {
+      return $receiver.configureExistingRoommateInputRow_0(existingRoommateInputTableRow, roommate), Unit;
+    }.bind(null, this)), getCallableRef('insertNewRoommateInputRow', function ($receiver, explicitIndex, roommate) {
+      return $receiver.insertNewRoommateInputRow_7kd045$(explicitIndex, roommate), Unit;
+    }.bind(null, this)));
+  };
+  RentSplitApp.prototype.configureExistingRoommateInputRow_0 = function (existingRoommateInputTableRow, roommate) {
+    var jq_existingRoommateInputTableRow = $(existingRoommateInputTableRow);
+    roommate.originalDOMElement = jq_existingRoommateInputTableRow;
+    jq(roommateNameInput.cssSelectorString, existingRoommateInputTableRow).val(roommate.n);
+    jq(roommateIncomeInput.cssSelectorString, existingRoommateInputTableRow).val(roommate.d);
+    RentSplitViewGenerator_getInstance().displayRoommateProportion_zem1ah$(rentSplitResultRow(roommate, this.state));
+    jq_existingRoommateInputTableRow.attr(roommateRenamability.htmlAttributeName, roommate.r);
+    jq_existingRoommateInputTableRow.attr(roommateRemovability.htmlAttributeName, roommate.x);
+  };
+  RentSplitApp.prototype.reconfigureExpenseDialog_pbrwj2$ = function (expense) {
+    jq(expenseFilterDialog.cssSelectorString).data(expenseFilterDialogCurrentExpense.dataName, expense.i);
+    jq(expenseFilterDialogExpenseName.cssSelectorString).text(sanitizedForHtml(get_nonEmptyType(expense)));
+    this.fillExpenseFilterApplicableRoommateList_pbrwj2$(expense);
+    this.reRegisterFilterDialogListeners();
+  };
+  function RentSplitApp$fillExpenseFilterApplicableRoommateList$lambda(f, element) {
+    return element;
+  }
+  var ArrayList_init = Kotlin.kotlin.collections.ArrayList_init_ww73n8$;
+  RentSplitApp.prototype.fillExpenseFilterApplicableRoommateList_pbrwj2$ = function (expense) {
+    var tmp$, tmp$_0;
+    jq(expenseFilterApplicableRoommateChecklistItem.cssSelectorString).remove();
+    jq(expenseFilterApplicableRoommateChecklist.cssSelectorString).append(this.buildExpenseFilterApplicableRoommateList_pbrwj2$(expense));
+    tmp$_0 = Kotlin.isType(tmp$ = jq(expenseFilterEveryoneCheckbox.cssSelectorString).get(0), HTMLInputElement) ? tmp$ : null;
+    if (tmp$_0 == null) {
+      return;
+    }
+    var everyoneCheckbox = tmp$_0;
+    var $receiver = jq(expenseFilterApplicableRoommateCheckbox.cssSelectorString).map(RentSplitApp$fillExpenseFilterApplicableRoommateList$lambda);
+    var destination = ArrayList_init($receiver.length);
+    var tmp$_1;
+    for (tmp$_1 = 0; tmp$_1 !== $receiver.length; ++tmp$_1) {
+      var item = $receiver[tmp$_1];
+      var tmp$_2 = destination.add_11rb$;
+      var tmp$_3, tmp$_4;
+      tmp$_4 = Kotlin.isType(tmp$_3 = item, HTMLInputElement) ? tmp$_3 : null;
+      if (tmp$_4 == null) {
+        return;
+      }
+      tmp$_2.call(destination, tmp$_4);
+    }
+    var roommateCheckboxes = destination;
+    this.expenseFilterChecklistController = JSTernaryCheckboxTreeController_init(everyoneCheckbox, roommateCheckboxes);
+  };
+  function RentSplitApp$buildExpenseFilterApplicableRoommateList$lambda(closure$expense, this$RentSplitApp) {
+    return function (htmlString, roommate) {
+      return htmlString + this$RentSplitApp.buildExpenseFilterApplicableRoommateListItem_m1r9kw$(closure$expense, roommate);
+    };
+  }
+  RentSplitApp.prototype.buildExpenseFilterApplicableRoommateList_pbrwj2$ = function (expense) {
+    return reduceTo(this.state.r.r, '', RentSplitApp$buildExpenseFilterApplicableRoommateList$lambda(expense, this));
+  };
+  RentSplitApp.prototype.buildExpenseFilterApplicableRoommateListItem_m1r9kw$ = function (expense, roommate) {
+    return '<li' + (" class='checklist-item " + expenseFilterApplicableRoommateChecklistItem.className + "'>") + '<label>' + '<input' + (' ' + resourceId.htmlAttributeName + "='" + roommate.i + "'") + (" class='" + expenseFilterApplicableRoommateCheckbox.className + "'") + " type='checkbox'" + (' ' + (expense.appliesTo_pcqrmu$(roommate) ? 'checked' : '')) + '/>' + (' ' + sanitizedForHtml(get_nonEmptyName(roommate))) + '<\/label>' + '<\/li>';
+  };
+  RentSplitApp.prototype.showExpenseDialog_pbrwj2$ = function (expense) {
+    var tmp$;
+    this.reconfigureExpenseDialog_pbrwj2$(expense);
+    (tmp$ = this.expenseFilterDialogElement) != null ? (tmp$.showModal(), Unit) : null;
+  };
+  Object.defineProperty(RentSplitApp.prototype, 'expenseFilterDialogElement', {
+    get: function () {
+      var tmp$, tmp$_0;
+      var tmp$_1;
+      if ((tmp$_0 = Kotlin.isType(tmp$ = jq(expenseFilterDialog.cssSelectorString).get(0), HTMLDialogElement) ? tmp$ : null) != null)
+        tmp$_1 = tmp$_0;
+      else {
+        var message = 'Could not find dialog element!';
+        console.log(message);
+        tmp$_1 = null;
+      }
+      return tmp$_1;
+    }
+  });
+  RentSplitApp.prototype.didPressNewExpenseButton_9ojx7i$ = function (event) {
+    this.addNewExpense_rhtjr1$(RentExpense$Companion_getInstance().generateNewExpense(), event);
+  };
+  RentSplitApp.prototype.addNewExpense_rhtjr1$ = function (newExpense, event) {
+    if (event === void 0)
+      event = null;
+    this.state = addingNewExpense(this.state, newExpense);
+  };
+  RentSplitApp.prototype.insertNewExpenseInputRow_nly0u5$ = function (explicitIndex, expense) {
+    if (explicitIndex === void 0)
+      explicitIndex = null;
+    var expenseInputHtml = this.buildExpenseInputRow_cymhq0$(explicitIndex != null ? explicitIndex : this.numberOfExpensesCurrentlyOnPage(), expense);
+    expense.originalDOMElement = jq(addAnExpenseRow.cssSelectorString).before(expenseInputHtml).prev();
+  };
+  RentSplitApp.prototype.buildExpenseInputRow_cymhq0$ = function (index, expense) {
+    return this.buildExpenseInputRow_c99a2s$(index, expense.i, expense.n, expense.d, expense.f, expense.r, expense.x);
+  };
+  RentSplitApp.prototype.buildExpenseInputRow_c99a2s$ = function (index, id, type, cost, applicableRoommates, isRenamable, isRemovable) {
+    var expenseNumber = index + 1 | 0;
+    var row = '<tr' + " class='hides-something-until-hover'" + (' ' + resourceId.htmlAttributeName + "='" + id + "'") + (' data-' + expenseInputRow.dataName + '=' + '"' + expenseNumber + '"') + (' ' + expenseRenamability.htmlAttributeName + "='" + isRenamable + "'") + (' ' + expenseRemovability.htmlAttributeName + "='" + isRemovable + "'") + (applicableRoommates == null ? '' : ' ' + expenseApplicableRoommates.htmlAttributeName + "='" + serializedSetOfIds(applicableRoommates) + "'") + '>';
+    var tmp$ = '<th class=' + '"' + (isRenamable ? 'plain   ' : '') + 'has-floating-button' + '"' + '>' + ("<button class='" + expenseFilterButton.className + "   floats-to-left   hidden-until-parent-hover' " + expenseFilterButtonExpenseRelation.htmlAttributeName + "='" + id + "'><i class='fa fa-filter'><\/i><\/button>") + '<input' + (' type=' + '"' + (isRenamable ? 'text' : 'hidden') + '"') + (' class=' + '"' + expenseTypeInput.className + '   text-right' + '"') + (!(type == null || type.length === 0) ? ' value=' + '"' + toString(type) + '"' : '') + ' size="8"' + ' tabindex=0' + (' placeholder=' + '"' + RentExpense$Companion_getInstance().numberedType_61zpoe$(id) + '"') + '/>';
+    var tmp$_0 = !isRenamable;
+    if (tmp$_0) {
+      tmp$_0 = !(type == null || type.length === 0);
+    }
+    row += tmp$ + (tmp$_0 ? type : '') + '<\/th>';
+    row += '<td class="plain vert-bottom">' + '<input' + ' type="number"' + (!(type == null || type.length === 0) ? ' id=' + '"' + 'total-' + toString(type) + '"' : '') + (' class=' + '"' + expenseCostInput.className + '"') + ' required' + (' value=' + '"' + (cost != null ? cost : defaultExpenseCost) + '"') + ' step="10"' + ' size="8"' + ' tabindex=0' + ' placeholder="Monthly Cost"' + '/>' + '<\/td>';
+    if (isRemovable) {
+      row += '<td' + (' class=' + '"' + removeAnExpenseButton.className + ' color-danger' + '"') + ' tabindex="0">' + '<i class="fa fa-minus-circle"><\/i>' + '<\/td>';
+    }
+    return row + '<\/tr>';
+  };
+  RentSplitApp.prototype.didPressNewRoommateButton_9ojx7i$ = function (event) {
+    return this.addNewRoommate_an8xux$(RentRoommate$Companion_getInstance().generateNewRoommate(), event);
+  };
+  RentSplitApp.prototype.addNewRoommate_an8xux$ = function (newRoommate, event) {
+    if (event === void 0)
+      event = null;
+    this.state = addingNewRoommate(this.state, newRoommate);
+  };
+  RentSplitApp.prototype.insertNewRoommateInputRow_7kd045$ = function (explicitIndex, roommate) {
+    if (explicitIndex === void 0)
+      explicitIndex = null;
+    var roommateInputHtml = this.buildRoommateInputRow_hi9t74$(explicitIndex != null ? explicitIndex : this.numberOfRoommatesCurrentlyOnPage(), roommate);
+    roommate.originalDOMElement = jq(addARoommateRow.cssSelectorString).before(roommateInputHtml).prev();
+  };
+  RentSplitApp.prototype.buildRoommateInputRow_hi9t74$ = function (index, roommate) {
+    return this.buildRoommateInputRow_yi75pw$(index, roommate.i, roommate.n, roommate.d, roommate.r, roommate.x);
+  };
+  RentSplitApp.prototype.buildRoommateInputRow_yi75pw$ = function (index, id, name, income, isRenamable, isRemovable) {
+    var roommateNumber = index + 1 | 0;
+    var row = '<tr' + (' ' + resourceId.htmlAttributeName + "='" + id + "'") + (' data-' + roommateInputRow.dataName + "='" + roommateNumber + "'") + (' ' + roommateRenamability.htmlAttributeName + "='" + isRenamable + "'") + (' ' + roommateRemovability.htmlAttributeName + "='" + isRemovable + "'") + '>';
+    row += '<th class="plain">' + '<input' + ' type="text"' + (' class=' + '"' + roommateNameInput.className + '   text-right' + '"') + (!(name == null || name.length === 0) ? ' value="' + name + '"' : '') + ' size="8"' + ' tabindex=0' + (' placeholder=' + '"' + RentRoommate$Companion_getInstance().numberedName_61zpoe$(id) + '"') + '/>' + '<\/th>';
+    row += '<td class="plain vert-bottom">' + '<input' + ' type="number"' + (' class=' + '"' + roommateIncomeInput.className + '"') + ' required' + (' value=' + '"' + (income != null ? income : defaultRoommateIncome) + '"') + ' step="100"' + ' size="8"' + ' tabindex=0' + ' placeholder="Income"' + '/>' + '<\/td>';
+    row += '<td class=' + '"' + roommateProportion.className + '"' + '>Calculating<\/td>';
+    if (isRemovable) {
+      row += '<td class=' + '"' + removeARoommateButton.className + ' color-danger' + '"' + ' tabindex="0">' + '<i class="fa fa-minus-circle"><\/i>' + '<\/td>';
+    }
+    return row + '<\/tr>';
+  };
+  RentSplitApp.prototype.numberOfRoommatesCurrentlyOnPage = function () {
+    return jq(roommateInputRow.cssSelectorString).length;
+  };
+  RentSplitApp.prototype.numberOfExpensesCurrentlyOnPage = function () {
+    return jq(expenseInputRow.cssSelectorString).length;
+  };
+  RentSplitApp.prototype.didPressRemoveExpenseButton_9ojx7i$ = function (event) {
+    var tmp$;
+    var expenseRow = (tmp$ = event.currentTarget) != null ? tmp$.parentElement : null;
+    expenseRow != null ? (expenseRow.remove(), Unit) : null;
+    this.reloadStateFromPage();
+  };
+  RentSplitApp.prototype.didPressRemoveRoommateButton_9ojx7i$ = function (event) {
+    var tmp$;
+    var roommateRow = (tmp$ = event.currentTarget) != null ? tmp$.parentElement : null;
+    roommateRow != null ? (roommateRow.remove(), Unit) : null;
+    this.reloadStateFromPage();
+  };
+  RentSplitApp.prototype.notifyOfProblems_1a4gu5$ = function (table) {
+    var $receiver = table.rows;
+    var destination = ArrayList_init();
+    var tmp$;
+    tmp$ = $receiver.iterator();
+    while (tmp$.hasNext()) {
+      var element = tmp$.next();
+      if (element.totalContributions > element.representedRoommate.d)
+        destination.add_11rb$(element);
+    }
+    var roommatesWhoOweTooMuch = destination;
+    var tmp$_0;
+    tmp$_0 = roommatesWhoOweTooMuch.iterator();
+    while (tmp$_0.hasNext()) {
+      var element_0 = tmp$_0.next();
+      var name = sanitizedForHtml(get_nonEmptyName(element_0.representedRoommate));
+      $('[data-' + roommateResultRow.dataName + "='" + name + "']").addClass(roommateWhoOwesTooMuch.className).attr('title', name + ' owes ' + (element_0.totalContributions - element_0.representedRoommate.d) + ' too much!');
+    }
+  };
+  function RentSplitApp$state$lambda(this$RentSplitApp) {
+    return function (f, f_0) {
+      this$RentSplitApp.reloadPageFromState_6taknv$();
+      save(this$RentSplitApp.state);
+      return Unit;
+    };
+  }
+  function RentSplitApp$expenseFilterChecklistController$lambda$lambda(this$RentSplitApp) {
+    return function (f, newState) {
+      this$RentSplitApp.applicableRoommateCheckboxesDidChange_esuzu6$(newState);
+      return Unit;
+    };
+  }
+  function RentSplitApp$expenseFilterChecklistController$lambda(this$RentSplitApp) {
+    return function (oldValue, newValue) {
+      var tmp$, tmp$_0;
+      oldValue != null ? (oldValue.deinit(), Unit) : null;
+      newValue != null ? (newValue.onStateChange_nrmh93$(RentSplitApp$expenseFilterChecklistController$lambda$lambda(this$RentSplitApp)), Unit) : null;
+      tmp$_0 = (tmp$ = newValue != null ? newValue.state : null) != null ? tmp$ : Ternary$indeterminate_getInstance();
+      this$RentSplitApp.applicableRoommateCheckboxesDidChange_esuzu6$(tmp$_0);
+      return Unit;
+    };
+  }
+  RentSplitApp.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'RentSplitApp',
+    interfaces: []
+  };
+  function main$lambda() {
+    (new RentSplitApp()).onReady();
+    return Unit;
+  }
+  function main(args) {
+    $(main$lambda);
+  }
+  var collectionSizeOrDefault = Kotlin.kotlin.collections.collectionSizeOrDefault_ba2ldo$;
+  function resultsTableModel($receiver) {
+    var $receiver_0 = $receiver.e.e;
+    var destination = ArrayList_init(collectionSizeOrDefault($receiver_0, 10));
+    var tmp$;
+    tmp$ = $receiver_0.iterator();
+    while (tmp$.hasNext()) {
+      var item = tmp$.next();
+      destination.add_11rb$(sanitizedForHtml(get_nonEmptyType(item)));
+    }
+    var $receiver_1 = $receiver.r.r;
+    var destination_0 = ArrayList_init(collectionSizeOrDefault($receiver_1, 10));
+    var tmp$_0;
+    tmp$_0 = $receiver_1.iterator();
+    while (tmp$_0.hasNext()) {
+      var item_0 = tmp$_0.next();
+      destination_0.add_11rb$(rentSplitResultRow(item_0, $receiver));
+    }
+    return new RentSplitResultTable(destination, destination_0);
+  }
+  function rentSplitResultRow$lambda(rowTotal, cell) {
+    return rowTotal + (cell != null ? cell : 0.0);
+  }
+  function rentSplitResultRow($receiver, overallState) {
+    var tmp$;
+    var $receiver_0 = overallState.e.e;
+    var destination = ArrayList_init(collectionSizeOrDefault($receiver_0, 10));
+    var tmp$_0;
+    tmp$_0 = $receiver_0.iterator();
+    while (tmp$_0.hasNext()) {
+      var item = tmp$_0.next();
+      var tmp$_1 = destination.add_11rb$;
+      var transform$result;
+      if (item.appliesTo_pcqrmu$($receiver)) {
+        var $receiver_1 = overallState.r.r;
+        var destination_0 = ArrayList_init();
+        var tmp$_2;
+        tmp$_2 = $receiver_1.iterator();
+        while (tmp$_2.hasNext()) {
+          var element = tmp$_2.next();
+          if (item.appliesTo_pcqrmu$(element))
+            destination_0.add_11rb$(element);
+        }
+        transform$result = $receiver.contribution_qsnaur$(item, new RentRoommates(destination_0));
+      }
+       else {
+        transform$result = null;
+      }
+      tmp$_1.call(destination, transform$result);
+    }
+    var cells = destination;
+    var rowTotal = reduceTo(cells, 0.0, rentSplitResultRow$lambda);
+    return new RentSplitResultRow($receiver, sanitizedForHtml(get_nonEmptyName($receiver)), cells, rowTotal, (tmp$ = overallState.r.incomePieChart.get_11rb$($receiver.i)) != null ? tmp$ : 0.0);
+  }
+  function RentSplitResultTable(columnHeaders, rows) {
+    this.columnHeaders = columnHeaders;
+    this.rows = rows;
+  }
+  RentSplitResultTable.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'RentSplitResultTable',
+    interfaces: []
+  };
+  RentSplitResultTable.prototype.component1 = function () {
+    return this.columnHeaders;
+  };
+  RentSplitResultTable.prototype.component2 = function () {
+    return this.rows;
+  };
+  RentSplitResultTable.prototype.copy_nnrplx$ = function (columnHeaders, rows) {
+    return new RentSplitResultTable(columnHeaders === void 0 ? this.columnHeaders : columnHeaders, rows === void 0 ? this.rows : rows);
+  };
+  RentSplitResultTable.prototype.toString = function () {
+    return 'RentSplitResultTable(columnHeaders=' + Kotlin.toString(this.columnHeaders) + (', rows=' + Kotlin.toString(this.rows)) + ')';
+  };
+  RentSplitResultTable.prototype.hashCode = function () {
+    var result = 0;
+    result = result * 31 + Kotlin.hashCode(this.columnHeaders) | 0;
+    result = result * 31 + Kotlin.hashCode(this.rows) | 0;
+    return result;
+  };
+  RentSplitResultTable.prototype.equals = function (other) {
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.columnHeaders, other.columnHeaders) && Kotlin.equals(this.rows, other.rows)))));
+  };
+  function RentSplitResultRow(representedRoommate, rowHeader, cells, totalContributions, incomeProportion) {
+    this.representedRoommate = representedRoommate;
+    this.rowHeader = rowHeader;
+    this.cells = cells;
+    this.totalContributions = totalContributions;
+    this.incomeProportion = incomeProportion;
+  }
+  RentSplitResultRow.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'RentSplitResultRow',
+    interfaces: []
+  };
+  RentSplitResultRow.prototype.component1 = function () {
+    return this.representedRoommate;
+  };
+  RentSplitResultRow.prototype.component2 = function () {
+    return this.rowHeader;
+  };
+  RentSplitResultRow.prototype.component3 = function () {
+    return this.cells;
+  };
+  RentSplitResultRow.prototype.component4 = function () {
+    return this.totalContributions;
+  };
+  RentSplitResultRow.prototype.component5 = function () {
+    return this.incomeProportion;
+  };
+  RentSplitResultRow.prototype.copy_8a21sy$ = function (representedRoommate, rowHeader, cells, totalContributions, incomeProportion) {
+    return new RentSplitResultRow(representedRoommate === void 0 ? this.representedRoommate : representedRoommate, rowHeader === void 0 ? this.rowHeader : rowHeader, cells === void 0 ? this.cells : cells, totalContributions === void 0 ? this.totalContributions : totalContributions, incomeProportion === void 0 ? this.incomeProportion : incomeProportion);
+  };
+  RentSplitResultRow.prototype.toString = function () {
+    return 'RentSplitResultRow(representedRoommate=' + Kotlin.toString(this.representedRoommate) + (', rowHeader=' + Kotlin.toString(this.rowHeader)) + (', cells=' + Kotlin.toString(this.cells)) + (', totalContributions=' + Kotlin.toString(this.totalContributions)) + (', incomeProportion=' + Kotlin.toString(this.incomeProportion)) + ')';
+  };
+  RentSplitResultRow.prototype.hashCode = function () {
+    var result = 0;
+    result = result * 31 + Kotlin.hashCode(this.representedRoommate) | 0;
+    result = result * 31 + Kotlin.hashCode(this.rowHeader) | 0;
+    result = result * 31 + Kotlin.hashCode(this.cells) | 0;
+    result = result * 31 + Kotlin.hashCode(this.totalContributions) | 0;
+    result = result * 31 + Kotlin.hashCode(this.incomeProportion) | 0;
+    return result;
+  };
+  RentSplitResultRow.prototype.equals = function (other) {
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.representedRoommate, other.representedRoommate) && Kotlin.equals(this.rowHeader, other.rowHeader) && Kotlin.equals(this.cells, other.cells) && Kotlin.equals(this.totalContributions, other.totalContributions) && Kotlin.equals(this.incomeProportion, other.incomeProportion)))));
+  };
+  function RentSplitViewGenerator() {
+    RentSplitViewGenerator_instance = this;
+  }
+  RentSplitViewGenerator.prototype.addExpenseColumnHeaderToDom_i0mql$ = function (jq_resultsTableHeadRow, headerText) {
+    jq_resultsTableHeadRow.append(this.buildExpenseColumnHeader_61zpoe$(headerText));
+  };
+  RentSplitViewGenerator.prototype.buildExpenseColumnHeader_61zpoe$ = function (headerText) {
+    return "<th class='hide-small'>" + headerText + '<\/th>';
+  };
+  function RentSplitViewGenerator$buildResultRow$lambda(cell) {
+    var tmp$;
+    return "<td class='hide-small'>" + ((tmp$ = cell != null ? get_dollarFormat(cell) : null) != null ? tmp$ : '\u2014') + '<\/td>';
+  }
+  RentSplitViewGenerator.prototype.buildResultRow_zem1ah$ = function (model) {
+    var roommateName = model.rowHeader;
+    var row = '<tr ' + roommateResultRow.htmlAttributeName + "='" + roommateName + "'><th>" + roommateName + '<\/th>';
+    row += joinToString(model.cells, '', void 0, void 0, void 0, void 0, RentSplitViewGenerator$buildResultRow$lambda);
+    row += '<th>' + get_dollarFormat(model.totalContributions) + '<\/th>';
+    return row + '<\/tr>';
+  };
+  RentSplitViewGenerator.prototype.fillOutResults_1a4gu5$ = function (model) {
+    this.fillOutResultsTableHead_1a4gu5$(model);
+    this.fillOutResultsTableBody_1a4gu5$(model);
+    this.displayRoommateProportions_1a4gu5$(model);
+  };
+  RentSplitViewGenerator.prototype.fillOutResultsTableHead_1a4gu5$ = function (model) {
+    var jq_resultsTableHeadRow = jq(resultsTableHeadRow.cssSelectorString);
+    jq_resultsTableHeadRow.empty();
+    jq_resultsTableHeadRow.append(this.buildResultsTableHeadRoommateNameColumnTitle());
+    var tmp$;
+    tmp$ = model.columnHeaders.iterator();
+    while (tmp$.hasNext()) {
+      var element = tmp$.next();
+      this.addExpenseColumnHeaderToDom_i0mql$(jq_resultsTableHeadRow, element);
+    }
+    jq_resultsTableHeadRow.append(this.buildResultsTableHeadRoommateTotalContributionsColumnTitle());
+  };
+  RentSplitViewGenerator.prototype.buildResultsTableHeadRoommateNameColumnTitle = function () {
+    return '<th class="text-center">Name<\/th>';
+  };
+  RentSplitViewGenerator.prototype.buildResultsTableHeadRoommateTotalContributionsColumnTitle = function () {
+    return '<th class="text-center">Total Cost<\/th>';
+  };
+  RentSplitViewGenerator.prototype.fillOutResultsTableBody_1a4gu5$ = function (model) {
+    var jq_resultsTableBody = jq(resultsTableBody.cssSelectorString);
+    jq_resultsTableBody.empty();
+    var tmp$;
+    tmp$ = model.rows.iterator();
+    while (tmp$.hasNext()) {
+      var element = tmp$.next();
+      this.addResultRowToDom_2qskos$(jq_resultsTableBody, element);
+    }
+  };
+  RentSplitViewGenerator.prototype.addResultRowToDom_2qskos$ = function (jq_resultsTableBody, model) {
+    jq_resultsTableBody.append(this.buildResultRow_zem1ah$(model));
+  };
+  RentSplitViewGenerator.prototype.displayRoommateProportions_1a4gu5$ = function (model) {
+    var tmp$;
+    tmp$ = model.rows.iterator();
+    while (tmp$.hasNext()) {
+      var element = tmp$.next();
+      this.displayRoommateProportion_zem1ah$(element);
+    }
+  };
+  RentSplitViewGenerator.prototype.displayRoommateProportion_zem1ah$ = function (model) {
+    var tmp$;
+    if ((tmp$ = model.representedRoommate.originalDOMElement) != null) {
+      jq(roommateProportion.cssSelectorString, tmp$).html(toFixed(model.incomeProportion * 100.0, 2) + '%');
+    }
+  };
+  RentSplitViewGenerator.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'RentSplitViewGenerator',
+    interfaces: []
+  };
+  var RentSplitViewGenerator_instance = null;
+  function RentSplitViewGenerator_getInstance() {
+    if (RentSplitViewGenerator_instance === null) {
+      new RentSplitViewGenerator();
+    }
+    return RentSplitViewGenerator_instance;
+  }
+  function AnyCssSelector() {
+  }
+  AnyCssSelector.$metadata$ = {
+    kind: Kind_INTERFACE,
+    simpleName: 'AnyCssSelector',
+    interfaces: []
+  };
+  function CssSelectorWithoutValue() {
+  }
+  CssSelectorWithoutValue.$metadata$ = {
+    kind: Kind_INTERFACE,
+    simpleName: 'CssSelectorWithoutValue',
+    interfaces: [AnyCssSelector]
+  };
+  function CssSelectorWithValue() {
+  }
+  CssSelectorWithValue.prototype.attributeSelector_v4lxyt$ = function (parameter) {
+    return '[' + this.htmlAttributeName + parameter.operator + '"' + parameter.parameterText + '"' + (parameter.caseInsensitive ? ' i' : '') + ']';
+  };
+  Object.defineProperty(CssSelectorWithValue.prototype, 'cssSelectorString', {
+    get: function () {
+      return '[' + this.htmlAttributeName + ']';
+    }
+  });
+  CssSelectorWithValue.$metadata$ = {
+    kind: Kind_INTERFACE,
+    simpleName: 'CssSelectorWithValue',
+    interfaces: [CssSelectorWithoutValue]
+  };
+  function CssParameterForSelector(parameterText, caseInsensitive) {
+    this.parameterText = parameterText;
+    this.caseInsensitive = caseInsensitive;
+  }
+  function CssParameterForSelector$exactly(parameterText, caseInsensitive) {
+    if (caseInsensitive === void 0)
+      caseInsensitive = false;
+    CssParameterForSelector.call(this, parameterText, caseInsensitive);
+  }
+  CssParameterForSelector$exactly.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'exactly',
+    interfaces: [CssParameterForSelector]
+  };
+  function CssParameterForSelector$listContainsExactly(listItem, caseInsensitive) {
+    if (caseInsensitive === void 0)
+      caseInsensitive = false;
+    CssParameterForSelector.call(this, listItem, caseInsensitive);
+  }
+  CssParameterForSelector$listContainsExactly.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'listContainsExactly',
+    interfaces: [CssParameterForSelector]
+  };
+  function CssParameterForSelector$languageSubCode(subCode, caseInsensitive) {
+    if (caseInsensitive === void 0)
+      caseInsensitive = false;
+    CssParameterForSelector.call(this, subCode, caseInsensitive);
+  }
+  CssParameterForSelector$languageSubCode.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'languageSubCode',
+    interfaces: [CssParameterForSelector]
+  };
+  function CssParameterForSelector$startsWith(prefix, caseInsensitive) {
+    if (caseInsensitive === void 0)
+      caseInsensitive = false;
+    CssParameterForSelector.call(this, prefix, caseInsensitive);
+  }
+  CssParameterForSelector$startsWith.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'startsWith',
+    interfaces: [CssParameterForSelector]
+  };
+  function CssParameterForSelector$endsWith(suffix, caseInsensitive) {
+    if (caseInsensitive === void 0)
+      caseInsensitive = false;
+    CssParameterForSelector.call(this, suffix, caseInsensitive);
+  }
+  CssParameterForSelector$endsWith.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'endsWith',
+    interfaces: [CssParameterForSelector]
+  };
+  function CssParameterForSelector$contains(needle, caseInsensitive) {
+    if (caseInsensitive === void 0)
+      caseInsensitive = false;
+    CssParameterForSelector.call(this, needle, caseInsensitive);
+  }
+  CssParameterForSelector$contains.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'contains',
+    interfaces: [CssParameterForSelector]
+  };
+  Object.defineProperty(CssParameterForSelector.prototype, 'operator', {
+    get: function () {
+      var tmp$;
+      if (Kotlin.isType(this, CssParameterForSelector$exactly))
+        tmp$ = '';
+      else if (Kotlin.isType(this, CssParameterForSelector$listContainsExactly))
+        tmp$ = '~';
+      else if (Kotlin.isType(this, CssParameterForSelector$languageSubCode))
+        tmp$ = '|';
+      else if (Kotlin.isType(this, CssParameterForSelector$startsWith))
+        tmp$ = '^';
+      else if (Kotlin.isType(this, CssParameterForSelector$endsWith))
+        tmp$ = '$';
+      else if (Kotlin.isType(this, CssParameterForSelector$contains))
+        tmp$ = '*';
+      else
+        tmp$ = Kotlin.noWhenBranchMatched();
+      return tmp$ + '=';
+    }
+  });
+  CssParameterForSelector.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'CssParameterForSelector',
+    interfaces: []
+  };
+  function CssElement(elementName) {
+    this.elementName = elementName;
+  }
+  Object.defineProperty(CssElement.prototype, 'cssSelectorString', {
+    get: function () {
+      return this.elementName;
+    }
+  });
+  CssElement.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'CssElement',
+    interfaces: [AnyCssSelector]
+  };
+  function CssClass(className) {
+    this.className = className;
+    this.htmlAttributeName_ksnhwq$_0 = lazy(CssClass$htmlAttributeName$lambda);
+    this.cssSelectorString_8fgjrh$_0 = lazy(CssClass$cssSelectorString$lambda(this));
+  }
+  Object.defineProperty(CssClass.prototype, 'htmlAttributeName', {
+    get: function () {
+      return this.htmlAttributeName_ksnhwq$_0.value;
+    }
+  });
+  Object.defineProperty(CssClass.prototype, 'cssSelectorString', {
+    get: function () {
+      return this.cssSelectorString_8fgjrh$_0.value;
+    }
+  });
+  function CssClass$htmlAttributeName$lambda() {
+    return 'class';
+  }
+  function CssClass$cssSelectorString$lambda(this$CssClass) {
+    return function () {
+      return '.' + this$CssClass.className;
+    };
+  }
+  CssClass.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'CssClass',
+    interfaces: [CssSelectorWithoutValue]
+  };
+  function CssId(idName) {
+    this.idName = idName;
+    this.htmlAttributeName_rbfksl$_0 = lazy(CssId$htmlAttributeName$lambda);
+    this.cssSelectorString_ehkfic$_0 = lazy(CssId$cssSelectorString$lambda(this));
+  }
+  Object.defineProperty(CssId.prototype, 'htmlAttributeName', {
+    get: function () {
+      return this.htmlAttributeName_rbfksl$_0.value;
+    }
+  });
+  Object.defineProperty(CssId.prototype, 'cssSelectorString', {
+    get: function () {
+      return this.cssSelectorString_ehkfic$_0.value;
+    }
+  });
+  function CssId$htmlAttributeName$lambda() {
+    return 'id';
+  }
+  function CssId$cssSelectorString$lambda(this$CssId) {
+    return function () {
+      return '#' + this$CssId.idName;
+    };
+  }
+  CssId.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'CssId',
+    interfaces: [CssSelectorWithoutValue]
+  };
+  function DataAttribute(dataName) {
+    this.dataName = dataName;
+    this.htmlAttributeName_81nimx$_0 = lazy(DataAttribute$htmlAttributeName$lambda(this));
+  }
+  Object.defineProperty(DataAttribute.prototype, 'htmlAttributeName', {
+    get: function () {
+      return this.htmlAttributeName_81nimx$_0.value;
+    }
+  });
+  function DataAttribute$htmlAttributeName$lambda(this$DataAttribute) {
+    return function () {
+      return 'data-' + this$DataAttribute.dataName;
+    };
+  }
+  DataAttribute.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'DataAttribute',
+    interfaces: [CssSelectorWithValue]
+  };
+  function CompoundSelector(selectorCombiner) {
+    this.selectorCombiner = selectorCombiner;
+  }
+  Object.defineProperty(CompoundSelector.prototype, 'cssSelectorString', {
+    get: function () {
+      return this.selectorCombiner.cssSelectorString;
+    }
+  });
+  CompoundSelector.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'CompoundSelector',
+    interfaces: [AnyCssSelector]
+  };
+  function SelectorCombiner(lhs, rhs, cssStringifier) {
+    this.lhs = lhs;
+    this.rhs = rhs;
+    this.cssStringifier = cssStringifier;
+  }
+  Object.defineProperty(SelectorCombiner.prototype, 'cssSelectorString', {
+    get: function () {
+      return this.cssStringifier();
+    }
+  });
+  function SelectorCombiner$BinaryCombinator(lhs, rhs, combinator) {
+    SelectorCombiner.call(this, lhs, rhs, SelectorCombiner$SelectorCombiner$BinaryCombinator_init$lambda(lhs, combinator, rhs));
+  }
+  function SelectorCombiner$SelectorCombiner$BinaryCombinator_init$lambda(closure$lhs, closure$combinator, closure$rhs) {
+    return function () {
+      return closure$lhs.cssSelectorString + closure$combinator + closure$rhs.cssSelectorString;
+    };
+  }
+  SelectorCombiner$BinaryCombinator.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'BinaryCombinator',
+    interfaces: [SelectorCombiner]
+  };
+  function SelectorCombiner$either(lhs, rhs) {
+    SelectorCombiner$BinaryCombinator.call(this, lhs, rhs, ',');
+  }
+  SelectorCombiner$either.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'either',
+    interfaces: [SelectorCombiner$BinaryCombinator]
+  };
+  function SelectorCombiner$container(parent, child) {
+    SelectorCombiner$BinaryCombinator.call(this, parent, child, '>');
+  }
+  SelectorCombiner$container.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'container',
+    interfaces: [SelectorCombiner$BinaryCombinator]
+  };
+  function SelectorCombiner$sibling(sister, brother) {
+    SelectorCombiner$BinaryCombinator.call(this, sister, brother, '~');
+  }
+  SelectorCombiner$sibling.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'sibling',
+    interfaces: [SelectorCombiner$BinaryCombinator]
+  };
+  function SelectorCombiner$immediateSibling(sister, brother) {
+    SelectorCombiner$BinaryCombinator.call(this, sister, brother, '+');
+  }
+  SelectorCombiner$immediateSibling.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'immediateSibling',
+    interfaces: [SelectorCombiner$BinaryCombinator]
+  };
+  SelectorCombiner.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'SelectorCombiner',
+    interfaces: [AnyCssSelector]
+  };
+  var or = defineInlineFunction('Rent Split 2.RentSplit.or_qxw4fl$', wrapFunction(function () {
+    var SelectorCombiner$SelectorCombiner$either_init = _.RentSplit.SelectorCombiner.either;
+    return function ($receiver, rhs) {
+      return new SelectorCombiner$SelectorCombiner$either_init($receiver, rhs);
+    };
+  }));
+  var containing = defineInlineFunction('Rent Split 2.RentSplit.containing_qxw4fl$', wrapFunction(function () {
+    var SelectorCombiner$SelectorCombiner$container_init = _.RentSplit.SelectorCombiner.container;
+    return function ($receiver, child) {
+      return new SelectorCombiner$SelectorCombiner$container_init($receiver, child);
+    };
+  }));
+  var justBefore = defineInlineFunction('Rent Split 2.RentSplit.justBefore_qxw4fl$', wrapFunction(function () {
+    var SelectorCombiner$SelectorCombiner$immediateSibling_init = _.RentSplit.SelectorCombiner.immediateSibling;
+    return function ($receiver, brother) {
+      return new SelectorCombiner$SelectorCombiner$immediateSibling_init($receiver, brother);
+    };
+  }));
+  var before = defineInlineFunction('Rent Split 2.RentSplit.before_qxw4fl$', wrapFunction(function () {
+    var SelectorCombiner$SelectorCombiner$sibling_init = _.RentSplit.SelectorCombiner.sibling;
+    return function ($receiver, brother) {
+      return new SelectorCombiner$SelectorCombiner$sibling_init($receiver, brother);
+    };
+  }));
   var localStorageConsentSerializedName;
   function LocalDataPreferences(localStorageConsent) {
     LocalDataPreferences$Companion_getInstance();
@@ -161,7 +1332,6 @@ this['Rent Split 2'] = function (_, Kotlin) {
     this.originalDOMElement = originalDOMElement;
     IdManager_getInstance().registerId_61zpoe$(this.i);
   }
-  var copyToArray = Kotlin.kotlin.collections.copyToArray;
   RentExpense.prototype.toJson = function () {
     var tmp$;
     return json([to(resourceIdSerializedName, this.i), to(resourceNameSerializedName, this.n), to(resourceDollarAmountSerializedName, this.d), to(resourceIsRemovableSerializedName, this.x), to(resourceIsRenamableSerializedName, this.r), to(expenseApplicableRoommatesSerializedName, (tmp$ = this.f) != null ? copyToArray(tmp$) : null)]);
@@ -199,7 +1369,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
       console.log(message_1);
       return null;
     }
-    tmp$_9 = (tmp$_8 = (tmp$_7 = Kotlin.isArray(tmp$_6 = raw[expenseApplicableRoommatesSerializedName]) ? tmp$_6 : null) != null ? toSet(tmp$_7) : null) != null ? tmp$_8 : RentExpenses$Companion_getInstance().allRoommates;
+    tmp$_9 = (tmp$_8 = (tmp$_7 = Kotlin.isArray(tmp$_6 = raw[expenseApplicableRoommatesSerializedName]) ? tmp$_6 : null) != null ? toSet_0(tmp$_7) : null) != null ? tmp$_8 : RentExpenses$Companion_getInstance().allRoommates;
     tmp$_11 = typeof (tmp$_10 = raw[resourceIsRemovableSerializedName]) === 'boolean' ? tmp$_10 : null;
     if (tmp$_11 == null) {
       var message_2 = 'No serialized removability';
@@ -309,8 +1479,6 @@ this['Rent Split 2'] = function (_, Kotlin) {
   RentExpenses.prototype.adding_pbrwj2$ = function (newExpense) {
     return new RentExpenses(adding(this.e, newExpense));
   };
-  var collectionSizeOrDefault = Kotlin.kotlin.collections.collectionSizeOrDefault_ba2ldo$;
-  var ArrayList_init = Kotlin.kotlin.collections.ArrayList_init_ww73n8$;
   RentExpenses.prototype.toJson = function () {
     var tmp$ = allExpensesSerializedName;
     var $receiver = this.e;
@@ -711,836 +1879,6 @@ this['Rent Split 2'] = function (_, Kotlin) {
   RentRoommates.prototype.equals = function (other) {
     return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && Kotlin.equals(this.r, other.r))));
   };
-  var addARoommateRowId;
-  var addARoommateRowSelector;
-  var addARoommateButtonId;
-  var addARoommateButtonSelector;
-  var removeARoommateButtonClassName;
-  var removeARoommateButtonSelector;
-  var addAnExpenseRowId;
-  var addAnExpenseRowSelector;
-  var addAnExpenseButtonId;
-  var addAnExpenseButtonSelector;
-  var removeAnExpenseButtonClassName;
-  var removeAnExpenseButtonSelector;
-  var roommateInputRowDataName;
-  var roommateInputRowSelector;
-  var expenseInputRowDataName;
-  var expenseInputRowSelector;
-  var roommateResultRowDataName;
-  var roommateNameInputClassName;
-  var roommateNameInputSelector;
-  var roommateIncomeInputClassName;
-  var roommateIncomeInputSelector;
-  var roommateProportionClassName;
-  var roommateProportionSelector;
-  var roommateAnyInputFieldSelector;
-  var roommateWhoOwesTooMuchClassName;
-  var roommateRemovabilityDataName;
-  var roommateRemovabilityAttribute;
-  var roommateRemovabilitySelector;
-  var roommateRenamabilityDataName;
-  var roommateRenamabilityAttribute;
-  var roommateRenamabilitySelector;
-  var expenseTypeInputClassName;
-  var expenseTypeInputSelector;
-  var expenseCostInputClassName;
-  var expenseCostInputSelector;
-  var expenseAnyInputFieldSelector;
-  var expenseRemovabilityDataName;
-  var expenseRemovabilityAttribute;
-  var expenseRemovabilitySelector;
-  var expenseRenamabilityDataName;
-  var expenseRenamabilityAttribute;
-  var expenseRenamabilitySelector;
-  var resultRowDataName;
-  var resultRowAttribute;
-  var resultRowSelector;
-  var resultsTableSelector;
-  var resultsTableBodySelector;
-  var resultsTableHeadRowSelector;
-  var resourceIdDataName;
-  var resourceIdAttribute;
-  var resourceIdSelector;
-  var expenseApplicableRoommatesDataName;
-  var expenseApplicableRoommatesAttribute;
-  var expenseApplicableRoommatesSelector;
-  var expenseHasApplicableRoommatesClassName;
-  var expenseHasApplicableRoommatesSelector;
-  var copyStateUrlButtonId;
-  var copyStateUrlButtonSelector;
-  var stateUrlFieldId;
-  var stateUrlFieldSelector;
-  var localStorageWarningId;
-  var localStorageWarningSelector;
-  var localStorageWarningExplicitRefusalButtonId;
-  var localStorageWarningExplicitRefusalButtonSelector;
-  var localStorageWarningExplicitConsentButtonId;
-  var localStorageWarningExplicitConsentButtonSelector;
-  var expenseFilterButtonClass;
-  var expenseFilterButtonSelector;
-  var expenseFilterDialogId;
-  var expenseFilterDialogSelector;
-  var expenseFilterDialogCancelButtonId;
-  var expenseFilterDialogCancelButtonSelector;
-  var expenseFilterDialogOkButtonId;
-  var expenseFilterDialogOkButtonSelector;
-  var expenseFilterDialogExpenseNameClassName;
-  var expenseFilterDialogExpenseNameSelector;
-  var expenseFilterApplicableRoommateChecklistId;
-  var expenseFilterApplicableRoommateChecklistSelector;
-  var expenseFilterApplicableRoommateChecklistItemClass;
-  var expenseFilterApplicableRoommateChecklistItemSelector;
-  var expenseFilterEveryoneCheckboxId;
-  var expenseFilterEveryoneCheckboxSelector;
-  var expenseFilterApplicableRoommateCheckboxClass;
-  var expenseFilterApplicableRoommateCheckboxSelector;
-  var expenseFilterDialogCurrentExpenseDataName;
-  var expenseFilterDialogCurrentExpenseAttribute;
-  var expenseFilterDialogCurrentExpenseSelector;
-  var expenseFilterAnyCheckboxSelector;
-  var expenseFilterButtonExpenseRelationDataName;
-  var expenseFilterButtonExpenseRelationAttribute;
-  var expenseFilterButtonExpenseRelationSelector;
-  var anyInputFieldSelector;
-  var anyInputButtonSelector;
-  var anyInputSelector;
-  var rentExpenseType;
-  var utilitiesExpenseType;
-  var roommateNamePlaceholderText;
-  var roommateIncomePlaceholderText;
-  var expenseTypePlaceholderText;
-  var expenseCostPlaceholderText;
-  var roommateNameColumnTitle;
-  var totalColumnTitle;
-  var defaultRoommateIncome;
-  var defaultExpenseCost;
-  var defaultRentExpenseCost;
-  var defaultUtilitiesExpenseCost;
-  function RentSplit() {
-    this.state_8j2skj$_0 = observing(load(RentSplitState$Companion_getInstance()), void 0, void 0, RentSplit$state$lambda(this));
-    var tmp$;
-    this.expenseFilterChecklistController_ttpzpq$_0 = observing((tmp$ = null) == null || Kotlin.isType(tmp$, JSTernaryCheckboxTreeController) ? tmp$ : throwCCE(), void 0, void 0, RentSplit$expenseFilterChecklistController$lambda(this));
-  }
-  var RentSplit$state_metadata = new PropertyMetadata('state');
-  Object.defineProperty(RentSplit.prototype, 'state', {
-    get: function () {
-      return this.state_8j2skj$_0.getValue_lrcp0p$(this, RentSplit$state_metadata);
-    },
-    set: function (state) {
-      this.state_8j2skj$_0.setValue_9rddgb$(this, RentSplit$state_metadata, state);
-    }
-  });
-  var RentSplit$expenseFilterChecklistController_metadata = new PropertyMetadata('expenseFilterChecklistController');
-  Object.defineProperty(RentSplit.prototype, 'expenseFilterChecklistController', {
-    get: function () {
-      return this.expenseFilterChecklistController_ttpzpq$_0.getValue_lrcp0p$(this, RentSplit$expenseFilterChecklistController_metadata);
-    },
-    set: function (expenseFilterChecklistController) {
-      this.expenseFilterChecklistController_ttpzpq$_0.setValue_9rddgb$(this, RentSplit$expenseFilterChecklistController_metadata, expenseFilterChecklistController);
-    }
-  });
-  RentSplit.prototype.onReady = function () {
-    this.preLoadConfigurations();
-    this.reloadPageFromState_6taknv$(false);
-    this.regenerateInputTables();
-    this.registerListeners();
-    this.recalculateRentSplit();
-    save(this.state);
-    this.presentToUser();
-  };
-  RentSplit.prototype.preLoadConfigurations = function () {
-    $('html').addClass(TouchBasics_getInstance().isTouchSupported() ? 'touch-supported' : 'touch-not-supported');
-  };
-  RentSplit.prototype.reloadPageFromState_6taknv$ = function (shouldReRegisterListeners) {
-    if (shouldReRegisterListeners === void 0)
-      shouldReRegisterListeners = true;
-    this.applyStateToLocalStorageWarning();
-    this.regenerateInputTables();
-    if (shouldReRegisterListeners) {
-      this.reRegisterListeners();
-    }
-    this.recalculateRentSplit();
-  };
-  RentSplit.prototype.applyStateToLocalStorageWarning = function () {
-    if (this.state.l.c != null) {
-      $(localStorageWarningSelector).addClass('hidden');
-    }
-     else {
-      $(localStorageWarningSelector).removeClass('hidden');
-    }
-  };
-  RentSplit.prototype.reRegisterListeners = function () {
-    $(anyInputSelector).off();
-    this.registerListeners();
-  };
-  RentSplit.prototype.reRegisterFilterDialogListeners = function () {
-    $(anyInputSelector, $(expenseFilterDialogSelector)).off();
-    this.registerFilterDialogListeners();
-  };
-  RentSplit.prototype.registerListeners = function () {
-    $(anyInputFieldSelector).change(getCallableRef('anyInputFieldDidChange', function ($receiver, event) {
-      return $receiver.anyInputFieldDidChange_g0pdib$(event), Unit;
-    }.bind(null, this)));
-    $(addAnExpenseButtonSelector).click(getCallableRef('didPressNewExpenseButton', function ($receiver, event) {
-      return $receiver.didPressNewExpenseButton_9ojx7i$(event), Unit;
-    }.bind(null, this)));
-    $(removeAnExpenseButtonSelector).click(getCallableRef('didPressRemoveExpenseButton', function ($receiver, event) {
-      return $receiver.didPressRemoveExpenseButton_9ojx7i$(event), Unit;
-    }.bind(null, this)));
-    $(addARoommateButtonSelector).click(getCallableRef('didPressNewRoommateButton', function ($receiver, event) {
-      return $receiver.didPressNewRoommateButton_9ojx7i$(event), Unit;
-    }.bind(null, this)));
-    $(removeARoommateButtonSelector).click(getCallableRef('didPressRemoveRoommateButton', function ($receiver, event) {
-      return $receiver.didPressRemoveRoommateButton_9ojx7i$(event), Unit;
-    }.bind(null, this)));
-    $(localStorageWarningExplicitConsentButtonSelector).click(getCallableRef('didPressLocalStorageWarningExplicitConsentButton', function ($receiver, event) {
-      return $receiver.didPressLocalStorageWarningExplicitConsentButton_9ojx7i$(event), Unit;
-    }.bind(null, this)));
-    $(localStorageWarningExplicitRefusalButtonSelector).click(getCallableRef('didPressLocalStorageWarningExplicitRefusalButton', function ($receiver, event) {
-      return $receiver.didPressLocalStorageWarningExplicitRefusalButton_9ojx7i$(event), Unit;
-    }.bind(null, this)));
-    $(copyStateUrlButtonSelector).click(getCallableRef('didPressCopyUrlButton', function ($receiver, event) {
-      return $receiver.didPressCopyUrlButton_9ojx7i$(event), Unit;
-    }.bind(null, this)));
-    this.registerFilterDialogListeners();
-  };
-  RentSplit.prototype.registerFilterDialogListeners = function () {
-    $(expenseFilterButtonSelector).click(getCallableRef('didPressFilterButton', function ($receiver, event) {
-      return $receiver.didPressFilterButton_9ojx7i$(event), Unit;
-    }.bind(null, this)));
-    $(expenseFilterDialogCancelButtonSelector).click(getCallableRef('didPressFilterDialogCancelButton', function ($receiver, event) {
-      return $receiver.didPressFilterDialogCancelButton_9ojx7i$(event), Unit;
-    }.bind(null, this)));
-    $(expenseFilterDialogOkButtonSelector).click(getCallableRef('didPressFilterDialogOkButton', function ($receiver, event) {
-      return $receiver.didPressFilterDialogOkButton_9ojx7i$(event), Unit;
-    }.bind(null, this)));
-  };
-  RentSplit.prototype.anyInputFieldDidChange_g0pdib$ = function (event) {
-    this.reloadStateFromPage();
-  };
-  RentSplit.prototype.didPressLocalStorageWarningExplicitConsentButton_9ojx7i$ = function (event) {
-    this.state = this.state.copy_2k6jng$(void 0, void 0, this.state.l.copy_hombyb$(UserConsent$explicitConsent_getInstance()));
-  };
-  RentSplit.prototype.didPressLocalStorageWarningExplicitRefusalButton_9ojx7i$ = function (event) {
-    this.state = this.state.copy_2k6jng$(void 0, void 0, this.state.l.copy_hombyb$(UserConsent$explicitRefusal_getInstance()));
-  };
-  function RentSplit$didPressCopyUrlButton$lambda() {
-    return $(copyStateUrlButtonSelector).removeClass('just-copied');
-  }
-  RentSplit.prototype.didPressCopyUrlButton_9ojx7i$ = function (event) {
-    try {
-      copyToClipboardOrThrow($(stateUrlFieldSelector));
-      $(copyStateUrlButtonSelector).addClass('just-copied');
-      window.setTimeout(RentSplit$didPressCopyUrlButton$lambda, 3000);
-    }
-     catch (error) {
-      if (Kotlin.isType(error, Throwable)) {
-        var message = 'Failed to copy state URL!';
-        console.log(message);
-      }
-       else
-        throw error;
-    }
-  };
-  RentSplit.prototype.didPressFilterButton_9ojx7i$ = function (event) {
-    var tmp$, tmp$_0, tmp$_1;
-    tmp$_0 = Kotlin.isType(tmp$ = event.currentTarget, Element) ? tmp$ : null;
-    if (tmp$_0 == null) {
-      var message = 'No element targeted in the filter button click event';
-      console.log(message);
-      return Unit;
-    }
-    tmp$_1 = this.expenseForFilterButton_2rdptt$(tmp$_0);
-    if (tmp$_1 == null) {
-      var message_0 = 'No expense matching ID in filter button';
-      console.log(message_0);
-      return Unit;
-    }
-    this.showExpenseDialog_pbrwj2$(tmp$_1);
-  };
-  RentSplit.prototype.applicableRoommateCheckboxesDidChange_fsqkh5$ = function (oldValue, newValue) {
-    booleanAttr_0($(expenseFilterDialogOkButtonSelector), 'disabled', newValue === Ternary$false_getInstance());
-  };
-  RentSplit.prototype.didPressFilterDialogCancelButton_9ojx7i$ = function (event) {
-    var tmp$;
-    (tmp$ = this.expenseFilterDialog) != null ? (tmp$.close(), Unit) : null;
-  };
-  RentSplit.prototype.didPressFilterDialogOkButton_9ojx7i$ = function (event) {
-    var tmp$;
-    var expense = this.expenseInFilterDialog();
-    if (expense != null) {
-      this.state = this.state.setting_pbrwj2$(expense.copy_7xqv4k$(void 0, void 0, void 0, this.applicableRoommateIdsInFilterDialog_6taknv$()));
-    }
-     else {
-      var message = 'No expense found in filter dialog!';
-      console.log(message);
-    }
-    (tmp$ = this.expenseFilterDialog) != null ? (tmp$.close(), Unit) : null;
-  };
-  RentSplit.prototype.reloadStateFromPage = function () {
-    this.state = this.state.copy_2k6jng$(this.fetchRoommates(), this.fetchExpenses());
-  };
-  RentSplit.prototype.recalculateRentSplit = function () {
-    var resultsTable = resultsTableModel(this.state);
-    RentSplitViewGenerator_getInstance().fillOutResults_1a4gu5$(resultsTable);
-    this.notifyOfProblems_1a4gu5$(resultsTable);
-  };
-  RentSplit.prototype.presentToUser = function () {
-    $('.rent').addClass('rent-ready');
-  };
-  RentSplit.prototype.fetchRoommates = function () {
-    return this.roommateRowsToRoommates_r6ezyp$($(roommateInputRowSelector));
-  };
-  RentSplit.prototype.fetchExpenses = function () {
-    return this.expenseRowsToExpenses_r6ezyp$($(expenseInputRowSelector));
-  };
-  function RentSplit$roommateRowsToRoommates$lambda(this$RentSplit) {
-    return function (index, roommateRow) {
-      return this$RentSplit.roommateRowToRoommate_folkv9$(index, $(roommateRow));
-    };
-  }
-  RentSplit.prototype.roommateRowsToRoommates_r6ezyp$ = function (jq_roommateRows) {
-    return new RentRoommates(asList(mapNotNull(jq_roommateRows, RentSplit$roommateRowsToRoommates$lambda(this))));
-  };
-  function RentSplit$expenseRowsToExpenses$lambda(this$RentSplit) {
-    return function (index, expenseRow) {
-      return this$RentSplit.expenseRowToExpense_folkv9$(index, $(expenseRow));
-    };
-  }
-  RentSplit.prototype.expenseRowsToExpenses_r6ezyp$ = function (jq_expenseRows) {
-    return new RentExpenses(asList(mapNotNull(jq_expenseRows, RentSplit$expenseRowsToExpenses$lambda(this))));
-  };
-  RentSplit.prototype.roommateRowToRoommate_folkv9$ = function (index, jq_roommateRow) {
-    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7, tmp$_8;
-    tmp$_0 = (tmp$ = $(jq_roommateRow).data(resourceIdDataName)) != null ? tmp$.toString() : null;
-    if (tmp$_0 == null) {
-      var message = 'No ID on page!';
-      console.log(message);
-      return null;
-    }
-    tmp$_2 = (tmp$_1 = $(roommateNameInputSelector, jq_roommateRow).val()) != null ? tmp$_1 : '';
-    tmp$_4 = (tmp$_3 = $(roommateIncomeInputSelector, jq_roommateRow).val()) != null ? toDoubleOrNull(tmp$_3) : null;
-    if (tmp$_4 == null) {
-      var message_0 = 'No monthly income on page!';
-      console.log(message_0);
-      return null;
-    }
-    return new RentRoommate(tmp$_0, tmp$_2, tmp$_4, (tmp$_6 = (tmp$_5 = jq_roommateRow.attr(roommateRemovabilityAttribute)) != null ? toBooleanOrNull(tmp$_5) : null) != null ? tmp$_6 : true, (tmp$_8 = (tmp$_7 = jq_roommateRow.attr(roommateRenamabilityAttribute)) != null ? toBooleanOrNull(tmp$_7) : null) != null ? tmp$_8 : true, jq_roommateRow);
-  };
-  RentSplit.prototype.expenseRowToExpense_folkv9$ = function (index, jq_expenseRow) {
-    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7, tmp$_8, tmp$_9, tmp$_10, tmp$_11, tmp$_12;
-    tmp$_0 = (tmp$ = jq_expenseRow.data(resourceIdDataName)) != null ? tmp$.toString() : null;
-    if (tmp$_0 == null) {
-      var message = 'No ID on page!';
-      console.log(message);
-      return null;
-    }
-    tmp$_2 = (tmp$_1 = $(expenseTypeInputSelector, jq_expenseRow).val()) != null ? tmp$_1 : '';
-    tmp$_6 = (tmp$_5 = (tmp$_4 = (tmp$_3 = jq_expenseRow.data(expenseApplicableRoommatesDataName)) != null ? tmp$_3.toString() : null) != null ? getCallableRef('expenseApplicableRoommatesFromString', function ($receiver, expenseApplicableRoommatesString) {
-      return $receiver.expenseApplicableRoommatesFromString_61zpoe$(expenseApplicableRoommatesString);
-    }.bind(null, this))(tmp$_4) : null) != null ? tmp$_5 : RentExpenses$Companion_getInstance().allRoommates;
-    tmp$_8 = (tmp$_7 = $(expenseCostInputSelector, jq_expenseRow).val()) != null ? toDoubleOrNull(tmp$_7) : null;
-    if (tmp$_8 == null) {
-      var message_0 = 'No monthly cost on page!';
-      console.log(message_0);
-      return null;
-    }
-    return new RentExpense(tmp$_0, tmp$_2, tmp$_8, tmp$_6, (tmp$_10 = (tmp$_9 = jq_expenseRow.attr(expenseRemovabilityAttribute)) != null ? toBooleanOrNull(tmp$_9) : null) != null ? tmp$_10 : true, (tmp$_12 = (tmp$_11 = jq_expenseRow.attr(expenseRenamabilityAttribute)) != null ? toBooleanOrNull(tmp$_11) : null) != null ? tmp$_12 : true, jq_expenseRow);
-  };
-  RentSplit.prototype.expenseApplicableRoommatesFromString_61zpoe$ = function (expenseApplicableRoommatesString) {
-    return toSetOfIds(expenseApplicableRoommatesString);
-  };
-  RentSplit.prototype.expenseForFilterButton_2rdptt$ = function (filterButton) {
-    var tmp$, tmp$_0;
-    return (tmp$_0 = (tmp$ = $(filterButton).data(expenseFilterButtonExpenseRelationDataName)) != null ? tmp$.toString() : null) != null ? getCallableRef('expenseForId', function ($receiver, id) {
-      return $receiver.expenseForId_61zpoe$(id);
-    }.bind(null, this))(tmp$_0) : null;
-  };
-  RentSplit.prototype.expenseForId_61zpoe$ = function (id) {
-    return this.state.e.expenseForId_61zpoe$(id);
-  };
-  RentSplit.prototype.expenseInFilterDialog = function () {
-    var tmp$, tmp$_0, tmp$_1;
-    return (tmp$_1 = (tmp$_0 = (tmp$ = this.expenseFilterDialog) != null ? $(tmp$) : null) != null ? tmp$_0.data(expenseFilterDialogCurrentExpenseDataName) : null) != null ? this.expenseForId_61zpoe$(tmp$_1.toString()) : null;
-  };
-  RentSplit.prototype.applicableRoommateIdsInFilterDialog_6taknv$ = function (ignoreEveryoneCheckbox) {
-    if (ignoreEveryoneCheckbox === void 0)
-      ignoreEveryoneCheckbox = false;
-    var tmp$;
-    var tmp$_0 = this.summarizeFilterDialogApplicableRoommates_6taknv$(ignoreEveryoneCheckbox);
-    var summary = tmp$_0.component1()
-    , set = tmp$_0.component2();
-    if (Kotlin.isType(summary, FiniteAmountSummary$all))
-      tmp$ = RentExpenses$Companion_getInstance().allRoommates;
-    else if (Kotlin.isType(summary, FiniteAmountSummary$some) || Kotlin.isType(summary, FiniteAmountSummary$none))
-      tmp$ = set;
-    else
-      tmp$ = Kotlin.noWhenBranchMatched();
-    return tmp$;
-  };
-  function RentSplit$summarizeFilterDialogApplicableRoommates$lambda(f, element) {
-    var id = toString($(element).data(resourceIdDataName));
-    var tmp$, tmp$_0;
-    return ((tmp$_0 = (tmp$ = $(element).prop('checked')) != null ? toBooleanOrNull(tmp$) : null) != null ? tmp$_0 : false) ? id : null;
-  }
-  RentSplit.prototype.summarizeFilterDialogApplicableRoommates_6taknv$ = function (ignoreEveryoneCheckbox) {
-    if (ignoreEveryoneCheckbox === void 0)
-      ignoreEveryoneCheckbox = false;
-    var tmp$;
-    var allCheckboxes = $(expenseFilterApplicableRoommateCheckboxSelector);
-    var tmp$_0 = !ignoreEveryoneCheckbox;
-    if (tmp$_0) {
-      var $receiver = $(expenseFilterEveryoneCheckboxSelector);
-      var tmp$_1, tmp$_2;
-      var tmp$_3 = (tmp$_2 = (tmp$_1 = $receiver.prop('checked')) != null ? toBooleanOrNull(tmp$_1) : null) != null ? tmp$_2 : false;
-      if (tmp$_3) {
-        var tmp$_4, tmp$_5;
-        tmp$_3 = !((tmp$_5 = (tmp$_4 = $receiver.prop('indeterminate')) != null ? toBooleanOrNull(tmp$_4) : null) != null ? tmp$_5 : false);
-      }
-      tmp$_0 = tmp$_3;
-    }
-    if (tmp$_0) {
-      tmp$ = new Pair(new FiniteAmountSummary$all(allCheckboxes.length), emptySet());
-    }
-     else {
-      var checkedRoommateIds = filterNotNull(allCheckboxes.map(RentSplit$summarizeFilterDialogApplicableRoommates$lambda));
-      var tmp$_6, tmp$_7;
-      tmp$_6 = checkedRoommateIds.size;
-      if (tmp$_6 === 0)
-        tmp$_7 = new FiniteAmountSummary$none();
-      else {
-        if (tmp$_6 === this.state.r.r.size)
-          tmp$_7 = new FiniteAmountSummary$all(allCheckboxes.length);
-        else {
-          tmp$_7 = new FiniteAmountSummary$some(checkedRoommateIds.size, allCheckboxes.length);
-        }
-      }
-      tmp$ = new Pair(tmp$_7, toSet_0(checkedRoommateIds));
-    }
-    return tmp$;
-  };
-  RentSplit.prototype.regenerateInputTables = function () {
-    this.regenerateRoommateInputTable_0();
-    this.regenerateExpenseInputTable_0();
-  };
-  RentSplit.prototype.regenerateInputTable_0 = function (rowSelector, allResources, configureExistingInput, insertNewInput) {
-    var existingInputs = asList($(rowSelector).toArray());
-    var offset = existingInputs.size;
-    var newResources = allResources.subList_vux9f0$(offset, allResources.size);
-    var tmp$;
-    tmp$ = zip(existingInputs, allResources).iterator();
-    while (tmp$.hasNext()) {
-      var element = tmp$.next();
-      var existingInput = element.component1()
-      , expense = element.component2();
-      configureExistingInput(existingInput, expense);
-    }
-    var tmp$_0, tmp$_0_0;
-    var index = 0;
-    tmp$_0 = newResources.iterator();
-    while (tmp$_0.hasNext()) {
-      var item = tmp$_0.next();
-      insertNewInput((tmp$_0_0 = index, index = tmp$_0_0 + 1 | 0, tmp$_0_0) + offset | 0, item);
-    }
-  };
-  function RentSplit$regenerateExpenseInputTable$lambda(this$RentSplit) {
-    return function (existingExpenseInput, expense) {
-      this$RentSplit.configureExistingExpenseInputRow_0(existingExpenseInput, expense);
-      return Unit;
-    };
-  }
-  function RentSplit$regenerateExpenseInputTable$lambda_0(this$RentSplit) {
-    return function (explicitIndex, expense) {
-      this$RentSplit.insertNewExpenseInputRow_nly0u5$(explicitIndex, expense);
-      return Unit;
-    };
-  }
-  RentSplit.prototype.regenerateExpenseInputTable_0 = function () {
-    this.regenerateInputTable_0(expenseInputRowSelector, this.state.e.e, RentSplit$regenerateExpenseInputTable$lambda(this), RentSplit$regenerateExpenseInputTable$lambda_0(this));
-  };
-  RentSplit.prototype.configureExistingExpenseInputRow_0 = function (existingExpenseInputRow, expense) {
-    var jq_existingExpenseInputRow = $(existingExpenseInputRow);
-    expense.originalDOMElement = jq_existingExpenseInputRow;
-    $(expenseTypeInputSelector, existingExpenseInputRow).val(expense.n);
-    $(expenseCostInputSelector, existingExpenseInputRow).val(expense.d);
-    jq_existingExpenseInputRow.attr(expenseRenamabilityAttribute, expense.r);
-    jq_existingExpenseInputRow.attr(expenseRemovabilityAttribute, expense.x);
-    if (expense.f == null) {
-      jq_existingExpenseInputRow.data(expenseApplicableRoommatesDataName, null);
-      jq_existingExpenseInputRow.removeClass(expenseHasApplicableRoommatesClassName);
-    }
-     else {
-      jq_existingExpenseInputRow.data(expenseApplicableRoommatesDataName, copyToArray(expense.f));
-      jq_existingExpenseInputRow.addClass(expenseHasApplicableRoommatesClassName);
-    }
-  };
-  RentSplit.prototype.regenerateRoommateInputTable_0 = function () {
-    this.regenerateInputTable_0(roommateInputRowSelector, this.state.r.r, getCallableRef('configureExistingRoommateInputRow', function ($receiver, existingRoommateInputTableRow, roommate) {
-      return $receiver.configureExistingRoommateInputRow_0(existingRoommateInputTableRow, roommate), Unit;
-    }.bind(null, this)), getCallableRef('insertNewRoommateInputRow', function ($receiver, explicitIndex, roommate) {
-      return $receiver.insertNewRoommateInputRow_7kd045$(explicitIndex, roommate), Unit;
-    }.bind(null, this)));
-  };
-  RentSplit.prototype.configureExistingRoommateInputRow_0 = function (existingRoommateInputTableRow, roommate) {
-    var jq_existingRoommateInputTableRow = $(existingRoommateInputTableRow);
-    roommate.originalDOMElement = jq_existingRoommateInputTableRow;
-    $(roommateNameInputSelector, existingRoommateInputTableRow).val(roommate.n);
-    $(roommateIncomeInputSelector, existingRoommateInputTableRow).val(roommate.d);
-    RentSplitViewGenerator_getInstance().displayRoommateProportion_zem1ah$(rentSplitResultRow(roommate, this.state));
-    jq_existingRoommateInputTableRow.attr(roommateRenamabilityAttribute, roommate.r);
-    jq_existingRoommateInputTableRow.attr(roommateRemovabilityAttribute, roommate.x);
-  };
-  RentSplit.prototype.reconfigureExpenseDialog_pbrwj2$ = function (expense) {
-    $(expenseFilterDialogSelector).data(expenseFilterDialogCurrentExpenseDataName, expense.i);
-    $(expenseFilterDialogExpenseNameSelector).text(sanitizedForHtml(get_nonEmptyType(expense)));
-    this.fillExpenseFilterApplicableRoommateList_pbrwj2$(expense);
-    this.reRegisterFilterDialogListeners();
-  };
-  function RentSplit$fillExpenseFilterApplicableRoommateList$lambda(f, element) {
-    return element;
-  }
-  RentSplit.prototype.fillExpenseFilterApplicableRoommateList_pbrwj2$ = function (expense) {
-    var tmp$, tmp$_0;
-    $(expenseFilterApplicableRoommateChecklistItemSelector).remove();
-    $(expenseFilterApplicableRoommateChecklistSelector).append(this.buildExpenseFilterApplicableRoommateList_pbrwj2$(expense));
-    tmp$_0 = Kotlin.isType(tmp$ = $(expenseFilterEveryoneCheckboxSelector).get(0), HTMLInputElement) ? tmp$ : null;
-    if (tmp$_0 == null) {
-      return;
-    }
-    var everyoneCheckbox = tmp$_0;
-    var $receiver = $(expenseFilterApplicableRoommateCheckboxSelector).map(RentSplit$fillExpenseFilterApplicableRoommateList$lambda);
-    var destination = ArrayList_init($receiver.length);
-    var tmp$_1;
-    for (tmp$_1 = 0; tmp$_1 !== $receiver.length; ++tmp$_1) {
-      var item = $receiver[tmp$_1];
-      var tmp$_2 = destination.add_11rb$;
-      var tmp$_3, tmp$_4;
-      tmp$_4 = Kotlin.isType(tmp$_3 = item, HTMLInputElement) ? tmp$_3 : null;
-      if (tmp$_4 == null) {
-        return;
-      }
-      tmp$_2.call(destination, tmp$_4);
-    }
-    var roommateCheckboxes = destination;
-    this.expenseFilterChecklistController = JSTernaryCheckboxTreeController_init(everyoneCheckbox, roommateCheckboxes);
-  };
-  function RentSplit$buildExpenseFilterApplicableRoommateList$lambda(closure$expense, this$RentSplit) {
-    return function (htmlString, roommate) {
-      return htmlString + this$RentSplit.buildExpenseFilterApplicableRoommateListItem_m1r9kw$(closure$expense, roommate);
-    };
-  }
-  RentSplit.prototype.buildExpenseFilterApplicableRoommateList_pbrwj2$ = function (expense) {
-    return reduceTo(this.state.r.r, '', RentSplit$buildExpenseFilterApplicableRoommateList$lambda(expense, this));
-  };
-  RentSplit.prototype.buildExpenseFilterApplicableRoommateListItem_m1r9kw$ = function (expense, roommate) {
-    return '<li' + " class='checklist-item expense-filter-applicable-roommate'>" + '<label>' + '<input' + (' ' + resourceIdAttribute + "='" + roommate.i + "'") + " class='expense-filter-applicable-roommate-checkbox'" + " type='checkbox'" + (' ' + (expense.appliesTo_pcqrmu$(roommate) ? 'checked' : '')) + '/>' + (' ' + sanitizedForHtml(get_nonEmptyName(roommate))) + '<\/label>' + '<\/li>';
-  };
-  RentSplit.prototype.showExpenseDialog_pbrwj2$ = function (expense) {
-    var tmp$;
-    this.reconfigureExpenseDialog_pbrwj2$(expense);
-    (tmp$ = this.expenseFilterDialog) != null ? (tmp$.showModal(), Unit) : null;
-  };
-  Object.defineProperty(RentSplit.prototype, 'expenseFilterDialog', {
-    get: function () {
-      var tmp$, tmp$_0;
-      var tmp$_1;
-      if ((tmp$_0 = Kotlin.isType(tmp$ = $(expenseFilterDialogSelector).get(0), HTMLDialogElement) ? tmp$ : null) != null)
-        tmp$_1 = tmp$_0;
-      else {
-        var message = 'Could not find dialog element!';
-        console.log(message);
-        tmp$_1 = null;
-      }
-      return tmp$_1;
-    }
-  });
-  RentSplit.prototype.didPressNewExpenseButton_9ojx7i$ = function (event) {
-    this.addNewExpense_rhtjr1$(RentExpense$Companion_getInstance().generateNewExpense(), event);
-  };
-  RentSplit.prototype.addNewExpense_rhtjr1$ = function (newExpense, event) {
-    if (event === void 0)
-      event = null;
-    this.state = addingNewExpense(this.state, newExpense);
-  };
-  RentSplit.prototype.insertNewExpenseInputRow_nly0u5$ = function (explicitIndex, expense) {
-    if (explicitIndex === void 0)
-      explicitIndex = null;
-    var expenseInputHtml = this.buildExpenseInputRow_cymhq0$(explicitIndex != null ? explicitIndex : this.numberOfExpensesWithInputRows(), expense);
-    expense.originalDOMElement = $(addAnExpenseRowSelector).before(expenseInputHtml).prev();
-  };
-  RentSplit.prototype.buildExpenseInputRow_cymhq0$ = function (index, expense) {
-    return this.buildExpenseInputRow_c99a2s$(index, expense.i, expense.n, expense.d, expense.f, expense.r, expense.x);
-  };
-  RentSplit.prototype.buildExpenseInputRow_c99a2s$ = function (index, id, type, cost, applicableRoommates, isRenamable, isRemovable) {
-    var expenseNumber = index + 1 | 0;
-    var row = '<tr' + " class='hides-something-until-hover'" + (' ' + resourceIdAttribute + "='" + id + "'") + (' data-' + expenseInputRowDataName + '=' + '"' + expenseNumber + '"') + (' ' + expenseRenamabilityAttribute + "='" + isRenamable + "'") + (' ' + expenseRemovabilityAttribute + "='" + isRemovable + "'") + (applicableRoommates == null ? '' : ' ' + expenseApplicableRoommatesAttribute + "='" + serializedSetOfIds(applicableRoommates) + "'") + '>';
-    var tmp$ = '<th class=' + '"' + (isRenamable ? 'plain   ' : '') + 'has-floating-button' + '"' + '>' + ("<button class='" + expenseFilterButtonClass + "   floats-to-left   hidden-until-parent-hover' " + expenseFilterButtonExpenseRelationAttribute + "='" + id + "'><i class='fa fa-filter'><\/i><\/button>") + '<input' + (' type=' + '"' + (isRenamable ? 'text' : 'hidden') + '"') + ' class="expense-type   text-right"' + (!(type == null || type.length === 0) ? ' value=' + '"' + toString(type) + '"' : '') + ' size="8"' + ' tabindex=0' + (' placeholder=' + '"' + RentExpense$Companion_getInstance().numberedType_61zpoe$(id) + '"') + '/>';
-    var tmp$_0 = !isRenamable;
-    if (tmp$_0) {
-      tmp$_0 = !(type == null || type.length === 0);
-    }
-    row += tmp$ + (tmp$_0 ? type : '') + '<\/th>';
-    row += '<td class="plain vert-bottom">' + '<input' + ' type="number"' + (!(type == null || type.length === 0) ? ' id=' + '"' + 'total-' + toString(type) + '"' : '') + ' class="expense-cost"' + ' required' + (' value=' + '"' + (cost != null ? cost : defaultExpenseCost) + '"') + ' step="10"' + ' size="8"' + ' tabindex=0' + ' placeholder="Monthly Cost"' + '/>' + '<\/td>';
-    if (isRemovable) {
-      row += '<td' + ' class="remove-expense-button color-danger"' + ' tabindex="0">' + '<i class="fa fa-minus-circle"><\/i>' + '<\/td>';
-    }
-    return row + '<\/tr>';
-  };
-  RentSplit.prototype.didPressNewRoommateButton_9ojx7i$ = function (event) {
-    return this.addNewRoommate_an8xux$(RentRoommate$Companion_getInstance().generateNewRoommate(), event);
-  };
-  RentSplit.prototype.addNewRoommate_an8xux$ = function (newRoommate, event) {
-    if (event === void 0)
-      event = null;
-    this.state = addingNewRoommate(this.state, newRoommate);
-  };
-  RentSplit.prototype.insertNewRoommateInputRow_7kd045$ = function (explicitIndex, roommate) {
-    if (explicitIndex === void 0)
-      explicitIndex = null;
-    var roommateInputHtml = this.buildRoommateInputRow_hi9t74$(explicitIndex != null ? explicitIndex : this.numberOfRoommatesWithInputRows(), roommate);
-    roommate.originalDOMElement = $(addARoommateRowSelector).before(roommateInputHtml).prev();
-  };
-  RentSplit.prototype.buildRoommateInputRow_hi9t74$ = function (index, roommate) {
-    return this.buildRoommateInputRow_yi75pw$(index, roommate.i, roommate.n, roommate.d, roommate.r, roommate.x);
-  };
-  RentSplit.prototype.buildRoommateInputRow_yi75pw$ = function (index, id, name, income, isRenamable, isRemovable) {
-    var roommateNumber = index + 1 | 0;
-    var row = '<tr' + (' ' + resourceIdAttribute + "='" + id + "'") + (' data-' + roommateInputRowDataName + "='" + roommateNumber + "'") + (' ' + roommateRenamabilityAttribute + "='" + isRenamable + "'") + (' ' + roommateRemovabilityAttribute + "='" + isRemovable + "'") + '>';
-    row += '<th class="plain">' + '<input' + ' type="text"' + ' class="roommate-name   text-right"' + (!(name == null || name.length === 0) ? ' value="' + name + '"' : '') + ' size="8"' + ' tabindex=0' + (' placeholder=' + '"' + RentRoommate$Companion_getInstance().numberedName_61zpoe$(id) + '"') + '/>' + '<\/th>';
-    row += '<td class="plain vert-bottom">' + '<input' + ' type="number"' + ' class="roommate-income"' + ' required' + (' value=' + '"' + (income != null ? income : defaultRoommateIncome) + '"') + ' step="100"' + ' size="8"' + ' tabindex=0' + ' placeholder="Income"' + '/>' + '<\/td>';
-    row += '<td class="roommate-proportion">Calculating<\/td>';
-    if (isRemovable) {
-      row += '<td class="remove-roommate-button color-danger"' + ' tabindex="0">' + '<i class="fa fa-minus-circle"><\/i>' + '<\/td>';
-    }
-    return row + '<\/tr>';
-  };
-  RentSplit.prototype.numberOfRoommates = function () {
-    return this.state.r.r.size;
-  };
-  RentSplit.prototype.numberOfRoommatesWithInputRows = function () {
-    return $(roommateInputRowSelector).length;
-  };
-  RentSplit.prototype.numberOfExpenses = function () {
-    return this.state.e.e.size;
-  };
-  RentSplit.prototype.numberOfExpensesWithInputRows = function () {
-    return $(expenseInputRowSelector).length;
-  };
-  RentSplit.prototype.didPressRemoveExpenseButton_9ojx7i$ = function (event) {
-    var tmp$;
-    var expenseRow = (tmp$ = event.currentTarget) != null ? tmp$.parentElement : null;
-    expenseRow != null ? (expenseRow.remove(), Unit) : null;
-    this.reloadStateFromPage();
-  };
-  RentSplit.prototype.didPressRemoveRoommateButton_9ojx7i$ = function (event) {
-    var tmp$;
-    var roommateRow = (tmp$ = event.currentTarget) != null ? tmp$.parentElement : null;
-    roommateRow != null ? (roommateRow.remove(), Unit) : null;
-    this.reloadStateFromPage();
-  };
-  RentSplit.prototype.notifyOfProblems_1a4gu5$ = function (table) {
-    var $receiver = table.rows;
-    var destination = ArrayList_init();
-    var tmp$;
-    tmp$ = $receiver.iterator();
-    while (tmp$.hasNext()) {
-      var element = tmp$.next();
-      if (element.totalContributions > element.representedRoommate.d)
-        destination.add_11rb$(element);
-    }
-    var roommatesWhoOweTooMuch = destination;
-    var tmp$_0;
-    tmp$_0 = roommatesWhoOweTooMuch.iterator();
-    while (tmp$_0.hasNext()) {
-      var element_0 = tmp$_0.next();
-      var name = sanitizedForHtml(get_nonEmptyName(element_0.representedRoommate));
-      $('[data-' + roommateResultRowDataName + "='" + name + "']").addClass(roommateWhoOwesTooMuchClassName).attr('title', name + ' owes ' + (element_0.totalContributions - element_0.representedRoommate.d) + ' too much!');
-    }
-  };
-  RentSplit.prototype.get_appliesToAllRoommates_3ssen7$ = function ($receiver) {
-    var tmp$, tmp$_0;
-    return (tmp$_0 = (tmp$ = $receiver.f) != null ? tmp$.containsAll_brywnq$(this.state.r.allRoommateIds) : null) != null ? tmp$_0 : false;
-  };
-  RentSplit.prototype.applicableRoommateSummary_tyj22f$ = function ($receiver, applicableRoommateIds) {
-    if (applicableRoommateIds === void 0)
-      applicableRoommateIds = $receiver.f;
-    var tmp$, tmp$_0;
-    var totalRoommateCount = this.state.r.r.size;
-    var applicableRoommateCount = (tmp$ = applicableRoommateIds != null ? applicableRoommateIds.size : null) != null ? tmp$ : totalRoommateCount;
-    var difference = totalRoommateCount - applicableRoommateCount | 0;
-    if (difference === totalRoommateCount)
-      tmp$_0 = new FiniteAmountSummary$none();
-    else if (difference === 0)
-      tmp$_0 = new FiniteAmountSummary$all(applicableRoommateCount);
-    else
-      tmp$_0 = new FiniteAmountSummary$some(applicableRoommateCount, totalRoommateCount);
-    return tmp$_0;
-  };
-  function RentSplit$state$lambda(this$RentSplit) {
-    return function (f, f_0) {
-      this$RentSplit.reloadPageFromState_6taknv$();
-      save(this$RentSplit.state);
-      return Unit;
-    };
-  }
-  function RentSplit$expenseFilterChecklistController$lambda$lambda(this$RentSplit) {
-    return function (oldState, newState) {
-      this$RentSplit.applicableRoommateCheckboxesDidChange_fsqkh5$(oldState, newState);
-      return Unit;
-    };
-  }
-  function RentSplit$expenseFilterChecklistController$lambda(this$RentSplit) {
-    return function (oldValue, newValue) {
-      var tmp$, tmp$_0, tmp$_1;
-      oldValue != null ? (oldValue.deinit(), Unit) : null;
-      newValue != null ? (newValue.onStateChange_nrmh93$(RentSplit$expenseFilterChecklistController$lambda$lambda(this$RentSplit)), Unit) : null;
-      tmp$ = oldValue != null ? oldValue.state : null;
-      tmp$_1 = (tmp$_0 = newValue != null ? newValue.state : null) != null ? tmp$_0 : Ternary$indeterminate_getInstance();
-      this$RentSplit.applicableRoommateCheckboxesDidChange_fsqkh5$(tmp$, tmp$_1);
-      return Unit;
-    };
-  }
-  RentSplit.$metadata$ = {
-    kind: Kind_CLASS,
-    simpleName: 'RentSplit',
-    interfaces: []
-  };
-  function main$lambda() {
-    (new RentSplit()).onReady();
-    return Unit;
-  }
-  function main(args) {
-    $(main$lambda);
-  }
-  function resultsTableModel($receiver) {
-    var $receiver_0 = $receiver.e.e;
-    var destination = ArrayList_init(collectionSizeOrDefault($receiver_0, 10));
-    var tmp$;
-    tmp$ = $receiver_0.iterator();
-    while (tmp$.hasNext()) {
-      var item = tmp$.next();
-      destination.add_11rb$(sanitizedForHtml(get_nonEmptyType(item)));
-    }
-    var $receiver_1 = $receiver.r.r;
-    var destination_0 = ArrayList_init(collectionSizeOrDefault($receiver_1, 10));
-    var tmp$_0;
-    tmp$_0 = $receiver_1.iterator();
-    while (tmp$_0.hasNext()) {
-      var item_0 = tmp$_0.next();
-      destination_0.add_11rb$(rentSplitResultRow(item_0, $receiver));
-    }
-    return new RentSplitResultTable(destination, destination_0);
-  }
-  function rentSplitResultRow$lambda(rowTotal, cell) {
-    return rowTotal + (cell != null ? cell : 0.0);
-  }
-  function rentSplitResultRow($receiver, overallState) {
-    var tmp$;
-    var $receiver_0 = overallState.e.e;
-    var destination = ArrayList_init(collectionSizeOrDefault($receiver_0, 10));
-    var tmp$_0;
-    tmp$_0 = $receiver_0.iterator();
-    while (tmp$_0.hasNext()) {
-      var item = tmp$_0.next();
-      var tmp$_1 = destination.add_11rb$;
-      var transform$result;
-      if (item.appliesTo_pcqrmu$($receiver)) {
-        var $receiver_1 = overallState.r.r;
-        var destination_0 = ArrayList_init();
-        var tmp$_2;
-        tmp$_2 = $receiver_1.iterator();
-        while (tmp$_2.hasNext()) {
-          var element = tmp$_2.next();
-          if (item.appliesTo_pcqrmu$(element))
-            destination_0.add_11rb$(element);
-        }
-        transform$result = $receiver.contribution_qsnaur$(item, new RentRoommates(destination_0));
-      }
-       else {
-        transform$result = null;
-      }
-      tmp$_1.call(destination, transform$result);
-    }
-    var cells = destination;
-    var rowTotal = reduceTo(cells, 0.0, rentSplitResultRow$lambda);
-    return new RentSplitResultRow($receiver, sanitizedForHtml(get_nonEmptyName($receiver)), cells, rowTotal, (tmp$ = overallState.r.incomePieChart.get_11rb$($receiver.i)) != null ? tmp$ : 0.0);
-  }
-  function RentSplitResultTable(columnHeaders, rows) {
-    this.columnHeaders = columnHeaders;
-    this.rows = rows;
-  }
-  RentSplitResultTable.$metadata$ = {
-    kind: Kind_CLASS,
-    simpleName: 'RentSplitResultTable',
-    interfaces: []
-  };
-  RentSplitResultTable.prototype.component1 = function () {
-    return this.columnHeaders;
-  };
-  RentSplitResultTable.prototype.component2 = function () {
-    return this.rows;
-  };
-  RentSplitResultTable.prototype.copy_nnrplx$ = function (columnHeaders, rows) {
-    return new RentSplitResultTable(columnHeaders === void 0 ? this.columnHeaders : columnHeaders, rows === void 0 ? this.rows : rows);
-  };
-  RentSplitResultTable.prototype.toString = function () {
-    return 'RentSplitResultTable(columnHeaders=' + Kotlin.toString(this.columnHeaders) + (', rows=' + Kotlin.toString(this.rows)) + ')';
-  };
-  RentSplitResultTable.prototype.hashCode = function () {
-    var result = 0;
-    result = result * 31 + Kotlin.hashCode(this.columnHeaders) | 0;
-    result = result * 31 + Kotlin.hashCode(this.rows) | 0;
-    return result;
-  };
-  RentSplitResultTable.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.columnHeaders, other.columnHeaders) && Kotlin.equals(this.rows, other.rows)))));
-  };
-  function RentSplitResultRow(representedRoommate, rowHeader, cells, totalContributions, incomeProportion) {
-    this.representedRoommate = representedRoommate;
-    this.rowHeader = rowHeader;
-    this.cells = cells;
-    this.totalContributions = totalContributions;
-    this.incomeProportion = incomeProportion;
-  }
-  RentSplitResultRow.$metadata$ = {
-    kind: Kind_CLASS,
-    simpleName: 'RentSplitResultRow',
-    interfaces: []
-  };
-  RentSplitResultRow.prototype.component1 = function () {
-    return this.representedRoommate;
-  };
-  RentSplitResultRow.prototype.component2 = function () {
-    return this.rowHeader;
-  };
-  RentSplitResultRow.prototype.component3 = function () {
-    return this.cells;
-  };
-  RentSplitResultRow.prototype.component4 = function () {
-    return this.totalContributions;
-  };
-  RentSplitResultRow.prototype.component5 = function () {
-    return this.incomeProportion;
-  };
-  RentSplitResultRow.prototype.copy_8a21sy$ = function (representedRoommate, rowHeader, cells, totalContributions, incomeProportion) {
-    return new RentSplitResultRow(representedRoommate === void 0 ? this.representedRoommate : representedRoommate, rowHeader === void 0 ? this.rowHeader : rowHeader, cells === void 0 ? this.cells : cells, totalContributions === void 0 ? this.totalContributions : totalContributions, incomeProportion === void 0 ? this.incomeProportion : incomeProportion);
-  };
-  RentSplitResultRow.prototype.toString = function () {
-    return 'RentSplitResultRow(representedRoommate=' + Kotlin.toString(this.representedRoommate) + (', rowHeader=' + Kotlin.toString(this.rowHeader)) + (', cells=' + Kotlin.toString(this.cells)) + (', totalContributions=' + Kotlin.toString(this.totalContributions)) + (', incomeProportion=' + Kotlin.toString(this.incomeProportion)) + ')';
-  };
-  RentSplitResultRow.prototype.hashCode = function () {
-    var result = 0;
-    result = result * 31 + Kotlin.hashCode(this.representedRoommate) | 0;
-    result = result * 31 + Kotlin.hashCode(this.rowHeader) | 0;
-    result = result * 31 + Kotlin.hashCode(this.cells) | 0;
-    result = result * 31 + Kotlin.hashCode(this.totalContributions) | 0;
-    result = result * 31 + Kotlin.hashCode(this.incomeProportion) | 0;
-    return result;
-  };
-  RentSplitResultRow.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.representedRoommate, other.representedRoommate) && Kotlin.equals(this.rowHeader, other.rowHeader) && Kotlin.equals(this.cells, other.cells) && Kotlin.equals(this.totalContributions, other.totalContributions) && Kotlin.equals(this.incomeProportion, other.incomeProportion)))));
-  };
   var rentRoommatesSerializedName;
   var rentExpensesSerializedName;
   var localDataPreferencesSerializedName;
@@ -1641,7 +1979,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
     var tmp$;
     var jsonStringForLocalStorage = serialized($receiver, SerializationPurpose$forLocalStorage_getInstance());
     var jsonStringForSharing = serialized($receiver, SerializationPurpose$forSharing_getInstance());
-    $(stateUrlFieldSelector).val(window.location.protocol + '//' + window.location.host + window.location.pathname + '?' + generalStateSerializedName + '=' + jsonStringForSharing);
+    jq(stateUrlField.cssSelectorString).val(window.location.protocol + '//' + window.location.host + window.location.pathname + '?' + generalStateSerializedName + '=' + jsonStringForSharing);
     tmp$ = $receiver.l.c;
     if (equals(tmp$, UserConsent$explicitConsent_getInstance()))
       window.localStorage.setItem(generalStateSerializedName, jsonStringForLocalStorage);
@@ -1726,88 +2064,6 @@ this['Rent Split 2'] = function (_, Kotlin) {
     }
   }
   SerializationPurpose.valueOf_61zpoe$ = SerializationPurpose$valueOf;
-  function RentSplitViewGenerator() {
-    RentSplitViewGenerator_instance = this;
-  }
-  RentSplitViewGenerator.prototype.addExpenseColumnHeaderToDom_i0mql$ = function (jq_resultsTableHeadRow, headerText) {
-    jq_resultsTableHeadRow.append(this.buildExpenseColumnHeader_61zpoe$(headerText));
-  };
-  RentSplitViewGenerator.prototype.buildExpenseColumnHeader_61zpoe$ = function (headerText) {
-    return "<th class='hide-small'>" + headerText + '<\/th>';
-  };
-  function RentSplitViewGenerator$buildResultRow$lambda(cell) {
-    var tmp$;
-    return "<td class='hide-small'>" + ((tmp$ = cell != null ? get_dollarFormat(cell) : null) != null ? tmp$ : '\u2014') + '<\/td>';
-  }
-  RentSplitViewGenerator.prototype.buildResultRow_zem1ah$ = function (model) {
-    var roommateName = model.rowHeader;
-    var row = '<tr data-' + roommateResultRowDataName + "='" + roommateName + "'><th>" + roommateName + '<\/th>';
-    row += joinToString(model.cells, '', void 0, void 0, void 0, void 0, RentSplitViewGenerator$buildResultRow$lambda);
-    row += '<th>' + get_dollarFormat(model.totalContributions) + '<\/th>';
-    return row + '<\/tr>';
-  };
-  RentSplitViewGenerator.prototype.fillOutResults_1a4gu5$ = function (model) {
-    this.fillOutResultsTableHead_1a4gu5$(model);
-    this.fillOutResultsTableBody_1a4gu5$(model);
-    this.displayRoommateProportions_1a4gu5$(model);
-  };
-  RentSplitViewGenerator.prototype.fillOutResultsTableHead_1a4gu5$ = function (model) {
-    var jq_resultsTableHeadRow = $(resultsTableHeadRowSelector);
-    jq_resultsTableHeadRow.empty();
-    jq_resultsTableHeadRow.append(this.buildResultsTableHeadRoommateNameColumnTitle());
-    var tmp$;
-    tmp$ = model.columnHeaders.iterator();
-    while (tmp$.hasNext()) {
-      var element = tmp$.next();
-      this.addExpenseColumnHeaderToDom_i0mql$(jq_resultsTableHeadRow, element);
-    }
-    jq_resultsTableHeadRow.append(this.buildResultsTableHeadRoommateTotalContributionsColumnTitle());
-  };
-  RentSplitViewGenerator.prototype.buildResultsTableHeadRoommateNameColumnTitle = function () {
-    return '<th class="text-center">Name<\/th>';
-  };
-  RentSplitViewGenerator.prototype.buildResultsTableHeadRoommateTotalContributionsColumnTitle = function () {
-    return '<th class="text-center">Total Cost<\/th>';
-  };
-  RentSplitViewGenerator.prototype.fillOutResultsTableBody_1a4gu5$ = function (model) {
-    var jq_resultsTableBody = $(resultsTableBodySelector);
-    jq_resultsTableBody.empty();
-    var tmp$;
-    tmp$ = model.rows.iterator();
-    while (tmp$.hasNext()) {
-      var element = tmp$.next();
-      this.addResultRowToDom_2qskos$(jq_resultsTableBody, element);
-    }
-  };
-  RentSplitViewGenerator.prototype.addResultRowToDom_2qskos$ = function (jq_resultsTableBody, model) {
-    jq_resultsTableBody.append(this.buildResultRow_zem1ah$(model));
-  };
-  RentSplitViewGenerator.prototype.displayRoommateProportions_1a4gu5$ = function (model) {
-    var tmp$;
-    tmp$ = model.rows.iterator();
-    while (tmp$.hasNext()) {
-      var element = tmp$.next();
-      this.displayRoommateProportion_zem1ah$(element);
-    }
-  };
-  RentSplitViewGenerator.prototype.displayRoommateProportion_zem1ah$ = function (model) {
-    var tmp$;
-    if ((tmp$ = model.representedRoommate.originalDOMElement) != null) {
-      $(roommateProportionSelector, tmp$).html(toFixed(model.incomeProportion * 100.0, 2) + '%');
-    }
-  };
-  RentSplitViewGenerator.$metadata$ = {
-    kind: Kind_OBJECT,
-    simpleName: 'RentSplitViewGenerator',
-    interfaces: []
-  };
-  var RentSplitViewGenerator_instance = null;
-  function RentSplitViewGenerator_getInstance() {
-    if (RentSplitViewGenerator_instance === null) {
-      new RentSplitViewGenerator();
-    }
-    return RentSplitViewGenerator_instance;
-  }
   function UserConsent(name, ordinal, serialValue) {
     Enum.call(this);
     this.serialValue = serialValue;
@@ -1999,7 +2255,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
     console.log(message);
   });
   function toSetOfIds($receiver) {
-    return toSet_0(split($receiver, Kotlin.charArrayOf(91, 44, 93)));
+    return toSet(split($receiver, Kotlin.charArrayOf(91, 44, 93)));
   }
   function serializedSetOfIds($receiver) {
     return joinToString($receiver, ',', '[', ']');
@@ -2129,6 +2385,37 @@ this['Rent Split 2'] = function (_, Kotlin) {
         tmp$_1 = !((tmp$_3 = (tmp$_2 = $receiver.prop('indeterminate')) != null ? toBooleanOrNull(tmp$_2) : null) != null ? tmp$_3 : false);
       }
       return tmp$_1;
+    };
+  }));
+  var jq_0 = defineInlineFunction('Rent Split 2.jQueryInterface.jq_1u92oz$', wrapFunction(function () {
+    var jq = $;
+    return function (cssSelector) {
+      return jq(cssSelector.cssSelectorString);
+    };
+  }));
+  var jq_1 = defineInlineFunction('Rent Split 2.jQueryInterface.jq_3qujwq$', wrapFunction(function () {
+    var jq = $;
+    return function (cssSelector, context) {
+      return jq(cssSelector.cssSelectorString, context);
+    };
+  }));
+  var jq_2 = defineInlineFunction('Rent Split 2.jQueryInterface.jq_ch0s56$', wrapFunction(function () {
+    var jq = $;
+    return function (cssSelector, context) {
+      return jq(cssSelector.cssSelectorString, context);
+    };
+  }));
+  var jq_3 = defineInlineFunction('Rent Split 2.jQueryInterface.jq_5358jw$', wrapFunction(function () {
+    var jq = $;
+    return function (cssSelector, context) {
+      var context_0 = jq(context.cssSelectorString);
+      return jq(cssSelector.cssSelectorString, context_0);
+    };
+  }));
+  var get_jq = defineInlineFunction('Rent Split 2.jQueryInterface.get_jq_dzaqfo$', wrapFunction(function () {
+    var jq = $;
+    return function ($receiver) {
+      return jq($receiver.cssSelectorString);
     };
   }));
   var get_parentElement = defineInlineFunction('Rent Split 2.jQueryInterface.get_parentElement_s15u7w$', function ($receiver) {
@@ -2716,510 +3003,220 @@ this['Rent Split 2'] = function (_, Kotlin) {
     return $this;
   }
   var package$RentSplit = _.RentSplit || (_.RentSplit = {});
-  Object.defineProperty(package$RentSplit, 'IdManager', {
-    get: IdManager_getInstance
-  });
-  Object.defineProperty(package$RentSplit, 'localStorageConsentSerializedName', {
+  Object.defineProperty(package$RentSplit, 'addARoommateRow', {
     get: function () {
-      return localStorageConsentSerializedName;
+      return addARoommateRow;
     }
   });
-  Object.defineProperty(LocalDataPreferences, 'Companion', {
-    get: LocalDataPreferences$Companion_getInstance
-  });
-  package$RentSplit.LocalDataPreferences = LocalDataPreferences;
-  Object.defineProperty(package$RentSplit, 'resourceIdSerializedName', {
+  Object.defineProperty(package$RentSplit, 'addARoommateButton', {
     get: function () {
-      return resourceIdSerializedName;
+      return addARoommateButton;
     }
   });
-  Object.defineProperty(package$RentSplit, 'resourceNameSerializedName', {
+  Object.defineProperty(package$RentSplit, 'removeARoommateButton', {
     get: function () {
-      return resourceNameSerializedName;
+      return removeARoommateButton;
     }
   });
-  Object.defineProperty(package$RentSplit, 'resourceDollarAmountSerializedName', {
+  Object.defineProperty(package$RentSplit, 'addAnExpenseRow', {
     get: function () {
-      return resourceDollarAmountSerializedName;
+      return addAnExpenseRow;
     }
   });
-  Object.defineProperty(package$RentSplit, 'expenseApplicableRoommatesSerializedName', {
+  Object.defineProperty(package$RentSplit, 'addAnExpenseButton', {
     get: function () {
-      return expenseApplicableRoommatesSerializedName;
+      return addAnExpenseButton;
     }
   });
-  Object.defineProperty(package$RentSplit, 'resourceIsRemovableSerializedName', {
+  Object.defineProperty(package$RentSplit, 'removeAnExpenseButton', {
     get: function () {
-      return resourceIsRemovableSerializedName;
+      return removeAnExpenseButton;
     }
   });
-  Object.defineProperty(package$RentSplit, 'resourceIsRenamableSerializedName', {
+  Object.defineProperty(package$RentSplit, 'roommateInputRow', {
     get: function () {
-      return resourceIsRenamableSerializedName;
+      return roommateInputRow;
     }
   });
-  Object.defineProperty(package$RentSplit, 'allExpensesSerializedName', {
+  Object.defineProperty(package$RentSplit, 'expenseInputRow', {
     get: function () {
-      return allExpensesSerializedName;
+      return expenseInputRow;
+    }
+  });
+  Object.defineProperty(package$RentSplit, 'roommateResultRow', {
+    get: function () {
+      return roommateResultRow;
+    }
+  });
+  Object.defineProperty(package$RentSplit, 'roommateNameInput', {
+    get: function () {
+      return roommateNameInput;
+    }
+  });
+  Object.defineProperty(package$RentSplit, 'roommateIncomeInput', {
+    get: function () {
+      return roommateIncomeInput;
+    }
+  });
+  Object.defineProperty(package$RentSplit, 'roommateProportion', {
+    get: function () {
+      return roommateProportion;
     }
   });
   $$importsForInline$$['Rent Split 2'] = _;
-  Object.defineProperty(RentExpense, 'Companion', {
-    get: RentExpense$Companion_getInstance
-  });
-  package$RentSplit.RentExpense = RentExpense;
-  package$RentSplit.get_nonEmptyType_3ssen7$ = get_nonEmptyType;
-  Object.defineProperty(RentExpenses, 'Companion', {
-    get: RentExpenses$Companion_getInstance
-  });
-  package$RentSplit.RentExpenses = RentExpenses;
-  Object.defineProperty(package$RentSplit, 'allRoommatesSerializedName', {
-    get: function () {
-      return allRoommatesSerializedName;
-    }
-  });
-  Object.defineProperty(RentRoommate, 'Companion', {
-    get: RentRoommate$Companion_getInstance
-  });
-  package$RentSplit.RentRoommate = RentRoommate;
-  package$RentSplit.get_nonEmptyName_4mt6yx$ = get_nonEmptyName;
-  Object.defineProperty(RentRoommates, 'Companion', {
-    get: RentRoommates$Companion_getInstance
-  });
-  package$RentSplit.RentRoommates = RentRoommates;
-  Object.defineProperty(package$RentSplit, 'addARoommateRowId', {
-    get: function () {
-      return addARoommateRowId;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'addARoommateRowSelector', {
-    get: function () {
-      return addARoommateRowSelector;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'addARoommateButtonId', {
-    get: function () {
-      return addARoommateButtonId;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'addARoommateButtonSelector', {
-    get: function () {
-      return addARoommateButtonSelector;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'removeARoommateButtonClassName', {
-    get: function () {
-      return removeARoommateButtonClassName;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'removeARoommateButtonSelector', {
-    get: function () {
-      return removeARoommateButtonSelector;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'addAnExpenseRowId', {
-    get: function () {
-      return addAnExpenseRowId;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'addAnExpenseRowSelector', {
-    get: function () {
-      return addAnExpenseRowSelector;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'addAnExpenseButtonId', {
-    get: function () {
-      return addAnExpenseButtonId;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'addAnExpenseButtonSelector', {
-    get: function () {
-      return addAnExpenseButtonSelector;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'removeAnExpenseButtonClassName', {
-    get: function () {
-      return removeAnExpenseButtonClassName;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'removeAnExpenseButtonSelector', {
-    get: function () {
-      return removeAnExpenseButtonSelector;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'roommateInputRowDataName', {
-    get: function () {
-      return roommateInputRowDataName;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'roommateInputRowSelector', {
-    get: function () {
-      return roommateInputRowSelector;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'expenseInputRowDataName', {
-    get: function () {
-      return expenseInputRowDataName;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'expenseInputRowSelector', {
-    get: function () {
-      return expenseInputRowSelector;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'roommateResultRowDataName', {
-    get: function () {
-      return roommateResultRowDataName;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'roommateNameInputClassName', {
-    get: function () {
-      return roommateNameInputClassName;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'roommateNameInputSelector', {
-    get: function () {
-      return roommateNameInputSelector;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'roommateIncomeInputClassName', {
-    get: function () {
-      return roommateIncomeInputClassName;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'roommateIncomeInputSelector', {
-    get: function () {
-      return roommateIncomeInputSelector;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'roommateProportionClassName', {
-    get: function () {
-      return roommateProportionClassName;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'roommateProportionSelector', {
-    get: function () {
-      return roommateProportionSelector;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'roommateAnyInputFieldSelector', {
-    get: function () {
-      return roommateAnyInputFieldSelector;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'roommateWhoOwesTooMuchClassName', {
-    get: function () {
-      return roommateWhoOwesTooMuchClassName;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'roommateRemovabilityDataName', {
-    get: function () {
-      return roommateRemovabilityDataName;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'roommateRemovabilityAttribute', {
-    get: function () {
-      return roommateRemovabilityAttribute;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'roommateRemovabilitySelector', {
-    get: function () {
-      return roommateRemovabilitySelector;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'roommateRenamabilityDataName', {
-    get: function () {
-      return roommateRenamabilityDataName;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'roommateRenamabilityAttribute', {
-    get: function () {
-      return roommateRenamabilityAttribute;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'roommateRenamabilitySelector', {
-    get: function () {
-      return roommateRenamabilitySelector;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'expenseTypeInputClassName', {
-    get: function () {
-      return expenseTypeInputClassName;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'expenseTypeInputSelector', {
-    get: function () {
-      return expenseTypeInputSelector;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'expenseCostInputClassName', {
-    get: function () {
-      return expenseCostInputClassName;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'expenseCostInputSelector', {
-    get: function () {
-      return expenseCostInputSelector;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'expenseAnyInputFieldSelector', {
-    get: function () {
-      return expenseAnyInputFieldSelector;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'expenseRemovabilityDataName', {
-    get: function () {
-      return expenseRemovabilityDataName;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'expenseRemovabilityAttribute', {
-    get: function () {
-      return expenseRemovabilityAttribute;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'expenseRemovabilitySelector', {
-    get: function () {
-      return expenseRemovabilitySelector;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'expenseRenamabilityDataName', {
-    get: function () {
-      return expenseRenamabilityDataName;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'expenseRenamabilityAttribute', {
-    get: function () {
-      return expenseRenamabilityAttribute;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'expenseRenamabilitySelector', {
-    get: function () {
-      return expenseRenamabilitySelector;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'resultRowDataName', {
-    get: function () {
-      return resultRowDataName;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'resultRowAttribute', {
-    get: function () {
-      return resultRowAttribute;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'resultRowSelector', {
-    get: function () {
-      return resultRowSelector;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'resultsTableSelector', {
-    get: function () {
-      return resultsTableSelector;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'resultsTableBodySelector', {
-    get: function () {
-      return resultsTableBodySelector;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'resultsTableHeadRowSelector', {
-    get: function () {
-      return resultsTableHeadRowSelector;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'resourceIdDataName', {
-    get: function () {
-      return resourceIdDataName;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'resourceIdAttribute', {
-    get: function () {
-      return resourceIdAttribute;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'resourceIdSelector', {
-    get: function () {
-      return resourceIdSelector;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'expenseApplicableRoommatesDataName', {
-    get: function () {
-      return expenseApplicableRoommatesDataName;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'expenseApplicableRoommatesAttribute', {
-    get: function () {
-      return expenseApplicableRoommatesAttribute;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'expenseApplicableRoommatesSelector', {
-    get: function () {
-      return expenseApplicableRoommatesSelector;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'expenseHasApplicableRoommatesClassName', {
-    get: function () {
-      return expenseHasApplicableRoommatesClassName;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'expenseHasApplicableRoommatesSelector', {
-    get: function () {
-      return expenseHasApplicableRoommatesSelector;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'copyStateUrlButtonId', {
+  Object.defineProperty(package$RentSplit, 'roommateAnyInputField', {
     get: function () {
-      return copyStateUrlButtonId;
+      return roommateAnyInputField;
     }
   });
-  Object.defineProperty(package$RentSplit, 'copyStateUrlButtonSelector', {
+  Object.defineProperty(package$RentSplit, 'roommateWhoOwesTooMuch', {
     get: function () {
-      return copyStateUrlButtonSelector;
+      return roommateWhoOwesTooMuch;
     }
   });
-  Object.defineProperty(package$RentSplit, 'stateUrlFieldId', {
+  Object.defineProperty(package$RentSplit, 'roommateRemovability', {
     get: function () {
-      return stateUrlFieldId;
+      return roommateRemovability;
     }
   });
-  Object.defineProperty(package$RentSplit, 'stateUrlFieldSelector', {
+  Object.defineProperty(package$RentSplit, 'roommateRenamability', {
     get: function () {
-      return stateUrlFieldSelector;
+      return roommateRenamability;
     }
   });
-  Object.defineProperty(package$RentSplit, 'localStorageWarningId', {
+  Object.defineProperty(package$RentSplit, 'expenseTypeInput', {
     get: function () {
-      return localStorageWarningId;
+      return expenseTypeInput;
     }
   });
-  Object.defineProperty(package$RentSplit, 'localStorageWarningSelector', {
+  Object.defineProperty(package$RentSplit, 'expenseCostInput', {
     get: function () {
-      return localStorageWarningSelector;
+      return expenseCostInput;
     }
   });
-  Object.defineProperty(package$RentSplit, 'localStorageWarningExplicitRefusalButtonId', {
+  Object.defineProperty(package$RentSplit, 'expenseAnyInputField', {
     get: function () {
-      return localStorageWarningExplicitRefusalButtonId;
+      return expenseAnyInputField;
     }
   });
-  Object.defineProperty(package$RentSplit, 'localStorageWarningExplicitRefusalButtonSelector', {
+  Object.defineProperty(package$RentSplit, 'expenseRemovability', {
     get: function () {
-      return localStorageWarningExplicitRefusalButtonSelector;
+      return expenseRemovability;
     }
   });
-  Object.defineProperty(package$RentSplit, 'localStorageWarningExplicitConsentButtonId', {
+  Object.defineProperty(package$RentSplit, 'expenseRenamability', {
     get: function () {
-      return localStorageWarningExplicitConsentButtonId;
+      return expenseRenamability;
     }
   });
-  Object.defineProperty(package$RentSplit, 'localStorageWarningExplicitConsentButtonSelector', {
+  Object.defineProperty(package$RentSplit, 'resultRow', {
     get: function () {
-      return localStorageWarningExplicitConsentButtonSelector;
+      return resultRow;
     }
   });
-  Object.defineProperty(package$RentSplit, 'expenseFilterButtonClass', {
+  Object.defineProperty(package$RentSplit, 'resultsTable', {
     get: function () {
-      return expenseFilterButtonClass;
+      return resultsTable;
     }
   });
-  Object.defineProperty(package$RentSplit, 'expenseFilterButtonSelector', {
+  Object.defineProperty(package$RentSplit, 'resultsTableBody', {
     get: function () {
-      return expenseFilterButtonSelector;
+      return resultsTableBody;
     }
   });
-  Object.defineProperty(package$RentSplit, 'expenseFilterDialogId', {
+  Object.defineProperty(package$RentSplit, 'resultsTableHeadRow', {
     get: function () {
-      return expenseFilterDialogId;
+      return resultsTableHeadRow;
     }
   });
-  Object.defineProperty(package$RentSplit, 'expenseFilterDialogSelector', {
+  Object.defineProperty(package$RentSplit, 'resourceId', {
     get: function () {
-      return expenseFilterDialogSelector;
+      return resourceId;
     }
   });
-  Object.defineProperty(package$RentSplit, 'expenseFilterDialogCancelButtonId', {
+  Object.defineProperty(package$RentSplit, 'expenseApplicableRoommates', {
     get: function () {
-      return expenseFilterDialogCancelButtonId;
+      return expenseApplicableRoommates;
     }
   });
-  Object.defineProperty(package$RentSplit, 'expenseFilterDialogCancelButtonSelector', {
+  Object.defineProperty(package$RentSplit, 'expenseHasApplicableRoommates', {
     get: function () {
-      return expenseFilterDialogCancelButtonSelector;
+      return expenseHasApplicableRoommates;
     }
   });
-  Object.defineProperty(package$RentSplit, 'expenseFilterDialogOkButtonId', {
+  Object.defineProperty(package$RentSplit, 'copyStateUrlButton', {
     get: function () {
-      return expenseFilterDialogOkButtonId;
+      return copyStateUrlButton;
     }
   });
-  Object.defineProperty(package$RentSplit, 'expenseFilterDialogOkButtonSelector', {
+  Object.defineProperty(package$RentSplit, 'stateUrlField', {
     get: function () {
-      return expenseFilterDialogOkButtonSelector;
+      return stateUrlField;
     }
   });
-  Object.defineProperty(package$RentSplit, 'expenseFilterDialogExpenseNameClassName', {
+  Object.defineProperty(package$RentSplit, 'localStorageWarning', {
     get: function () {
-      return expenseFilterDialogExpenseNameClassName;
+      return localStorageWarning;
     }
   });
-  Object.defineProperty(package$RentSplit, 'expenseFilterDialogExpenseNameSelector', {
+  Object.defineProperty(package$RentSplit, 'localStorageWarningExplicitRefusalButton', {
     get: function () {
-      return expenseFilterDialogExpenseNameSelector;
+      return localStorageWarningExplicitRefusalButton;
     }
   });
-  Object.defineProperty(package$RentSplit, 'expenseFilterApplicableRoommateChecklistId', {
+  Object.defineProperty(package$RentSplit, 'localStorageWarningExplicitConsentButton', {
     get: function () {
-      return expenseFilterApplicableRoommateChecklistId;
+      return localStorageWarningExplicitConsentButton;
     }
   });
-  Object.defineProperty(package$RentSplit, 'expenseFilterApplicableRoommateChecklistSelector', {
+  Object.defineProperty(package$RentSplit, 'expenseFilterButton', {
     get: function () {
-      return expenseFilterApplicableRoommateChecklistSelector;
+      return expenseFilterButton;
     }
   });
-  Object.defineProperty(package$RentSplit, 'expenseFilterApplicableRoommateChecklistItemClass', {
+  Object.defineProperty(package$RentSplit, 'expenseFilterDialog', {
     get: function () {
-      return expenseFilterApplicableRoommateChecklistItemClass;
+      return expenseFilterDialog;
     }
   });
-  Object.defineProperty(package$RentSplit, 'expenseFilterApplicableRoommateChecklistItemSelector', {
+  Object.defineProperty(package$RentSplit, 'expenseFilterDialogCancelButton', {
     get: function () {
-      return expenseFilterApplicableRoommateChecklistItemSelector;
+      return expenseFilterDialogCancelButton;
     }
   });
-  Object.defineProperty(package$RentSplit, 'expenseFilterEveryoneCheckboxId', {
+  Object.defineProperty(package$RentSplit, 'expenseFilterDialogOkButton', {
     get: function () {
-      return expenseFilterEveryoneCheckboxId;
+      return expenseFilterDialogOkButton;
     }
   });
-  Object.defineProperty(package$RentSplit, 'expenseFilterEveryoneCheckboxSelector', {
+  Object.defineProperty(package$RentSplit, 'expenseFilterDialogExpenseName', {
     get: function () {
-      return expenseFilterEveryoneCheckboxSelector;
+      return expenseFilterDialogExpenseName;
     }
   });
-  Object.defineProperty(package$RentSplit, 'expenseFilterApplicableRoommateCheckboxClass', {
+  Object.defineProperty(package$RentSplit, 'expenseFilterApplicableRoommateChecklist', {
     get: function () {
-      return expenseFilterApplicableRoommateCheckboxClass;
+      return expenseFilterApplicableRoommateChecklist;
     }
   });
-  Object.defineProperty(package$RentSplit, 'expenseFilterApplicableRoommateCheckboxSelector', {
+  Object.defineProperty(package$RentSplit, 'expenseFilterApplicableRoommateChecklistItem', {
     get: function () {
-      return expenseFilterApplicableRoommateCheckboxSelector;
+      return expenseFilterApplicableRoommateChecklistItem;
     }
   });
-  Object.defineProperty(package$RentSplit, 'expenseFilterDialogCurrentExpenseDataName', {
+  Object.defineProperty(package$RentSplit, 'expenseFilterEveryoneCheckbox', {
     get: function () {
-      return expenseFilterDialogCurrentExpenseDataName;
+      return expenseFilterEveryoneCheckbox;
     }
   });
-  Object.defineProperty(package$RentSplit, 'expenseFilterDialogCurrentExpenseAttribute', {
+  Object.defineProperty(package$RentSplit, 'expenseFilterApplicableRoommateCheckbox', {
     get: function () {
-      return expenseFilterDialogCurrentExpenseAttribute;
+      return expenseFilterApplicableRoommateCheckbox;
     }
   });
-  Object.defineProperty(package$RentSplit, 'expenseFilterDialogCurrentExpenseSelector', {
+  Object.defineProperty(package$RentSplit, 'expenseFilterDialogCurrentExpense', {
     get: function () {
-      return expenseFilterDialogCurrentExpenseSelector;
+      return expenseFilterDialogCurrentExpense;
     }
   });
   Object.defineProperty(package$RentSplit, 'expenseFilterAnyCheckboxSelector', {
@@ -3227,34 +3224,24 @@ this['Rent Split 2'] = function (_, Kotlin) {
       return expenseFilterAnyCheckboxSelector;
     }
   });
-  Object.defineProperty(package$RentSplit, 'expenseFilterButtonExpenseRelationDataName', {
+  Object.defineProperty(package$RentSplit, 'expenseFilterButtonExpenseRelation', {
     get: function () {
-      return expenseFilterButtonExpenseRelationDataName;
+      return expenseFilterButtonExpenseRelation;
     }
   });
-  Object.defineProperty(package$RentSplit, 'expenseFilterButtonExpenseRelationAttribute', {
+  Object.defineProperty(package$RentSplit, 'anyInputField', {
     get: function () {
-      return expenseFilterButtonExpenseRelationAttribute;
+      return anyInputField;
     }
   });
-  Object.defineProperty(package$RentSplit, 'expenseFilterButtonExpenseRelationSelector', {
+  Object.defineProperty(package$RentSplit, 'anyInputButton', {
     get: function () {
-      return expenseFilterButtonExpenseRelationSelector;
+      return anyInputButton;
     }
   });
-  Object.defineProperty(package$RentSplit, 'anyInputFieldSelector', {
+  Object.defineProperty(package$RentSplit, 'anyInput', {
     get: function () {
-      return anyInputFieldSelector;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'anyInputButtonSelector', {
-    get: function () {
-      return anyInputButtonSelector;
-    }
-  });
-  Object.defineProperty(package$RentSplit, 'anyInputSelector', {
-    get: function () {
-      return anyInputSelector;
+      return anyInput;
     }
   });
   Object.defineProperty(package$RentSplit, 'rentExpenseType', {
@@ -3317,12 +3304,110 @@ this['Rent Split 2'] = function (_, Kotlin) {
       return defaultUtilitiesExpenseCost;
     }
   });
-  package$RentSplit.RentSplit = RentSplit;
+  Object.defineProperty(package$RentSplit, 'IdManager', {
+    get: IdManager_getInstance
+  });
+  package$RentSplit.RentSplitApp = RentSplitApp;
   package$RentSplit.main_kand9s$ = main;
   package$RentSplit.resultsTableModel_fib44y$ = resultsTableModel;
   package$RentSplit.rentSplitResultRow_8fwuai$ = rentSplitResultRow;
   package$RentSplit.RentSplitResultTable = RentSplitResultTable;
   package$RentSplit.RentSplitResultRow = RentSplitResultRow;
+  Object.defineProperty(package$RentSplit, 'RentSplitViewGenerator', {
+    get: RentSplitViewGenerator_getInstance
+  });
+  package$RentSplit.AnyCssSelector = AnyCssSelector;
+  package$RentSplit.CssSelectorWithoutValue = CssSelectorWithoutValue;
+  package$RentSplit.CssSelectorWithValue = CssSelectorWithValue;
+  CssParameterForSelector.exactly = CssParameterForSelector$exactly;
+  CssParameterForSelector.listContainsExactly = CssParameterForSelector$listContainsExactly;
+  CssParameterForSelector.languageSubCode = CssParameterForSelector$languageSubCode;
+  CssParameterForSelector.startsWith = CssParameterForSelector$startsWith;
+  CssParameterForSelector.endsWith = CssParameterForSelector$endsWith;
+  CssParameterForSelector.contains = CssParameterForSelector$contains;
+  package$RentSplit.CssParameterForSelector = CssParameterForSelector;
+  package$RentSplit.CssElement = CssElement;
+  package$RentSplit.CssClass = CssClass;
+  package$RentSplit.CssId = CssId;
+  package$RentSplit.DataAttribute = DataAttribute;
+  package$RentSplit.CompoundSelector = CompoundSelector;
+  SelectorCombiner.BinaryCombinator = SelectorCombiner$BinaryCombinator;
+  SelectorCombiner.either = SelectorCombiner$either;
+  SelectorCombiner.container = SelectorCombiner$container;
+  SelectorCombiner.sibling = SelectorCombiner$sibling;
+  SelectorCombiner.immediateSibling = SelectorCombiner$immediateSibling;
+  package$RentSplit.SelectorCombiner = SelectorCombiner;
+  package$RentSplit.or_qxw4fl$ = or;
+  package$RentSplit.containing_qxw4fl$ = containing;
+  package$RentSplit.justBefore_qxw4fl$ = justBefore;
+  package$RentSplit.before_qxw4fl$ = before;
+  Object.defineProperty(package$RentSplit, 'localStorageConsentSerializedName', {
+    get: function () {
+      return localStorageConsentSerializedName;
+    }
+  });
+  Object.defineProperty(LocalDataPreferences, 'Companion', {
+    get: LocalDataPreferences$Companion_getInstance
+  });
+  package$RentSplit.LocalDataPreferences = LocalDataPreferences;
+  Object.defineProperty(package$RentSplit, 'resourceIdSerializedName', {
+    get: function () {
+      return resourceIdSerializedName;
+    }
+  });
+  Object.defineProperty(package$RentSplit, 'resourceNameSerializedName', {
+    get: function () {
+      return resourceNameSerializedName;
+    }
+  });
+  Object.defineProperty(package$RentSplit, 'resourceDollarAmountSerializedName', {
+    get: function () {
+      return resourceDollarAmountSerializedName;
+    }
+  });
+  Object.defineProperty(package$RentSplit, 'expenseApplicableRoommatesSerializedName', {
+    get: function () {
+      return expenseApplicableRoommatesSerializedName;
+    }
+  });
+  Object.defineProperty(package$RentSplit, 'resourceIsRemovableSerializedName', {
+    get: function () {
+      return resourceIsRemovableSerializedName;
+    }
+  });
+  Object.defineProperty(package$RentSplit, 'resourceIsRenamableSerializedName', {
+    get: function () {
+      return resourceIsRenamableSerializedName;
+    }
+  });
+  Object.defineProperty(package$RentSplit, 'allExpensesSerializedName', {
+    get: function () {
+      return allExpensesSerializedName;
+    }
+  });
+  Object.defineProperty(RentExpense, 'Companion', {
+    get: RentExpense$Companion_getInstance
+  });
+  package$RentSplit.RentExpense = RentExpense;
+  package$RentSplit.get_nonEmptyType_3ssen7$ = get_nonEmptyType;
+  Object.defineProperty(RentExpenses, 'Companion', {
+    get: RentExpenses$Companion_getInstance
+  });
+  package$RentSplit.RentExpenses = RentExpenses;
+  Object.defineProperty(package$RentSplit, 'allRoommatesSerializedName', {
+    get: function () {
+      return allRoommatesSerializedName;
+    }
+  });
+  Object.defineProperty(RentRoommate, 'Companion', {
+    get: RentRoommate$Companion_getInstance
+  });
+  package$RentSplit.RentRoommate = RentRoommate;
+  package$RentSplit.get_nonEmptyName_4mt6yx$ = get_nonEmptyName;
+  Object.defineProperty(RentRoommates, 'Companion', {
+    get: RentRoommates$Companion_getInstance
+  });
+  package$RentSplit.RentRoommates = RentRoommates;
   Object.defineProperty(package$RentSplit, 'rentRoommatesSerializedName', {
     get: function () {
       return rentRoommatesSerializedName;
@@ -3360,9 +3445,6 @@ this['Rent Split 2'] = function (_, Kotlin) {
     get: SerializationPurpose$forSharing_getInstance
   });
   package$RentSplit.SerializationPurpose = SerializationPurpose;
-  Object.defineProperty(package$RentSplit, 'RentSplitViewGenerator', {
-    get: RentSplitViewGenerator_getInstance
-  });
   Object.defineProperty(UserConsent, 'explicitConsent', {
     get: UserConsent$explicitConsent_getInstance
   });
@@ -3405,6 +3487,11 @@ this['Rent Split 2'] = function (_, Kotlin) {
   package$jQueryInterface.indeterminate_9ufosi$ = indeterminate;
   package$jQueryInterface.indeterminate_5laha2$ = indeterminate_0;
   package$jQueryInterface.checkedNotIndeterminate_9ufosi$ = checkedNotIndeterminate;
+  package$jQueryInterface.jq_1u92oz$ = jq_0;
+  package$jQueryInterface.jq_3qujwq$ = jq_1;
+  package$jQueryInterface.jq_ch0s56$ = jq_2;
+  package$jQueryInterface.get_jq_dzaqfo$ = get_jq;
+  package$jQueryInterface.jq_5358jw$ = jq_3;
   package$jQueryInterface.get_parentElement_s15u7w$ = get_parentElement;
   var package$org = _.org || (_.org = {});
   var package$bh = package$org.bh || (package$org.bh = {});
@@ -3473,109 +3560,56 @@ this['Rent Split 2'] = function (_, Kotlin) {
   });
   package$js.JSTernaryCheckboxTreeController_init_cbr6g3$ = JSTernaryCheckboxTreeController_init;
   package$js.JSTernaryCheckboxTreeController = JSTernaryCheckboxTreeController;
-  localStorageConsentSerializedName = 'c';
-  resourceIdSerializedName = 'i';
-  resourceNameSerializedName = 'n';
-  resourceDollarAmountSerializedName = 'd';
-  expenseApplicableRoommatesSerializedName = 'f';
-  resourceIsRemovableSerializedName = 'x';
-  resourceIsRenamableSerializedName = 'r';
-  allExpensesSerializedName = 'e';
-  allRoommatesSerializedName = 'r';
-  addARoommateRowId = 'Add-Roommate-Row';
-  addARoommateRowSelector = '#Add-Roommate-Row';
-  addARoommateButtonId = 'Add-Roommate-Button';
-  addARoommateButtonSelector = '#Add-Roommate-Button';
-  removeARoommateButtonClassName = 'remove-roommate-button';
-  removeARoommateButtonSelector = '.remove-roommate-button';
-  addAnExpenseRowId = 'Add-Expense-Row';
-  addAnExpenseRowSelector = '#Add-Expense-Row';
-  addAnExpenseButtonId = 'Add-Expense-Button';
-  addAnExpenseButtonSelector = '#Add-Expense-Button';
-  removeAnExpenseButtonClassName = 'remove-expense-button';
-  removeAnExpenseButtonSelector = '.remove-expense-button';
-  roommateInputRowDataName = 'roommate-row';
-  roommateInputRowSelector = '[data-roommate-row]';
-  expenseInputRowDataName = 'expense-row';
-  expenseInputRowSelector = '[data-expense-row]';
-  roommateResultRowDataName = 'result-roommate-row';
-  roommateNameInputClassName = 'roommate-name';
-  roommateNameInputSelector = '.' + roommateNameInputClassName;
-  roommateIncomeInputClassName = 'roommate-income';
-  roommateIncomeInputSelector = '.' + roommateIncomeInputClassName;
-  roommateProportionClassName = 'roommate-proportion';
-  roommateProportionSelector = '.' + roommateProportionClassName;
-  roommateAnyInputFieldSelector = '.roommate-name,.roommate-income';
-  roommateWhoOwesTooMuchClassName = 'roommate-owes-too-much';
-  roommateRemovabilityDataName = 'roommate-removable';
-  roommateRemovabilityAttribute = 'data-roommate-removable';
-  roommateRemovabilitySelector = '[data-roommate-removable]';
-  roommateRenamabilityDataName = 'roommate-renamable';
-  roommateRenamabilityAttribute = 'data-roommate-renamable';
-  roommateRenamabilitySelector = '[data-roommate-renamable]';
-  expenseTypeInputClassName = 'expense-type';
-  expenseTypeInputSelector = '.' + expenseTypeInputClassName;
-  expenseCostInputClassName = 'expense-cost';
-  expenseCostInputSelector = '.' + expenseCostInputClassName;
-  expenseAnyInputFieldSelector = '.expense-type,.expense-cost';
-  expenseRemovabilityDataName = 'expense-removable';
-  expenseRemovabilityAttribute = 'data-expense-removable';
-  expenseRemovabilitySelector = '[data-expense-removable]';
-  expenseRenamabilityDataName = 'expense-renamable';
-  expenseRenamabilityAttribute = 'data-expense-renamable';
-  expenseRenamabilitySelector = '[data-expense-renamable]';
-  resultRowDataName = 'result-roommate-row';
-  resultRowAttribute = 'data-result-roommate-row';
-  resultRowSelector = '[data-result-roommate-row]';
-  resultsTableSelector = '#Results';
-  resultsTableBodySelector = '#Results>tbody';
-  resultsTableHeadRowSelector = '#Results>thead>tr';
-  resourceIdDataName = 'id';
-  resourceIdAttribute = 'data-id';
-  resourceIdSelector = '[data-id]';
-  expenseApplicableRoommatesDataName = 'applicable-roommate-ids';
-  expenseApplicableRoommatesAttribute = 'data-applicable-roommate-ids';
-  expenseApplicableRoommatesSelector = '[data-applicable-roommate-ids]';
-  expenseHasApplicableRoommatesClassName = 'has-applicable-roommates';
-  expenseHasApplicableRoommatesSelector = '.has-applicable-roommates';
-  copyStateUrlButtonId = 'Copy-URL-Button';
-  copyStateUrlButtonSelector = '#Copy-URL-Button';
-  stateUrlFieldId = 'State-URL-Field';
-  stateUrlFieldSelector = '#State-URL-Field';
-  localStorageWarningId = 'Local-Storage-Warning';
-  localStorageWarningSelector = '#Local-Storage-Warning';
-  localStorageWarningExplicitRefusalButtonId = 'Local-Storage-Warning-Decline-Button';
-  localStorageWarningExplicitRefusalButtonSelector = '#Local-Storage-Warning-Decline-Button';
-  localStorageWarningExplicitConsentButtonId = 'Local-Storage-Warning-Consent-Button';
-  localStorageWarningExplicitConsentButtonSelector = '#Local-Storage-Warning-Consent-Button';
-  expenseFilterButtonClass = 'filter-button';
-  expenseFilterButtonSelector = '.filter-button';
-  expenseFilterDialogId = 'filter-dialog';
-  expenseFilterDialogSelector = '#filter-dialog';
-  expenseFilterDialogCancelButtonId = 'filter-dialog-cancel-button';
-  expenseFilterDialogCancelButtonSelector = '#filter-dialog-cancel-button';
-  expenseFilterDialogOkButtonId = 'filter-dialog-ok-button';
-  expenseFilterDialogOkButtonSelector = '#filter-dialog-ok-button';
-  expenseFilterDialogExpenseNameClassName = 'expense-name';
-  expenseFilterDialogExpenseNameSelector = '.expense-name';
-  expenseFilterApplicableRoommateChecklistId = 'expense-filter-applicable-roommate-checklist';
-  expenseFilterApplicableRoommateChecklistSelector = '#expense-filter-applicable-roommate-checklist';
-  expenseFilterApplicableRoommateChecklistItemClass = 'expense-filter-applicable-roommate';
-  expenseFilterApplicableRoommateChecklistItemSelector = '.expense-filter-applicable-roommate';
-  expenseFilterEveryoneCheckboxId = 'roommate-filter-everyone-checkbox';
-  expenseFilterEveryoneCheckboxSelector = '#roommate-filter-everyone-checkbox';
-  expenseFilterApplicableRoommateCheckboxClass = 'expense-filter-applicable-roommate-checkbox';
-  expenseFilterApplicableRoommateCheckboxSelector = '.expense-filter-applicable-roommate-checkbox';
-  expenseFilterDialogCurrentExpenseDataName = 'current-expense';
-  expenseFilterDialogCurrentExpenseAttribute = 'data-current-expense';
-  expenseFilterDialogCurrentExpenseSelector = '[data-current-expense]';
-  expenseFilterAnyCheckboxSelector = '#filter-dialog input[type=checkbox]';
-  expenseFilterButtonExpenseRelationDataName = 'expense';
-  expenseFilterButtonExpenseRelationAttribute = 'data-expense';
-  expenseFilterButtonExpenseRelationSelector = '[data-expense]';
-  anyInputFieldSelector = 'input,.roommate-name,.roommate-income,.expense-type,.expense-cost';
-  anyInputButtonSelector = '#Add-Roommate-Button,#Add-Expense-Button,' + '.remove-roommate-button,.remove-expense-button,' + '.filter-button,#filter-dialog-cancel-button,#filter-dialog-ok-button';
-  anyInputSelector = 'input,.roommate-name,.roommate-income,.expense-type,.expense-cost,#Add-Roommate-Button,#Add-Expense-Button,.remove-roommate-button,.remove-expense-button,.filter-button,#filter-dialog-cancel-button,#filter-dialog-ok-button';
+  DataAttribute.prototype.attributeSelector_v4lxyt$ = CssSelectorWithValue.prototype.attributeSelector_v4lxyt$;
+  Object.defineProperty(DataAttribute.prototype, 'cssSelectorString', Object.getOwnPropertyDescriptor(CssSelectorWithValue.prototype, 'cssSelectorString'));
+  addARoommateRow = new CssId('Add-Roommate-Row');
+  addARoommateButton = new CssId('Add-Roommate-Button');
+  removeARoommateButton = new CssClass('remove-roommate-button');
+  addAnExpenseRow = new CssId('Add-Expense-Row');
+  addAnExpenseButton = new CssId('Add-Expense-Button');
+  removeAnExpenseButton = new CssClass('remove-expense-button');
+  roommateInputRow = new DataAttribute('roommate-row');
+  expenseInputRow = new DataAttribute('expense-row');
+  roommateResultRow = new DataAttribute('result-' + roommateInputRow.dataName);
+  roommateNameInput = new CssClass('roommate-name');
+  roommateIncomeInput = new CssClass('roommate-income');
+  roommateProportion = new CssClass('roommate-proportion');
+  roommateAnyInputField = new SelectorCombiner$either(roommateNameInput, roommateIncomeInput);
+  roommateWhoOwesTooMuch = new CssClass('roommate-owes-too-much');
+  roommateRemovability = new DataAttribute('roommate-removable');
+  roommateRenamability = new DataAttribute('roommate-renamable');
+  expenseTypeInput = new CssClass('expense-type');
+  expenseCostInput = new CssClass('expense-cost');
+  expenseAnyInputField = new SelectorCombiner$either(expenseTypeInput, expenseCostInput);
+  expenseRemovability = new DataAttribute('expense-removable');
+  expenseRenamability = new DataAttribute('expense-renamable');
+  resultRow = new DataAttribute('result-roommate-row');
+  resultsTable = new CssId('Results');
+  resultsTableBody = new SelectorCombiner$container(resultsTable, new CssElement('tbody'));
+  resultsTableHeadRow = new SelectorCombiner$container(new SelectorCombiner$container(resultsTable, new CssElement('thead')), new CssElement('tr'));
+  resourceId = new DataAttribute('id');
+  expenseApplicableRoommates = new DataAttribute('applicable-roommate-ids');
+  expenseHasApplicableRoommates = new CssClass('has-applicable-roommates');
+  copyStateUrlButton = new CssId('Copy-URL-Button');
+  stateUrlField = new CssId('State-URL-Field');
+  localStorageWarning = new CssId('Local-Storage-Warning');
+  localStorageWarningExplicitRefusalButton = new CssId('Local-Storage-Warning-Decline-Button');
+  localStorageWarningExplicitConsentButton = new CssId('Local-Storage-Warning-Consent-Button');
+  expenseFilterButton = new CssClass('filter-button');
+  expenseFilterDialog = new CssId('Filter-Dialog');
+  expenseFilterDialogCancelButton = new CssId('Filter-Dialog-Cancel-Button');
+  expenseFilterDialogOkButton = new CssId('Filter-Dialog-Ok-Button');
+  expenseFilterDialogExpenseName = new CssClass('expense-name');
+  expenseFilterApplicableRoommateChecklist = new CssId('Expense-Filter-Applicable-Roommate-Checklist');
+  expenseFilterApplicableRoommateChecklistItem = new CssClass('expense-filter-applicable-roommate');
+  expenseFilterEveryoneCheckbox = new CssId('Roommate-Filter-Everyone-Checkbox');
+  expenseFilterApplicableRoommateCheckbox = new CssClass('expense-filter-applicable-roommate-checkbox');
+  expenseFilterDialogCurrentExpense = new DataAttribute('current-expense');
+  expenseFilterAnyCheckboxSelector = expenseFilterDialog.cssSelectorString + ' input[type=checkbox]';
+  expenseFilterButtonExpenseRelation = new DataAttribute('expense');
+  anyInputField = new SelectorCombiner$either(new SelectorCombiner$either(new CssElement('input'), roommateAnyInputField), expenseAnyInputField);
+  anyInputButton = new SelectorCombiner$either(new SelectorCombiner$either(new SelectorCombiner$either(new SelectorCombiner$either(new SelectorCombiner$either(new SelectorCombiner$either(addARoommateButton, addAnExpenseButton), removeARoommateButton), removeAnExpenseButton), expenseFilterButton), expenseFilterDialogCancelButton), expenseFilterDialogOkButton);
+  anyInput = new SelectorCombiner$either(anyInputField, anyInputButton);
   rentExpenseType = 'Rent';
   utilitiesExpenseType = 'Utilities';
   roommateNamePlaceholderText = 'Name';
@@ -3588,6 +3622,15 @@ this['Rent Split 2'] = function (_, Kotlin) {
   defaultExpenseCost = 100.0;
   defaultRentExpenseCost = 800.0;
   defaultUtilitiesExpenseCost = 50.0;
+  localStorageConsentSerializedName = 'c';
+  resourceIdSerializedName = 'i';
+  resourceNameSerializedName = 'n';
+  resourceDollarAmountSerializedName = 'd';
+  expenseApplicableRoommatesSerializedName = 'f';
+  resourceIsRemovableSerializedName = 'x';
+  resourceIsRenamableSerializedName = 'r';
+  allExpensesSerializedName = 'e';
+  allRoommatesSerializedName = 'r';
   rentRoommatesSerializedName = 'r';
   rentExpensesSerializedName = 'e';
   localDataPreferencesSerializedName = 'l';

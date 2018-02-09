@@ -112,5 +112,25 @@ fun JQuery.checked(newValue: Boolean?): JQuery {
 inline fun JQuery.indeterminate(): Boolean = prop("indeterminate")?.toBooleanOrNull() ?: false
 inline fun JQuery.indeterminate(newValue: Boolean?) = prop("indeterminate", newValue)
 
+
 /** @return `true` iff this is checked but not indeterminate */
 inline fun JQuery.checkedNotIndeterminate() = checked() && !indeterminate()
+
+
+@Suppress("NOTHING_TO_INLINE")
+inline fun jq(cssSelector: AnyCssSelector): JQuery = jq(cssSelector.cssSelectorString)
+
+
+@Suppress("NOTHING_TO_INLINE")
+inline fun jq(cssSelector: AnyCssSelector, context: Element): JQuery = jq(cssSelector.cssSelectorString, context)
+
+
+@Suppress("NOTHING_TO_INLINE")
+inline fun jq(cssSelector: AnyCssSelector, context: JQuery): JQuery = jq(cssSelector.cssSelectorString, context)
+
+
+@Suppress("NOTHING_TO_INLINE")
+inline fun jq(cssSelector: AnyCssSelector, context: AnyCssSelector): JQuery = jq(cssSelector, context.jq)
+
+
+inline val AnyCssSelector.jq get() = jq(this)
