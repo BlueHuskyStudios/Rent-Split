@@ -2,6 +2,7 @@ package RentSplit
 
 import jQueryInterface.*
 
+@Suppress("MemberVisibilityCanBePrivate")
 /**
  * Generates HTML strings and places them into the DOM
  *
@@ -29,7 +30,7 @@ object RentSplitViewGenerator {
      */
     fun buildResultRow(model: RentSplitResultRow): String {
         val roommateName = model.rowHeader
-        var row = "<tr data-$roommateResultRowDataName='$roommateName'><th>$roommateName</th>"
+        var row = "<tr ${roommateResultRow.htmlAttributeName}='$roommateName'><th>$roommateName</th>"
         row += model.cells.joinToString(
                 separator = "",
                 transform = { cell -> "<td class='hide-small'>${cell?.dollarFormat ?: "—"}</td>" })
@@ -54,7 +55,7 @@ object RentSplitViewGenerator {
      */
     @Suppress("UNUSED_PARAMETER")
     fun fillOutResultsTableHead(model: RentSplitResultTable) {
-        val jq_resultsTableHeadRow = jq(resultsTableHeadRowSelector)
+        val jq_resultsTableHeadRow = jq(resultsTableHeadRow)
         jq_resultsTableHeadRow.empty()
         jq_resultsTableHeadRow.append(buildResultsTableHeadRoommateNameColumnTitle())
         model.columnHeaders.forEach { header -> addExpenseColumnHeaderToDom(jq_resultsTableHeadRow, header) }
@@ -79,7 +80,7 @@ object RentSplitViewGenerator {
      * output table
      */
     fun fillOutResultsTableBody(model: RentSplitResultTable) {
-        val jq_resultsTableBody = jq(resultsTableBodySelector)
+        val jq_resultsTableBody = jq(resultsTableBody)
         jq_resultsTableBody.empty()
         model.rows.forEach { this.addResultRowToDom(jq_resultsTableBody, it) }
     }
@@ -106,7 +107,7 @@ object RentSplitViewGenerator {
      */
     fun displayRoommateProportion(model: RentSplitResultRow) {
         model.representedRoommate.originalDOMElement?.let { originalDOMElement ->
-            jq(roommateProportionSelector, originalDOMElement).html("${(model.incomeProportion * 100.0).toFixed(2)}%")
+            jq(roommateProportion, originalDOMElement).html("${(model.incomeProportion * 100.0).toFixed(2)}%")
         }
     }
 }

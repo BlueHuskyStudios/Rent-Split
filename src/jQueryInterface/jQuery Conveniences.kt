@@ -112,5 +112,30 @@ fun JQuery.checked(newValue: Boolean?): JQuery {
 inline fun JQuery.indeterminate(): Boolean = prop("indeterminate")?.toBooleanOrNull() ?: false
 inline fun JQuery.indeterminate(newValue: Boolean?) = prop("indeterminate", newValue)
 
+
 /** @return `true` iff this is checked but not indeterminate */
 inline fun JQuery.checkedNotIndeterminate() = checked() && !indeterminate()
+
+
+/** Allows jQuery syntax to be used for an instance of `AnyCssSelector` */
+@Suppress("NOTHING_TO_INLINE")
+inline fun jq(cssSelector: AnyCssSelector): JQuery = jq(cssSelector.cssSelectorString)
+
+
+/** Allows jQuery syntax to be used for an instance of `AnyCssSelector` with an `Element` for context */
+@Suppress("NOTHING_TO_INLINE")
+inline fun jq(cssSelector: AnyCssSelector, context: Element): JQuery = jq(cssSelector.cssSelectorString, context)
+
+
+/** Allows jQuery syntax to be used for an instance of `AnyCssSelector` with another `JQuery` for context */
+@Suppress("NOTHING_TO_INLINE")
+inline fun jq(cssSelector: AnyCssSelector, context: JQuery): JQuery = jq(cssSelector.cssSelectorString, context)
+
+
+/** Allows jQuery syntax to be used for an instance of `AnyCssSelector` with another `AnyCssSelector` for context */
+@Suppress("NOTHING_TO_INLINE")
+inline fun jq(cssSelector: AnyCssSelector, context: AnyCssSelector): JQuery = jq(cssSelector, context.jq)
+
+
+/** Shorthand for `jq(this)` */
+inline val AnyCssSelector.jq get() = jq(this)
