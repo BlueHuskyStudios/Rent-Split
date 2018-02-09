@@ -43,18 +43,18 @@ this['Rent Split 2'] = function (_, Kotlin) {
   var ReadWriteProperty = Kotlin.kotlin.properties.ReadWriteProperty;
   var ObservableProperty = Kotlin.kotlin.properties.ObservableProperty;
   var roundToInt = Kotlin.kotlin.math.roundToInt_yrwdxr$;
-  CssParameterForSelector$exactly.prototype = Object.create(CssParameterForSelector.prototype);
-  CssParameterForSelector$exactly.prototype.constructor = CssParameterForSelector$exactly;
-  CssParameterForSelector$listContainsExactly.prototype = Object.create(CssParameterForSelector.prototype);
-  CssParameterForSelector$listContainsExactly.prototype.constructor = CssParameterForSelector$listContainsExactly;
-  CssParameterForSelector$languageSubCode.prototype = Object.create(CssParameterForSelector.prototype);
-  CssParameterForSelector$languageSubCode.prototype.constructor = CssParameterForSelector$languageSubCode;
-  CssParameterForSelector$startsWith.prototype = Object.create(CssParameterForSelector.prototype);
-  CssParameterForSelector$startsWith.prototype.constructor = CssParameterForSelector$startsWith;
-  CssParameterForSelector$endsWith.prototype = Object.create(CssParameterForSelector.prototype);
-  CssParameterForSelector$endsWith.prototype.constructor = CssParameterForSelector$endsWith;
-  CssParameterForSelector$contains.prototype = Object.create(CssParameterForSelector.prototype);
-  CssParameterForSelector$contains.prototype.constructor = CssParameterForSelector$contains;
+  CssParameterForAttributeSelector$exactly.prototype = Object.create(CssParameterForAttributeSelector.prototype);
+  CssParameterForAttributeSelector$exactly.prototype.constructor = CssParameterForAttributeSelector$exactly;
+  CssParameterForAttributeSelector$listContainsExactly.prototype = Object.create(CssParameterForAttributeSelector.prototype);
+  CssParameterForAttributeSelector$listContainsExactly.prototype.constructor = CssParameterForAttributeSelector$listContainsExactly;
+  CssParameterForAttributeSelector$languageSubCode.prototype = Object.create(CssParameterForAttributeSelector.prototype);
+  CssParameterForAttributeSelector$languageSubCode.prototype.constructor = CssParameterForAttributeSelector$languageSubCode;
+  CssParameterForAttributeSelector$startsWith.prototype = Object.create(CssParameterForAttributeSelector.prototype);
+  CssParameterForAttributeSelector$startsWith.prototype.constructor = CssParameterForAttributeSelector$startsWith;
+  CssParameterForAttributeSelector$endsWith.prototype = Object.create(CssParameterForAttributeSelector.prototype);
+  CssParameterForAttributeSelector$endsWith.prototype.constructor = CssParameterForAttributeSelector$endsWith;
+  CssParameterForAttributeSelector$contains.prototype = Object.create(CssParameterForAttributeSelector.prototype);
+  CssParameterForAttributeSelector$contains.prototype.constructor = CssParameterForAttributeSelector$contains;
   SelectorCombiner$BinaryCombinator.prototype = Object.create(SelectorCombiner.prototype);
   SelectorCombiner$BinaryCombinator.prototype.constructor = SelectorCombiner$BinaryCombinator;
   SelectorCombiner$either.prototype = Object.create(SelectorCombiner$BinaryCombinator.prototype);
@@ -963,115 +963,115 @@ this['Rent Split 2'] = function (_, Kotlin) {
     simpleName: 'AnyCssSelector',
     interfaces: []
   };
-  function CssSelectorWithoutValue() {
+  function CssHtmlAttributeWithoutValue() {
   }
-  CssSelectorWithoutValue.$metadata$ = {
-    kind: Kind_INTERFACE,
-    simpleName: 'CssSelectorWithoutValue',
-    interfaces: [AnyCssSelector]
-  };
-  function CssSelectorWithValue() {
-  }
-  CssSelectorWithValue.prototype.attributeSelector_v4lxyt$ = function (parameter) {
-    return '[' + this.htmlAttributeName + parameter.operator + '"' + parameter.parameterText + '"' + (parameter.caseInsensitive ? ' i' : '') + ']';
-  };
-  Object.defineProperty(CssSelectorWithValue.prototype, 'cssSelectorString', {
+  Object.defineProperty(CssHtmlAttributeWithoutValue.prototype, 'cssSelectorString', {
     get: function () {
       return '[' + this.htmlAttributeName + ']';
     }
   });
-  CssSelectorWithValue.$metadata$ = {
+  CssHtmlAttributeWithoutValue.$metadata$ = {
     kind: Kind_INTERFACE,
-    simpleName: 'CssSelectorWithValue',
-    interfaces: [CssSelectorWithoutValue]
+    simpleName: 'CssHtmlAttributeWithoutValue',
+    interfaces: [AnyCssSelector]
   };
-  function CssParameterForSelector(parameterText, caseInsensitive) {
+  function CssHtmlAttributeWithValue() {
+  }
+  CssHtmlAttributeWithValue.prototype.cssSelectorString_8ij0n9$ = function (parameter) {
+    return '[' + this.htmlAttributeName + parameter.operator + '"' + parameter.parameterText + '"' + (parameter.caseInsensitive ? ' i' : '') + ']';
+  };
+  CssHtmlAttributeWithValue.$metadata$ = {
+    kind: Kind_INTERFACE,
+    simpleName: 'CssHtmlAttributeWithValue',
+    interfaces: [CssHtmlAttributeWithoutValue]
+  };
+  function CssParameterForAttributeSelector(parameterText, caseInsensitive) {
     this.parameterText = parameterText;
     this.caseInsensitive = caseInsensitive;
   }
-  function CssParameterForSelector$exactly(parameterText, caseInsensitive) {
+  function CssParameterForAttributeSelector$exactly(parameterText, caseInsensitive) {
     if (caseInsensitive === void 0)
       caseInsensitive = false;
-    CssParameterForSelector.call(this, parameterText, caseInsensitive);
+    CssParameterForAttributeSelector.call(this, parameterText, caseInsensitive);
   }
-  CssParameterForSelector$exactly.$metadata$ = {
+  CssParameterForAttributeSelector$exactly.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'exactly',
-    interfaces: [CssParameterForSelector]
+    interfaces: [CssParameterForAttributeSelector]
   };
-  function CssParameterForSelector$listContainsExactly(listItem, caseInsensitive) {
+  function CssParameterForAttributeSelector$listContainsExactly(listItem, caseInsensitive) {
     if (caseInsensitive === void 0)
       caseInsensitive = false;
-    CssParameterForSelector.call(this, listItem, caseInsensitive);
+    CssParameterForAttributeSelector.call(this, listItem, caseInsensitive);
   }
-  CssParameterForSelector$listContainsExactly.$metadata$ = {
+  CssParameterForAttributeSelector$listContainsExactly.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'listContainsExactly',
-    interfaces: [CssParameterForSelector]
+    interfaces: [CssParameterForAttributeSelector]
   };
-  function CssParameterForSelector$languageSubCode(subCode, caseInsensitive) {
+  function CssParameterForAttributeSelector$languageSubCode(subCode, caseInsensitive) {
     if (caseInsensitive === void 0)
       caseInsensitive = false;
-    CssParameterForSelector.call(this, subCode, caseInsensitive);
+    CssParameterForAttributeSelector.call(this, subCode, caseInsensitive);
   }
-  CssParameterForSelector$languageSubCode.$metadata$ = {
+  CssParameterForAttributeSelector$languageSubCode.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'languageSubCode',
-    interfaces: [CssParameterForSelector]
+    interfaces: [CssParameterForAttributeSelector]
   };
-  function CssParameterForSelector$startsWith(prefix, caseInsensitive) {
+  function CssParameterForAttributeSelector$startsWith(prefix, caseInsensitive) {
     if (caseInsensitive === void 0)
       caseInsensitive = false;
-    CssParameterForSelector.call(this, prefix, caseInsensitive);
+    CssParameterForAttributeSelector.call(this, prefix, caseInsensitive);
   }
-  CssParameterForSelector$startsWith.$metadata$ = {
+  CssParameterForAttributeSelector$startsWith.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'startsWith',
-    interfaces: [CssParameterForSelector]
+    interfaces: [CssParameterForAttributeSelector]
   };
-  function CssParameterForSelector$endsWith(suffix, caseInsensitive) {
+  function CssParameterForAttributeSelector$endsWith(suffix, caseInsensitive) {
     if (caseInsensitive === void 0)
       caseInsensitive = false;
-    CssParameterForSelector.call(this, suffix, caseInsensitive);
+    CssParameterForAttributeSelector.call(this, suffix, caseInsensitive);
   }
-  CssParameterForSelector$endsWith.$metadata$ = {
+  CssParameterForAttributeSelector$endsWith.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'endsWith',
-    interfaces: [CssParameterForSelector]
+    interfaces: [CssParameterForAttributeSelector]
   };
-  function CssParameterForSelector$contains(needle, caseInsensitive) {
+  function CssParameterForAttributeSelector$contains(needle, caseInsensitive) {
     if (caseInsensitive === void 0)
       caseInsensitive = false;
-    CssParameterForSelector.call(this, needle, caseInsensitive);
+    CssParameterForAttributeSelector.call(this, needle, caseInsensitive);
   }
-  CssParameterForSelector$contains.$metadata$ = {
+  CssParameterForAttributeSelector$contains.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'contains',
-    interfaces: [CssParameterForSelector]
+    interfaces: [CssParameterForAttributeSelector]
   };
-  Object.defineProperty(CssParameterForSelector.prototype, 'operator', {
+  Object.defineProperty(CssParameterForAttributeSelector.prototype, 'operator', {
     get: function () {
       var tmp$;
-      if (Kotlin.isType(this, CssParameterForSelector$exactly))
+      if (Kotlin.isType(this, CssParameterForAttributeSelector$exactly))
         tmp$ = '';
-      else if (Kotlin.isType(this, CssParameterForSelector$listContainsExactly))
+      else if (Kotlin.isType(this, CssParameterForAttributeSelector$listContainsExactly))
         tmp$ = '~';
-      else if (Kotlin.isType(this, CssParameterForSelector$languageSubCode))
+      else if (Kotlin.isType(this, CssParameterForAttributeSelector$languageSubCode))
         tmp$ = '|';
-      else if (Kotlin.isType(this, CssParameterForSelector$startsWith))
+      else if (Kotlin.isType(this, CssParameterForAttributeSelector$startsWith))
         tmp$ = '^';
-      else if (Kotlin.isType(this, CssParameterForSelector$endsWith))
+      else if (Kotlin.isType(this, CssParameterForAttributeSelector$endsWith))
         tmp$ = '$';
-      else if (Kotlin.isType(this, CssParameterForSelector$contains))
+      else if (Kotlin.isType(this, CssParameterForAttributeSelector$contains))
         tmp$ = '*';
       else
         tmp$ = Kotlin.noWhenBranchMatched();
       return tmp$ + '=';
     }
   });
-  CssParameterForSelector.$metadata$ = {
+  CssParameterForAttributeSelector.$metadata$ = {
     kind: Kind_CLASS,
-    simpleName: 'CssParameterForSelector',
+    simpleName: 'CssParameterForAttributeSelector',
     interfaces: []
   };
   function CssElement(elementName) {
@@ -1113,7 +1113,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
   CssClass.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'CssClass',
-    interfaces: [CssSelectorWithoutValue]
+    interfaces: [CssHtmlAttributeWithoutValue]
   };
   function CssId(idName) {
     this.idName = idName;
@@ -1141,7 +1141,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
   CssId.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'CssId',
-    interfaces: [CssSelectorWithoutValue]
+    interfaces: [CssHtmlAttributeWithoutValue]
   };
   function DataAttribute(dataName) {
     this.dataName = dataName;
@@ -1160,20 +1160,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
   DataAttribute.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'DataAttribute',
-    interfaces: [CssSelectorWithValue]
-  };
-  function CompoundSelector(selectorCombiner) {
-    this.selectorCombiner = selectorCombiner;
-  }
-  Object.defineProperty(CompoundSelector.prototype, 'cssSelectorString', {
-    get: function () {
-      return this.selectorCombiner.cssSelectorString;
-    }
-  });
-  CompoundSelector.$metadata$ = {
-    kind: Kind_CLASS,
-    simpleName: 'CompoundSelector',
-    interfaces: [AnyCssSelector]
+    interfaces: [CssHtmlAttributeWithValue]
   };
   function SelectorCombiner(lhs, rhs, cssStringifier) {
     this.lhs = lhs;
@@ -3317,20 +3304,19 @@ this['Rent Split 2'] = function (_, Kotlin) {
     get: RentSplitViewGenerator_getInstance
   });
   package$RentSplit.AnyCssSelector = AnyCssSelector;
-  package$RentSplit.CssSelectorWithoutValue = CssSelectorWithoutValue;
-  package$RentSplit.CssSelectorWithValue = CssSelectorWithValue;
-  CssParameterForSelector.exactly = CssParameterForSelector$exactly;
-  CssParameterForSelector.listContainsExactly = CssParameterForSelector$listContainsExactly;
-  CssParameterForSelector.languageSubCode = CssParameterForSelector$languageSubCode;
-  CssParameterForSelector.startsWith = CssParameterForSelector$startsWith;
-  CssParameterForSelector.endsWith = CssParameterForSelector$endsWith;
-  CssParameterForSelector.contains = CssParameterForSelector$contains;
-  package$RentSplit.CssParameterForSelector = CssParameterForSelector;
+  package$RentSplit.CssHtmlAttributeWithoutValue = CssHtmlAttributeWithoutValue;
+  package$RentSplit.CssHtmlAttributeWithValue = CssHtmlAttributeWithValue;
+  CssParameterForAttributeSelector.exactly = CssParameterForAttributeSelector$exactly;
+  CssParameterForAttributeSelector.listContainsExactly = CssParameterForAttributeSelector$listContainsExactly;
+  CssParameterForAttributeSelector.languageSubCode = CssParameterForAttributeSelector$languageSubCode;
+  CssParameterForAttributeSelector.startsWith = CssParameterForAttributeSelector$startsWith;
+  CssParameterForAttributeSelector.endsWith = CssParameterForAttributeSelector$endsWith;
+  CssParameterForAttributeSelector.contains = CssParameterForAttributeSelector$contains;
+  package$RentSplit.CssParameterForAttributeSelector = CssParameterForAttributeSelector;
   package$RentSplit.CssElement = CssElement;
   package$RentSplit.CssClass = CssClass;
   package$RentSplit.CssId = CssId;
   package$RentSplit.DataAttribute = DataAttribute;
-  package$RentSplit.CompoundSelector = CompoundSelector;
   SelectorCombiner.BinaryCombinator = SelectorCombiner$BinaryCombinator;
   SelectorCombiner.either = SelectorCombiner$either;
   SelectorCombiner.container = SelectorCombiner$container;
@@ -3560,8 +3546,9 @@ this['Rent Split 2'] = function (_, Kotlin) {
   });
   package$js.JSTernaryCheckboxTreeController_init_cbr6g3$ = JSTernaryCheckboxTreeController_init;
   package$js.JSTernaryCheckboxTreeController = JSTernaryCheckboxTreeController;
-  DataAttribute.prototype.attributeSelector_v4lxyt$ = CssSelectorWithValue.prototype.attributeSelector_v4lxyt$;
-  Object.defineProperty(DataAttribute.prototype, 'cssSelectorString', Object.getOwnPropertyDescriptor(CssSelectorWithValue.prototype, 'cssSelectorString'));
+  Object.defineProperty(CssHtmlAttributeWithValue.prototype, 'cssSelectorString', Object.getOwnPropertyDescriptor(CssHtmlAttributeWithoutValue.prototype, 'cssSelectorString'));
+  DataAttribute.prototype.cssSelectorString_8ij0n9$ = CssHtmlAttributeWithValue.prototype.cssSelectorString_8ij0n9$;
+  Object.defineProperty(DataAttribute.prototype, 'cssSelectorString', Object.getOwnPropertyDescriptor(CssHtmlAttributeWithValue.prototype, 'cssSelectorString'));
   addARoommateRow = new CssId('Add-Roommate-Row');
   addARoommateButton = new CssId('Add-Roommate-Button');
   removeARoommateButton = new CssClass('remove-roommate-button');
