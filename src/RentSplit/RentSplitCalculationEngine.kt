@@ -1,5 +1,7 @@
 package RentSplit
 
+import org.bh.tools.base.collections.extensions.*
+
 /**
  * Handles the calculations of the results table
  *

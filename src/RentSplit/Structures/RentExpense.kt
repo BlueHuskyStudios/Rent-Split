@@ -5,6 +5,7 @@ import RentSplit.IdManager.registerId
 import RentSplit.RentExpenses.Companion.allRoommates
 import jQueryInterface.*
 import org.bh.tools.base.collections.*
+import org.bh.tools.base.collections.extensions.*
 import kotlin.js.*
 
 

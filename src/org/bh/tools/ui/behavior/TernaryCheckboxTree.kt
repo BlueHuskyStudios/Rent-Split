@@ -1,6 +1,6 @@
 package org.bh.tools.ui.behavior
 
-import RentSplit.*
+import org.bh.tools.base.collections.extensions.*
 import org.bh.tools.base.func.*
 import org.bh.tools.base.struct.*
 import org.bh.tools.base.struct.FiniteAmountSummary.*

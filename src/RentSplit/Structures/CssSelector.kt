@@ -20,7 +20,7 @@ interface AnyCssSelector {
 /**
  * A CSS selector that represents an HTML attribute (like `disabled` or `checked`) that has no value
  */
-interface CssHtmlAttributeWithoutValue : AnyCssSelector {
+interface CssHtmlAttribute : AnyCssSelector {
     /**
      * The name of the HTML attribute
      */
@@ -34,7 +34,7 @@ interface CssHtmlAttributeWithoutValue : AnyCssSelector {
 /**
  * A CSS selector that represents an HTML attribute (like `id` or `href`) that can have a value
  */
-interface CssHtmlAttributeWithValue : CssHtmlAttributeWithoutValue {
+interface CssHtmlAttributeWithValue : CssHtmlAttribute {
     /**
      * The string version of this selector, specifying the parameter
      */
@@ -118,7 +118,7 @@ class CssElement(val elementName: String): AnyCssSelector {
 /**
  * A CSS class
  */
-class CssClass(val className: String): CssHtmlAttributeWithoutValue {
+class CssClass(val className: String): CssHtmlAttribute {
     override val htmlAttributeName: String by lazy { "class" }
     override val cssSelectorString by lazy { ".$className" }
 }
@@ -128,7 +128,7 @@ class CssClass(val className: String): CssHtmlAttributeWithoutValue {
 /**
  * A CSS ID
  */
-class CssId(val idName: String): CssHtmlAttributeWithoutValue {
+class CssId(val idName: String): CssHtmlAttribute {
     override val htmlAttributeName by lazy { "id" }
     override val cssSelectorString by lazy { "#$idName" }
 }

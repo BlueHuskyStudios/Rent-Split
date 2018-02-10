@@ -121,10 +121,11 @@
 
     <section id="State-Management" class="flex-column flex-horiz-space-around">
         <section id="Share-State">
-            <label class="flex-row flex-wrap flex-horiz-stretch flex-vert-bottom">Share this split with your roommates:&nbsp;
-                <div class="flex-row flex-horiz-stretch">
+            <label class="flex-column flex-wrap flex-horiz-stretch flex-vert-bottom">Share this split with your roommates:&nbsp;
+                <!--suppress HtmlUnknownTag -->
+                <div id="State-URL-Holder" class="flex-row flex-horiz-stretch   can-have-status" data-status-text="">
                     <input type="text" id="State-URL-Field" readonly />
-                    <button type="button" id="Copy-URL-Button" title="Copy", class="copy-button"><i class="fa fa-share-alt fa-lg"></i></button>
+                    <button type="button" id="Copy-URL-Button" title="Copy" class="copy-button"><i class="fa fa-share-alt fa-lg"></i></button>
                 </div>
             </label>
         </section>

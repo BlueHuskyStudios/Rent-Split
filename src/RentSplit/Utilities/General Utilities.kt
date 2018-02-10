@@ -15,6 +15,10 @@ external fun encodeURIComponent(raw: String): String
 external fun decodeURIComponent(raw: String): String
 
 
+val String.urlEncoded get() = encodeURIComponent(this)
+val String.urlDecoded get() = decodeURIComponent(this)
+
+
 /**
  * If this string is null, or if this string is empty, then this returns `false`. Else, this returns `true`.
  */
@@ -76,18 +80,6 @@ fun String.toBoolean(valueIfInvalid: Boolean = true): Boolean = toBooleanOrNull(
 
 
 /**
- * Reduces this collection to one value, by using a given starting value and then processing each element off of that
- */
-fun <From, To> Collection<From>.reduceTo(start: To, transformer: (To, From) -> To): To {
-    var value = start
-    forEach {
-        value = transformer(value, it)
-    }
-    return value
-}
-
-
-/**
  * Returns a new list, which is a copy of this one with the given new element added
  */
 fun <Element> List<Element>.adding(newElement: Element): List<Element> {
@@ -128,11 +120,26 @@ inline fun log(message: String, logger: (String) -> Unit = ::consoleLogString) =
 
 
 /**
+ * Simply logs the given object using the given logger (defaults to console.log)
+ */
+inline fun <T> log(`object`: T?, logger: (T?) -> Unit = ::consoleLog) = logger(`object`)
+
+
+/**
  * An alias for `console.log` that can only log `String`s
  */
 @Suppress("NOTHING_TO_INLINE") // Inlined on-purpose because this is an alias for console.log
 inline fun consoleLogString(message: String) {
     console.log(message)
+}
+
+
+/**
+ * An alias for `console.log` that can log anything
+ */
+@Suppress("NOTHING_TO_INLINE") // Inlined on-purpose because this is an alias for console.log
+inline fun <T> consoleLog(`object`: T?) {
+    console.log(`object`)
 }
 
 

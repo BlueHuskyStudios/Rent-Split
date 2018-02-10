@@ -3,6 +3,7 @@ package RentSplit
 import RentSplit.IdManager.generateNewId
 import RentSplit.IdManager.registerId
 import jQueryInterface.*
+import org.bh.tools.base.collections.extensions.*
 import kotlin.js.*
 
 

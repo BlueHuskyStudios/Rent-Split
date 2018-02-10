@@ -60,6 +60,12 @@ package RentSplit
         val localStorageWarningExplicitRefusalButton = CssId("Local-Storage-Warning-Decline-Button")
         val localStorageWarningExplicitConsentButton = CssId("Local-Storage-Warning-Consent-Button")
 
+        val justCopiedAlerting = CssClass("just-copied")
+        val shareUrlHolder = CssId("State-URL-Holder")
+        val stateUrlStatus = DataAttribute("status-text")
+        val canHaveStatus = CssClass("can-have-status")
+        val showStatus = CssClass("show-status")
+
 
 /// Expense Filters ///
 
