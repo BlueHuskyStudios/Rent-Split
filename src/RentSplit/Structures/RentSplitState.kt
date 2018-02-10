@@ -124,7 +124,7 @@ fun RentSplitState.Companion.load(): RentSplitState {
 fun RentSplitState.save() {
     val jsonStringForLocalStorage = serialized(forLocalStorage)
     val jsonStringForSharing = serialized(forSharing)
-    jq(stateUrlFieldSelector).`val`("${window.location.protocol}//${window.location.host}${window.location.pathname}?$generalStateSerializedName=$jsonStringForSharing")
+    jq(stateUrlField).`val`("${window.location.protocol}//${window.location.host}${window.location.pathname}?$generalStateSerializedName=$jsonStringForSharing")
 
     // Only save to the local storage if the user consented
     when (this.localDataPreferences.localStorageConsent) {
