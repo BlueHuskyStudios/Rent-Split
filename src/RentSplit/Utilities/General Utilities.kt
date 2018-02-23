@@ -110,7 +110,7 @@ inline fun doNothing() = Unit
 /**
  * Logs a message and then returns the this value
  */
-inline fun <ValueType> ValueType.alsoLog(message: String, logger: (String) -> Unit = ::consoleLogString) = also { log(message, logger) }
+inline fun <ValueType> ValueType.alsoLog(message: String, logger: (String) -> Unit = ::consoleLogString) = also { log(message + "\t$this", logger) }
 
 
 /**

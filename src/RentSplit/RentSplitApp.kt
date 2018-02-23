@@ -813,6 +813,7 @@ class RentSplitApp {
             copyShareUrl()
             when (response) {
                 is success -> {
+                    alertUserOfSuccessfulGenerationOfShareUrl()
                     log("Shortened URL!")
                 }
                 is error -> {

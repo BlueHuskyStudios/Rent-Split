@@ -38,13 +38,14 @@ this['Rent Split 2'] = function (_, Kotlin) {
   var split = Kotlin.kotlin.text.split_o64adg$;
   var Regex_init = Kotlin.kotlin.text.Regex_init_61zpoe$;
   var replace = Kotlin.kotlin.text.replace_680rmw$;
-  var joinToString_0 = Kotlin.kotlin.collections.joinToString_cgipc5$;
+  var emptyMap = Kotlin.kotlin.collections.emptyMap_q3lmfv$;
+  var toList_0 = Kotlin.kotlin.collections.toList_us0mfu$;
+  var emptyList = Kotlin.kotlin.collections.emptyList_287e2$;
   var Iterator = Kotlin.kotlin.collections.Iterator;
   var roundToInt = Kotlin.kotlin.math.roundToInt_yrwdxr$;
   var Any = Object;
   var ReadWriteProperty = Kotlin.kotlin.properties.ReadWriteProperty;
   var ObservableProperty = Kotlin.kotlin.properties.ObservableProperty;
-  var emptyMap = Kotlin.kotlin.collections.emptyMap_q3lmfv$;
   var toShort = Kotlin.toShort;
   CssParameterForAttributeSelector$exactly.prototype = Object.create(CssParameterForAttributeSelector.prototype);
   CssParameterForAttributeSelector$exactly.prototype.constructor = CssParameterForAttributeSelector$exactly;
@@ -72,8 +73,12 @@ this['Rent Split 2'] = function (_, Kotlin) {
   SerializationPurpose.prototype.constructor = SerializationPurpose;
   UserConsent.prototype = Object.create(Enum.prototype);
   UserConsent.prototype.constructor = UserConsent;
+  GooGlUrlShortener$RequestParameter$accessKey.prototype = Object.create(GooGlUrlShortener$RequestParameter.prototype);
+  GooGlUrlShortener$RequestParameter$accessKey.prototype.constructor = GooGlUrlShortener$RequestParameter$accessKey;
   GooGlUrlShortener$RequestParameter$longUrl.prototype = Object.create(GooGlUrlShortener$RequestParameter.prototype);
   GooGlUrlShortener$RequestParameter$longUrl.prototype.constructor = GooGlUrlShortener$RequestParameter$longUrl;
+  GooGlUrlShortener$RequestParameter$Usage.prototype = Object.create(Enum.prototype);
+  GooGlUrlShortener$RequestParameter$Usage.prototype.constructor = GooGlUrlShortener$RequestParameter$Usage;
   GooGlUrlShortener$ShortenResponse$success.prototype = Object.create(GooGlUrlShortener$ShortenResponse.prototype);
   GooGlUrlShortener$ShortenResponse$success.prototype.constructor = GooGlUrlShortener$ShortenResponse$success;
   GooGlUrlShortener$ShortenResponse$error.prototype = Object.create(GooGlUrlShortener$ShortenResponse.prototype);
@@ -312,13 +317,13 @@ this['Rent Split 2'] = function (_, Kotlin) {
     var tmp$, tmp$_0, tmp$_1;
     tmp$_0 = Kotlin.isType(tmp$ = event.currentTarget, Element) ? tmp$ : null;
     if (tmp$_0 == null) {
-      var message = 'No element targeted in the filter button click event';
+      var message = 'No element targeted in the filter button click event' + ('\t' + Unit);
       console.log(message);
       return Unit;
     }
     tmp$_1 = this.expenseForFilterButton_2rdptt$(tmp$_0);
     if (tmp$_1 == null) {
-      var message_0 = 'No expense matching ID in filter button';
+      var message_0 = 'No expense matching ID in filter button' + ('\t' + Unit);
       console.log(message_0);
       return Unit;
     }
@@ -380,14 +385,14 @@ this['Rent Split 2'] = function (_, Kotlin) {
     var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7, tmp$_8;
     tmp$_0 = (tmp$ = $(jq_roommateRow).data(resourceId.dataName)) != null ? tmp$.toString() : null;
     if (tmp$_0 == null) {
-      var message = 'No ID on page!';
+      var message = 'No ID on page!' + ('\t' + null);
       console.log(message);
       return null;
     }
     tmp$_2 = (tmp$_1 = jq(roommateNameInput.cssSelectorString, jq_roommateRow).val()) != null ? tmp$_1 : '';
     tmp$_4 = (tmp$_3 = jq(roommateIncomeInput.cssSelectorString, jq_roommateRow).val()) != null ? toDoubleOrNull(tmp$_3) : null;
     if (tmp$_4 == null) {
-      var message_0 = 'No monthly income on page!';
+      var message_0 = 'No monthly income on page!' + ('\t' + null);
       console.log(message_0);
       return null;
     }
@@ -397,7 +402,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
     var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7, tmp$_8, tmp$_9, tmp$_10, tmp$_11, tmp$_12;
     tmp$_0 = (tmp$ = jq_expenseRow.data(resourceId.dataName)) != null ? tmp$.toString() : null;
     if (tmp$_0 == null) {
-      var message = 'No ID on page!';
+      var message = 'No ID on page!' + ('\t' + null);
       console.log(message);
       return null;
     }
@@ -407,7 +412,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
     }.bind(null, this))(tmp$_4) : null) != null ? tmp$_5 : RentExpenses$Companion_getInstance().allRoommates;
     tmp$_8 = (tmp$_7 = jq(expenseCostInput.cssSelectorString, jq_expenseRow).val()) != null ? toDoubleOrNull(tmp$_7) : null;
     if (tmp$_8 == null) {
-      var message_0 = 'No monthly cost on page!';
+      var message_0 = 'No monthly cost on page!' + ('\t' + null);
       console.log(message_0);
       return null;
     }
@@ -623,7 +628,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
       if ((tmp$_0 = Kotlin.isType(tmp$ = jq(expenseFilterDialog.cssSelectorString).get(0), HTMLDialogElement) ? tmp$ : null) != null)
         tmp$_1 = tmp$_0;
       else {
-        var message = 'Could not find dialog element!';
+        var message = 'Could not find dialog element!' + ('\t' + null);
         console.log(message);
         tmp$_1 = null;
       }
@@ -733,6 +738,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
       this$RentSplitApp.placeShareUrlOnPage_0(guaranteedUrl);
       this$RentSplitApp.copyShareUrl_0();
       if (Kotlin.isType(response, GooGlUrlShortener$ShortenResponse$success)) {
+        this$RentSplitApp.alertUserOfSuccessfulGenerationOfShareUrl_0();
         var message = 'Shortened URL!';
         console.log(message);
       }
@@ -1469,33 +1475,33 @@ this['Rent Split 2'] = function (_, Kotlin) {
       tmp$_14 = tmp$_0;
     else {
       var $receiver = IdManager_getInstance().generateNewId();
-      var message = 'No serialized expense ID; generating one to migrate it';
+      var message = 'No serialized expense ID; generating one to migrate it' + ('\t' + $receiver);
       console.log(message);
       tmp$_14 = $receiver;
     }
     tmp$_1 = tmp$_14;
     tmp$_3 = typeof (tmp$_2 = raw[resourceNameSerializedName]) === 'string' ? tmp$_2 : null;
     if (tmp$_3 == null) {
-      var message_0 = 'No serialized expense type';
+      var message_0 = 'No serialized expense type' + ('\t' + null);
       console.log(message_0);
       return null;
     }
     tmp$_5 = typeof (tmp$_4 = raw[resourceDollarAmountSerializedName]) === 'number' ? tmp$_4 : null;
     if (tmp$_5 == null) {
-      var message_1 = 'No serialized expense cost';
+      var message_1 = 'No serialized expense cost' + ('\t' + null);
       console.log(message_1);
       return null;
     }
     tmp$_9 = (tmp$_8 = (tmp$_7 = Kotlin.isArray(tmp$_6 = raw[expenseApplicableRoommatesSerializedName]) ? tmp$_6 : null) != null ? toSet_0(tmp$_7) : null) != null ? tmp$_8 : RentExpenses$Companion_getInstance().allRoommates;
     tmp$_11 = typeof (tmp$_10 = raw[resourceIsRemovableSerializedName]) === 'boolean' ? tmp$_10 : null;
     if (tmp$_11 == null) {
-      var message_2 = 'No serialized removability';
+      var message_2 = 'No serialized removability' + ('\t' + null);
       console.log(message_2);
       return null;
     }
     tmp$_13 = typeof (tmp$_12 = raw[resourceIsRenamableSerializedName]) === 'boolean' ? tmp$_12 : null;
     if (tmp$_13 == null) {
-      var message_3 = 'No serialized renamability';
+      var message_3 = 'No serialized renamability' + ('\t' + null);
       console.log(message_3);
       return null;
     }
@@ -1762,32 +1768,32 @@ this['Rent Split 2'] = function (_, Kotlin) {
       tmp$_10 = tmp$_0;
     else {
       var $receiver = IdManager_getInstance().generateNewId();
-      var message = 'No serialized roommate ID; generating one to migrate it';
+      var message = 'No serialized roommate ID; generating one to migrate it' + ('\t' + $receiver);
       console.log(message);
       tmp$_10 = $receiver;
     }
     tmp$_1 = tmp$_10;
     tmp$_3 = typeof (tmp$_2 = raw[resourceNameSerializedName]) === 'string' ? tmp$_2 : null;
     if (tmp$_3 == null) {
-      var message_0 = 'No serialized roommate name';
+      var message_0 = 'No serialized roommate name' + ('\t' + null);
       console.log(message_0);
       return null;
     }
     tmp$_5 = typeof (tmp$_4 = raw[resourceDollarAmountSerializedName]) === 'number' ? tmp$_4 : null;
     if (tmp$_5 == null) {
-      var message_1 = 'No serialized roommate income';
+      var message_1 = 'No serialized roommate income' + ('\t' + null);
       console.log(message_1);
       return null;
     }
     tmp$_7 = typeof (tmp$_6 = raw[resourceIsRemovableSerializedName]) === 'boolean' ? tmp$_6 : null;
     if (tmp$_7 == null) {
-      var message_2 = 'No serialized removability';
+      var message_2 = 'No serialized removability' + ('\t' + null);
       console.log(message_2);
       return null;
     }
     tmp$_9 = typeof (tmp$_8 = raw[resourceIsRenamableSerializedName]) === 'boolean' ? tmp$_8 : null;
     if (tmp$_9 == null) {
-      var message_3 = 'No serialized renamability';
+      var message_3 = 'No serialized renamability' + ('\t' + null);
       console.log(message_3);
       return null;
     }
@@ -2373,7 +2379,8 @@ this['Rent Split 2'] = function (_, Kotlin) {
           console.log(message);
           return Unit;
         });
-      console.log(message);
+      var message_0 = message + ('\t' + $receiver);
+      console.log(message_0);
       return $receiver;
     };
   }));
@@ -2426,12 +2433,13 @@ this['Rent Split 2'] = function (_, Kotlin) {
     };
   }
   GooGlUrlShortener.prototype.shorten_5nfh8w$ = function (longUrl, responseListener) {
-    HttpRequest_init('https://www.googleapis.com/urlshortener/v1/url?key=' + this.accessKey, (new GooGlUrlShortener$RequestParameters([new GooGlUrlShortener$RequestParameter$longUrl(longUrl)])).toRequestMap()).open_eue948$('POST', GooGlUrlShortener$shorten$lambda(responseListener));
+    HttpRequest_init('https://www.googleapis.com/urlshortener/v1/url', GooGlUrlShortener$RequestParameters$Companion_getInstance().invoke_ffpjb$([new GooGlUrlShortener$RequestParameter$accessKey(this.accessKey, GooGlUrlShortener$RequestParameter$Usage$urlParameter_getInstance()), new GooGlUrlShortener$RequestParameter$longUrl(longUrl, GooGlUrlShortener$RequestParameter$Usage$urlParameter_getInstance())])).open_eue948$('POST', GooGlUrlShortener$shorten$lambda(responseListener));
   };
-  function GooGlUrlShortener$RequestParameter(key, value, requestValueGenerator) {
+  function GooGlUrlShortener$RequestParameter(key, value, usage, requestValueGenerator) {
     GooGlUrlShortener$RequestParameter$Keys_getInstance();
     this.key = key;
     this.value = value;
+    this.usage = usage;
     this.requestValue_3awx3k$_0 = lazy(GooGlUrlShortener$RequestParameter$requestValue$lambda(requestValueGenerator, this));
   }
   Object.defineProperty(GooGlUrlShortener$RequestParameter.prototype, 'requestValue', {
@@ -2439,8 +2447,19 @@ this['Rent Split 2'] = function (_, Kotlin) {
       return this.requestValue_3awx3k$_0.value;
     }
   });
-  function GooGlUrlShortener$RequestParameter$longUrl(url) {
-    GooGlUrlShortener$RequestParameter.call(this, GooGlUrlShortener$RequestParameter$Keys_getInstance().longUrl, url, GooGlUrlShortener$RequestParameter$GooGlUrlShortener$RequestParameter$longUrl_init$lambda);
+  function GooGlUrlShortener$RequestParameter$accessKey(key, method) {
+    GooGlUrlShortener$RequestParameter.call(this, GooGlUrlShortener$RequestParameter$Keys_getInstance().accessKey, key, method, GooGlUrlShortener$RequestParameter$GooGlUrlShortener$RequestParameter$accessKey_init$lambda);
+  }
+  function GooGlUrlShortener$RequestParameter$GooGlUrlShortener$RequestParameter$accessKey_init$lambda(it) {
+    return it;
+  }
+  GooGlUrlShortener$RequestParameter$accessKey.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'accessKey',
+    interfaces: [GooGlUrlShortener$RequestParameter]
+  };
+  function GooGlUrlShortener$RequestParameter$longUrl(url, method) {
+    GooGlUrlShortener$RequestParameter.call(this, GooGlUrlShortener$RequestParameter$Keys_getInstance().longUrl, url, method, GooGlUrlShortener$RequestParameter$GooGlUrlShortener$RequestParameter$longUrl_init$lambda);
   }
   function GooGlUrlShortener$RequestParameter$GooGlUrlShortener$RequestParameter$longUrl_init$lambda(it) {
     return it.toString();
@@ -2452,6 +2471,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
   };
   function GooGlUrlShortener$RequestParameter$Keys() {
     GooGlUrlShortener$RequestParameter$Keys_instance = this;
+    this.accessKey = 'key';
     this.longUrl = 'longUrl';
   }
   GooGlUrlShortener$RequestParameter$Keys.$metadata$ = {
@@ -2466,6 +2486,46 @@ this['Rent Split 2'] = function (_, Kotlin) {
     }
     return GooGlUrlShortener$RequestParameter$Keys_instance;
   }
+  function GooGlUrlShortener$RequestParameter$Usage(name, ordinal) {
+    Enum.call(this);
+    this.name$ = name;
+    this.ordinal$ = ordinal;
+  }
+  function GooGlUrlShortener$RequestParameter$Usage_initFields() {
+    GooGlUrlShortener$RequestParameter$Usage_initFields = function () {
+    };
+    GooGlUrlShortener$RequestParameter$Usage$urlParameter_instance = new GooGlUrlShortener$RequestParameter$Usage('urlParameter', 0);
+    GooGlUrlShortener$RequestParameter$Usage$header_instance = new GooGlUrlShortener$RequestParameter$Usage('header', 1);
+  }
+  var GooGlUrlShortener$RequestParameter$Usage$urlParameter_instance;
+  function GooGlUrlShortener$RequestParameter$Usage$urlParameter_getInstance() {
+    GooGlUrlShortener$RequestParameter$Usage_initFields();
+    return GooGlUrlShortener$RequestParameter$Usage$urlParameter_instance;
+  }
+  var GooGlUrlShortener$RequestParameter$Usage$header_instance;
+  function GooGlUrlShortener$RequestParameter$Usage$header_getInstance() {
+    GooGlUrlShortener$RequestParameter$Usage_initFields();
+    return GooGlUrlShortener$RequestParameter$Usage$header_instance;
+  }
+  GooGlUrlShortener$RequestParameter$Usage.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Usage',
+    interfaces: [Enum]
+  };
+  function GooGlUrlShortener$RequestParameter$Usage$values() {
+    return [GooGlUrlShortener$RequestParameter$Usage$urlParameter_getInstance(), GooGlUrlShortener$RequestParameter$Usage$header_getInstance()];
+  }
+  GooGlUrlShortener$RequestParameter$Usage.values = GooGlUrlShortener$RequestParameter$Usage$values;
+  function GooGlUrlShortener$RequestParameter$Usage$valueOf(name) {
+    switch (name) {
+      case 'urlParameter':
+        return GooGlUrlShortener$RequestParameter$Usage$urlParameter_getInstance();
+      case 'header':
+        return GooGlUrlShortener$RequestParameter$Usage$header_getInstance();
+      default:throwISE('No enum constant RentSplit.GooGlUrlShortener.RequestParameter.Usage.' + name);
+    }
+  }
+  GooGlUrlShortener$RequestParameter$Usage.valueOf_61zpoe$ = GooGlUrlShortener$RequestParameter$Usage$valueOf;
   function GooGlUrlShortener$RequestParameter$requestValue$lambda(closure$requestValueGenerator, this$RequestParameter) {
     return function () {
       return closure$requestValueGenerator(this$RequestParameter.value);
@@ -2477,6 +2537,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
     interfaces: []
   };
   function GooGlUrlShortener$RequestParameters(allParameters) {
+    GooGlUrlShortener$RequestParameters$Companion_getInstance();
     this.allParameters = allParameters;
   }
   function GooGlUrlShortener$RequestParameters$toRequestMap$lambda(requestMap, parameter) {
@@ -2486,22 +2547,74 @@ this['Rent Split 2'] = function (_, Kotlin) {
     return requestMap;
   }
   GooGlUrlShortener$RequestParameters.prototype.toRequestMap = function () {
-    var tmp$ = asList(this.allParameters);
-    var runningValue = {v: LinkedHashMap_init()};
-    var tmp$_0;
-    tmp$_0 = tmp$.iterator();
-    while (tmp$_0.hasNext()) {
-      var element = tmp$_0.next();
-      runningValue.v = GooGlUrlShortener$RequestParameters$toRequestMap$lambda(runningValue.v, element);
+    if (this.allParameters.isEmpty()) {
+      return emptyMap();
     }
-    return runningValue.v;
+     else {
+      var tmp$ = this.allParameters;
+      var runningValue = {v: LinkedHashMap_init()};
+      var tmp$_0;
+      tmp$_0 = tmp$.iterator();
+      while (tmp$_0.hasNext()) {
+        var element = tmp$_0.next();
+        runningValue.v = GooGlUrlShortener$RequestParameters$toRequestMap$lambda(runningValue.v, element);
+      }
+      return runningValue.v;
+    }
   };
   function GooGlUrlShortener$RequestParameters$toRequestUriParameterString$lambda(it) {
     return it.key + '=' + it.requestValue;
   }
   GooGlUrlShortener$RequestParameters.prototype.toRequestUriParameterString = function () {
-    return '?' + joinToString_0(this.allParameters, '&', void 0, void 0, void 0, void 0, GooGlUrlShortener$RequestParameters$toRequestUriParameterString$lambda);
+    return '?' + joinToString(this.allParameters, '&', void 0, void 0, void 0, void 0, GooGlUrlShortener$RequestParameters$toRequestUriParameterString$lambda);
   };
+  Object.defineProperty(GooGlUrlShortener$RequestParameters.prototype, 'justUrlParameters', {
+    get: function () {
+      var $receiver = this.allParameters;
+      var destination = ArrayList_init();
+      var tmp$;
+      tmp$ = $receiver.iterator();
+      while (tmp$.hasNext()) {
+        var element = tmp$.next();
+        if (element.usage === GooGlUrlShortener$RequestParameter$Usage$urlParameter_getInstance())
+          destination.add_11rb$(element);
+      }
+      return new GooGlUrlShortener$RequestParameters(destination);
+    }
+  });
+  Object.defineProperty(GooGlUrlShortener$RequestParameters.prototype, 'justHeaders', {
+    get: function () {
+      var $receiver = this.allParameters;
+      var destination = ArrayList_init();
+      var tmp$;
+      tmp$ = $receiver.iterator();
+      while (tmp$.hasNext()) {
+        var element = tmp$.next();
+        if (element.usage === GooGlUrlShortener$RequestParameter$Usage$header_getInstance())
+          destination.add_11rb$(element);
+      }
+      return new GooGlUrlShortener$RequestParameters(destination);
+    }
+  });
+  function GooGlUrlShortener$RequestParameters$Companion() {
+    GooGlUrlShortener$RequestParameters$Companion_instance = this;
+    this.emptyParameters = new GooGlUrlShortener$RequestParameters(emptyList());
+  }
+  GooGlUrlShortener$RequestParameters$Companion.prototype.invoke_ffpjb$ = function (allParameters) {
+    return new GooGlUrlShortener$RequestParameters(toList_0(allParameters));
+  };
+  GooGlUrlShortener$RequestParameters$Companion.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Companion',
+    interfaces: []
+  };
+  var GooGlUrlShortener$RequestParameters$Companion_instance = null;
+  function GooGlUrlShortener$RequestParameters$Companion_getInstance() {
+    if (GooGlUrlShortener$RequestParameters$Companion_instance === null) {
+      new GooGlUrlShortener$RequestParameters$Companion();
+    }
+    return GooGlUrlShortener$RequestParameters$Companion_instance;
+  }
   GooGlUrlShortener$RequestParameters.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'RequestParameters',
@@ -3437,11 +3550,11 @@ this['Rent Split 2'] = function (_, Kotlin) {
         throw _;
     }
   }
-  function HttpRequest(requestURL, headers) {
-    if (headers === void 0)
-      headers = emptyMap();
-    this.requestURL = requestURL;
-    this.headers = headers;
+  function HttpRequest(url, parameters) {
+    if (parameters === void 0)
+      parameters = GooGlUrlShortener$RequestParameters$Companion_getInstance().emptyParameters;
+    this.url = url;
+    this.parameters = parameters;
   }
   HttpRequest.prototype.get_m8ahyy$ = function (responseListener) {
     this.open_eue948$('GET', responseListener);
@@ -3456,20 +3569,48 @@ this['Rent Split 2'] = function (_, Kotlin) {
   HttpRequest.prototype.open_eue948$ = function (method, responseListener) {
     var request = new XMLHttpRequest();
     request.onreadystatechange = HttpRequest$open$lambda(request, responseListener);
-    open(request, method, this.requestURL.toString(), this.headers, true);
+    open(request, method, this.generateFullRequestUrlString_0(), this.generateHeaders_0(), true);
     request.send();
+  };
+  HttpRequest.prototype.generateHeaders_0 = function () {
+    return this.parameters.justHeaders.toRequestMap();
+  };
+  HttpRequest.prototype.generateFullRequestUrlString_0 = function () {
+    var $receiver = this.generateFullRequestUrl_0().toString();
+    var message = 'Generated request URL' + ('\t' + $receiver);
+    console.log(message);
+    return $receiver;
+  };
+  HttpRequest.prototype.generateFullRequestUrl_0 = function () {
+    return withSearchParams(this.url, this.parameters.justUrlParameters);
   };
   HttpRequest.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'HttpRequest',
     interfaces: []
   };
-  function HttpRequest_init(requestURL, headers, $this) {
-    if (headers === void 0)
-      headers = emptyMap();
+  function HttpRequest_init(urlString, parameters, $this) {
+    if (parameters === void 0)
+      parameters = GooGlUrlShortener$RequestParameters$Companion_getInstance().emptyParameters;
     $this = $this || Object.create(HttpRequest.prototype);
-    HttpRequest.call($this, new URL(requestURL), headers);
+    HttpRequest.call($this, new URL(urlString), parameters);
     return $this;
+  }
+  function withSearchParams($receiver, searchParams) {
+    if (searchParams.allParameters.isEmpty()) {
+      return $receiver;
+    }
+     else {
+      var copy = $receiver;
+      copy.search = asSearchString(searchParams);
+      return copy;
+    }
+  }
+  function asSearchString$lambda(it) {
+    return get_urlEncoded(it.key) + '=' + get_urlEncoded(toString(it.value));
+  }
+  function asSearchString($receiver) {
+    return '?' + joinToString($receiver.allParameters, '&', void 0, void 0, void 0, void 0, asSearchString$lambda);
   }
   function open($receiver, method, url, headers, async, username, password) {
     if (username === void 0)
@@ -4342,11 +4483,22 @@ this['Rent Split 2'] = function (_, Kotlin) {
   package$RentSplit.toSetOfIds_pdl1vz$ = toSetOfIds;
   package$RentSplit.serializedSetOfIds_gevexo$ = serializedSetOfIds;
   package$RentSplit.sanitizedForHtml_pdl1vz$ = sanitizedForHtml;
+  GooGlUrlShortener$RequestParameter.accessKey = GooGlUrlShortener$RequestParameter$accessKey;
   GooGlUrlShortener$RequestParameter.longUrl = GooGlUrlShortener$RequestParameter$longUrl;
   Object.defineProperty(GooGlUrlShortener$RequestParameter, 'Keys', {
     get: GooGlUrlShortener$RequestParameter$Keys_getInstance
   });
+  Object.defineProperty(GooGlUrlShortener$RequestParameter$Usage, 'urlParameter', {
+    get: GooGlUrlShortener$RequestParameter$Usage$urlParameter_getInstance
+  });
+  Object.defineProperty(GooGlUrlShortener$RequestParameter$Usage, 'header', {
+    get: GooGlUrlShortener$RequestParameter$Usage$header_getInstance
+  });
+  GooGlUrlShortener$RequestParameter.Usage = GooGlUrlShortener$RequestParameter$Usage;
   GooGlUrlShortener.RequestParameter = GooGlUrlShortener$RequestParameter;
+  Object.defineProperty(GooGlUrlShortener$RequestParameters, 'Companion', {
+    get: GooGlUrlShortener$RequestParameters$Companion_getInstance
+  });
   GooGlUrlShortener.RequestParameters = GooGlUrlShortener$RequestParameters;
   Object.defineProperty(GooGlUrlShortener$ShortenResponse$success, 'Companion', {
     get: GooGlUrlShortener$ShortenResponse$success$Companion_getInstance
@@ -4466,7 +4618,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
   package$util.safeTry_klfg04$ = safeTry;
   var package$io = package$tools.io || (package$tools.io = {});
   var package$net = package$io.net || (package$io.net = {});
-  package$net.HttpRequest_init_mvjluj$ = HttpRequest_init;
+  package$net.HttpRequest_init_whtn4x$ = HttpRequest_init;
   package$net.HttpRequest = HttpRequest;
   package$net.HttpResponse_init_1endcj$ = HttpResponse_init;
   package$net.HttpResponse = HttpResponse;

@@ -2,6 +2,9 @@
 
 package org.bh.tools.io.net
 
+import RentSplit.*
+import RentSplit.GooGlUrlShortener.*
+import RentSplit.GooGlUrlShortener.RequestParameters.Companion.emptyParameters
 import org.w3c.dom.url.*
 import org.w3c.xhr.*
 
@@ -12,11 +15,12 @@ import org.w3c.xhr.*
  */
 
 class HttpRequest(
-        val requestURL: URL,
-        val headers: Map<String, String> = emptyMap()
+        val url: URL,
+        val parameters: RequestParameters = emptyParameters
 ) {
 
-    constructor(requestURL: String, headers: Map<String, String> = emptyMap()): this(URL(requestURL), headers)
+    constructor(urlString: String, parameters: RequestParameters = emptyParameters): this(URL(urlString), parameters)
+
 
     fun get(responseListener: HttpResponseListener) {
         open("GET", responseListener)
@@ -31,10 +35,31 @@ class HttpRequest(
             }
         }
 
-        request.open(method = method, url = requestURL.toString(), headers = headers, async = true)
+        request.open(method = method, url = generateFullRequestUrlString(), headers = generateHeaders(), async = true)
         request.send()
     }
+
+    private fun generateHeaders() = parameters.justHeaders.toRequestMap()
+
+    private fun generateFullRequestUrlString() = generateFullRequestUrl().toString().alsoLog("Generated request URL")
+
+    private fun generateFullRequestUrl() = url.withSearchParams(searchParams = parameters.justUrlParameters)
 }
+
+private fun URL.withSearchParams(searchParams: GooGlUrlShortener.RequestParameters) =
+        if (searchParams.allParameters.isEmpty()) {
+            this
+        }
+        else {
+            val copy = this
+            copy.search = searchParams.asSearchString()
+            copy
+        }
+
+private fun RequestParameters.asSearchString() = "?" +
+        allParameters.joinToString(separator = "&",
+                                   transform = { it.key.urlEncoded +
+                                           "=" + it.value.toString().urlEncoded})
 
 private fun XMLHttpRequest.open(method: String, url: String, headers: Map<String, String>, async: Boolean, username: String? = null, password: String? = null) {
     this.open(method, url, async, username, password)

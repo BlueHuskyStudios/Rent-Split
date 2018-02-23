@@ -3,6 +3,7 @@ package RentSplit
 
 import RentSplit.GooGlUrlShortener.*
 import RentSplit.GooGlUrlShortener.RequestParameter.*
+import RentSplit.GooGlUrlShortener.RequestParameter.Usage.*
 import RentSplit.GooGlUrlShortener.ShortenResponse.*
 import org.bh.tools.base.collections.extensions.*
 import org.bh.tools.base.util.*
@@ -24,39 +25,66 @@ typealias GooGlResponseListener = (ShortenResponse) -> Unit
 class GooGlUrlShortener(val accessKey: String) { // AIzaSyBsJvWOGsHnIcPi-wnIB3WAaILRKsI8Pmo
 
     fun shorten(longUrl: URL, responseListener: GooGlResponseListener) {
-        HttpRequest("https://www.googleapis.com/urlshortener/v1/url?key=$accessKey",
+        HttpRequest("https://www.googleapis.com/urlshortener/v1/url",
                     RequestParameters(
-                        longUrl(longUrl)
-                    ).toRequestMap())
+                            accessKey(accessKey, method = urlParameter),
+                            longUrl(longUrl, method = urlParameter)
+                    ))
                 .open("POST") {
                     responseListener(ShortenResponse(it))
                 }
     }
 
-    sealed class RequestParameter<out Value>(val key: String, val value: Value, requestValueGenerator: (Value) -> String) {
+
+
+    sealed class RequestParameter<out Value>(val key: String, val value: Value, val usage: Usage, requestValueGenerator: (Value) -> String) {
 
         val requestValue: String by lazy { requestValueGenerator(value) }
 
-        class longUrl(url: URL): RequestParameter<URL>(Keys.longUrl, url, { it.toString() })
+        class accessKey(key: String, method: Usage): RequestParameter<String>(Keys.accessKey, key, method, { it })
+        class longUrl(url: URL, method: Usage): RequestParameter<URL>(Keys.longUrl, url, method, { it.toString() })
 
 
         companion object Keys {
+            const val accessKey = "key"
             const val longUrl = "longUrl"
+        }
+
+        enum class Usage {
+            urlParameter,
+            header
         }
     }
 
 
 
-    class RequestParameters(vararg val allParameters: RequestParameter<*>) {
+    class RequestParameters(val allParameters: List<RequestParameter<*>>) {
         fun toRequestMap(): Map<String, String> =
-                allParameters.asList().reduceTo(mutableMapOf()) { requestMap, parameter ->
-                    requestMap[parameter.key] = parameter.requestValue
-                    return@reduceTo requestMap
+                if (allParameters.isEmpty()) {
+                    emptyMap()
                 }
+                else {
+                    allParameters.reduceTo(mutableMapOf()) { requestMap, parameter ->
+                        requestMap[parameter.key] = parameter.requestValue
+                        return@reduceTo requestMap
+                    }
+                }
+
 
         @Suppress("unused")
         fun toRequestUriParameterString() =
                 "?" + allParameters.joinToString(separator = "&") { "${it.key}=${it.requestValue}" }
+
+
+        val justUrlParameters get() = RequestParameters(allParameters.filter { it.usage == urlParameter })
+        val justHeaders get() = RequestParameters(allParameters.filter { it.usage == header })
+
+
+        companion object {
+            val emptyParameters = RequestParameters(emptyList())
+
+            operator fun invoke(vararg allParameters: RequestParameter<*>) = RequestParameters(allParameters = allParameters.toList())
+        }
     }
 
 
@@ -68,7 +96,7 @@ class GooGlUrlShortener(val accessKey: String) { // AIzaSyBsJvWOGsHnIcPi-wnIB3WA
                 val shortUrlString: String,
                 val longUrlString: String,
                 httpResponse: HttpResponse? = null
-        ): ShortenResponse(httpResponse) {
+        ) : ShortenResponse(httpResponse) {
 
             val shortUrl: URL by lazy { URL(shortUrlString) }
             val longUrl: URL by lazy { URL(longUrlString) }
@@ -103,14 +131,17 @@ class GooGlUrlShortener(val accessKey: String) { // AIzaSyBsJvWOGsHnIcPi-wnIB3WA
                 val code: Short,
                 val message: String,
                 httpResponse: HttpResponse? = null
-        ): ShortenResponse(httpResponse) {
+        ) : ShortenResponse(httpResponse) {
             companion object {
                 operator fun invoke(httpResponse: HttpResponse) = safeTry {
-                    error(JSON.parse<Json>(httpResponse.text)["error"]?.unsafeCast<Json>() ?: return@safeTry null, httpResponse)
+                    error(JSON.parse<Json>(httpResponse.text)["error"]?.unsafeCast<Json>() ?: return@safeTry null,
+                          httpResponse)
                 }
 
                 operator fun invoke(json: Json, httpResponse: HttpResponse? = null): error? {
-                    return error(allErrors = json["errors"].unsafeCast<Array<Json>>().map { SingleError(it) ?: return null },
+                    return error(allErrors = json["errors"].unsafeCast<Array<Json>>().map {
+                        SingleError(it) ?: return null
+                    },
                                  code = json["code"] as? Short ?: return null,
                                  message = json["message"] as? String ?: return null,
                                  httpResponse = httpResponse)
@@ -137,21 +168,19 @@ class GooGlUrlShortener(val accessKey: String) { // AIzaSyBsJvWOGsHnIcPi-wnIB3WA
             }
         }
 
-        class unknownError(httpResponse: HttpResponse): ShortenResponse(httpResponse)
-
+        class unknownError(httpResponse: HttpResponse) : ShortenResponse(httpResponse)
 
 
         companion object {
             operator fun invoke(httpResponse: HttpResponse) =
-                if (JSON.parse<Json>(httpResponse.text)["error"] != null) {
-                    error(httpResponse)
-                } else {
-                    success(httpResponse)
-                }
-                ?: unknownError(httpResponse)
+                    if (JSON.parse<Json>(httpResponse.text)["error"] != null) {
+                        error(httpResponse)
+                    } else {
+                        success(httpResponse)
+                    }
+                    ?: unknownError(httpResponse)
         }
     }
-
 
 
 //
