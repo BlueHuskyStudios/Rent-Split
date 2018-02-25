@@ -164,3 +164,6 @@ fun String.sanitizedForHtml(): String {
             .replace(oldValue = "<", newValue = "&lt;")
             .replace(oldValue = ">", newValue = "&gt;")
 }
+
+
+fun Any.jsonString() = JSON.stringify(this)

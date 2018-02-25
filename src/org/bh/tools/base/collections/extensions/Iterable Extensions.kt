@@ -162,9 +162,9 @@ typealias Reducer<ElementType, ResultType> = (runningValue: ResultType, currentV
  *
  * @return This Iterable, reduced to a single value
  */
-inline fun <ElementType, StartingType: ResultType, ResultType>
+fun <ElementType, StartingType: ResultType, ResultType>
         Iterable<ElementType>
-        .reduceTo(startingValue: StartingType, crossinline reducer: Reducer<ElementType, ResultType>)
+        .reduceTo(startingValue: StartingType, reducer: Reducer<ElementType, ResultType>)
         : ResultType {
 
     var runningValue: ResultType = startingValue

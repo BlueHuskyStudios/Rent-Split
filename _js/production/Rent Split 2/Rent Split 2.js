@@ -38,14 +38,15 @@ this['Rent Split 2'] = function (_, Kotlin) {
   var split = Kotlin.kotlin.text.split_o64adg$;
   var Regex_init = Kotlin.kotlin.text.Regex_init_61zpoe$;
   var replace = Kotlin.kotlin.text.replace_680rmw$;
-  var emptyMap = Kotlin.kotlin.collections.emptyMap_q3lmfv$;
-  var toList_0 = Kotlin.kotlin.collections.toList_us0mfu$;
-  var emptyList = Kotlin.kotlin.collections.emptyList_287e2$;
   var Iterator = Kotlin.kotlin.collections.Iterator;
   var roundToInt = Kotlin.kotlin.math.roundToInt_yrwdxr$;
   var Any = Object;
   var ReadWriteProperty = Kotlin.kotlin.properties.ReadWriteProperty;
   var ObservableProperty = Kotlin.kotlin.properties.ObservableProperty;
+  var ensureNotNull = Kotlin.ensureNotNull;
+  var toList_0 = Kotlin.kotlin.collections.toList_us0mfu$;
+  var emptyList = Kotlin.kotlin.collections.emptyList_287e2$;
+  var emptyMap = Kotlin.kotlin.collections.emptyMap_q3lmfv$;
   var toShort = Kotlin.toShort;
   CssParameterForAttributeSelector$exactly.prototype = Object.create(CssParameterForAttributeSelector.prototype);
   CssParameterForAttributeSelector$exactly.prototype.constructor = CssParameterForAttributeSelector$exactly;
@@ -73,18 +74,16 @@ this['Rent Split 2'] = function (_, Kotlin) {
   SerializationPurpose.prototype.constructor = SerializationPurpose;
   UserConsent.prototype = Object.create(Enum.prototype);
   UserConsent.prototype.constructor = UserConsent;
-  GooGlUrlShortener$RequestParameter$accessKey.prototype = Object.create(GooGlUrlShortener$RequestParameter.prototype);
-  GooGlUrlShortener$RequestParameter$accessKey.prototype.constructor = GooGlUrlShortener$RequestParameter$accessKey;
-  GooGlUrlShortener$RequestParameter$longUrl.prototype = Object.create(GooGlUrlShortener$RequestParameter.prototype);
-  GooGlUrlShortener$RequestParameter$longUrl.prototype.constructor = GooGlUrlShortener$RequestParameter$longUrl;
-  GooGlUrlShortener$RequestParameter$Usage.prototype = Object.create(Enum.prototype);
-  GooGlUrlShortener$RequestParameter$Usage.prototype.constructor = GooGlUrlShortener$RequestParameter$Usage;
   GooGlUrlShortener$ShortenResponse$success.prototype = Object.create(GooGlUrlShortener$ShortenResponse.prototype);
   GooGlUrlShortener$ShortenResponse$success.prototype.constructor = GooGlUrlShortener$ShortenResponse$success;
   GooGlUrlShortener$ShortenResponse$error.prototype = Object.create(GooGlUrlShortener$ShortenResponse.prototype);
   GooGlUrlShortener$ShortenResponse$error.prototype.constructor = GooGlUrlShortener$ShortenResponse$error;
   GooGlUrlShortener$ShortenResponse$unknownError.prototype = Object.create(GooGlUrlShortener$ShortenResponse.prototype);
   GooGlUrlShortener$ShortenResponse$unknownError.prototype.constructor = GooGlUrlShortener$ShortenResponse$unknownError;
+  GooGlUrlShortener$Parameters$accessKey.prototype = Object.create(HttpRequest$RequestParameter.prototype);
+  GooGlUrlShortener$Parameters$accessKey.prototype.constructor = GooGlUrlShortener$Parameters$accessKey;
+  GooGlUrlShortener$Parameters$longUrl.prototype = Object.create(HttpRequest$RequestParameter.prototype);
+  GooGlUrlShortener$Parameters$longUrl.prototype.constructor = GooGlUrlShortener$Parameters$longUrl;
   observing$ObjectLiteral.prototype = Object.create(ObservableProperty.prototype);
   observing$ObjectLiteral.prototype.constructor = observing$ObjectLiteral;
   FiniteAmountSummary$all.prototype = Object.create(FiniteAmountSummary.prototype);
@@ -95,6 +94,12 @@ this['Rent Split 2'] = function (_, Kotlin) {
   FiniteAmountSummary$none.prototype.constructor = FiniteAmountSummary$none;
   Ternary.prototype = Object.create(Enum.prototype);
   Ternary.prototype.constructor = Ternary;
+  HttpRequest$RequestParameter$Usage.prototype = Object.create(Enum.prototype);
+  HttpRequest$RequestParameter$Usage.prototype.constructor = HttpRequest$RequestParameter$Usage;
+  HttpRequest$RequestParameter$genericHeader.prototype = Object.create(HttpRequest$RequestParameter.prototype);
+  HttpRequest$RequestParameter$genericHeader.prototype.constructor = HttpRequest$RequestParameter$genericHeader;
+  HttpResponse$InteractionStage.prototype = Object.create(Enum.prototype);
+  HttpResponse$InteractionStage.prototype.constructor = HttpResponse$InteractionStage;
   JSTernaryCheckboxTreeController.prototype = Object.create(TernaryCheckboxTree.prototype);
   JSTernaryCheckboxTreeController.prototype.constructor = JSTernaryCheckboxTreeController;
   var addARoommateRow;
@@ -223,21 +228,13 @@ this['Rent Split 2'] = function (_, Kotlin) {
     save(this.state);
     this.presentToUser();
   };
-  function RentSplitApp$preLoadConfigurations$lambda(this$RentSplitApp) {
-    return function (it) {
-      this$RentSplitApp.replaceShareUrlWithPromptToGenerateANewOne_0();
-      return Unit;
-    };
-  }
-  var jq = $;
   RentSplitApp.prototype.preLoadConfigurations = function () {
     $('html').addClass(TouchBasics_getInstance().isTouchSupported() ? 'touch-supported' : 'touch-not-supported');
-    this.replaceShareUrlWithPromptToGenerateANewOne_0();
-    jq(stateUrlField.cssSelectorString).on('changeData', void 0, RentSplitApp$preLoadConfigurations$lambda(this));
   };
   RentSplitApp.prototype.reloadPageFromState_6taknv$ = function (shouldReRegisterListeners) {
     if (shouldReRegisterListeners === void 0)
       shouldReRegisterListeners = true;
+    this.replaceShareUrlWithPromptToGenerateANewOne_0();
     this.applyStateToLocalStorageWarning();
     this.regenerateInputTables();
     if (shouldReRegisterListeners) {
@@ -245,6 +242,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
     }
     this.recalculateRentSplit();
   };
+  var jq = $;
   RentSplitApp.prototype.applyStateToLocalStorageWarning = function () {
     if (this.state.l.c != null) {
       jq(localStorageWarning.cssSelectorString).addClass('hidden');
@@ -603,15 +601,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
     };
   }
   RentSplitApp.prototype.buildExpenseFilterApplicableRoommateList_pbrwj2$ = function (expense) {
-    var $receiver = this.state.r.r;
-    var runningValue = {v: ''};
-    var tmp$;
-    tmp$ = $receiver.iterator();
-    while (tmp$.hasNext()) {
-      var element = tmp$.next();
-      runningValue.v = RentSplitApp$buildExpenseFilterApplicableRoommateList$lambda(expense, this)(runningValue.v, element);
-    }
-    return runningValue.v;
+    return reduceTo(this.state.r.r, '', RentSplitApp$buildExpenseFilterApplicableRoommateList$lambda(expense, this));
   };
   RentSplitApp.prototype.buildExpenseFilterApplicableRoommateListItem_m1r9kw$ = function (expense, roommate) {
     return '<li' + (" class='checklist-item " + expenseFilterApplicableRoommateChecklistItem.className + "'>") + '<label>' + '<input' + (' ' + resourceId.htmlAttributeName + "='" + roommate.i + "'") + (" class='" + expenseFilterApplicableRoommateCheckbox.className + "'") + " type='checkbox'" + (' ' + (expense.appliesTo_pcqrmu$(roommate) ? 'checked' : '')) + '/>' + (' ' + sanitizedForHtml(get_nonEmptyName(roommate))) + '<\/label>' + '<\/li>';
@@ -734,7 +724,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
   };
   function RentSplitApp$userWantsShareUrl$lambda(this$RentSplitApp) {
     return function (response, guaranteedUrl) {
-      var tmp$, tmp$_0;
+      var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5;
       this$RentSplitApp.placeShareUrlOnPage_0(guaranteedUrl);
       this$RentSplitApp.copyShareUrl_0();
       if (Kotlin.isType(response, GooGlUrlShortener$ShortenResponse$success)) {
@@ -744,10 +734,17 @@ this['Rent Split 2'] = function (_, Kotlin) {
       }
        else if (Kotlin.isType(response, GooGlUrlShortener$ShortenResponse$error)) {
         this$RentSplitApp.alertUserOfFailureToGenerateShareUrl_0('\u26A0\uFE0F Could not shorten URL');
-        var object = response.errors;
+        var object = copyToArray(response.errors);
         console.log(object);
         var message_0 = (tmp$_0 = (tmp$ = nonEmptyOrNull(response.message)) != null ? tmp$ : get_statusText(response)) != null ? tmp$_0 : 'No message';
         console.log(message_0);
+      }
+       else if (Kotlin.isType(response, GooGlUrlShortener$ShortenResponse$unknownError)) {
+        this$RentSplitApp.alertUserOfFailureToGenerateShareUrl_0('\u26A0\uFE0F Could not shorten URL');
+        var message_1 = (tmp$_3 = (tmp$_2 = (tmp$_1 = response.httpResponse) != null ? tmp$_1.text : null) != null ? nonEmptyOrNull(tmp$_2) : null) != null ? tmp$_3 : 'No response text';
+        console.log(message_1);
+        var message_2 = (tmp$_5 = (tmp$_4 = get_statusText(response)) != null ? nonEmptyOrNull(tmp$_4) : null) != null ? tmp$_5 : 'No message';
+        console.log(message_2);
       }
       return Unit;
     };
@@ -759,7 +756,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
   function RentSplitApp$generateShareUrl$lambda(closure$callback, closure$sharingUrl) {
     return function (response) {
       var tmp$, tmp$_0, tmp$_1;
-      closure$callback(response, (tmp$_1 = (tmp$_0 = Kotlin.isType(tmp$ = response, GooGlUrlShortener$ShortenResponse$success) ? tmp$ : null) != null ? tmp$_0.shortUrl : null) != null ? tmp$_1 : closure$sharingUrl);
+      closure$callback(response, (tmp$_1 = (tmp$_0 = Kotlin.isType(tmp$ = response, GooGlUrlShortener$ShortenResponse$success) ? tmp$ : null) != null ? tmp$_0.shortUrlObject : null) != null ? tmp$_1 : closure$sharingUrl);
       return Unit;
     };
   }
@@ -925,14 +922,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
       tmp$_1.call(destination, transform$result);
     }
     var cells = destination;
-    var runningValue = {v: 0.0};
-    var tmp$_3;
-    tmp$_3 = cells.iterator();
-    while (tmp$_3.hasNext()) {
-      var element_0 = tmp$_3.next();
-      runningValue.v = rentSplitResultRow$lambda(runningValue.v, element_0);
-    }
-    var rowTotal = runningValue.v;
+    var rowTotal = reduceTo(cells, 0.0, rentSplitResultRow$lambda);
     return new RentSplitResultRow($receiver, sanitizedForHtml(get_nonEmptyName($receiver)), cells, rowTotal, (tmp$ = overallState.r.incomePieChart.get_11rb$($receiver.i)) != null ? tmp$ : 0.0);
   }
   function RentSplitResultTable(columnHeaders, rows) {
@@ -1597,15 +1587,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
   function RentExpenses(allExpenses) {
     RentExpenses$Companion_getInstance();
     this.e = allExpenses;
-    var $receiver = this.e;
-    var runningValue = {v: 0.0};
-    var tmp$;
-    tmp$ = $receiver.iterator();
-    while (tmp$.hasNext()) {
-      var element = tmp$.next();
-      runningValue.v = RentExpenses$totalExpenses$lambda(runningValue.v, element);
-    }
-    this.totalExpenses = runningValue.v;
+    this.totalExpenses = reduceTo(this.e, 0.0, RentExpenses$totalExpenses$lambda);
   }
   RentExpenses.prototype.adding_pbrwj2$ = function (newExpense) {
     return new RentExpenses(adding(this.e, newExpense));
@@ -1883,27 +1865,19 @@ this['Rent Split 2'] = function (_, Kotlin) {
       var item = tmp$.next();
       destination.add_11rb$(transform(item));
     }
-    var reducer = getCallableRef('plus', function ($receiver, other) {
+    this.totalIncome = reduceTo(destination, 0.0, getCallableRef('plus', function ($receiver, other) {
       return $receiver + other;
-    });
-    var runningValue = {v: 0.0};
-    var tmp$_0;
-    tmp$_0 = destination.iterator();
-    while (tmp$_0.hasNext()) {
-      var element = tmp$_0.next();
-      runningValue.v = reducer(runningValue.v, element);
-    }
-    this.totalIncome = runningValue.v;
+    }));
     this.incomePieChart_xues5a$_0 = lazy(RentRoommates$incomePieChart$lambda(this));
     var $receiver_0 = this.r;
     var transform_0 = getPropertyCallableRef('id', 1, function ($receiver) {
       return $receiver.i;
     });
     var destination_0 = ArrayList_init(collectionSizeOrDefault($receiver_0, 10));
-    var tmp$_1;
-    tmp$_1 = $receiver_0.iterator();
-    while (tmp$_1.hasNext()) {
-      var item_0 = tmp$_1.next();
+    var tmp$_0;
+    tmp$_0 = $receiver_0.iterator();
+    while (tmp$_0.hasNext()) {
+      var item_0 = tmp$_0.next();
       destination_0.add_11rb$(transform_0(item_0));
     }
     this.allRoommateIds = destination_0;
@@ -1993,17 +1967,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
   var LinkedHashMap_init = Kotlin.kotlin.collections.LinkedHashMap_init_q3lmfv$;
   function RentRoommates$incomePieChart$lambda(this$RentRoommates) {
     return function () {
-      var tmp$ = this$RentRoommates.r;
-      var startingValue = LinkedHashMap_init();
-      var reducer = RentRoommates$incomePieChart$lambda$lambda(this$RentRoommates);
-      var runningValue = {v: startingValue};
-      var tmp$_0;
-      tmp$_0 = tmp$.iterator();
-      while (tmp$_0.hasNext()) {
-        var element = tmp$_0.next();
-        runningValue.v = reducer(runningValue.v, element);
-      }
-      return runningValue.v;
+      return reduceTo(this$RentRoommates.r, LinkedHashMap_init(), RentRoommates$incomePieChart$lambda$lambda(this$RentRoommates));
     };
   }
   RentRoommates.$metadata$ = {
@@ -2423,7 +2387,11 @@ this['Rent Split 2'] = function (_, Kotlin) {
   function sanitizedForHtml($receiver) {
     return replace(replace(Regex_init('&(?!amp;amp;)').replace_x2uqeu$($receiver, '&amp;'), '<', '&lt;'), '>', '&gt;');
   }
+  function jsonString($receiver) {
+    return JSON.stringify($receiver);
+  }
   function GooGlUrlShortener(accessKey) {
+    GooGlUrlShortener$Parameters_getInstance();
     this.accessKey = accessKey;
   }
   function GooGlUrlShortener$shorten$lambda(closure$responseListener) {
@@ -2433,192 +2401,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
     };
   }
   GooGlUrlShortener.prototype.shorten_5nfh8w$ = function (longUrl, responseListener) {
-    HttpRequest_init('https://www.googleapis.com/urlshortener/v1/url', GooGlUrlShortener$RequestParameters$Companion_getInstance().invoke_ffpjb$([new GooGlUrlShortener$RequestParameter$accessKey(this.accessKey, GooGlUrlShortener$RequestParameter$Usage$urlParameter_getInstance()), new GooGlUrlShortener$RequestParameter$longUrl(longUrl, GooGlUrlShortener$RequestParameter$Usage$urlParameter_getInstance())])).open_eue948$('POST', GooGlUrlShortener$shorten$lambda(responseListener));
-  };
-  function GooGlUrlShortener$RequestParameter(key, value, usage, requestValueGenerator) {
-    GooGlUrlShortener$RequestParameter$Keys_getInstance();
-    this.key = key;
-    this.value = value;
-    this.usage = usage;
-    this.requestValue_3awx3k$_0 = lazy(GooGlUrlShortener$RequestParameter$requestValue$lambda(requestValueGenerator, this));
-  }
-  Object.defineProperty(GooGlUrlShortener$RequestParameter.prototype, 'requestValue', {
-    get: function () {
-      return this.requestValue_3awx3k$_0.value;
-    }
-  });
-  function GooGlUrlShortener$RequestParameter$accessKey(key, method) {
-    GooGlUrlShortener$RequestParameter.call(this, GooGlUrlShortener$RequestParameter$Keys_getInstance().accessKey, key, method, GooGlUrlShortener$RequestParameter$GooGlUrlShortener$RequestParameter$accessKey_init$lambda);
-  }
-  function GooGlUrlShortener$RequestParameter$GooGlUrlShortener$RequestParameter$accessKey_init$lambda(it) {
-    return it;
-  }
-  GooGlUrlShortener$RequestParameter$accessKey.$metadata$ = {
-    kind: Kind_CLASS,
-    simpleName: 'accessKey',
-    interfaces: [GooGlUrlShortener$RequestParameter]
-  };
-  function GooGlUrlShortener$RequestParameter$longUrl(url, method) {
-    GooGlUrlShortener$RequestParameter.call(this, GooGlUrlShortener$RequestParameter$Keys_getInstance().longUrl, url, method, GooGlUrlShortener$RequestParameter$GooGlUrlShortener$RequestParameter$longUrl_init$lambda);
-  }
-  function GooGlUrlShortener$RequestParameter$GooGlUrlShortener$RequestParameter$longUrl_init$lambda(it) {
-    return it.toString();
-  }
-  GooGlUrlShortener$RequestParameter$longUrl.$metadata$ = {
-    kind: Kind_CLASS,
-    simpleName: 'longUrl',
-    interfaces: [GooGlUrlShortener$RequestParameter]
-  };
-  function GooGlUrlShortener$RequestParameter$Keys() {
-    GooGlUrlShortener$RequestParameter$Keys_instance = this;
-    this.accessKey = 'key';
-    this.longUrl = 'longUrl';
-  }
-  GooGlUrlShortener$RequestParameter$Keys.$metadata$ = {
-    kind: Kind_OBJECT,
-    simpleName: 'Keys',
-    interfaces: []
-  };
-  var GooGlUrlShortener$RequestParameter$Keys_instance = null;
-  function GooGlUrlShortener$RequestParameter$Keys_getInstance() {
-    if (GooGlUrlShortener$RequestParameter$Keys_instance === null) {
-      new GooGlUrlShortener$RequestParameter$Keys();
-    }
-    return GooGlUrlShortener$RequestParameter$Keys_instance;
-  }
-  function GooGlUrlShortener$RequestParameter$Usage(name, ordinal) {
-    Enum.call(this);
-    this.name$ = name;
-    this.ordinal$ = ordinal;
-  }
-  function GooGlUrlShortener$RequestParameter$Usage_initFields() {
-    GooGlUrlShortener$RequestParameter$Usage_initFields = function () {
-    };
-    GooGlUrlShortener$RequestParameter$Usage$urlParameter_instance = new GooGlUrlShortener$RequestParameter$Usage('urlParameter', 0);
-    GooGlUrlShortener$RequestParameter$Usage$header_instance = new GooGlUrlShortener$RequestParameter$Usage('header', 1);
-  }
-  var GooGlUrlShortener$RequestParameter$Usage$urlParameter_instance;
-  function GooGlUrlShortener$RequestParameter$Usage$urlParameter_getInstance() {
-    GooGlUrlShortener$RequestParameter$Usage_initFields();
-    return GooGlUrlShortener$RequestParameter$Usage$urlParameter_instance;
-  }
-  var GooGlUrlShortener$RequestParameter$Usage$header_instance;
-  function GooGlUrlShortener$RequestParameter$Usage$header_getInstance() {
-    GooGlUrlShortener$RequestParameter$Usage_initFields();
-    return GooGlUrlShortener$RequestParameter$Usage$header_instance;
-  }
-  GooGlUrlShortener$RequestParameter$Usage.$metadata$ = {
-    kind: Kind_CLASS,
-    simpleName: 'Usage',
-    interfaces: [Enum]
-  };
-  function GooGlUrlShortener$RequestParameter$Usage$values() {
-    return [GooGlUrlShortener$RequestParameter$Usage$urlParameter_getInstance(), GooGlUrlShortener$RequestParameter$Usage$header_getInstance()];
-  }
-  GooGlUrlShortener$RequestParameter$Usage.values = GooGlUrlShortener$RequestParameter$Usage$values;
-  function GooGlUrlShortener$RequestParameter$Usage$valueOf(name) {
-    switch (name) {
-      case 'urlParameter':
-        return GooGlUrlShortener$RequestParameter$Usage$urlParameter_getInstance();
-      case 'header':
-        return GooGlUrlShortener$RequestParameter$Usage$header_getInstance();
-      default:throwISE('No enum constant RentSplit.GooGlUrlShortener.RequestParameter.Usage.' + name);
-    }
-  }
-  GooGlUrlShortener$RequestParameter$Usage.valueOf_61zpoe$ = GooGlUrlShortener$RequestParameter$Usage$valueOf;
-  function GooGlUrlShortener$RequestParameter$requestValue$lambda(closure$requestValueGenerator, this$RequestParameter) {
-    return function () {
-      return closure$requestValueGenerator(this$RequestParameter.value);
-    };
-  }
-  GooGlUrlShortener$RequestParameter.$metadata$ = {
-    kind: Kind_CLASS,
-    simpleName: 'RequestParameter',
-    interfaces: []
-  };
-  function GooGlUrlShortener$RequestParameters(allParameters) {
-    GooGlUrlShortener$RequestParameters$Companion_getInstance();
-    this.allParameters = allParameters;
-  }
-  function GooGlUrlShortener$RequestParameters$toRequestMap$lambda(requestMap, parameter) {
-    var key = parameter.key;
-    var value = parameter.requestValue;
-    requestMap.put_xwzc9p$(key, value);
-    return requestMap;
-  }
-  GooGlUrlShortener$RequestParameters.prototype.toRequestMap = function () {
-    if (this.allParameters.isEmpty()) {
-      return emptyMap();
-    }
-     else {
-      var tmp$ = this.allParameters;
-      var runningValue = {v: LinkedHashMap_init()};
-      var tmp$_0;
-      tmp$_0 = tmp$.iterator();
-      while (tmp$_0.hasNext()) {
-        var element = tmp$_0.next();
-        runningValue.v = GooGlUrlShortener$RequestParameters$toRequestMap$lambda(runningValue.v, element);
-      }
-      return runningValue.v;
-    }
-  };
-  function GooGlUrlShortener$RequestParameters$toRequestUriParameterString$lambda(it) {
-    return it.key + '=' + it.requestValue;
-  }
-  GooGlUrlShortener$RequestParameters.prototype.toRequestUriParameterString = function () {
-    return '?' + joinToString(this.allParameters, '&', void 0, void 0, void 0, void 0, GooGlUrlShortener$RequestParameters$toRequestUriParameterString$lambda);
-  };
-  Object.defineProperty(GooGlUrlShortener$RequestParameters.prototype, 'justUrlParameters', {
-    get: function () {
-      var $receiver = this.allParameters;
-      var destination = ArrayList_init();
-      var tmp$;
-      tmp$ = $receiver.iterator();
-      while (tmp$.hasNext()) {
-        var element = tmp$.next();
-        if (element.usage === GooGlUrlShortener$RequestParameter$Usage$urlParameter_getInstance())
-          destination.add_11rb$(element);
-      }
-      return new GooGlUrlShortener$RequestParameters(destination);
-    }
-  });
-  Object.defineProperty(GooGlUrlShortener$RequestParameters.prototype, 'justHeaders', {
-    get: function () {
-      var $receiver = this.allParameters;
-      var destination = ArrayList_init();
-      var tmp$;
-      tmp$ = $receiver.iterator();
-      while (tmp$.hasNext()) {
-        var element = tmp$.next();
-        if (element.usage === GooGlUrlShortener$RequestParameter$Usage$header_getInstance())
-          destination.add_11rb$(element);
-      }
-      return new GooGlUrlShortener$RequestParameters(destination);
-    }
-  });
-  function GooGlUrlShortener$RequestParameters$Companion() {
-    GooGlUrlShortener$RequestParameters$Companion_instance = this;
-    this.emptyParameters = new GooGlUrlShortener$RequestParameters(emptyList());
-  }
-  GooGlUrlShortener$RequestParameters$Companion.prototype.invoke_ffpjb$ = function (allParameters) {
-    return new GooGlUrlShortener$RequestParameters(toList_0(allParameters));
-  };
-  GooGlUrlShortener$RequestParameters$Companion.$metadata$ = {
-    kind: Kind_OBJECT,
-    simpleName: 'Companion',
-    interfaces: []
-  };
-  var GooGlUrlShortener$RequestParameters$Companion_instance = null;
-  function GooGlUrlShortener$RequestParameters$Companion_getInstance() {
-    if (GooGlUrlShortener$RequestParameters$Companion_instance === null) {
-      new GooGlUrlShortener$RequestParameters$Companion();
-    }
-    return GooGlUrlShortener$RequestParameters$Companion_instance;
-  }
-  GooGlUrlShortener$RequestParameters.$metadata$ = {
-    kind: Kind_CLASS,
-    simpleName: 'RequestParameters',
-    interfaces: []
+    HttpRequest_init('https://www.googleapis.com/urlshortener/v1/url', HttpRequest$RequestParameters$Companion_getInstance().invoke_bgp2as$([new GooGlUrlShortener$Parameters$accessKey(this.accessKey, HttpRequest$RequestParameter$Usage$urlParameter_getInstance()), new GooGlUrlShortener$Parameters$longUrl(longUrl, HttpRequest$RequestParameter$Usage$postBodyJson_getInstance()), new HttpRequest$RequestParameter$genericHeader('Content-Type', 'application/json')])).send_i16107$('POST', void 0, GooGlUrlShortener$shorten$lambda(responseListener));
   };
   function GooGlUrlShortener$ShortenResponse(httpResponse) {
     GooGlUrlShortener$ShortenResponse$Companion_getInstance();
@@ -2631,18 +2414,18 @@ this['Rent Split 2'] = function (_, Kotlin) {
     GooGlUrlShortener$ShortenResponse.call(this, httpResponse);
     this.kind = kind;
     this.id = shortUrlString;
-    this.longUrlString = longUrlString;
-    this.shortUrl_jwv10o$_0 = lazy(GooGlUrlShortener$ShortenResponse$success$shortUrl$lambda(this));
-    this.longUrl_42ucna$_0 = lazy(GooGlUrlShortener$ShortenResponse$success$longUrl$lambda(this));
+    this.longUrl = longUrlString;
+    this.shortUrlObject_ygx97t$_0 = lazy(GooGlUrlShortener$ShortenResponse$success$shortUrl$lambda(this));
+    this.longUrlObject_jvxam1$_0 = lazy(GooGlUrlShortener$ShortenResponse$success$longUrl$lambda(this));
   }
-  Object.defineProperty(GooGlUrlShortener$ShortenResponse$success.prototype, 'shortUrl', {
+  Object.defineProperty(GooGlUrlShortener$ShortenResponse$success.prototype, 'shortUrlObject', {
     get: function () {
-      return this.shortUrl_jwv10o$_0.value;
+      return this.shortUrlObject_ygx97t$_0.value;
     }
   });
-  Object.defineProperty(GooGlUrlShortener$ShortenResponse$success.prototype, 'longUrl', {
+  Object.defineProperty(GooGlUrlShortener$ShortenResponse$success.prototype, 'longUrlObject', {
     get: function () {
-      return this.longUrl_42ucna$_0.value;
+      return this.longUrlObject_jvxam1$_0.value;
     }
   });
   function GooGlUrlShortener$ShortenResponse$success$Companion() {
@@ -2675,7 +2458,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
   }
   function GooGlUrlShortener$ShortenResponse$success$longUrl$lambda(this$success) {
     return function () {
-      return new URL(this$success.longUrlString);
+      return new URL(this$success.longUrl);
     };
   }
   GooGlUrlShortener$ShortenResponse$success.$metadata$ = {
@@ -2755,6 +2538,10 @@ this['Rent Split 2'] = function (_, Kotlin) {
   };
   function GooGlUrlShortener$ShortenResponse$SingleError(domain, reason, message, locationType, location) {
     GooGlUrlShortener$ShortenResponse$SingleError$Companion_getInstance();
+    if (locationType === void 0)
+      locationType = null;
+    if (location === void 0)
+      location = null;
     this.domain = domain;
     this.reason = reason;
     this.message = message;
@@ -2765,7 +2552,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
     GooGlUrlShortener$ShortenResponse$SingleError$Companion_instance = this;
   }
   GooGlUrlShortener$ShortenResponse$SingleError$Companion.prototype.invoke_qk3xy8$ = function (json) {
-    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7, tmp$_8;
+    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6;
     tmp$_0 = typeof (tmp$ = json['domain']) === 'string' ? tmp$ : null;
     if (tmp$_0 == null) {
       return null;
@@ -2778,15 +2565,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
     if (tmp$_4 == null) {
       return null;
     }
-    tmp$_6 = typeof (tmp$_5 = json['locationType']) === 'string' ? tmp$_5 : null;
-    if (tmp$_6 == null) {
-      return null;
-    }
-    tmp$_8 = typeof (tmp$_7 = json['location']) === 'string' ? tmp$_7 : null;
-    if (tmp$_8 == null) {
-      return null;
-    }
-    return new GooGlUrlShortener$ShortenResponse$SingleError(tmp$_0, tmp$_2, tmp$_4, tmp$_6, tmp$_8);
+    return new GooGlUrlShortener$ShortenResponse$SingleError(tmp$_0, tmp$_2, tmp$_4, typeof (tmp$_5 = json['locationType']) === 'string' ? tmp$_5 : null, typeof (tmp$_6 = json['location']) === 'string' ? tmp$_6 : null);
   };
   GooGlUrlShortener$ShortenResponse$SingleError$Companion.$metadata$ = {
     kind: Kind_OBJECT,
@@ -2820,7 +2599,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
   GooGlUrlShortener$ShortenResponse$SingleError.prototype.component5 = function () {
     return this.location;
   };
-  GooGlUrlShortener$ShortenResponse$SingleError.prototype.copy_x0a6t6$ = function (domain, reason, message, locationType, location) {
+  GooGlUrlShortener$ShortenResponse$SingleError.prototype.copy_nfi43m$ = function (domain, reason, message, locationType, location) {
     return new GooGlUrlShortener$ShortenResponse$SingleError(domain === void 0 ? this.domain : domain, reason === void 0 ? this.reason : reason, message === void 0 ? this.message : message, locationType === void 0 ? this.locationType : locationType, location === void 0 ? this.location : location);
   };
   GooGlUrlShortener$ShortenResponse$SingleError.prototype.toString = function () {
@@ -2850,14 +2629,8 @@ this['Rent Split 2'] = function (_, Kotlin) {
     GooGlUrlShortener$ShortenResponse$Companion_instance = this;
   }
   GooGlUrlShortener$ShortenResponse$Companion.prototype.invoke_142kgh$ = function (httpResponse) {
-    var tmp$;
-    if (JSON.parse(httpResponse.text)['error'] != null) {
-      tmp$ = GooGlUrlShortener$ShortenResponse$error$Companion_getInstance().invoke_142kgh$(httpResponse);
-    }
-     else {
-      tmp$ = GooGlUrlShortener$ShortenResponse$success$Companion_getInstance().invoke_142kgh$(httpResponse);
-    }
-    return tmp$ != null ? tmp$ : new GooGlUrlShortener$ShortenResponse$unknownError(httpResponse);
+    var tmp$, tmp$_0;
+    return (tmp$_0 = (tmp$ = GooGlUrlShortener$ShortenResponse$error$Companion_getInstance().invoke_142kgh$(httpResponse)) != null ? tmp$ : GooGlUrlShortener$ShortenResponse$success$Companion_getInstance().invoke_142kgh$(httpResponse)) != null ? tmp$_0 : new GooGlUrlShortener$ShortenResponse$unknownError(httpResponse);
   };
   GooGlUrlShortener$ShortenResponse$Companion.$metadata$ = {
     kind: Kind_OBJECT,
@@ -2876,6 +2649,43 @@ this['Rent Split 2'] = function (_, Kotlin) {
     simpleName: 'ShortenResponse',
     interfaces: []
   };
+  function GooGlUrlShortener$Parameters() {
+    GooGlUrlShortener$Parameters_instance = this;
+  }
+  function GooGlUrlShortener$Parameters$accessKey(key, usage) {
+    HttpRequest$RequestParameter.call(this, 'key', key, usage, GooGlUrlShortener$Parameters$GooGlUrlShortener$Parameters$accessKey_init$lambda);
+  }
+  function GooGlUrlShortener$Parameters$GooGlUrlShortener$Parameters$accessKey_init$lambda(it) {
+    return it;
+  }
+  GooGlUrlShortener$Parameters$accessKey.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'accessKey',
+    interfaces: [HttpRequest$RequestParameter]
+  };
+  function GooGlUrlShortener$Parameters$longUrl(url, usage) {
+    HttpRequest$RequestParameter.call(this, 'longUrl', url, usage, GooGlUrlShortener$Parameters$GooGlUrlShortener$Parameters$longUrl_init$lambda);
+  }
+  function GooGlUrlShortener$Parameters$GooGlUrlShortener$Parameters$longUrl_init$lambda(it) {
+    return it.toString();
+  }
+  GooGlUrlShortener$Parameters$longUrl.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'longUrl',
+    interfaces: [HttpRequest$RequestParameter]
+  };
+  GooGlUrlShortener$Parameters.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Parameters',
+    interfaces: []
+  };
+  var GooGlUrlShortener$Parameters_instance = null;
+  function GooGlUrlShortener$Parameters_getInstance() {
+    if (GooGlUrlShortener$Parameters_instance === null) {
+      new GooGlUrlShortener$Parameters();
+    }
+    return GooGlUrlShortener$Parameters_instance;
+  }
   GooGlUrlShortener.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'GooGlUrlShortener',
@@ -3222,18 +3032,16 @@ this['Rent Split 2'] = function (_, Kotlin) {
       return null;
     };
   }));
-  var reduceTo = defineInlineFunction('Rent Split 2.org.bh.tools.base.collections.extensions.reduceTo_db6zb0$', wrapFunction(function () {
-    return function ($receiver, startingValue, reducer) {
-      var runningValue = {v: startingValue};
-      var tmp$;
-      tmp$ = $receiver.iterator();
-      while (tmp$.hasNext()) {
-        var element = tmp$.next();
-        runningValue.v = reducer(runningValue.v, element);
-      }
-      return runningValue.v;
-    };
-  }));
+  function reduceTo($receiver, startingValue, reducer) {
+    var runningValue = {v: startingValue};
+    var tmp$;
+    tmp$ = $receiver.iterator();
+    while (tmp$.hasNext()) {
+      var element = tmp$.next();
+      runningValue.v = reducer(runningValue.v, element);
+    }
+    return runningValue.v;
+  }
   var safeReduce = defineInlineFunction('Rent Split 2.org.bh.tools.base.collections.extensions.safeReduce_lrrcxv$', wrapFunction(function () {
     var count = Kotlin.kotlin.collections.count_7wnvza$;
     var UnsupportedOperationException_init = Kotlin.kotlin.UnsupportedOperationException_init_pdl1vj$;
@@ -3538,6 +3346,9 @@ this['Rent Split 2'] = function (_, Kotlin) {
     else
       return Kotlin.noWhenBranchMatched();
   }
+  function deepCopy($receiver) {
+    return JSON.parse(JSON.stringify($receiver));
+  }
   function safeTry(closure) {
     try {
       return closure();
@@ -3552,37 +3363,230 @@ this['Rent Split 2'] = function (_, Kotlin) {
   }
   function HttpRequest(url, parameters) {
     if (parameters === void 0)
-      parameters = GooGlUrlShortener$RequestParameters$Companion_getInstance().emptyParameters;
+      parameters = HttpRequest$RequestParameters$Companion_getInstance().emptyParameters;
     this.url = url;
     this.parameters = parameters;
   }
   HttpRequest.prototype.get_m8ahyy$ = function (responseListener) {
-    this.open_eue948$('GET', responseListener);
+    this.send_i16107$('GET', void 0, responseListener);
   };
-  function HttpRequest$open$lambda(closure$request, closure$responseListener) {
+  function HttpRequest$send$lambda(closure$bestResponseSoFar, closure$request, closure$responseListener) {
     return function (it) {
-      if (closure$request.readyState === XMLHttpRequest.DONE)
-        closure$responseListener(HttpResponse_init(closure$request));
+      closure$bestResponseSoFar.v = mostInformative(closure$bestResponseSoFar.v, HttpResponse_init(closure$request));
+      if (closure$request.readyState === XMLHttpRequest.DONE) {
+        closure$responseListener(ensureNotNull(closure$bestResponseSoFar.v));
+      }
       return Unit;
     };
   }
-  HttpRequest.prototype.open_eue948$ = function (method, responseListener) {
+  HttpRequest.prototype.send_i16107$ = function (method, body, responseListener) {
+    if (body === void 0)
+      body = null;
     var request = new XMLHttpRequest();
-    request.onreadystatechange = HttpRequest$open$lambda(request, responseListener);
-    open(request, method, this.generateFullRequestUrlString_0(), this.generateHeaders_0(), true);
-    request.send();
+    var bestResponseSoFar = {v: null};
+    request.onreadystatechange = HttpRequest$send$lambda(bestResponseSoFar, request, responseListener);
+    var requestUrlString = this.generateFullRequestUrlString_0();
+    var actualBody = body != null ? body : this.generatePostBody_0();
+    var message = 'Will send ' + method + ' request:';
+    console.log(message);
+    console.log(requestUrlString);
+    console.log(actualBody);
+    request.open(method, requestUrlString, true);
+    var tmp$;
+    tmp$ = this.parameters.justHeaders.allParameters.iterator();
+    while (tmp$.hasNext()) {
+      var element = tmp$.next();
+      request.setRequestHeader(element.key, element.valueAsRequestString);
+    }
+    var message_0 = request.getAllResponseHeaders();
+    console.log(message_0);
+    try {
+      request.send(actualBody);
+    }
+     catch (error) {
+      if (Kotlin.isType(error, Throwable)) {
+        responseListener(new HttpResponse(error.toString(), -1 | 0, 'Failed to send request', null));
+      }
+       else
+        throw error;
+    }
   };
-  HttpRequest.prototype.generateHeaders_0 = function () {
-    return this.parameters.justHeaders.toRequestMap();
+  HttpRequest.prototype.generatePostBody_0 = function () {
+    return jsonString(this.parameters.justPostBodyJson.toRequestJson());
   };
   HttpRequest.prototype.generateFullRequestUrlString_0 = function () {
-    var $receiver = this.generateFullRequestUrl_0().toString();
-    var message = 'Generated request URL' + ('\t' + $receiver);
-    console.log(message);
-    return $receiver;
+    return this.generateFullRequestUrl_0().toString();
   };
   HttpRequest.prototype.generateFullRequestUrl_0 = function () {
     return withSearchParams(this.url, this.parameters.justUrlParameters);
+  };
+  function HttpRequest$RequestParameters(allParameters) {
+    HttpRequest$RequestParameters$Companion_getInstance();
+    this.allParameters = allParameters;
+  }
+  function HttpRequest$RequestParameters$toRequestJson$lambda(requestJson, parameter) {
+    requestJson[parameter.key] = parameter.valueAsRequestString;
+    return requestJson;
+  }
+  HttpRequest$RequestParameters.prototype.toRequestJson = function () {
+    if (this.allParameters.isEmpty()) {
+      return json([]);
+    }
+     else {
+      return reduceTo(this.allParameters, json([]), HttpRequest$RequestParameters$toRequestJson$lambda);
+    }
+  };
+  function HttpRequest$RequestParameters$toRequestUriParameterString$lambda(it) {
+    return it.key + '=' + it.valueAsRequestString;
+  }
+  HttpRequest$RequestParameters.prototype.toRequestUriParameterString = function () {
+    return '?' + joinToString(this.allParameters, '&', void 0, void 0, void 0, void 0, HttpRequest$RequestParameters$toRequestUriParameterString$lambda);
+  };
+  Object.defineProperty(HttpRequest$RequestParameters.prototype, 'justUrlParameters', {
+    get: function () {
+      var $receiver = this.allParameters;
+      var destination = ArrayList_init();
+      var tmp$;
+      tmp$ = $receiver.iterator();
+      while (tmp$.hasNext()) {
+        var element = tmp$.next();
+        if (element.usage === HttpRequest$RequestParameter$Usage$urlParameter_getInstance())
+          destination.add_11rb$(element);
+      }
+      return new HttpRequest$RequestParameters(destination);
+    }
+  });
+  Object.defineProperty(HttpRequest$RequestParameters.prototype, 'justPostBodyJson', {
+    get: function () {
+      var $receiver = this.allParameters;
+      var destination = ArrayList_init();
+      var tmp$;
+      tmp$ = $receiver.iterator();
+      while (tmp$.hasNext()) {
+        var element = tmp$.next();
+        if (element.usage === HttpRequest$RequestParameter$Usage$postBodyJson_getInstance())
+          destination.add_11rb$(element);
+      }
+      return new HttpRequest$RequestParameters(destination);
+    }
+  });
+  Object.defineProperty(HttpRequest$RequestParameters.prototype, 'justHeaders', {
+    get: function () {
+      var $receiver = this.allParameters;
+      var destination = ArrayList_init();
+      var tmp$;
+      tmp$ = $receiver.iterator();
+      while (tmp$.hasNext()) {
+        var element = tmp$.next();
+        if (element.usage === HttpRequest$RequestParameter$Usage$header_getInstance())
+          destination.add_11rb$(element);
+      }
+      return new HttpRequest$RequestParameters(destination);
+    }
+  });
+  function HttpRequest$RequestParameters$Companion() {
+    HttpRequest$RequestParameters$Companion_instance = this;
+    this.emptyParameters = new HttpRequest$RequestParameters(emptyList());
+  }
+  HttpRequest$RequestParameters$Companion.prototype.invoke_bgp2as$ = function (allParameters) {
+    return new HttpRequest$RequestParameters(toList_0(allParameters));
+  };
+  HttpRequest$RequestParameters$Companion.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Companion',
+    interfaces: []
+  };
+  var HttpRequest$RequestParameters$Companion_instance = null;
+  function HttpRequest$RequestParameters$Companion_getInstance() {
+    if (HttpRequest$RequestParameters$Companion_instance === null) {
+      new HttpRequest$RequestParameters$Companion();
+    }
+    return HttpRequest$RequestParameters$Companion_instance;
+  }
+  HttpRequest$RequestParameters.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'RequestParameters',
+    interfaces: []
+  };
+  function HttpRequest$RequestParameter(key, value, usage, requestValueGenerator) {
+    this.key = key;
+    this.value = value;
+    this.usage = usage;
+    this.valueAsRequestString_3t57w8$_0 = lazy(HttpRequest$RequestParameter$valueAsRequestString$lambda(requestValueGenerator, this));
+  }
+  Object.defineProperty(HttpRequest$RequestParameter.prototype, 'valueAsRequestString', {
+    get: function () {
+      return this.valueAsRequestString_3t57w8$_0.value;
+    }
+  });
+  function HttpRequest$RequestParameter$Usage(name, ordinal) {
+    Enum.call(this);
+    this.name$ = name;
+    this.ordinal$ = ordinal;
+  }
+  function HttpRequest$RequestParameter$Usage_initFields() {
+    HttpRequest$RequestParameter$Usage_initFields = function () {
+    };
+    HttpRequest$RequestParameter$Usage$urlParameter_instance = new HttpRequest$RequestParameter$Usage('urlParameter', 0);
+    HttpRequest$RequestParameter$Usage$postBodyJson_instance = new HttpRequest$RequestParameter$Usage('postBodyJson', 1);
+    HttpRequest$RequestParameter$Usage$header_instance = new HttpRequest$RequestParameter$Usage('header', 2);
+  }
+  var HttpRequest$RequestParameter$Usage$urlParameter_instance;
+  function HttpRequest$RequestParameter$Usage$urlParameter_getInstance() {
+    HttpRequest$RequestParameter$Usage_initFields();
+    return HttpRequest$RequestParameter$Usage$urlParameter_instance;
+  }
+  var HttpRequest$RequestParameter$Usage$postBodyJson_instance;
+  function HttpRequest$RequestParameter$Usage$postBodyJson_getInstance() {
+    HttpRequest$RequestParameter$Usage_initFields();
+    return HttpRequest$RequestParameter$Usage$postBodyJson_instance;
+  }
+  var HttpRequest$RequestParameter$Usage$header_instance;
+  function HttpRequest$RequestParameter$Usage$header_getInstance() {
+    HttpRequest$RequestParameter$Usage_initFields();
+    return HttpRequest$RequestParameter$Usage$header_instance;
+  }
+  HttpRequest$RequestParameter$Usage.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Usage',
+    interfaces: [Enum]
+  };
+  function HttpRequest$RequestParameter$Usage$values() {
+    return [HttpRequest$RequestParameter$Usage$urlParameter_getInstance(), HttpRequest$RequestParameter$Usage$postBodyJson_getInstance(), HttpRequest$RequestParameter$Usage$header_getInstance()];
+  }
+  HttpRequest$RequestParameter$Usage.values = HttpRequest$RequestParameter$Usage$values;
+  function HttpRequest$RequestParameter$Usage$valueOf(name) {
+    switch (name) {
+      case 'urlParameter':
+        return HttpRequest$RequestParameter$Usage$urlParameter_getInstance();
+      case 'postBodyJson':
+        return HttpRequest$RequestParameter$Usage$postBodyJson_getInstance();
+      case 'header':
+        return HttpRequest$RequestParameter$Usage$header_getInstance();
+      default:throwISE('No enum constant org.bh.tools.io.net.HttpRequest.RequestParameter.Usage.' + name);
+    }
+  }
+  HttpRequest$RequestParameter$Usage.valueOf_61zpoe$ = HttpRequest$RequestParameter$Usage$valueOf;
+  function HttpRequest$RequestParameter$genericHeader(key, value) {
+    HttpRequest$RequestParameter.call(this, key, value, HttpRequest$RequestParameter$Usage$header_getInstance(), HttpRequest$RequestParameter$HttpRequest$RequestParameter$genericHeader_init$lambda);
+  }
+  function HttpRequest$RequestParameter$HttpRequest$RequestParameter$genericHeader_init$lambda(it) {
+    return it;
+  }
+  HttpRequest$RequestParameter$genericHeader.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'genericHeader',
+    interfaces: [HttpRequest$RequestParameter]
+  };
+  function HttpRequest$RequestParameter$valueAsRequestString$lambda(closure$requestValueGenerator, this$RequestParameter) {
+    return function () {
+      return closure$requestValueGenerator(this$RequestParameter.value);
+    };
+  }
+  HttpRequest$RequestParameter.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'RequestParameter',
+    interfaces: []
   };
   HttpRequest.$metadata$ = {
     kind: Kind_CLASS,
@@ -3591,7 +3595,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
   };
   function HttpRequest_init(urlString, parameters, $this) {
     if (parameters === void 0)
-      parameters = GooGlUrlShortener$RequestParameters$Companion_getInstance().emptyParameters;
+      parameters = HttpRequest$RequestParameters$Companion_getInstance().emptyParameters;
     $this = $this || Object.create(HttpRequest.prototype);
     HttpRequest.call($this, new URL(urlString), parameters);
     return $this;
@@ -3601,9 +3605,9 @@ this['Rent Split 2'] = function (_, Kotlin) {
       return $receiver;
     }
      else {
-      var copy = $receiver;
-      copy.search = asSearchString(searchParams);
-      return copy;
+      var copy_0 = copy($receiver);
+      copy_0.search = asSearchString(searchParams);
+      return copy_0;
     }
   }
   function asSearchString$lambda(it) {
@@ -3612,7 +3616,9 @@ this['Rent Split 2'] = function (_, Kotlin) {
   function asSearchString($receiver) {
     return '?' + joinToString($receiver.allParameters, '&', void 0, void 0, void 0, void 0, asSearchString$lambda);
   }
-  function open($receiver, method, url, headers, async, username, password) {
+  function send($receiver, method, url, headers, async, username, password) {
+    if (headers === void 0)
+      headers = emptyMap();
     if (username === void 0)
       username = null;
     if (password === void 0)
@@ -3625,16 +3631,116 @@ this['Rent Split 2'] = function (_, Kotlin) {
       $receiver.setRequestHeader(element.key, element.value);
     }
   }
-  function HttpResponse(text, status, statusText) {
+  function HttpResponse(text, status, statusText, interactionStage) {
     this.text = text;
     this.status = status;
     this.statusText = statusText;
+    this.interactionStage = interactionStage;
   }
   Object.defineProperty(HttpResponse.prototype, 'wasSuccessful', {
     get: function () {
       return this.status === toShort(200);
     }
   });
+  function HttpResponse$InteractionStage(name, ordinal, xmlHttpRequestReadyState) {
+    Enum.call(this);
+    this.xmlHttpRequestReadyState = xmlHttpRequestReadyState;
+    this.name$ = name;
+    this.ordinal$ = ordinal;
+  }
+  function HttpResponse$InteractionStage_initFields() {
+    HttpResponse$InteractionStage_initFields = function () {
+    };
+    HttpResponse$InteractionStage$notStarted_instance = new HttpResponse$InteractionStage('notStarted', 0, XMLHttpRequest.UNSENT);
+    HttpResponse$InteractionStage$opened_instance = new HttpResponse$InteractionStage('opened', 1, XMLHttpRequest.OPENED);
+    HttpResponse$InteractionStage$headersReceived_instance = new HttpResponse$InteractionStage('headersReceived', 2, XMLHttpRequest.HEADERS_RECEIVED);
+    HttpResponse$InteractionStage$loading_instance = new HttpResponse$InteractionStage('loading', 3, XMLHttpRequest.LOADING);
+    HttpResponse$InteractionStage$completed_instance = new HttpResponse$InteractionStage('completed', 4, XMLHttpRequest.DONE);
+    HttpResponse$InteractionStage$Companion_getInstance();
+  }
+  var HttpResponse$InteractionStage$notStarted_instance;
+  function HttpResponse$InteractionStage$notStarted_getInstance() {
+    HttpResponse$InteractionStage_initFields();
+    return HttpResponse$InteractionStage$notStarted_instance;
+  }
+  var HttpResponse$InteractionStage$opened_instance;
+  function HttpResponse$InteractionStage$opened_getInstance() {
+    HttpResponse$InteractionStage_initFields();
+    return HttpResponse$InteractionStage$opened_instance;
+  }
+  var HttpResponse$InteractionStage$headersReceived_instance;
+  function HttpResponse$InteractionStage$headersReceived_getInstance() {
+    HttpResponse$InteractionStage_initFields();
+    return HttpResponse$InteractionStage$headersReceived_instance;
+  }
+  var HttpResponse$InteractionStage$loading_instance;
+  function HttpResponse$InteractionStage$loading_getInstance() {
+    HttpResponse$InteractionStage_initFields();
+    return HttpResponse$InteractionStage$loading_instance;
+  }
+  var HttpResponse$InteractionStage$completed_instance;
+  function HttpResponse$InteractionStage$completed_getInstance() {
+    HttpResponse$InteractionStage_initFields();
+    return HttpResponse$InteractionStage$completed_instance;
+  }
+  function HttpResponse$InteractionStage$Companion() {
+    HttpResponse$InteractionStage$Companion_instance = this;
+  }
+  HttpResponse$InteractionStage$Companion.prototype.invoke_mq22fl$ = function (xmlHttpRequestReadyState) {
+    var $receiver = HttpResponse$InteractionStage$values();
+    var firstOrNull$result;
+    firstOrNull$break: do {
+      var tmp$;
+      for (tmp$ = 0; tmp$ !== $receiver.length; ++tmp$) {
+        var element = $receiver[tmp$];
+        if (element.xmlHttpRequestReadyState === xmlHttpRequestReadyState) {
+          firstOrNull$result = element;
+          break firstOrNull$break;
+        }
+      }
+      firstOrNull$result = null;
+    }
+     while (false);
+    return firstOrNull$result;
+  };
+  HttpResponse$InteractionStage$Companion.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Companion',
+    interfaces: []
+  };
+  var HttpResponse$InteractionStage$Companion_instance = null;
+  function HttpResponse$InteractionStage$Companion_getInstance() {
+    HttpResponse$InteractionStage_initFields();
+    if (HttpResponse$InteractionStage$Companion_instance === null) {
+      new HttpResponse$InteractionStage$Companion();
+    }
+    return HttpResponse$InteractionStage$Companion_instance;
+  }
+  HttpResponse$InteractionStage.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'InteractionStage',
+    interfaces: [Enum]
+  };
+  function HttpResponse$InteractionStage$values() {
+    return [HttpResponse$InteractionStage$notStarted_getInstance(), HttpResponse$InteractionStage$opened_getInstance(), HttpResponse$InteractionStage$headersReceived_getInstance(), HttpResponse$InteractionStage$loading_getInstance(), HttpResponse$InteractionStage$completed_getInstance()];
+  }
+  HttpResponse$InteractionStage.values = HttpResponse$InteractionStage$values;
+  function HttpResponse$InteractionStage$valueOf(name) {
+    switch (name) {
+      case 'notStarted':
+        return HttpResponse$InteractionStage$notStarted_getInstance();
+      case 'opened':
+        return HttpResponse$InteractionStage$opened_getInstance();
+      case 'headersReceived':
+        return HttpResponse$InteractionStage$headersReceived_getInstance();
+      case 'loading':
+        return HttpResponse$InteractionStage$loading_getInstance();
+      case 'completed':
+        return HttpResponse$InteractionStage$completed_getInstance();
+      default:throwISE('No enum constant org.bh.tools.io.net.HttpResponse.InteractionStage.' + name);
+    }
+  }
+  HttpResponse$InteractionStage.valueOf_61zpoe$ = HttpResponse$InteractionStage$valueOf;
   HttpResponse.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'HttpResponse',
@@ -3642,34 +3748,44 @@ this['Rent Split 2'] = function (_, Kotlin) {
   };
   function HttpResponse_init(xmlHttpResponse, $this) {
     $this = $this || Object.create(HttpResponse.prototype);
-    HttpResponse.call($this, xmlHttpResponse.responseText, xmlHttpResponse.status, xmlHttpResponse.statusText);
+    HttpResponse.call($this, xmlHttpResponse.responseText, xmlHttpResponse.status, xmlHttpResponse.statusText, HttpResponse$InteractionStage$Companion_getInstance().invoke_mq22fl$(xmlHttpResponse.readyState));
     return $this;
   }
-  HttpResponse.prototype.component1 = function () {
-    return this.text;
-  };
-  HttpResponse.prototype.component2 = function () {
-    return this.status;
-  };
-  HttpResponse.prototype.component3 = function () {
-    return this.statusText;
-  };
-  HttpResponse.prototype.copy_fryogh$ = function (text, status, statusText) {
-    return new HttpResponse(text === void 0 ? this.text : text, status === void 0 ? this.status : status, statusText === void 0 ? this.statusText : statusText);
-  };
-  HttpResponse.prototype.toString = function () {
-    return 'HttpResponse(text=' + Kotlin.toString(this.text) + (', status=' + Kotlin.toString(this.status)) + (', statusText=' + Kotlin.toString(this.statusText)) + ')';
-  };
-  HttpResponse.prototype.hashCode = function () {
-    var result = 0;
-    result = result * 31 + Kotlin.hashCode(this.text) | 0;
-    result = result * 31 + Kotlin.hashCode(this.status) | 0;
-    result = result * 31 + Kotlin.hashCode(this.statusText) | 0;
-    return result;
-  };
-  HttpResponse.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.text, other.text) && Kotlin.equals(this.status, other.status) && Kotlin.equals(this.statusText, other.statusText)))));
-  };
+  function mostInformative(a, b) {
+    if (a == null)
+      return b;
+    else {
+      return get_informativeScore(a) > get_informativeScore(b) ? a : b;
+    }
+  }
+  var isBlank = Kotlin.kotlin.text.isBlank_gw00vp$;
+  function get_informativeScore($receiver) {
+    var score = 0.0;
+    if ($receiver.status !== toShort(0)) {
+      score += $receiver.status === toShort(200) ? 1.5 : 1.0;
+    }
+    var $receiver_0 = $receiver.statusText;
+    if (!($receiver_0 == null || isBlank($receiver_0))) {
+      score += 2;
+    }
+    var $receiver_1 = $receiver.text;
+    if (!($receiver_1 == null || isBlank($receiver_1))) {
+      score += 3;
+    }
+    if ($receiver.interactionStage != null) {
+      score *= ($receiver.interactionStage.xmlHttpRequestReadyState + 1) / XMLHttpRequest.DONE;
+    }
+    return score;
+  }
+  function copy($receiver) {
+    return new URL($receiver.toString());
+  }
+  var deepCopy_0 = defineInlineFunction('Rent Split 2.org.bh.tools.io.net.deepCopy_wace04$', wrapFunction(function () {
+    var copy = _.org.bh.tools.io.net.copy_wace04$;
+    return function ($receiver) {
+      return copy($receiver);
+    };
+  }));
   function TernaryCheckboxTree(children, text, id) {
     this.children = children;
     this.text_kabazs$_0 = text;
@@ -3791,15 +3907,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
     return count + tmp$;
   }
   function invoke_3($receiver, checkboxes) {
-    var tmp$ = FiniteAmountSummary$Companion_getInstance();
-    var runningValue = {v: 0.0};
-    var tmp$_0;
-    tmp$_0 = checkboxes.iterator();
-    while (tmp$_0.hasNext()) {
-      var element = tmp$_0.next();
-      runningValue.v = invoke$lambda(runningValue.v, element);
-    }
-    return invoke_0(tmp$, runningValue.v, checkboxes.size);
+    return invoke_0(FiniteAmountSummary$Companion_getInstance(), reduceTo(checkboxes, 0.0, invoke$lambda), checkboxes.size);
   }
   function TouchBasics() {
     TouchBasics_instance = this;
@@ -4483,23 +4591,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
   package$RentSplit.toSetOfIds_pdl1vz$ = toSetOfIds;
   package$RentSplit.serializedSetOfIds_gevexo$ = serializedSetOfIds;
   package$RentSplit.sanitizedForHtml_pdl1vz$ = sanitizedForHtml;
-  GooGlUrlShortener$RequestParameter.accessKey = GooGlUrlShortener$RequestParameter$accessKey;
-  GooGlUrlShortener$RequestParameter.longUrl = GooGlUrlShortener$RequestParameter$longUrl;
-  Object.defineProperty(GooGlUrlShortener$RequestParameter, 'Keys', {
-    get: GooGlUrlShortener$RequestParameter$Keys_getInstance
-  });
-  Object.defineProperty(GooGlUrlShortener$RequestParameter$Usage, 'urlParameter', {
-    get: GooGlUrlShortener$RequestParameter$Usage$urlParameter_getInstance
-  });
-  Object.defineProperty(GooGlUrlShortener$RequestParameter$Usage, 'header', {
-    get: GooGlUrlShortener$RequestParameter$Usage$header_getInstance
-  });
-  GooGlUrlShortener$RequestParameter.Usage = GooGlUrlShortener$RequestParameter$Usage;
-  GooGlUrlShortener.RequestParameter = GooGlUrlShortener$RequestParameter;
-  Object.defineProperty(GooGlUrlShortener$RequestParameters, 'Companion', {
-    get: GooGlUrlShortener$RequestParameters$Companion_getInstance
-  });
-  GooGlUrlShortener.RequestParameters = GooGlUrlShortener$RequestParameters;
+  package$RentSplit.jsonString_s8jyvk$ = jsonString;
   Object.defineProperty(GooGlUrlShortener$ShortenResponse$success, 'Companion', {
     get: GooGlUrlShortener$ShortenResponse$success$Companion_getInstance
   });
@@ -4517,6 +4609,11 @@ this['Rent Split 2'] = function (_, Kotlin) {
     get: GooGlUrlShortener$ShortenResponse$Companion_getInstance
   });
   GooGlUrlShortener.ShortenResponse = GooGlUrlShortener$ShortenResponse;
+  GooGlUrlShortener$Parameters.prototype.accessKey = GooGlUrlShortener$Parameters$accessKey;
+  GooGlUrlShortener$Parameters.prototype.longUrl = GooGlUrlShortener$Parameters$longUrl;
+  Object.defineProperty(GooGlUrlShortener, 'Parameters', {
+    get: GooGlUrlShortener$Parameters_getInstance
+  });
   package$RentSplit.GooGlUrlShortener = GooGlUrlShortener;
   package$RentSplit.get_wasSuccessful_i51kfp$ = get_wasSuccessful;
   package$RentSplit.get_statusText_i51kfp$ = get_statusText;
@@ -4615,13 +4712,53 @@ this['Rent Split 2'] = function (_, Kotlin) {
   package$struct.invoke_aa6xk2$ = invoke_1;
   package$struct.invoke_yniobj$ = invoke_2;
   var package$util = package$base.util || (package$base.util = {});
+  package$util.deepCopy_eoe559$ = deepCopy;
   package$util.safeTry_klfg04$ = safeTry;
+  Object.defineProperty(HttpRequest$RequestParameters, 'Companion', {
+    get: HttpRequest$RequestParameters$Companion_getInstance
+  });
+  HttpRequest.RequestParameters = HttpRequest$RequestParameters;
+  Object.defineProperty(HttpRequest$RequestParameter$Usage, 'urlParameter', {
+    get: HttpRequest$RequestParameter$Usage$urlParameter_getInstance
+  });
+  Object.defineProperty(HttpRequest$RequestParameter$Usage, 'postBodyJson', {
+    get: HttpRequest$RequestParameter$Usage$postBodyJson_getInstance
+  });
+  Object.defineProperty(HttpRequest$RequestParameter$Usage, 'header', {
+    get: HttpRequest$RequestParameter$Usage$header_getInstance
+  });
+  HttpRequest$RequestParameter.Usage = HttpRequest$RequestParameter$Usage;
+  HttpRequest$RequestParameter.genericHeader = HttpRequest$RequestParameter$genericHeader;
+  HttpRequest.RequestParameter = HttpRequest$RequestParameter;
   var package$io = package$tools.io || (package$tools.io = {});
   var package$net = package$io.net || (package$io.net = {});
-  package$net.HttpRequest_init_whtn4x$ = HttpRequest_init;
+  package$net.HttpRequest_init_g3x9lo$ = HttpRequest_init;
   package$net.HttpRequest = HttpRequest;
+  Object.defineProperty(HttpResponse$InteractionStage, 'notStarted', {
+    get: HttpResponse$InteractionStage$notStarted_getInstance
+  });
+  Object.defineProperty(HttpResponse$InteractionStage, 'opened', {
+    get: HttpResponse$InteractionStage$opened_getInstance
+  });
+  Object.defineProperty(HttpResponse$InteractionStage, 'headersReceived', {
+    get: HttpResponse$InteractionStage$headersReceived_getInstance
+  });
+  Object.defineProperty(HttpResponse$InteractionStage, 'loading', {
+    get: HttpResponse$InteractionStage$loading_getInstance
+  });
+  Object.defineProperty(HttpResponse$InteractionStage, 'completed', {
+    get: HttpResponse$InteractionStage$completed_getInstance
+  });
+  Object.defineProperty(HttpResponse$InteractionStage, 'Companion', {
+    get: HttpResponse$InteractionStage$Companion_getInstance
+  });
+  HttpResponse.InteractionStage = HttpResponse$InteractionStage;
   package$net.HttpResponse_init_1endcj$ = HttpResponse_init;
   package$net.HttpResponse = HttpResponse;
+  package$net.mostInformative_rwjgrz$ = mostInformative;
+  package$net.get_informativeScore_yi7m7y$ = get_informativeScore;
+  package$net.copy_wace04$ = copy;
+  package$net.deepCopy_wace04$ = deepCopy_0;
   var package$ui = package$tools.ui || (package$tools.ui = {});
   var package$behavior = package$ui.behavior || (package$ui.behavior = {});
   package$behavior.TernaryCheckboxTree = TernaryCheckboxTree;

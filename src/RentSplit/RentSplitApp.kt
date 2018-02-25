@@ -80,10 +80,6 @@ class RentSplitApp {
      */
     fun preLoadConfigurations() {
         jq("html").addClass(if (TouchBasics.isTouchSupported()) "touch-supported" else "touch-not-supported")
-        replaceShareUrlWithPromptToGenerateANewOne()
-        jq(stateUrlField).onChangeData {
-            replaceShareUrlWithPromptToGenerateANewOne()
-        }
     }
 
 
@@ -91,6 +87,7 @@ class RentSplitApp {
      * Reloads all objects on the page by reading the state variable
      */
     fun reloadPageFromState(shouldReRegisterListeners: Boolean = true) {
+        this.replaceShareUrlWithPromptToGenerateANewOne()
         this.applyStateToLocalStorageWarning()
         this.regenerateInputTables()
         if (shouldReRegisterListeners) {
@@ -818,8 +815,13 @@ class RentSplitApp {
                 }
                 is error -> {
                     alertUserOfFailureToGenerateShareUrl(statusText = "⚠️ Could not shorten URL")
-                    log(response.allErrors)
+                    log(response.allErrors.toTypedArray())
                     log(response.message.nonEmptyOrNull() ?: response.statusText ?: "No message")
+                }
+                is unknownError -> {
+                    alertUserOfFailureToGenerateShareUrl(statusText = "⚠️ Could not shorten URL")
+                    log(response.httpResponse?.text?.nonEmptyOrNull() ?: "No response text")
+                    log(response.statusText?.nonEmptyOrNull() ?: "No message")
                 }
             }
         }
