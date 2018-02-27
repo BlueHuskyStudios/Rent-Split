@@ -41,9 +41,9 @@ class GooGlUrlShortener(val accessKey: String) { // AIzaSyBsJvWOGsHnIcPi-wnIB3WA
     sealed class ShortenResponse(val httpResponse: HttpResponse?) {
         class success(
                 val kind: String,
-                @JsName("id")
+//                @JsName("id")
                 val shortUrlString: String,
-                @JsName("longUrl")
+//                @JsName("longUrl")
                 val longUrlString: String,
                 httpResponse: HttpResponse? = null
         ) : ShortenResponse(httpResponse) {
@@ -56,7 +56,12 @@ class GooGlUrlShortener(val accessKey: String) { // AIzaSyBsJvWOGsHnIcPi-wnIB3WA
 
             companion object {
                 operator fun invoke(httpResponse: HttpResponse) = safeTry {
-                    JSON.parse<success>(httpResponse.text)
+                    class Raw(val kind: String, val id: String, val longUrl: String)
+                    (JSON.parse<Raw?>(httpResponse.text) ?: return@safeTry null).let { raw ->
+                        return@safeTry success(kind = raw.kind,
+                                               shortUrlString = raw.id,
+                                               longUrlString = raw.longUrl)
+                    }
                 }
             }
         }

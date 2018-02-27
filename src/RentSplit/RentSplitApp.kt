@@ -840,9 +840,9 @@ class RentSplitApp {
 
         val sharingUrlString = sharingUrlPrefix + jsonStringForSharing
 
-        val sharingUrl = URL(sharingUrlString)
-        GooGlUrlShortener(gooGlAccessToken).shorten(sharingUrl) { response ->
-            callback(response, (response as? success)?.shortUrl ?: sharingUrl)
+        val fullLengthSharingUrl = URL(sharingUrlString)
+        GooGlUrlShortener(gooGlAccessToken).shorten(fullLengthSharingUrl) { response ->
+            callback(response, (response as? success)?.shortUrl ?: fullLengthSharingUrl)
         }
     }
 
@@ -857,6 +857,7 @@ class RentSplitApp {
             }
             catch (error: Throwable) {
                 log("Failed to copy state URL!")
+                log(error)
             }
 
 

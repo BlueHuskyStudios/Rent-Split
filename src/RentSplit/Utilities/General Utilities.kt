@@ -93,9 +93,10 @@ fun <Element> List<Element>.adding(newElement: Element): List<Element> {
  * Attempts to copy the text within the element(s) selected by this JQuery selector. If that cannot be done, this
  * throws an error andor returns `false`. If it succeeded, this returns `true`.
  */
-fun JQuery.copyToClipboardOrThrow(): Boolean {
+fun JQuery.copyToClipboardOrThrow() {
+    class CopyFailed: Exception("Could not copy")
     this.select()
-    return document.execCommand("copy")
+    if (!document.execCommand("copy")) throw CopyFailed()
 }
 
 

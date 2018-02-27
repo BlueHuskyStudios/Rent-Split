@@ -35,6 +35,8 @@ this['Rent Split 2'] = function (_, Kotlin) {
   var Enum = Kotlin.kotlin.Enum;
   var throwISE = Kotlin.throwISE;
   var toList = Kotlin.kotlin.collections.toList_7wnvza$;
+  var Exception_init = Kotlin.kotlin.Exception_init_pdl1vj$;
+  var Exception = Kotlin.kotlin.Exception;
   var split = Kotlin.kotlin.text.split_o64adg$;
   var Regex_init = Kotlin.kotlin.text.Regex_init_61zpoe$;
   var replace = Kotlin.kotlin.text.replace_680rmw$;
@@ -74,6 +76,8 @@ this['Rent Split 2'] = function (_, Kotlin) {
   SerializationPurpose.prototype.constructor = SerializationPurpose;
   UserConsent.prototype = Object.create(Enum.prototype);
   UserConsent.prototype.constructor = UserConsent;
+  copyToClipboardOrThrow$CopyFailed.prototype = Object.create(Exception.prototype);
+  copyToClipboardOrThrow$CopyFailed.prototype.constructor = copyToClipboardOrThrow$CopyFailed;
   GooGlUrlShortener$ShortenResponse$success.prototype = Object.create(GooGlUrlShortener$ShortenResponse.prototype);
   GooGlUrlShortener$ShortenResponse$success.prototype.constructor = GooGlUrlShortener$ShortenResponse$success;
   GooGlUrlShortener$ShortenResponse$error.prototype = Object.create(GooGlUrlShortener$ShortenResponse.prototype);
@@ -753,10 +757,10 @@ this['Rent Split 2'] = function (_, Kotlin) {
     this.alertUserOfUrlGenerationStart_0();
     this.generateShareUrl_0(RentSplitApp$userWantsShareUrl$lambda(this));
   };
-  function RentSplitApp$generateShareUrl$lambda(closure$callback, closure$sharingUrl) {
+  function RentSplitApp$generateShareUrl$lambda(closure$callback, closure$fullLengthSharingUrl) {
     return function (response) {
       var tmp$, tmp$_0, tmp$_1;
-      closure$callback(response, (tmp$_1 = (tmp$_0 = Kotlin.isType(tmp$ = response, GooGlUrlShortener$ShortenResponse$success) ? tmp$ : null) != null ? tmp$_0.shortUrlObject : null) != null ? tmp$_1 : closure$sharingUrl);
+      closure$callback(response, (tmp$_1 = (tmp$_0 = Kotlin.isType(tmp$ = response, GooGlUrlShortener$ShortenResponse$success) ? tmp$ : null) != null ? tmp$_0.shortUrlObject : null) != null ? tmp$_1 : closure$fullLengthSharingUrl);
       return Unit;
     };
   }
@@ -770,8 +774,8 @@ this['Rent Split 2'] = function (_, Kotlin) {
       tmp$ = window.location.protocol + '//' + window.location.host + window.location.pathname + '?' + generalStateSerializedName + '=';
     var sharingUrlPrefix = tmp$;
     var sharingUrlString = sharingUrlPrefix + jsonStringForSharing;
-    var sharingUrl = new URL(sharingUrlString);
-    (new GooGlUrlShortener(gooGlAccessToken)).shorten_5nfh8w$(sharingUrl, RentSplitApp$generateShareUrl$lambda(callback, sharingUrl));
+    var fullLengthSharingUrl = new URL(sharingUrlString);
+    (new GooGlUrlShortener(gooGlAccessToken)).shorten_5nfh8w$(fullLengthSharingUrl, RentSplitApp$generateShareUrl$lambda(callback, fullLengthSharingUrl));
   };
   function RentSplitApp$copyShareUrl$lambda() {
     jq(copyStateUrlButton.cssSelectorString).removeClass(justCopiedAlerting.className);
@@ -787,6 +791,8 @@ this['Rent Split 2'] = function (_, Kotlin) {
       if (Kotlin.isType(error, Throwable)) {
         var message = 'Failed to copy state URL!';
         console.log(message);
+        var object = error;
+        console.log(object);
       }
        else
         throw error;
@@ -2328,9 +2334,19 @@ this['Rent Split 2'] = function (_, Kotlin) {
     newExpenses.add_11rb$(newElement);
     return toList(newExpenses);
   }
+  function copyToClipboardOrThrow$CopyFailed() {
+    Exception_init('Could not copy', this);
+    this.name = 'copyToClipboardOrThrow$CopyFailed';
+  }
+  copyToClipboardOrThrow$CopyFailed.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'CopyFailed',
+    interfaces: [Exception]
+  };
   function copyToClipboardOrThrow($receiver) {
     $receiver.select();
-    return document.execCommand('copy');
+    if (!document.execCommand('copy'))
+      throw new copyToClipboardOrThrow$CopyFailed();
   }
   var doNothing = defineInlineFunction('Rent Split 2.RentSplit.doNothing', function () {
   });
@@ -2413,8 +2429,8 @@ this['Rent Split 2'] = function (_, Kotlin) {
       httpResponse = null;
     GooGlUrlShortener$ShortenResponse.call(this, httpResponse);
     this.kind = kind;
-    this.id = shortUrlString;
-    this.longUrl = longUrlString;
+    this.shortUrlString = shortUrlString;
+    this.longUrlString = longUrlString;
     this.shortUrlObject_ygx97t$_0 = lazy(GooGlUrlShortener$ShortenResponse$success$shortUrl$lambda(this));
     this.longUrlObject_jvxam1$_0 = lazy(GooGlUrlShortener$ShortenResponse$success$longUrl$lambda(this));
   }
@@ -2431,9 +2447,24 @@ this['Rent Split 2'] = function (_, Kotlin) {
   function GooGlUrlShortener$ShortenResponse$success$Companion() {
     GooGlUrlShortener$ShortenResponse$success$Companion_instance = this;
   }
+  function GooGlUrlShortener$ShortenResponse$success$Companion$invoke$lambda$Raw(kind, id, longUrl) {
+    this.kind = kind;
+    this.id = id;
+    this.longUrl = longUrl;
+  }
+  GooGlUrlShortener$ShortenResponse$success$Companion$invoke$lambda$Raw.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Raw',
+    interfaces: []
+  };
   function GooGlUrlShortener$ShortenResponse$success$Companion$invoke$lambda(closure$httpResponse) {
     return function () {
-      return JSON.parse(closure$httpResponse.text);
+      var tmp$;
+      tmp$ = JSON.parse(closure$httpResponse.text);
+      if (tmp$ == null) {
+        return null;
+      }
+      return new GooGlUrlShortener$ShortenResponse$success(tmp$.kind, tmp$.id, tmp$.longUrl);
     };
   }
   GooGlUrlShortener$ShortenResponse$success$Companion.prototype.invoke_142kgh$ = function (httpResponse) {
@@ -2453,12 +2484,12 @@ this['Rent Split 2'] = function (_, Kotlin) {
   }
   function GooGlUrlShortener$ShortenResponse$success$shortUrl$lambda(this$success) {
     return function () {
-      return new URL(this$success.id);
+      return new URL(this$success.shortUrlString);
     };
   }
   function GooGlUrlShortener$ShortenResponse$success$longUrl$lambda(this$success) {
     return function () {
-      return new URL(this$success.longUrl);
+      return new URL(this$success.longUrlString);
     };
   }
   GooGlUrlShortener$ShortenResponse$success.$metadata$ = {
@@ -4835,7 +4866,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
   expenseFilterAnyCheckboxSelector = expenseFilterDialog.cssSelectorString + ' input[type=checkbox]';
   expenseFilterButtonExpenseRelation = new DataAttribute('expense');
   anyInputField = new SelectorCombiner$either(new SelectorCombiner$either(new CssElement('input'), roommateAnyInputField), expenseAnyInputField);
-  anyInputButton = new SelectorCombiner$either(new SelectorCombiner$either(new SelectorCombiner$either(new SelectorCombiner$either(new SelectorCombiner$either(new SelectorCombiner$either(addARoommateButton, addAnExpenseButton), removeARoommateButton), removeAnExpenseButton), expenseFilterButton), expenseFilterDialogCancelButton), expenseFilterDialogOkButton);
+  anyInputButton = new SelectorCombiner$either(new SelectorCombiner$either(new SelectorCombiner$either(new SelectorCombiner$either(new SelectorCombiner$either(new SelectorCombiner$either(new SelectorCombiner$either(addARoommateButton, addAnExpenseButton), removeARoommateButton), removeAnExpenseButton), expenseFilterButton), expenseFilterDialogCancelButton), expenseFilterDialogOkButton), copyStateUrlButton);
   anyInput = new SelectorCombiner$either(anyInputField, anyInputButton);
   rentExpenseType = 'Rent';
   utilitiesExpenseType = 'Utilities';

@@ -89,7 +89,8 @@ package RentSplit
         val anyInputField = CssElement("input") or roommateAnyInputField or expenseAnyInputField
         val anyInputButton = addARoommateButton or addAnExpenseButton or
                 removeARoommateButton or removeAnExpenseButton or
-                expenseFilterButton or expenseFilterDialogCancelButton or expenseFilterDialogOkButton
+                expenseFilterButton or expenseFilterDialogCancelButton or expenseFilterDialogOkButton or
+                copyStateUrlButton
         val anyInput = anyInputField or anyInputButton
 
 
