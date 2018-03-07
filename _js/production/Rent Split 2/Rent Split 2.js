@@ -134,14 +134,13 @@ this['Rent Split 2'] = function (_, Kotlin) {
   var resourceId;
   var expenseApplicableRoommates;
   var expenseHasApplicableRoommates;
-  var copyStateUrlButton;
-  var stateUrlField;
+  var shareUrlButton;
+  var shareUrlField;
   var localStorageWarning;
   var localStorageWarningExplicitRefusalButton;
   var localStorageWarningExplicitConsentButton;
-  var justCopiedAlerting;
   var shareUrlHolder;
-  var stateUrlStatus;
+  var statusMetaData;
   var canHaveStatus;
   var showStatus;
   var expenseFilterButton;
@@ -287,8 +286,11 @@ this['Rent Split 2'] = function (_, Kotlin) {
     jq(localStorageWarningExplicitRefusalButton.cssSelectorString).click(getCallableRef('didPressLocalStorageWarningExplicitRefusalButton', function ($receiver, event) {
       return $receiver.didPressLocalStorageWarningExplicitRefusalButton_9ojx7i$(event), Unit;
     }.bind(null, this)));
-    jq(copyStateUrlButton.cssSelectorString).click(getCallableRef('didPressShareButton', function ($receiver, event) {
+    jq(shareUrlButton.cssSelectorString).click(getCallableRef('didPressShareButton', function ($receiver, event) {
       return $receiver.didPressShareButton_9ojx7i$(event), Unit;
+    }.bind(null, this)));
+    jq(shareUrlField.cssSelectorString).click(getCallableRef('didPressShareUrlField', function ($receiver, event) {
+      return $receiver.didPressShareUrlField_9ojx7i$(event), Unit;
     }.bind(null, this)));
     this.registerFilterDialogListeners();
   };
@@ -314,6 +316,9 @@ this['Rent Split 2'] = function (_, Kotlin) {
   };
   RentSplitApp.prototype.didPressShareButton_9ojx7i$ = function (event) {
     this.userWantsShareUrl();
+  };
+  RentSplitApp.prototype.didPressShareUrlField_9ojx7i$ = function (event) {
+    jq(shareUrlField.cssSelectorString).select();
   };
   RentSplitApp.prototype.didPressFilterButton_9ojx7i$ = function (event) {
     var tmp$, tmp$_0, tmp$_1;
@@ -726,11 +731,12 @@ this['Rent Split 2'] = function (_, Kotlin) {
       $('[data-' + roommateResultRow.dataName + "='" + name + "']").addClass(roommateWhoOwesTooMuch.className).attr('title', name + ' owes ' + (element_0.totalContributions - element_0.representedRoommate.d) + ' too much!');
     }
   };
-  function RentSplitApp$userWantsShareUrl$lambda(this$RentSplitApp) {
+  function RentSplitApp$userWantsShareUrl$lambda(this$RentSplitApp, closure$urlToShare, closure$didCopyShareUrl) {
     return function (response, guaranteedUrl) {
       var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5;
       this$RentSplitApp.placeShareUrlOnPage_0(guaranteedUrl);
-      this$RentSplitApp.copyShareUrl_0();
+      closure$urlToShare.v = guaranteedUrl;
+      closure$didCopyShareUrl.v = this$RentSplitApp.copyShareUrl_0();
       if (Kotlin.isType(response, GooGlUrlShortener$ShortenResponse$success)) {
         this$RentSplitApp.alertUserOfSuccessfulGenerationOfShareUrl_0();
         var message = 'Shortened URL!';
@@ -753,39 +759,84 @@ this['Rent Split 2'] = function (_, Kotlin) {
       return Unit;
     };
   }
+  function RentSplitApp$userWantsShareUrl$check$lambda(closure$check) {
+    return function () {
+      closure$check();
+      return Unit;
+    };
+  }
+  function RentSplitApp$userWantsShareUrl$check(closure$numberOfRemainingChecks, this$RentSplitApp, closure$didCopyShareUrl, closure$urlToShare) {
+    return function closure$check() {
+      var tmp$, tmp$_0;
+      if (closure$numberOfRemainingChecks.v <= 0) {
+        var message = 'Failed to generate short URL fast enough. Falling back to full-length one...';
+        console.log(message);
+        this$RentSplitApp.placeShareUrlOnPage_0(this$RentSplitApp.fullLengthSharingUrl);
+        this$RentSplitApp.copyShareUrl_0();
+        return;
+      }
+       else if (closure$didCopyShareUrl.v) {
+        return;
+      }
+       else {
+        closure$numberOfRemainingChecks.v = closure$numberOfRemainingChecks.v - 1 | 0;
+        var tmp$_1;
+        if ((tmp$ = closure$urlToShare.v) != null) {
+          var this$RentSplitApp_0 = this$RentSplitApp;
+          this$RentSplitApp_0.placeShareUrlOnPage_0(tmp$);
+          this$RentSplitApp_0.copyShareUrl_0();
+          return;
+        }
+         else
+          tmp$_1 = null;
+        (tmp$_0 = tmp$_1) != null ? tmp$_0 : delay(0.05, RentSplitApp$userWantsShareUrl$check$lambda(closure$check));
+      }
+    };
+  }
+  function RentSplitApp$userWantsShareUrl$lambda_0(closure$check) {
+    return function () {
+      closure$check();
+      return Unit;
+    };
+  }
   RentSplitApp.prototype.userWantsShareUrl = function () {
-    this.alertUserOfUrlGenerationStart_0();
-    this.generateShareUrl_0(RentSplitApp$userWantsShareUrl$lambda(this));
+    this.alertUserOfShareUrlGenerationStart_0();
+    var urlToShare = {v: null};
+    var didCopyShareUrl = {v: false};
+    this.generateShareUrl_0(RentSplitApp$userWantsShareUrl$lambda(this, urlToShare, didCopyShareUrl));
+    var numberOfRemainingChecks = {v: 18};
+    var check = RentSplitApp$userWantsShareUrl$check(numberOfRemainingChecks, this, didCopyShareUrl, urlToShare);
+    delay(0.1, RentSplitApp$userWantsShareUrl$lambda_0(check));
   };
-  function RentSplitApp$generateShareUrl$lambda(closure$callback, closure$fullLengthSharingUrl) {
+  Object.defineProperty(RentSplitApp.prototype, 'fullLengthSharingUrl', {
+    get: function () {
+      var tmp$;
+      var jsonStringForSharing = serialized(this.state, SerializationPurpose$forSharing_getInstance());
+      var actualProtocol = window.location.protocol;
+      if (equals(actualProtocol, 'file:'))
+        tmp$ = 'https://rent-split.bhstudios.org/';
+      else
+        tmp$ = actualProtocol + '//' + window.location.host + window.location.pathname;
+      var sharingUrlPrefix = tmp$ + '?generalState=';
+      return new URL(sharingUrlPrefix + jsonStringForSharing);
+    }
+  });
+  function RentSplitApp$generateShareUrl$lambda(closure$callback, closure$backupUrl) {
     return function (response) {
       var tmp$, tmp$_0, tmp$_1;
-      closure$callback(response, (tmp$_1 = (tmp$_0 = Kotlin.isType(tmp$ = response, GooGlUrlShortener$ShortenResponse$success) ? tmp$ : null) != null ? tmp$_0.shortUrlObject : null) != null ? tmp$_1 : closure$fullLengthSharingUrl);
+      closure$callback(response, (tmp$_1 = (tmp$_0 = Kotlin.isType(tmp$ = response, GooGlUrlShortener$ShortenResponse$success) ? tmp$ : null) != null ? tmp$_0.shortUrlObject : null) != null ? tmp$_1 : closure$backupUrl);
       return Unit;
     };
   }
   RentSplitApp.prototype.generateShareUrl_0 = function (callback) {
-    var tmp$;
-    var jsonStringForSharing = serialized(this.state, SerializationPurpose$forSharing_getInstance());
-    var actualProtocol = window.location.protocol;
-    if (equals(actualProtocol, 'file:'))
-      tmp$ = 'https://rent-split.bhstudios.org/?generalState=';
-    else
-      tmp$ = window.location.protocol + '//' + window.location.host + window.location.pathname + '?' + generalStateSerializedName + '=';
-    var sharingUrlPrefix = tmp$;
-    var sharingUrlString = sharingUrlPrefix + jsonStringForSharing;
-    var fullLengthSharingUrl = new URL(sharingUrlString);
-    (new GooGlUrlShortener(gooGlAccessToken)).shorten_5nfh8w$(fullLengthSharingUrl, RentSplitApp$generateShareUrl$lambda(callback, fullLengthSharingUrl));
+    var backupUrl = this.fullLengthSharingUrl;
+    (new GooGlUrlShortener(gooGlAccessToken)).shorten_5nfh8w$(backupUrl, RentSplitApp$generateShareUrl$lambda(callback, backupUrl));
   };
-  function RentSplitApp$copyShareUrl$lambda() {
-    jq(copyStateUrlButton.cssSelectorString).removeClass(justCopiedAlerting.className);
-    return Unit;
-  }
   RentSplitApp.prototype.copyShareUrl_0 = function () {
     try {
-      copyToClipboardOrThrow(jq(stateUrlField.cssSelectorString));
-      jq(copyStateUrlButton.cssSelectorString).addClass(justCopiedAlerting.className);
-      delay_0(Kotlin.Long.fromInt(3), RentSplitApp$copyShareUrl$lambda);
+      copyToClipboardOrThrow(jq(shareUrlField.cssSelectorString));
+      this.alertUserOfSuccessfulCopyOfShareUrl_0();
+      return true;
     }
      catch (error) {
       if (Kotlin.isType(error, Throwable)) {
@@ -793,54 +844,83 @@ this['Rent Split 2'] = function (_, Kotlin) {
         console.log(message);
         var object = error;
         console.log(object);
+        this.alertUserOfFailureToCopyShareUrl_0('\u26A0\uFE0F Not copied!');
+        return false;
       }
        else
         throw error;
     }
   };
   RentSplitApp.prototype.placeShareUrlOnPage_0 = function (url) {
-    jq(stateUrlField.cssSelectorString).val(url.toString());
+    jq(shareUrlField.cssSelectorString).val(url.toString());
   };
-  RentSplitApp.prototype.alertUserOfUrlGenerationStart_0 = function () {
-    this.shareUrlErrorText_0 = 'Shortening\u2026';
+  RentSplitApp.prototype.alertUserOfShareUrlGenerationStart_0 = function () {
+    this.shareUrlFieldStatusText_0 = 'Hang on; shortening\u2026';
     this.showUrlStatusNow_0();
   };
-  function RentSplitApp$hideUrlStatusSoon$lambda(this$RentSplitApp) {
+  function RentSplitApp$hideShareUrlStatusSoon$lambda(this$RentSplitApp) {
     return function () {
-      this$RentSplitApp.hideUrlStatusNow_0();
+      this$RentSplitApp.hideShareUrlStatusNow_0();
       return Unit;
     };
   }
-  RentSplitApp.prototype.hideUrlStatusSoon = function () {
-    delay_0(Kotlin.Long.fromInt(3), RentSplitApp$hideUrlStatusSoon$lambda(this));
+  RentSplitApp.prototype.hideShareUrlStatusSoon = function () {
+    delay_0(Kotlin.Long.fromInt(3), RentSplitApp$hideShareUrlStatusSoon$lambda(this));
   };
-  RentSplitApp.prototype.hideUrlStatusNow_0 = function () {
+  RentSplitApp.prototype.hideShareUrlStatusNow_0 = function () {
     jq(shareUrlHolder.cssSelectorString).removeClass(showStatus.className);
   };
   RentSplitApp.prototype.showUrlStatusNow_0 = function () {
     jq(shareUrlHolder.cssSelectorString).addClass(showStatus.className);
   };
-  Object.defineProperty(RentSplitApp.prototype, 'shareUrlErrorText_0', {
+  Object.defineProperty(RentSplitApp.prototype, 'shareUrlButtonStatusText_0', {
     get: function () {
       var tmp$;
-      return (tmp$ = jq(shareUrlHolder.cssSelectorString).data(stateUrlStatus.dataName)) != null ? tmp$.toString() : null;
+      return (tmp$ = jq(shareUrlButton.cssSelectorString).data(statusMetaData.dataName)) != null ? tmp$.toString() : null;
     },
     set: function (value) {
-      jq(shareUrlHolder.cssSelectorString).data(stateUrlStatus.dataName, value).attr(stateUrlStatus.htmlAttributeName, value);
+      jq(shareUrlButton.cssSelectorString).data(statusMetaData.dataName, value).attr(statusMetaData.htmlAttributeName, value);
+    }
+  });
+  Object.defineProperty(RentSplitApp.prototype, 'shareUrlFieldStatusText_0', {
+    get: function () {
+      var tmp$;
+      return (tmp$ = jq(shareUrlHolder.cssSelectorString).data(statusMetaData.dataName)) != null ? tmp$.toString() : null;
+    },
+    set: function (value) {
+      jq(shareUrlHolder.cssSelectorString).data(statusMetaData.dataName, value).attr(statusMetaData.htmlAttributeName, value);
     }
   });
   RentSplitApp.prototype.alertUserOfSuccessfulGenerationOfShareUrl_0 = function () {
-    this.shareUrlErrorText_0 = 'Shortened!';
+    this.shareUrlFieldStatusText_0 = 'Shortened!';
     this.showUrlStatusNow_0();
-    this.hideUrlStatusSoon();
+    this.hideShareUrlStatusSoon();
+  };
+  function RentSplitApp$alertUserOfSuccessfulCopyOfShareUrl$lambda() {
+    jq(shareUrlButton.cssSelectorString).removeClass(showStatus.className);
+    return Unit;
+  }
+  RentSplitApp.prototype.alertUserOfSuccessfulCopyOfShareUrl_0 = function () {
+    this.shareUrlButtonStatusText_0 = 'Copied!';
+    jq(shareUrlButton.cssSelectorString).addClass(showStatus.className);
+    delay_0(Kotlin.Long.fromInt(3), RentSplitApp$alertUserOfSuccessfulCopyOfShareUrl$lambda);
   };
   RentSplitApp.prototype.alertUserOfFailureToGenerateShareUrl_0 = function (statusText) {
-    this.shareUrlErrorText_0 = statusText;
+    this.shareUrlFieldStatusText_0 = statusText;
     this.showUrlStatusNow_0();
-    this.hideUrlStatusSoon();
+    this.hideShareUrlStatusSoon();
+  };
+  function RentSplitApp$alertUserOfFailureToCopyShareUrl$lambda() {
+    jq(shareUrlButton.cssSelectorString).removeClass(showStatus.className);
+    return Unit;
+  }
+  RentSplitApp.prototype.alertUserOfFailureToCopyShareUrl_0 = function (statusText) {
+    this.shareUrlButtonStatusText_0 = statusText;
+    jq(shareUrlButton.cssSelectorString).addClass(showStatus.className);
+    delay_0(Kotlin.Long.fromInt(3), RentSplitApp$alertUserOfFailureToCopyShareUrl$lambda);
   };
   RentSplitApp.prototype.replaceShareUrlWithPromptToGenerateANewOne_0 = function () {
-    jq(stateUrlField.cssSelectorString).val('Get a new share URL: \uD83D\uDC49\uD83C\uDFFD');
+    jq(shareUrlField.cssSelectorString).val('Get a new share URL: \uD83D\uDC49\uD83C\uDFFD');
   };
   function RentSplitApp$state$lambda(this$RentSplitApp) {
     return function (f, f_0) {
@@ -3422,7 +3502,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
     console.log(message);
     console.log(requestUrlString);
     console.log(actualBody);
-    request.open(method, requestUrlString, true);
+    request.open(method, requestUrlString, false);
     var tmp$;
     tmp$ = this.parameters.justHeaders.allParameters.iterator();
     while (tmp$.hasNext()) {
@@ -4262,14 +4342,14 @@ this['Rent Split 2'] = function (_, Kotlin) {
       return expenseHasApplicableRoommates;
     }
   });
-  Object.defineProperty(package$RentSplit, 'copyStateUrlButton', {
+  Object.defineProperty(package$RentSplit, 'shareUrlButton', {
     get: function () {
-      return copyStateUrlButton;
+      return shareUrlButton;
     }
   });
-  Object.defineProperty(package$RentSplit, 'stateUrlField', {
+  Object.defineProperty(package$RentSplit, 'shareUrlField', {
     get: function () {
-      return stateUrlField;
+      return shareUrlField;
     }
   });
   Object.defineProperty(package$RentSplit, 'localStorageWarning', {
@@ -4287,19 +4367,14 @@ this['Rent Split 2'] = function (_, Kotlin) {
       return localStorageWarningExplicitConsentButton;
     }
   });
-  Object.defineProperty(package$RentSplit, 'justCopiedAlerting', {
-    get: function () {
-      return justCopiedAlerting;
-    }
-  });
   Object.defineProperty(package$RentSplit, 'shareUrlHolder', {
     get: function () {
       return shareUrlHolder;
     }
   });
-  Object.defineProperty(package$RentSplit, 'stateUrlStatus', {
+  Object.defineProperty(package$RentSplit, 'statusMetaData', {
     get: function () {
-      return stateUrlStatus;
+      return statusMetaData;
     }
   });
   Object.defineProperty(package$RentSplit, 'canHaveStatus', {
@@ -4843,14 +4918,13 @@ this['Rent Split 2'] = function (_, Kotlin) {
   resourceId = new DataAttribute('id');
   expenseApplicableRoommates = new DataAttribute('applicable-roommate-ids');
   expenseHasApplicableRoommates = new CssClass('has-applicable-roommates');
-  copyStateUrlButton = new CssId('Copy-URL-Button');
-  stateUrlField = new CssId('State-URL-Field');
+  shareUrlButton = new CssId('Copy-URL-Button');
+  shareUrlField = new CssId('State-URL-Field');
   localStorageWarning = new CssId('Local-Storage-Warning');
   localStorageWarningExplicitRefusalButton = new CssId('Local-Storage-Warning-Decline-Button');
   localStorageWarningExplicitConsentButton = new CssId('Local-Storage-Warning-Consent-Button');
-  justCopiedAlerting = new CssClass('just-copied');
   shareUrlHolder = new CssId('State-URL-Holder');
-  stateUrlStatus = new DataAttribute('status-text');
+  statusMetaData = new DataAttribute('status-text');
   canHaveStatus = new CssClass('can-have-status');
   showStatus = new CssClass('show-status');
   expenseFilterButton = new CssClass('filter-button');
@@ -4866,7 +4940,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
   expenseFilterAnyCheckboxSelector = expenseFilterDialog.cssSelectorString + ' input[type=checkbox]';
   expenseFilterButtonExpenseRelation = new DataAttribute('expense');
   anyInputField = new SelectorCombiner$either(new SelectorCombiner$either(new CssElement('input'), roommateAnyInputField), expenseAnyInputField);
-  anyInputButton = new SelectorCombiner$either(new SelectorCombiner$either(new SelectorCombiner$either(new SelectorCombiner$either(new SelectorCombiner$either(new SelectorCombiner$either(new SelectorCombiner$either(addARoommateButton, addAnExpenseButton), removeARoommateButton), removeAnExpenseButton), expenseFilterButton), expenseFilterDialogCancelButton), expenseFilterDialogOkButton), copyStateUrlButton);
+  anyInputButton = new SelectorCombiner$either(new SelectorCombiner$either(new SelectorCombiner$either(new SelectorCombiner$either(new SelectorCombiner$either(new SelectorCombiner$either(new SelectorCombiner$either(addARoommateButton, addAnExpenseButton), removeARoommateButton), removeAnExpenseButton), expenseFilterButton), expenseFilterDialogCancelButton), expenseFilterDialogOkButton), shareUrlButton);
   anyInput = new SelectorCombiner$either(anyInputField, anyInputButton);
   rentExpenseType = 'Rent';
   utilitiesExpenseType = 'Utilities';

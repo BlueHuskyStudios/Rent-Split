@@ -57,7 +57,7 @@ class HttpRequest(
         log(requestUrlString)
         log(actualBody)
 
-        request.open(method = method, url = requestUrlString, async = true)
+        request.open(method = method, url = requestUrlString, async = false)
 
         this.parameters.justHeaders.allParameters.forEach {
             request.setRequestHeader(it.key, it.valueAsRequestString)
