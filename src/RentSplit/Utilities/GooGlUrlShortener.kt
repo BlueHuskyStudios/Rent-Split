@@ -22,35 +22,74 @@ typealias GooGlResponseListener = (ShortenResponse) -> Unit
  * @author Ben Leggiero
  * @since 2018-02-10
  */
-class GooGlUrlShortener(val accessKey: String) { // AIzaSyBsJvWOGsHnIcPi-wnIB3WAaILRKsI8Pmo
+class GooGlUrlShortener(
+        /**
+         * The API access key to use for Goo.gl
+         */
+        private val accessKey: String
+) {
 
-    fun shorten(longUrl: URL, responseListener: GooGlResponseListener) {
+    /**
+     * Shortens the given URL, then calls the response listener
+     *
+     * @param longUrl          The URL to be shortened
+     * @param asynchronous     If `true`, the URL will be shortened on another thread asynchronously without blocking
+     *                         this one. Otherwise, it will block this thread and the response will be called
+     *                         synchronously on this one. Default is `true`.
+     * @param responseListener The function to be called when we get a response back from Google's servers.
+     */
+    fun shorten(longUrl: URL, asynchronous: Boolean = true, responseListener: GooGlResponseListener) {
         HttpRequest("https://www.googleapis.com/urlshortener/v1/url",
                     RequestParameters(
-                            accessKey(accessKey, usage = urlParameter),
-                            longUrl(longUrl, usage = postBodyJson),
+                            accessKey(accessKey),
+                            longUrl(longUrl),
                             genericHeader("Content-Type", "application/json")
                     ))
-                .send("POST") {
+                .post(asynchronous = asynchronous) {
                     responseListener(ShortenResponse(it))
                 }
     }
 
 
-
-    sealed class ShortenResponse(val httpResponse: HttpResponse?) {
+    /**
+     * A response from goo.gl after a [shorten] request was made.
+     */
+    sealed class ShortenResponse(
+            /**
+             * The full HTTP response, if one was gotten. One might not be gotten, for instance, if we are offline
+             */
+            val httpResponse: HttpResponse?
+    ) {
+        /**
+         * A successful response from goo.gl, containing the shortened URL
+         */
         class success(
+                /**
+                 * The kind of success message, like `"urlshortener#url"`
+                 */
                 val kind: String,
-//                @JsName("id")
+
+                /**
+                 * The result of shortening the URL
+                 */
                 val shortUrlString: String,
-//                @JsName("longUrl")
+
+                /**
+                 * The original URL to shorten, in case you've forgotten or something
+                 */
                 val longUrlString: String,
                 httpResponse: HttpResponse? = null
         ) : ShortenResponse(httpResponse) {
 
+            /**
+             * The URL form of [shortUrlString]
+             */
             @JsName("shortUrlObject")
             val shortUrl: URL by lazy { URL(shortUrlString) }
 
+            /**
+             * The URL form of [longUrlString]
+             */
             @JsName("longUrlObject")
             val longUrl: URL by lazy { URL(longUrlString) }
 
@@ -66,27 +105,26 @@ class GooGlUrlShortener(val accessKey: String) { // AIzaSyBsJvWOGsHnIcPi-wnIB3WA
             }
         }
 
-        /*
-        {
-            "error": {
-                "errors": [
-                    {
-                        "domain": "global",
-                        "reason": "required",
-                        "message": "Required",
-                        "locationType": "parameter",
-                        "location": "resource.longUrl"
-                    }
-                ],
-                "code": 400,
-                "message": "Required"
-            }
-        }
-        */
+
+
+        /**
+         * A response from goo.gl that there was an error shortening the URL
+         */
         class error(
+                /**
+                 * A list of all errors that goo.gl reported
+                 */
                 @JsName("errors")
                 val allErrors: List<SingleError>,
+
+                /**
+                 * The HTTP code associated with this error
+                 */
                 val code: Short,
+
+                /**
+                 * The message associated with this error
+                 */
                 val message: String,
                 httpResponse: HttpResponse? = null
         ) : ShortenResponse(httpResponse) {
@@ -107,11 +145,35 @@ class GooGlUrlShortener(val accessKey: String) { // AIzaSyBsJvWOGsHnIcPi-wnIB3WA
             }
         }
 
+
+
+        /**
+         * One error in a list of errors from goo.gl
+         */
         data class SingleError(
+                /**
+                 * The domain of the error, like `"global"`
+                 */
                 val domain: String,
+
+                /**
+                 * The encoded explanation of the error, like `"required"`
+                 */
                 val reason: String,
+
+                /**
+                 * The human-readable explanation of the error, like `"Required"`
+                 */
                 val message: String,
+
+                /**
+                 * The type of location where the error occurred, like `"parameter"`
+                 */
                 val locationType: String? = null,
+
+                /**
+                 * The location where the error occurred, like `"resource.longUrl"`
+                 */
                 val location: String? = null
         ) {
             companion object {
@@ -126,10 +188,18 @@ class GooGlUrlShortener(val accessKey: String) { // AIzaSyBsJvWOGsHnIcPi-wnIB3WA
             }
         }
 
+
+
+        /**
+         * Some response that couldn't be parsed
+         */
         class unknownError(httpResponse: HttpResponse) : ShortenResponse(httpResponse)
 
 
         companion object {
+            /**
+             * Creates a new shorten response from the given HTTP response
+             */
             operator fun invoke(httpResponse: HttpResponse) =
                     error(httpResponse)
                     ?: success(httpResponse)
@@ -139,36 +209,32 @@ class GooGlUrlShortener(val accessKey: String) { // AIzaSyBsJvWOGsHnIcPi-wnIB3WA
 
 
 
+    /**
+     * A parameter to send to goo.gl
+     */
     companion object Parameters {
-        class accessKey(key: String, usage: Usage): RequestParameter<String>("key", key, usage, { it })
-        class longUrl(url: URL, usage: Usage): RequestParameter<URL>("longUrl", url, usage, { it.toString() })
+        /**
+         * The parameter for the goo.gl API access key
+         */
+        class accessKey(key: String): RequestParameter<String>("key", key, urlParameter, { it })
+
+        /**
+         * The parameter for the non-shortened URL
+         */
+        class longUrl(url: URL): RequestParameter<URL>("longUrl", url, postBodyJson, { it.toString() })
     }
-
-
-
-
-//
-//
-//
-//    enum class ShortenResponseFormat {
-//        json,
-//        xml,
-//        txt,
-//        ;
-//
-//        val stringForUrl: String get() = when (this) {
-//            json -> "json"
-//            xml -> "xml"
-//            txt -> "txt"
-//        }
-//    }
 }
 
 
-
+/**
+ * Returns `true` iff this represents a successful response
+ */
 val ShortenResponse.wasSuccessful get() = when (this) {
     is success -> true
     is error, is unknownError -> false
 }
 
+/**
+ * The
+ */
 val ShortenResponse.statusText get() = this.httpResponse?.statusText

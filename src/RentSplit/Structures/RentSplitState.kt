@@ -1,3 +1,4 @@
+@file:Suppress("PackageDirectoryMismatch")
 package RentSplit
 
 import RentSplit.SerializationPurpose.*
@@ -13,8 +14,6 @@ const val rentRoommatesSerializedName = "r"
 const val rentExpensesSerializedName = "e"
 const val localDataPreferencesSerializedName = "l"
 const val generalStateSerializedName = "generalState"
-
-
 const val gooGlAccessToken = "AIzaSyBsJvWOGsHnIcPi-wnIB3WAaILRKsI8Pmo"
 
 

@@ -1,3 +1,6 @@
+@file:Suppress("PackageDirectoryMismatch",
+               "unused" // Utilities files are exempt from trimming unused functions.
+)
 package RentSplit
 
 import jQueryInterface.*
@@ -96,7 +99,9 @@ fun <Element> List<Element>.adding(newElement: Element): List<Element> {
 fun JQuery.copyToClipboardOrThrow() {
     class CopyFailed: Exception("Could not copy")
     this.select()
-    if (!document.execCommand("copy")) throw CopyFailed()
+    if (!document.execCommand("copy")) {
+        throw CopyFailed()
+    }
 }
 
 

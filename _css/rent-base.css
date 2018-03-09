@@ -195,28 +195,6 @@ html.rent {
 }
 
 
-/*.copy-button {
-    position: relative;
-}
-    .copy-button::before {
-        content: "Copied!";
-        position: absolute;
-        bottom: 1ex;
-        left:0;
-        right: 0;
-        width: 100%;
-        color: rgba(0,0,0, 0);
-        z-index: -1;
-        transition-property: bottom, color;
-        transition-duration: 2s;
-    }
-    .copy-button.just-copied::before {
-        bottom: -3ex;
-        color: rgba(0,0,0, 0.8);
-        transition-duration: 0.3s;
-    }*/
-
-
 
 /* MARK: - Hidden floating row buttons */
 

@@ -9,13 +9,17 @@ import kotlin.math.*
  */
 
 
-
+/**
+ * Waits the given number of seconds, then executes the given block
+ */
 fun delay(seconds: Double, then: () -> Unit) {
     window.setTimeout(then, (seconds * 1000).roundToInt())
 }
 
 
-
+/**
+ * Waits the given number of seconds, then executes the given block
+ */
 fun delay(seconds: Long, then: () -> Unit) {
     @Suppress("UnsafeCastFromDynamic")
     window.setTimeout(then, (seconds * 1000).asDynamic())
