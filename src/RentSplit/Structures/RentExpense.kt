@@ -67,7 +67,7 @@ data class RentExpense(
             resourceDollarAmountSerializedName to monthlyCost,
             resourceIsRemovableSerializedName to isRemovable,
             resourceIsRenamableSerializedName to isRenamable,
-            expenseApplicableRoommatesSerializedName to applicableRoommateIds?.toTypedArray()
+            expenseApplicableRoommatesSerializedName to (applicableRoommateIds?.toTypedArray() ?: undefined)
     )
 
 

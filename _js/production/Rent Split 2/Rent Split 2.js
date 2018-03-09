@@ -765,17 +765,16 @@ this['Rent Split 2'] = function (_, Kotlin) {
       return Unit;
     };
   }
-  function RentSplitApp$userWantsShareUrl$check(closure$numberOfRemainingChecks, this$RentSplitApp, closure$didCopyShareUrl, closure$urlToShare) {
+  function RentSplitApp$userWantsShareUrl$check(closure$didCopyShareUrl, this$RentSplitApp, closure$numberOfRemainingChecks, closure$urlToShare) {
     return function closure$check() {
       var tmp$, tmp$_0;
-      if (closure$numberOfRemainingChecks.v <= 0) {
+      if (closure$didCopyShareUrl.v)
+        return;
+      else if (closure$numberOfRemainingChecks.v <= 0) {
         var message = 'Failed to generate short URL fast enough. Falling back to full-length one...';
         console.log(message);
         this$RentSplitApp.placeShareUrlOnPage_0(this$RentSplitApp.fullLengthSharingUrl);
         this$RentSplitApp.copyShareUrl_0();
-        return;
-      }
-       else if (closure$didCopyShareUrl.v) {
         return;
       }
        else {
@@ -783,8 +782,9 @@ this['Rent Split 2'] = function (_, Kotlin) {
         var tmp$_1;
         if ((tmp$ = closure$urlToShare.v) != null) {
           var this$RentSplitApp_0 = this$RentSplitApp;
+          var closure$didCopyShareUrl_0 = closure$didCopyShareUrl;
           this$RentSplitApp_0.placeShareUrlOnPage_0(tmp$);
-          this$RentSplitApp_0.copyShareUrl_0();
+          closure$didCopyShareUrl_0.v = this$RentSplitApp_0.copyShareUrl_0();
           return;
         }
          else
@@ -805,7 +805,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
     var didCopyShareUrl = {v: false};
     this.generateShareUrl_0(RentSplitApp$userWantsShareUrl$lambda(this, urlToShare, didCopyShareUrl));
     var numberOfRemainingChecks = {v: 18};
-    var check = RentSplitApp$userWantsShareUrl$check(numberOfRemainingChecks, this, didCopyShareUrl, urlToShare);
+    var check = RentSplitApp$userWantsShareUrl$check(didCopyShareUrl, this, numberOfRemainingChecks, urlToShare);
     delay(0.1, RentSplitApp$userWantsShareUrl$lambda_0(check));
   };
   Object.defineProperty(RentSplitApp.prototype, 'fullLengthSharingUrl', {
@@ -830,7 +830,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
   }
   RentSplitApp.prototype.generateShareUrl_0 = function (callback) {
     var backupUrl = this.fullLengthSharingUrl;
-    (new GooGlUrlShortener(gooGlAccessToken)).shorten_5nfh8w$(backupUrl, RentSplitApp$generateShareUrl$lambda(callback, backupUrl));
+    (new GooGlUrlShortener(gooGlAccessToken)).shorten_8fe5xt$(backupUrl, true, RentSplitApp$generateShareUrl$lambda(callback, backupUrl));
   };
   RentSplitApp.prototype.copyShareUrl_0 = function () {
     try {
@@ -873,15 +873,6 @@ this['Rent Split 2'] = function (_, Kotlin) {
   RentSplitApp.prototype.showUrlStatusNow_0 = function () {
     jq(shareUrlHolder.cssSelectorString).addClass(showStatus.className);
   };
-  Object.defineProperty(RentSplitApp.prototype, 'shareUrlButtonStatusText_0', {
-    get: function () {
-      var tmp$;
-      return (tmp$ = jq(shareUrlButton.cssSelectorString).data(statusMetaData.dataName)) != null ? tmp$.toString() : null;
-    },
-    set: function (value) {
-      jq(shareUrlButton.cssSelectorString).data(statusMetaData.dataName, value).attr(statusMetaData.htmlAttributeName, value);
-    }
-  });
   Object.defineProperty(RentSplitApp.prototype, 'shareUrlFieldStatusText_0', {
     get: function () {
       var tmp$;
@@ -889,6 +880,15 @@ this['Rent Split 2'] = function (_, Kotlin) {
     },
     set: function (value) {
       jq(shareUrlHolder.cssSelectorString).data(statusMetaData.dataName, value).attr(statusMetaData.htmlAttributeName, value);
+    }
+  });
+  Object.defineProperty(RentSplitApp.prototype, 'shareUrlButtonStatusText_0', {
+    get: function () {
+      var tmp$;
+      return (tmp$ = jq(shareUrlButton.cssSelectorString).data(statusMetaData.dataName)) != null ? tmp$.toString() : null;
+    },
+    set: function (value) {
+      jq(shareUrlButton.cssSelectorString).data(statusMetaData.dataName, value).attr(statusMetaData.htmlAttributeName, value);
     }
   });
   RentSplitApp.prototype.alertUserOfSuccessfulGenerationOfShareUrl_0 = function () {
@@ -1532,8 +1532,8 @@ this['Rent Split 2'] = function (_, Kotlin) {
     IdManager_getInstance().registerId_61zpoe$(this.i);
   }
   RentExpense.prototype.toJson = function () {
-    var tmp$;
-    return json([to(resourceIdSerializedName, this.i), to(resourceNameSerializedName, this.n), to(resourceDollarAmountSerializedName, this.d), to(resourceIsRemovableSerializedName, this.x), to(resourceIsRenamableSerializedName, this.r), to(expenseApplicableRoommatesSerializedName, (tmp$ = this.f) != null ? copyToArray(tmp$) : null)]);
+    var tmp$, tmp$_0;
+    return json([to(resourceIdSerializedName, this.i), to(resourceNameSerializedName, this.n), to(resourceDollarAmountSerializedName, this.d), to(resourceIsRemovableSerializedName, this.x), to(resourceIsRenamableSerializedName, this.r), to(expenseApplicableRoommatesSerializedName, (tmp$_0 = (tmp$ = this.f) != null ? copyToArray(tmp$) : null) != null ? tmp$_0 : undefined)]);
   };
   RentExpense.prototype.appliesTo_pcqrmu$ = function (rentRoommate) {
     var tmp$, tmp$_0;
@@ -2425,8 +2425,9 @@ this['Rent Split 2'] = function (_, Kotlin) {
   };
   function copyToClipboardOrThrow($receiver) {
     $receiver.select();
-    if (!document.execCommand('copy'))
+    if (!document.execCommand('copy')) {
       throw new copyToClipboardOrThrow$CopyFailed();
+    }
   }
   var doNothing = defineInlineFunction('Rent Split 2.RentSplit.doNothing', function () {
   });
@@ -2488,7 +2489,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
   }
   function GooGlUrlShortener(accessKey) {
     GooGlUrlShortener$Parameters_getInstance();
-    this.accessKey = accessKey;
+    this.accessKey_0 = accessKey;
   }
   function GooGlUrlShortener$shorten$lambda(closure$responseListener) {
     return function (it) {
@@ -2496,8 +2497,10 @@ this['Rent Split 2'] = function (_, Kotlin) {
       return Unit;
     };
   }
-  GooGlUrlShortener.prototype.shorten_5nfh8w$ = function (longUrl, responseListener) {
-    HttpRequest_init('https://www.googleapis.com/urlshortener/v1/url', HttpRequest$RequestParameters$Companion_getInstance().invoke_bgp2as$([new GooGlUrlShortener$Parameters$accessKey(this.accessKey, HttpRequest$RequestParameter$Usage$urlParameter_getInstance()), new GooGlUrlShortener$Parameters$longUrl(longUrl, HttpRequest$RequestParameter$Usage$postBodyJson_getInstance()), new HttpRequest$RequestParameter$genericHeader('Content-Type', 'application/json')])).send_i16107$('POST', void 0, GooGlUrlShortener$shorten$lambda(responseListener));
+  GooGlUrlShortener.prototype.shorten_8fe5xt$ = function (longUrl, asynchronous, responseListener) {
+    if (asynchronous === void 0)
+      asynchronous = true;
+    HttpRequest_init('https://www.googleapis.com/urlshortener/v1/url', HttpRequest$RequestParameters$Companion_getInstance().invoke_bgp2as$([new GooGlUrlShortener$Parameters$accessKey(this.accessKey_0), new GooGlUrlShortener$Parameters$longUrl(longUrl), new HttpRequest$RequestParameter$genericHeader('Content-Type', 'application/json')])).post_svp6kg$(void 0, asynchronous, GooGlUrlShortener$shorten$lambda(responseListener));
   };
   function GooGlUrlShortener$ShortenResponse(httpResponse) {
     GooGlUrlShortener$ShortenResponse$Companion_getInstance();
@@ -2763,8 +2766,8 @@ this['Rent Split 2'] = function (_, Kotlin) {
   function GooGlUrlShortener$Parameters() {
     GooGlUrlShortener$Parameters_instance = this;
   }
-  function GooGlUrlShortener$Parameters$accessKey(key, usage) {
-    HttpRequest$RequestParameter.call(this, 'key', key, usage, GooGlUrlShortener$Parameters$GooGlUrlShortener$Parameters$accessKey_init$lambda);
+  function GooGlUrlShortener$Parameters$accessKey(key) {
+    HttpRequest$RequestParameter.call(this, 'key', key, HttpRequest$RequestParameter$Usage$urlParameter_getInstance(), GooGlUrlShortener$Parameters$GooGlUrlShortener$Parameters$accessKey_init$lambda);
   }
   function GooGlUrlShortener$Parameters$GooGlUrlShortener$Parameters$accessKey_init$lambda(it) {
     return it;
@@ -2774,8 +2777,8 @@ this['Rent Split 2'] = function (_, Kotlin) {
     simpleName: 'accessKey',
     interfaces: [HttpRequest$RequestParameter]
   };
-  function GooGlUrlShortener$Parameters$longUrl(url, usage) {
-    HttpRequest$RequestParameter.call(this, 'longUrl', url, usage, GooGlUrlShortener$Parameters$GooGlUrlShortener$Parameters$longUrl_init$lambda);
+  function GooGlUrlShortener$Parameters$longUrl(url) {
+    HttpRequest$RequestParameter.call(this, 'longUrl', url, HttpRequest$RequestParameter$Usage$postBodyJson_getInstance(), GooGlUrlShortener$Parameters$GooGlUrlShortener$Parameters$longUrl_init$lambda);
   }
   function GooGlUrlShortener$Parameters$GooGlUrlShortener$Parameters$longUrl_init$lambda(it) {
     return it.toString();
@@ -3474,12 +3477,21 @@ this['Rent Split 2'] = function (_, Kotlin) {
   }
   function HttpRequest(url, parameters) {
     if (parameters === void 0)
-      parameters = HttpRequest$RequestParameters$Companion_getInstance().emptyParameters;
+      parameters = HttpRequest$RequestParameters$Companion_getInstance().empty;
     this.url = url;
     this.parameters = parameters;
   }
-  HttpRequest.prototype.get_m8ahyy$ = function (responseListener) {
-    this.send_i16107$('GET', void 0, responseListener);
+  HttpRequest.prototype.get_ht4p2j$ = function (asynchronous, responseListener) {
+    if (asynchronous === void 0)
+      asynchronous = true;
+    this.send_yew6y6$('GET', void 0, asynchronous, responseListener);
+  };
+  HttpRequest.prototype.post_svp6kg$ = function (body, asynchronous, responseListener) {
+    if (body === void 0)
+      body = null;
+    if (asynchronous === void 0)
+      asynchronous = true;
+    this.send_yew6y6$('POST', body, asynchronous, responseListener);
   };
   function HttpRequest$send$lambda(closure$bestResponseSoFar, closure$request, closure$responseListener) {
     return function (it) {
@@ -3490,9 +3502,11 @@ this['Rent Split 2'] = function (_, Kotlin) {
       return Unit;
     };
   }
-  HttpRequest.prototype.send_i16107$ = function (method, body, responseListener) {
+  HttpRequest.prototype.send_yew6y6$ = function (method, body, asynchronous, responseListener) {
     if (body === void 0)
       body = null;
+    if (asynchronous === void 0)
+      asynchronous = true;
     var request = new XMLHttpRequest();
     var bestResponseSoFar = {v: null};
     request.onreadystatechange = HttpRequest$send$lambda(bestResponseSoFar, request, responseListener);
@@ -3502,7 +3516,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
     console.log(message);
     console.log(requestUrlString);
     console.log(actualBody);
-    request.open(method, requestUrlString, false);
+    request.open(method, requestUrlString, asynchronous);
     var tmp$;
     tmp$ = this.parameters.justHeaders.allParameters.iterator();
     while (tmp$.hasNext()) {
@@ -3597,7 +3611,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
   });
   function HttpRequest$RequestParameters$Companion() {
     HttpRequest$RequestParameters$Companion_instance = this;
-    this.emptyParameters = new HttpRequest$RequestParameters(emptyList());
+    this.empty = new HttpRequest$RequestParameters(emptyList());
   }
   HttpRequest$RequestParameters$Companion.prototype.invoke_bgp2as$ = function (allParameters) {
     return new HttpRequest$RequestParameters(toList_0(allParameters));
@@ -3706,7 +3720,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
   };
   function HttpRequest_init(urlString, parameters, $this) {
     if (parameters === void 0)
-      parameters = HttpRequest$RequestParameters$Companion_getInstance().emptyParameters;
+      parameters = HttpRequest$RequestParameters$Companion_getInstance().empty;
     $this = $this || Object.create(HttpRequest.prototype);
     HttpRequest.call($this, new URL(urlString), parameters);
     return $this;
