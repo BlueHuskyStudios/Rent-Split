@@ -2,6 +2,7 @@ package jQueryInterface
 
 import RentSplit.*
 import org.w3c.dom.*
+import org.w3c.dom.events.*
 
 /*
  * @author Ben Leggiero
@@ -139,3 +140,17 @@ inline fun jq(cssSelector: AnyCssSelector, context: AnyCssSelector): JQuery = jq
 
 /** Shorthand for `jq(this)` */
 inline val AnyCssSelector.jq get() = jq(this)
+
+
+inline fun JQuery.addClass(`class`: CssClass) = addClass(`class`.className)
+inline fun JQuery.removeClass(`class`: CssClass) = removeClass(`class`.className)
+inline fun JQuery.data(data: DataAttribute) = data(data.dataName)
+inline fun JQuery.data(data: DataAttribute, value: Any?) = data(data.dataName, value)
+inline fun JQuery.attr(attribute: CssHtmlAttribute) = attr(attribute.htmlAttributeName)
+inline fun JQuery.attr(attribute: CssHtmlAttribute, value: Boolean?) = attr(attribute.htmlAttributeName, value)
+inline fun JQuery.attr(attribute: CssHtmlAttribute, value: Double?) = attr(attribute.htmlAttributeName, value)
+inline fun JQuery.attr(attribute: CssHtmlAttribute, value: String?) = attr(attribute.htmlAttributeName, value)
+
+
+
+inline fun JQuery.onChangeData(noinline action: (event: Event) -> Unit) = this.on(eventNames = "changeData", handler =  action)

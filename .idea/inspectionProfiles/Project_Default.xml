@@ -7,6 +7,7 @@
     <inspection_tool class="ConstPropertyName" enabled="true" level="WEAK WARNING" enabled_by_default="true">
       <option name="namePattern" value="[a-z][A-Za-z\d]*" />
     </inspection_tool>
+    <inspection_tool class="ControlFlowStatementWithoutBraces" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="EnumEntryName" enabled="true" level="WEAK WARNING" enabled_by_default="true">
       <option name="namePattern" value="[a-z][A-Za-z\d]*" />
     </inspection_tool>
@@ -72,7 +73,6 @@
       <option name="namePattern" value="[A-Za-z][A-Za-z\d]*" />
     </inspection_tool>
     <inspection_tool class="OnDemandImport" enabled="false" level="INFORMATION" enabled_by_default="false" />
-    <inspection_tool class="PackageDirectoryMismatch" enabled="true" level="Info" enabled_by_default="true" />
     <inspection_tool class="PackageName" enabled="true" level="WEAK WARNING" enabled_by_default="true">
       <option name="namePattern" value="(([a-z][A-Za-z\d]+)\.?)+|([A-Z][A-Za-z\d]+)" />
     </inspection_tool>

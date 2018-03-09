@@ -9,7 +9,6 @@ this['Rent Split 2'] = function (_, Kotlin) {
   var Kind_OBJECT = Kotlin.Kind.OBJECT;
   var PropertyMetadata = Kotlin.PropertyMetadata;
   var getCallableRef = Kotlin.getCallableRef;
-  var Throwable = Error;
   var asList = Kotlin.kotlin.collections.asList_us0mfu$;
   var toDoubleOrNull = Kotlin.kotlin.text.toDoubleOrNull_pdl1vz$;
   var emptySet = Kotlin.kotlin.collections.emptySet_287e2$;
@@ -18,6 +17,8 @@ this['Rent Split 2'] = function (_, Kotlin) {
   var filterNotNull = Kotlin.kotlin.collections.filterNotNull_emfgvx$;
   var toSet = Kotlin.kotlin.collections.toSet_7wnvza$;
   var zip = Kotlin.kotlin.collections.zip_45mdf7$;
+  var equals = Kotlin.equals;
+  var Throwable = Error;
   var throwCCE = Kotlin.throwCCE;
   var Kind_CLASS = Kotlin.Kind.CLASS;
   var joinToString = Kotlin.kotlin.collections.joinToString_fmv235$;
@@ -28,21 +29,27 @@ this['Rent Split 2'] = function (_, Kotlin) {
   var to = Kotlin.kotlin.to_ujzrz7$;
   var json = Kotlin.kotlin.js.json_pyyo18$;
   var toSet_0 = Kotlin.kotlin.collections.toSet_us0mfu$;
-  var equals = Kotlin.equals;
   var toMutableList = Kotlin.kotlin.collections.toMutableList_4c7yge$;
   var listOf = Kotlin.kotlin.collections.listOf_i5x0yv$;
   var getPropertyCallableRef = Kotlin.getPropertyCallableRef;
   var Enum = Kotlin.kotlin.Enum;
   var throwISE = Kotlin.throwISE;
   var toList = Kotlin.kotlin.collections.toList_7wnvza$;
+  var Exception_init = Kotlin.kotlin.Exception_init_pdl1vj$;
+  var Exception = Kotlin.kotlin.Exception;
   var split = Kotlin.kotlin.text.split_o64adg$;
   var Regex_init = Kotlin.kotlin.text.Regex_init_61zpoe$;
   var replace = Kotlin.kotlin.text.replace_680rmw$;
   var Iterator = Kotlin.kotlin.collections.Iterator;
+  var roundToInt = Kotlin.kotlin.math.roundToInt_yrwdxr$;
   var Any = Object;
   var ReadWriteProperty = Kotlin.kotlin.properties.ReadWriteProperty;
   var ObservableProperty = Kotlin.kotlin.properties.ObservableProperty;
-  var roundToInt = Kotlin.kotlin.math.roundToInt_yrwdxr$;
+  var ensureNotNull = Kotlin.ensureNotNull;
+  var toList_0 = Kotlin.kotlin.collections.toList_us0mfu$;
+  var emptyList = Kotlin.kotlin.collections.emptyList_287e2$;
+  var emptyMap = Kotlin.kotlin.collections.emptyMap_q3lmfv$;
+  var toShort = Kotlin.toShort;
   CssParameterForAttributeSelector$exactly.prototype = Object.create(CssParameterForAttributeSelector.prototype);
   CssParameterForAttributeSelector$exactly.prototype.constructor = CssParameterForAttributeSelector$exactly;
   CssParameterForAttributeSelector$listContainsExactly.prototype = Object.create(CssParameterForAttributeSelector.prototype);
@@ -69,6 +76,18 @@ this['Rent Split 2'] = function (_, Kotlin) {
   SerializationPurpose.prototype.constructor = SerializationPurpose;
   UserConsent.prototype = Object.create(Enum.prototype);
   UserConsent.prototype.constructor = UserConsent;
+  copyToClipboardOrThrow$CopyFailed.prototype = Object.create(Exception.prototype);
+  copyToClipboardOrThrow$CopyFailed.prototype.constructor = copyToClipboardOrThrow$CopyFailed;
+  GooGlUrlShortener$ShortenResponse$success.prototype = Object.create(GooGlUrlShortener$ShortenResponse.prototype);
+  GooGlUrlShortener$ShortenResponse$success.prototype.constructor = GooGlUrlShortener$ShortenResponse$success;
+  GooGlUrlShortener$ShortenResponse$error.prototype = Object.create(GooGlUrlShortener$ShortenResponse.prototype);
+  GooGlUrlShortener$ShortenResponse$error.prototype.constructor = GooGlUrlShortener$ShortenResponse$error;
+  GooGlUrlShortener$ShortenResponse$unknownError.prototype = Object.create(GooGlUrlShortener$ShortenResponse.prototype);
+  GooGlUrlShortener$ShortenResponse$unknownError.prototype.constructor = GooGlUrlShortener$ShortenResponse$unknownError;
+  GooGlUrlShortener$Parameters$accessKey.prototype = Object.create(HttpRequest$RequestParameter.prototype);
+  GooGlUrlShortener$Parameters$accessKey.prototype.constructor = GooGlUrlShortener$Parameters$accessKey;
+  GooGlUrlShortener$Parameters$longUrl.prototype = Object.create(HttpRequest$RequestParameter.prototype);
+  GooGlUrlShortener$Parameters$longUrl.prototype.constructor = GooGlUrlShortener$Parameters$longUrl;
   observing$ObjectLiteral.prototype = Object.create(ObservableProperty.prototype);
   observing$ObjectLiteral.prototype.constructor = observing$ObjectLiteral;
   FiniteAmountSummary$all.prototype = Object.create(FiniteAmountSummary.prototype);
@@ -79,6 +98,12 @@ this['Rent Split 2'] = function (_, Kotlin) {
   FiniteAmountSummary$none.prototype.constructor = FiniteAmountSummary$none;
   Ternary.prototype = Object.create(Enum.prototype);
   Ternary.prototype.constructor = Ternary;
+  HttpRequest$RequestParameter$Usage.prototype = Object.create(Enum.prototype);
+  HttpRequest$RequestParameter$Usage.prototype.constructor = HttpRequest$RequestParameter$Usage;
+  HttpRequest$RequestParameter$genericHeader.prototype = Object.create(HttpRequest$RequestParameter.prototype);
+  HttpRequest$RequestParameter$genericHeader.prototype.constructor = HttpRequest$RequestParameter$genericHeader;
+  HttpResponse$InteractionStage.prototype = Object.create(Enum.prototype);
+  HttpResponse$InteractionStage.prototype.constructor = HttpResponse$InteractionStage;
   JSTernaryCheckboxTreeController.prototype = Object.create(TernaryCheckboxTree.prototype);
   JSTernaryCheckboxTreeController.prototype.constructor = JSTernaryCheckboxTreeController;
   var addARoommateRow;
@@ -109,11 +134,15 @@ this['Rent Split 2'] = function (_, Kotlin) {
   var resourceId;
   var expenseApplicableRoommates;
   var expenseHasApplicableRoommates;
-  var copyStateUrlButton;
-  var stateUrlField;
+  var shareUrlButton;
+  var shareUrlField;
   var localStorageWarning;
   var localStorageWarningExplicitRefusalButton;
   var localStorageWarningExplicitConsentButton;
+  var shareUrlHolder;
+  var statusMetaData;
+  var canHaveStatus;
+  var showStatus;
   var expenseFilterButton;
   var expenseFilterDialog;
   var expenseFilterDialogCancelButton;
@@ -208,6 +237,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
   RentSplitApp.prototype.reloadPageFromState_6taknv$ = function (shouldReRegisterListeners) {
     if (shouldReRegisterListeners === void 0)
       shouldReRegisterListeners = true;
+    this.replaceShareUrlWithPromptToGenerateANewOne_0();
     this.applyStateToLocalStorageWarning();
     this.regenerateInputTables();
     if (shouldReRegisterListeners) {
@@ -256,8 +286,11 @@ this['Rent Split 2'] = function (_, Kotlin) {
     jq(localStorageWarningExplicitRefusalButton.cssSelectorString).click(getCallableRef('didPressLocalStorageWarningExplicitRefusalButton', function ($receiver, event) {
       return $receiver.didPressLocalStorageWarningExplicitRefusalButton_9ojx7i$(event), Unit;
     }.bind(null, this)));
-    jq(copyStateUrlButton.cssSelectorString).click(getCallableRef('didPressCopyUrlButton', function ($receiver, event) {
-      return $receiver.didPressCopyUrlButton_9ojx7i$(event), Unit;
+    jq(shareUrlButton.cssSelectorString).click(getCallableRef('didPressShareButton', function ($receiver, event) {
+      return $receiver.didPressShareButton_9ojx7i$(event), Unit;
+    }.bind(null, this)));
+    jq(shareUrlField.cssSelectorString).click(getCallableRef('didPressShareUrlField', function ($receiver, event) {
+      return $receiver.didPressShareUrlField_9ojx7i$(event), Unit;
     }.bind(null, this)));
     this.registerFilterDialogListeners();
   };
@@ -281,35 +314,23 @@ this['Rent Split 2'] = function (_, Kotlin) {
   RentSplitApp.prototype.didPressLocalStorageWarningExplicitRefusalButton_9ojx7i$ = function (event) {
     this.state = this.state.copy_2k6jng$(void 0, void 0, this.state.l.copy_hombyb$(UserConsent$explicitRefusal_getInstance()));
   };
-  function RentSplitApp$didPressCopyUrlButton$lambda() {
-    return jq(copyStateUrlButton.cssSelectorString).removeClass('just-copied');
-  }
-  RentSplitApp.prototype.didPressCopyUrlButton_9ojx7i$ = function (event) {
-    try {
-      copyToClipboardOrThrow(jq(stateUrlField.cssSelectorString));
-      jq(copyStateUrlButton.cssSelectorString).addClass('just-copied');
-      window.setTimeout(RentSplitApp$didPressCopyUrlButton$lambda, 3000);
-    }
-     catch (error) {
-      if (Kotlin.isType(error, Throwable)) {
-        var message = 'Failed to copy state URL!';
-        console.log(message);
-      }
-       else
-        throw error;
-    }
+  RentSplitApp.prototype.didPressShareButton_9ojx7i$ = function (event) {
+    this.userWantsShareUrl();
+  };
+  RentSplitApp.prototype.didPressShareUrlField_9ojx7i$ = function (event) {
+    jq(shareUrlField.cssSelectorString).select();
   };
   RentSplitApp.prototype.didPressFilterButton_9ojx7i$ = function (event) {
     var tmp$, tmp$_0, tmp$_1;
     tmp$_0 = Kotlin.isType(tmp$ = event.currentTarget, Element) ? tmp$ : null;
     if (tmp$_0 == null) {
-      var message = 'No element targeted in the filter button click event';
+      var message = 'No element targeted in the filter button click event' + ('\t' + Unit);
       console.log(message);
       return Unit;
     }
     tmp$_1 = this.expenseForFilterButton_2rdptt$(tmp$_0);
     if (tmp$_1 == null) {
-      var message_0 = 'No expense matching ID in filter button';
+      var message_0 = 'No expense matching ID in filter button' + ('\t' + Unit);
       console.log(message_0);
       return Unit;
     }
@@ -371,14 +392,14 @@ this['Rent Split 2'] = function (_, Kotlin) {
     var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7, tmp$_8;
     tmp$_0 = (tmp$ = $(jq_roommateRow).data(resourceId.dataName)) != null ? tmp$.toString() : null;
     if (tmp$_0 == null) {
-      var message = 'No ID on page!';
+      var message = 'No ID on page!' + ('\t' + null);
       console.log(message);
       return null;
     }
     tmp$_2 = (tmp$_1 = jq(roommateNameInput.cssSelectorString, jq_roommateRow).val()) != null ? tmp$_1 : '';
     tmp$_4 = (tmp$_3 = jq(roommateIncomeInput.cssSelectorString, jq_roommateRow).val()) != null ? toDoubleOrNull(tmp$_3) : null;
     if (tmp$_4 == null) {
-      var message_0 = 'No monthly income on page!';
+      var message_0 = 'No monthly income on page!' + ('\t' + null);
       console.log(message_0);
       return null;
     }
@@ -388,7 +409,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
     var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7, tmp$_8, tmp$_9, tmp$_10, tmp$_11, tmp$_12;
     tmp$_0 = (tmp$ = jq_expenseRow.data(resourceId.dataName)) != null ? tmp$.toString() : null;
     if (tmp$_0 == null) {
-      var message = 'No ID on page!';
+      var message = 'No ID on page!' + ('\t' + null);
       console.log(message);
       return null;
     }
@@ -398,7 +419,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
     }.bind(null, this))(tmp$_4) : null) != null ? tmp$_5 : RentExpenses$Companion_getInstance().allRoommates;
     tmp$_8 = (tmp$_7 = jq(expenseCostInput.cssSelectorString, jq_expenseRow).val()) != null ? toDoubleOrNull(tmp$_7) : null;
     if (tmp$_8 == null) {
-      var message_0 = 'No monthly cost on page!';
+      var message_0 = 'No monthly cost on page!' + ('\t' + null);
       console.log(message_0);
       return null;
     }
@@ -606,7 +627,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
       if ((tmp$_0 = Kotlin.isType(tmp$ = jq(expenseFilterDialog.cssSelectorString).get(0), HTMLDialogElement) ? tmp$ : null) != null)
         tmp$_1 = tmp$_0;
       else {
-        var message = 'Could not find dialog element!';
+        var message = 'Could not find dialog element!' + ('\t' + null);
         console.log(message);
         tmp$_1 = null;
       }
@@ -709,6 +730,197 @@ this['Rent Split 2'] = function (_, Kotlin) {
       var name = sanitizedForHtml(get_nonEmptyName(element_0.representedRoommate));
       $('[data-' + roommateResultRow.dataName + "='" + name + "']").addClass(roommateWhoOwesTooMuch.className).attr('title', name + ' owes ' + (element_0.totalContributions - element_0.representedRoommate.d) + ' too much!');
     }
+  };
+  function RentSplitApp$userWantsShareUrl$lambda(this$RentSplitApp, closure$urlToShare, closure$didCopyShareUrl) {
+    return function (response, guaranteedUrl) {
+      var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5;
+      this$RentSplitApp.placeShareUrlOnPage_0(guaranteedUrl);
+      closure$urlToShare.v = guaranteedUrl;
+      closure$didCopyShareUrl.v = this$RentSplitApp.copyShareUrl_0();
+      if (Kotlin.isType(response, GooGlUrlShortener$ShortenResponse$success)) {
+        this$RentSplitApp.alertUserOfSuccessfulGenerationOfShareUrl_0();
+        var message = 'Shortened URL!';
+        console.log(message);
+      }
+       else if (Kotlin.isType(response, GooGlUrlShortener$ShortenResponse$error)) {
+        this$RentSplitApp.alertUserOfFailureToGenerateShareUrl_0('\u26A0\uFE0F Could not shorten URL');
+        var object = copyToArray(response.errors);
+        console.log(object);
+        var message_0 = (tmp$_0 = (tmp$ = nonEmptyOrNull(response.message)) != null ? tmp$ : get_statusText(response)) != null ? tmp$_0 : 'No message';
+        console.log(message_0);
+      }
+       else if (Kotlin.isType(response, GooGlUrlShortener$ShortenResponse$unknownError)) {
+        this$RentSplitApp.alertUserOfFailureToGenerateShareUrl_0('\u26A0\uFE0F Could not shorten URL');
+        var message_1 = (tmp$_3 = (tmp$_2 = (tmp$_1 = response.httpResponse) != null ? tmp$_1.text : null) != null ? nonEmptyOrNull(tmp$_2) : null) != null ? tmp$_3 : 'No response text';
+        console.log(message_1);
+        var message_2 = (tmp$_5 = (tmp$_4 = get_statusText(response)) != null ? nonEmptyOrNull(tmp$_4) : null) != null ? tmp$_5 : 'No message';
+        console.log(message_2);
+      }
+      return Unit;
+    };
+  }
+  function RentSplitApp$userWantsShareUrl$check$lambda(closure$check) {
+    return function () {
+      closure$check();
+      return Unit;
+    };
+  }
+  function RentSplitApp$userWantsShareUrl$check(closure$numberOfRemainingChecks, this$RentSplitApp, closure$didCopyShareUrl, closure$urlToShare) {
+    return function closure$check() {
+      var tmp$, tmp$_0;
+      if (closure$numberOfRemainingChecks.v <= 0) {
+        var message = 'Failed to generate short URL fast enough. Falling back to full-length one...';
+        console.log(message);
+        this$RentSplitApp.placeShareUrlOnPage_0(this$RentSplitApp.fullLengthSharingUrl);
+        this$RentSplitApp.copyShareUrl_0();
+        return;
+      }
+       else if (closure$didCopyShareUrl.v) {
+        return;
+      }
+       else {
+        closure$numberOfRemainingChecks.v = closure$numberOfRemainingChecks.v - 1 | 0;
+        var tmp$_1;
+        if ((tmp$ = closure$urlToShare.v) != null) {
+          var this$RentSplitApp_0 = this$RentSplitApp;
+          this$RentSplitApp_0.placeShareUrlOnPage_0(tmp$);
+          this$RentSplitApp_0.copyShareUrl_0();
+          return;
+        }
+         else
+          tmp$_1 = null;
+        (tmp$_0 = tmp$_1) != null ? tmp$_0 : delay(0.05, RentSplitApp$userWantsShareUrl$check$lambda(closure$check));
+      }
+    };
+  }
+  function RentSplitApp$userWantsShareUrl$lambda_0(closure$check) {
+    return function () {
+      closure$check();
+      return Unit;
+    };
+  }
+  RentSplitApp.prototype.userWantsShareUrl = function () {
+    this.alertUserOfShareUrlGenerationStart_0();
+    var urlToShare = {v: null};
+    var didCopyShareUrl = {v: false};
+    this.generateShareUrl_0(RentSplitApp$userWantsShareUrl$lambda(this, urlToShare, didCopyShareUrl));
+    var numberOfRemainingChecks = {v: 18};
+    var check = RentSplitApp$userWantsShareUrl$check(numberOfRemainingChecks, this, didCopyShareUrl, urlToShare);
+    delay(0.1, RentSplitApp$userWantsShareUrl$lambda_0(check));
+  };
+  Object.defineProperty(RentSplitApp.prototype, 'fullLengthSharingUrl', {
+    get: function () {
+      var tmp$;
+      var jsonStringForSharing = serialized(this.state, SerializationPurpose$forSharing_getInstance());
+      var actualProtocol = window.location.protocol;
+      if (equals(actualProtocol, 'file:'))
+        tmp$ = 'https://rent-split.bhstudios.org/';
+      else
+        tmp$ = actualProtocol + '//' + window.location.host + window.location.pathname;
+      var sharingUrlPrefix = tmp$ + '?generalState=';
+      return new URL(sharingUrlPrefix + jsonStringForSharing);
+    }
+  });
+  function RentSplitApp$generateShareUrl$lambda(closure$callback, closure$backupUrl) {
+    return function (response) {
+      var tmp$, tmp$_0, tmp$_1;
+      closure$callback(response, (tmp$_1 = (tmp$_0 = Kotlin.isType(tmp$ = response, GooGlUrlShortener$ShortenResponse$success) ? tmp$ : null) != null ? tmp$_0.shortUrlObject : null) != null ? tmp$_1 : closure$backupUrl);
+      return Unit;
+    };
+  }
+  RentSplitApp.prototype.generateShareUrl_0 = function (callback) {
+    var backupUrl = this.fullLengthSharingUrl;
+    (new GooGlUrlShortener(gooGlAccessToken)).shorten_5nfh8w$(backupUrl, RentSplitApp$generateShareUrl$lambda(callback, backupUrl));
+  };
+  RentSplitApp.prototype.copyShareUrl_0 = function () {
+    try {
+      copyToClipboardOrThrow(jq(shareUrlField.cssSelectorString));
+      this.alertUserOfSuccessfulCopyOfShareUrl_0();
+      return true;
+    }
+     catch (error) {
+      if (Kotlin.isType(error, Throwable)) {
+        var message = 'Failed to copy state URL!';
+        console.log(message);
+        var object = error;
+        console.log(object);
+        this.alertUserOfFailureToCopyShareUrl_0('\u26A0\uFE0F Not copied!');
+        return false;
+      }
+       else
+        throw error;
+    }
+  };
+  RentSplitApp.prototype.placeShareUrlOnPage_0 = function (url) {
+    jq(shareUrlField.cssSelectorString).val(url.toString());
+  };
+  RentSplitApp.prototype.alertUserOfShareUrlGenerationStart_0 = function () {
+    this.shareUrlFieldStatusText_0 = 'Hang on; shortening\u2026';
+    this.showUrlStatusNow_0();
+  };
+  function RentSplitApp$hideShareUrlStatusSoon$lambda(this$RentSplitApp) {
+    return function () {
+      this$RentSplitApp.hideShareUrlStatusNow_0();
+      return Unit;
+    };
+  }
+  RentSplitApp.prototype.hideShareUrlStatusSoon = function () {
+    delay_0(Kotlin.Long.fromInt(3), RentSplitApp$hideShareUrlStatusSoon$lambda(this));
+  };
+  RentSplitApp.prototype.hideShareUrlStatusNow_0 = function () {
+    jq(shareUrlHolder.cssSelectorString).removeClass(showStatus.className);
+  };
+  RentSplitApp.prototype.showUrlStatusNow_0 = function () {
+    jq(shareUrlHolder.cssSelectorString).addClass(showStatus.className);
+  };
+  Object.defineProperty(RentSplitApp.prototype, 'shareUrlButtonStatusText_0', {
+    get: function () {
+      var tmp$;
+      return (tmp$ = jq(shareUrlButton.cssSelectorString).data(statusMetaData.dataName)) != null ? tmp$.toString() : null;
+    },
+    set: function (value) {
+      jq(shareUrlButton.cssSelectorString).data(statusMetaData.dataName, value).attr(statusMetaData.htmlAttributeName, value);
+    }
+  });
+  Object.defineProperty(RentSplitApp.prototype, 'shareUrlFieldStatusText_0', {
+    get: function () {
+      var tmp$;
+      return (tmp$ = jq(shareUrlHolder.cssSelectorString).data(statusMetaData.dataName)) != null ? tmp$.toString() : null;
+    },
+    set: function (value) {
+      jq(shareUrlHolder.cssSelectorString).data(statusMetaData.dataName, value).attr(statusMetaData.htmlAttributeName, value);
+    }
+  });
+  RentSplitApp.prototype.alertUserOfSuccessfulGenerationOfShareUrl_0 = function () {
+    this.shareUrlFieldStatusText_0 = 'Shortened!';
+    this.showUrlStatusNow_0();
+    this.hideShareUrlStatusSoon();
+  };
+  function RentSplitApp$alertUserOfSuccessfulCopyOfShareUrl$lambda() {
+    jq(shareUrlButton.cssSelectorString).removeClass(showStatus.className);
+    return Unit;
+  }
+  RentSplitApp.prototype.alertUserOfSuccessfulCopyOfShareUrl_0 = function () {
+    this.shareUrlButtonStatusText_0 = 'Copied!';
+    jq(shareUrlButton.cssSelectorString).addClass(showStatus.className);
+    delay_0(Kotlin.Long.fromInt(3), RentSplitApp$alertUserOfSuccessfulCopyOfShareUrl$lambda);
+  };
+  RentSplitApp.prototype.alertUserOfFailureToGenerateShareUrl_0 = function (statusText) {
+    this.shareUrlFieldStatusText_0 = statusText;
+    this.showUrlStatusNow_0();
+    this.hideShareUrlStatusSoon();
+  };
+  function RentSplitApp$alertUserOfFailureToCopyShareUrl$lambda() {
+    jq(shareUrlButton.cssSelectorString).removeClass(showStatus.className);
+    return Unit;
+  }
+  RentSplitApp.prototype.alertUserOfFailureToCopyShareUrl_0 = function (statusText) {
+    this.shareUrlButtonStatusText_0 = statusText;
+    jq(shareUrlButton.cssSelectorString).addClass(showStatus.className);
+    delay_0(Kotlin.Long.fromInt(3), RentSplitApp$alertUserOfFailureToCopyShareUrl$lambda);
+  };
+  RentSplitApp.prototype.replaceShareUrlWithPromptToGenerateANewOne_0 = function () {
+    jq(shareUrlField.cssSelectorString).val('Get a new share URL: \uD83D\uDC49\uD83C\uDFFD');
   };
   function RentSplitApp$state$lambda(this$RentSplitApp) {
     return function (f, f_0) {
@@ -963,16 +1175,16 @@ this['Rent Split 2'] = function (_, Kotlin) {
     simpleName: 'AnyCssSelector',
     interfaces: []
   };
-  function CssHtmlAttributeWithoutValue() {
+  function CssHtmlAttribute() {
   }
-  Object.defineProperty(CssHtmlAttributeWithoutValue.prototype, 'cssSelectorString', {
+  Object.defineProperty(CssHtmlAttribute.prototype, 'cssSelectorString', {
     get: function () {
       return '[' + this.htmlAttributeName + ']';
     }
   });
-  CssHtmlAttributeWithoutValue.$metadata$ = {
+  CssHtmlAttribute.$metadata$ = {
     kind: Kind_INTERFACE,
-    simpleName: 'CssHtmlAttributeWithoutValue',
+    simpleName: 'CssHtmlAttribute',
     interfaces: [AnyCssSelector]
   };
   function CssHtmlAttributeWithValue() {
@@ -983,7 +1195,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
   CssHtmlAttributeWithValue.$metadata$ = {
     kind: Kind_INTERFACE,
     simpleName: 'CssHtmlAttributeWithValue',
-    interfaces: [CssHtmlAttributeWithoutValue]
+    interfaces: [CssHtmlAttribute]
   };
   function CssParameterForAttributeSelector(parameterText, caseInsensitive) {
     this.parameterText = parameterText;
@@ -1113,7 +1325,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
   CssClass.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'CssClass',
-    interfaces: [CssHtmlAttributeWithoutValue]
+    interfaces: [CssHtmlAttribute]
   };
   function CssId(idName) {
     this.idName = idName;
@@ -1141,7 +1353,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
   CssId.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'CssId',
-    interfaces: [CssHtmlAttributeWithoutValue]
+    interfaces: [CssHtmlAttribute]
   };
   function DataAttribute(dataName) {
     this.dataName = dataName;
@@ -1339,33 +1551,33 @@ this['Rent Split 2'] = function (_, Kotlin) {
       tmp$_14 = tmp$_0;
     else {
       var $receiver = IdManager_getInstance().generateNewId();
-      var message = 'No serialized expense ID; generating one to migrate it';
+      var message = 'No serialized expense ID; generating one to migrate it' + ('\t' + $receiver);
       console.log(message);
       tmp$_14 = $receiver;
     }
     tmp$_1 = tmp$_14;
     tmp$_3 = typeof (tmp$_2 = raw[resourceNameSerializedName]) === 'string' ? tmp$_2 : null;
     if (tmp$_3 == null) {
-      var message_0 = 'No serialized expense type';
+      var message_0 = 'No serialized expense type' + ('\t' + null);
       console.log(message_0);
       return null;
     }
     tmp$_5 = typeof (tmp$_4 = raw[resourceDollarAmountSerializedName]) === 'number' ? tmp$_4 : null;
     if (tmp$_5 == null) {
-      var message_1 = 'No serialized expense cost';
+      var message_1 = 'No serialized expense cost' + ('\t' + null);
       console.log(message_1);
       return null;
     }
     tmp$_9 = (tmp$_8 = (tmp$_7 = Kotlin.isArray(tmp$_6 = raw[expenseApplicableRoommatesSerializedName]) ? tmp$_6 : null) != null ? toSet_0(tmp$_7) : null) != null ? tmp$_8 : RentExpenses$Companion_getInstance().allRoommates;
     tmp$_11 = typeof (tmp$_10 = raw[resourceIsRemovableSerializedName]) === 'boolean' ? tmp$_10 : null;
     if (tmp$_11 == null) {
-      var message_2 = 'No serialized removability';
+      var message_2 = 'No serialized removability' + ('\t' + null);
       console.log(message_2);
       return null;
     }
     tmp$_13 = typeof (tmp$_12 = raw[resourceIsRenamableSerializedName]) === 'boolean' ? tmp$_12 : null;
     if (tmp$_13 == null) {
-      var message_3 = 'No serialized renamability';
+      var message_3 = 'No serialized renamability' + ('\t' + null);
       console.log(message_3);
       return null;
     }
@@ -1624,32 +1836,32 @@ this['Rent Split 2'] = function (_, Kotlin) {
       tmp$_10 = tmp$_0;
     else {
       var $receiver = IdManager_getInstance().generateNewId();
-      var message = 'No serialized roommate ID; generating one to migrate it';
+      var message = 'No serialized roommate ID; generating one to migrate it' + ('\t' + $receiver);
       console.log(message);
       tmp$_10 = $receiver;
     }
     tmp$_1 = tmp$_10;
     tmp$_3 = typeof (tmp$_2 = raw[resourceNameSerializedName]) === 'string' ? tmp$_2 : null;
     if (tmp$_3 == null) {
-      var message_0 = 'No serialized roommate name';
+      var message_0 = 'No serialized roommate name' + ('\t' + null);
       console.log(message_0);
       return null;
     }
     tmp$_5 = typeof (tmp$_4 = raw[resourceDollarAmountSerializedName]) === 'number' ? tmp$_4 : null;
     if (tmp$_5 == null) {
-      var message_1 = 'No serialized roommate income';
+      var message_1 = 'No serialized roommate income' + ('\t' + null);
       console.log(message_1);
       return null;
     }
     tmp$_7 = typeof (tmp$_6 = raw[resourceIsRemovableSerializedName]) === 'boolean' ? tmp$_6 : null;
     if (tmp$_7 == null) {
-      var message_2 = 'No serialized removability';
+      var message_2 = 'No serialized removability' + ('\t' + null);
       console.log(message_2);
       return null;
     }
     tmp$_9 = typeof (tmp$_8 = raw[resourceIsRenamableSerializedName]) === 'boolean' ? tmp$_8 : null;
     if (tmp$_9 == null) {
-      var message_3 = 'No serialized renamability';
+      var message_3 = 'No serialized renamability' + ('\t' + null);
       console.log(message_3);
       return null;
     }
@@ -1870,6 +2082,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
   var rentExpensesSerializedName;
   var localDataPreferencesSerializedName;
   var generalStateSerializedName;
+  var gooGlAccessToken;
   function RentSplitState(roommates, expenses, localDataPreferences) {
     RentSplitState$Companion_getInstance();
     this.r = roommates;
@@ -1965,8 +2178,6 @@ this['Rent Split 2'] = function (_, Kotlin) {
   function save($receiver) {
     var tmp$;
     var jsonStringForLocalStorage = serialized($receiver, SerializationPurpose$forLocalStorage_getInstance());
-    var jsonStringForSharing = serialized($receiver, SerializationPurpose$forSharing_getInstance());
-    jq(stateUrlField.cssSelectorString).val(window.location.protocol + '//' + window.location.host + window.location.pathname + '?' + generalStateSerializedName + '=' + jsonStringForSharing);
     tmp$ = $receiver.l.c;
     if (equals(tmp$, UserConsent$explicitConsent_getInstance()))
       window.localStorage.setItem(generalStateSerializedName, jsonStringForLocalStorage);
@@ -1986,7 +2197,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
       case 'forLocalStorage':
         return JSON.stringify($receiver.toJson_i9b4g5$(purpose));
       case 'forSharing':
-        return encodeURIComponent(JSON.stringify($receiver.toJson_i9b4g5$(purpose)));
+        return get_urlEncoded(JSON.stringify($receiver.toJson_i9b4g5$(purpose)));
       default:return Kotlin.noWhenBranchMatched();
     }
   }
@@ -2129,6 +2340,12 @@ this['Rent Split 2'] = function (_, Kotlin) {
     }
   }
   UserConsent.valueOf_61zpoe$ = UserConsent$valueOf;
+  function get_urlEncoded($receiver) {
+    return encodeURIComponent($receiver);
+  }
+  function get_urlDecoded($receiver) {
+    return decodeURIComponent($receiver);
+  }
   var isNeitherNullNorEmpty = defineInlineFunction('Rent Split 2.RentSplit.isNeitherNullNorEmpty_5cw0du$', function ($receiver) {
     return !($receiver == null || $receiver.length === 0);
   });
@@ -2192,24 +2409,24 @@ this['Rent Split 2'] = function (_, Kotlin) {
     var tmp$;
     return (tmp$ = toBooleanOrNull($receiver)) != null ? tmp$ : valueIfInvalid;
   }
-  function reduceTo($receiver, start, transformer) {
-    var value = {v: start};
-    var tmp$;
-    tmp$ = $receiver.iterator();
-    while (tmp$.hasNext()) {
-      var element = tmp$.next();
-      value.v = transformer(value.v, element);
-    }
-    return value.v;
-  }
   function adding($receiver, newElement) {
     var newExpenses = toMutableList($receiver);
     newExpenses.add_11rb$(newElement);
     return toList(newExpenses);
   }
+  function copyToClipboardOrThrow$CopyFailed() {
+    Exception_init('Could not copy', this);
+    this.name = 'copyToClipboardOrThrow$CopyFailed';
+  }
+  copyToClipboardOrThrow$CopyFailed.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'CopyFailed',
+    interfaces: [Exception]
+  };
   function copyToClipboardOrThrow($receiver) {
     $receiver.select();
-    return document.execCommand('copy');
+    if (!document.execCommand('copy'))
+      throw new copyToClipboardOrThrow$CopyFailed();
   }
   var doNothing = defineInlineFunction('Rent Split 2.RentSplit.doNothing', function () {
   });
@@ -2222,7 +2439,8 @@ this['Rent Split 2'] = function (_, Kotlin) {
           console.log(message);
           return Unit;
         });
-      console.log(message);
+      var message_0 = message + ('\t' + $receiver);
+      console.log(message_0);
       return $receiver;
     };
   }));
@@ -2238,8 +2456,23 @@ this['Rent Split 2'] = function (_, Kotlin) {
       console.log(message);
     };
   }));
+  var log_0 = defineInlineFunction('Rent Split 2.RentSplit.log_7uhc0p$', wrapFunction(function () {
+    var Unit = Kotlin.kotlin.Unit;
+    var getCallableRef = Kotlin.getCallableRef;
+    return function (object, logger) {
+      if (logger === void 0)
+        logger = getCallableRef('consoleLog', function (object) {
+          console.log(object);
+          return Unit;
+        });
+      console.log(object);
+    };
+  }));
   var consoleLogString = defineInlineFunction('Rent Split 2.RentSplit.consoleLogString_61zpoe$', function (message) {
     console.log(message);
+  });
+  var consoleLog = defineInlineFunction('Rent Split 2.RentSplit.consoleLog_mh5how$', function (object) {
+    console.log(object);
   });
   function toSetOfIds($receiver) {
     return toSet(split($receiver, Kotlin.charArrayOf(91, 44, 93)));
@@ -2249,6 +2482,337 @@ this['Rent Split 2'] = function (_, Kotlin) {
   }
   function sanitizedForHtml($receiver) {
     return replace(replace(Regex_init('&(?!amp;amp;)').replace_x2uqeu$($receiver, '&amp;'), '<', '&lt;'), '>', '&gt;');
+  }
+  function jsonString($receiver) {
+    return JSON.stringify($receiver);
+  }
+  function GooGlUrlShortener(accessKey) {
+    GooGlUrlShortener$Parameters_getInstance();
+    this.accessKey = accessKey;
+  }
+  function GooGlUrlShortener$shorten$lambda(closure$responseListener) {
+    return function (it) {
+      closure$responseListener(GooGlUrlShortener$ShortenResponse$Companion_getInstance().invoke_142kgh$(it));
+      return Unit;
+    };
+  }
+  GooGlUrlShortener.prototype.shorten_5nfh8w$ = function (longUrl, responseListener) {
+    HttpRequest_init('https://www.googleapis.com/urlshortener/v1/url', HttpRequest$RequestParameters$Companion_getInstance().invoke_bgp2as$([new GooGlUrlShortener$Parameters$accessKey(this.accessKey, HttpRequest$RequestParameter$Usage$urlParameter_getInstance()), new GooGlUrlShortener$Parameters$longUrl(longUrl, HttpRequest$RequestParameter$Usage$postBodyJson_getInstance()), new HttpRequest$RequestParameter$genericHeader('Content-Type', 'application/json')])).send_i16107$('POST', void 0, GooGlUrlShortener$shorten$lambda(responseListener));
+  };
+  function GooGlUrlShortener$ShortenResponse(httpResponse) {
+    GooGlUrlShortener$ShortenResponse$Companion_getInstance();
+    this.httpResponse = httpResponse;
+  }
+  function GooGlUrlShortener$ShortenResponse$success(kind, shortUrlString, longUrlString, httpResponse) {
+    GooGlUrlShortener$ShortenResponse$success$Companion_getInstance();
+    if (httpResponse === void 0)
+      httpResponse = null;
+    GooGlUrlShortener$ShortenResponse.call(this, httpResponse);
+    this.kind = kind;
+    this.shortUrlString = shortUrlString;
+    this.longUrlString = longUrlString;
+    this.shortUrlObject_ygx97t$_0 = lazy(GooGlUrlShortener$ShortenResponse$success$shortUrl$lambda(this));
+    this.longUrlObject_jvxam1$_0 = lazy(GooGlUrlShortener$ShortenResponse$success$longUrl$lambda(this));
+  }
+  Object.defineProperty(GooGlUrlShortener$ShortenResponse$success.prototype, 'shortUrlObject', {
+    get: function () {
+      return this.shortUrlObject_ygx97t$_0.value;
+    }
+  });
+  Object.defineProperty(GooGlUrlShortener$ShortenResponse$success.prototype, 'longUrlObject', {
+    get: function () {
+      return this.longUrlObject_jvxam1$_0.value;
+    }
+  });
+  function GooGlUrlShortener$ShortenResponse$success$Companion() {
+    GooGlUrlShortener$ShortenResponse$success$Companion_instance = this;
+  }
+  function GooGlUrlShortener$ShortenResponse$success$Companion$invoke$lambda$Raw(kind, id, longUrl) {
+    this.kind = kind;
+    this.id = id;
+    this.longUrl = longUrl;
+  }
+  GooGlUrlShortener$ShortenResponse$success$Companion$invoke$lambda$Raw.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Raw',
+    interfaces: []
+  };
+  function GooGlUrlShortener$ShortenResponse$success$Companion$invoke$lambda(closure$httpResponse) {
+    return function () {
+      var tmp$;
+      tmp$ = JSON.parse(closure$httpResponse.text);
+      if (tmp$ == null) {
+        return null;
+      }
+      return new GooGlUrlShortener$ShortenResponse$success(tmp$.kind, tmp$.id, tmp$.longUrl);
+    };
+  }
+  GooGlUrlShortener$ShortenResponse$success$Companion.prototype.invoke_142kgh$ = function (httpResponse) {
+    return safeTry(GooGlUrlShortener$ShortenResponse$success$Companion$invoke$lambda(httpResponse));
+  };
+  GooGlUrlShortener$ShortenResponse$success$Companion.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Companion',
+    interfaces: []
+  };
+  var GooGlUrlShortener$ShortenResponse$success$Companion_instance = null;
+  function GooGlUrlShortener$ShortenResponse$success$Companion_getInstance() {
+    if (GooGlUrlShortener$ShortenResponse$success$Companion_instance === null) {
+      new GooGlUrlShortener$ShortenResponse$success$Companion();
+    }
+    return GooGlUrlShortener$ShortenResponse$success$Companion_instance;
+  }
+  function GooGlUrlShortener$ShortenResponse$success$shortUrl$lambda(this$success) {
+    return function () {
+      return new URL(this$success.shortUrlString);
+    };
+  }
+  function GooGlUrlShortener$ShortenResponse$success$longUrl$lambda(this$success) {
+    return function () {
+      return new URL(this$success.longUrlString);
+    };
+  }
+  GooGlUrlShortener$ShortenResponse$success.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'success',
+    interfaces: [GooGlUrlShortener$ShortenResponse]
+  };
+  function GooGlUrlShortener$ShortenResponse$error(allErrors, code, message, httpResponse) {
+    GooGlUrlShortener$ShortenResponse$error$Companion_getInstance();
+    if (httpResponse === void 0)
+      httpResponse = null;
+    GooGlUrlShortener$ShortenResponse.call(this, httpResponse);
+    this.errors = allErrors;
+    this.code = code;
+    this.message = message;
+  }
+  function GooGlUrlShortener$ShortenResponse$error$Companion() {
+    GooGlUrlShortener$ShortenResponse$error$Companion_instance = this;
+  }
+  function GooGlUrlShortener$ShortenResponse$error$Companion$invoke$lambda(closure$httpResponse) {
+    return function () {
+      var tmp$, tmp$_0, tmp$_1;
+      tmp$_1 = GooGlUrlShortener$ShortenResponse$error$Companion_getInstance();
+      tmp$_0 = (tmp$ = JSON.parse(closure$httpResponse.text)['error']) != null ? tmp$ : null;
+      if (tmp$_0 == null) {
+        return null;
+      }
+      return tmp$_1.invoke_cwgkzm$(tmp$_0, closure$httpResponse);
+    };
+  }
+  GooGlUrlShortener$ShortenResponse$error$Companion.prototype.invoke_142kgh$ = function (httpResponse) {
+    return safeTry(GooGlUrlShortener$ShortenResponse$error$Companion$invoke$lambda(httpResponse));
+  };
+  GooGlUrlShortener$ShortenResponse$error$Companion.prototype.invoke_cwgkzm$ = function (json, httpResponse) {
+    if (httpResponse === void 0)
+      httpResponse = null;
+    var tmp$, tmp$_0, tmp$_1, tmp$_2;
+    var $receiver = json['errors'];
+    var destination = ArrayList_init($receiver.length);
+    var tmp$_3;
+    for (tmp$_3 = 0; tmp$_3 !== $receiver.length; ++tmp$_3) {
+      var item = $receiver[tmp$_3];
+      var tmp$_4 = destination.add_11rb$;
+      var tmp$_5;
+      tmp$_5 = GooGlUrlShortener$ShortenResponse$SingleError$Companion_getInstance().invoke_qk3xy8$(item);
+      if (tmp$_5 == null) {
+        return null;
+      }
+      tmp$_4.call(destination, tmp$_5);
+    }
+    tmp$_0 = typeof (tmp$ = json['code']) === 'number' ? tmp$ : null;
+    if (tmp$_0 == null) {
+      return null;
+    }
+    tmp$_2 = typeof (tmp$_1 = json['message']) === 'string' ? tmp$_1 : null;
+    if (tmp$_2 == null) {
+      return null;
+    }
+    return new GooGlUrlShortener$ShortenResponse$error(destination, tmp$_0, tmp$_2, httpResponse);
+  };
+  GooGlUrlShortener$ShortenResponse$error$Companion.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Companion',
+    interfaces: []
+  };
+  var GooGlUrlShortener$ShortenResponse$error$Companion_instance = null;
+  function GooGlUrlShortener$ShortenResponse$error$Companion_getInstance() {
+    if (GooGlUrlShortener$ShortenResponse$error$Companion_instance === null) {
+      new GooGlUrlShortener$ShortenResponse$error$Companion();
+    }
+    return GooGlUrlShortener$ShortenResponse$error$Companion_instance;
+  }
+  GooGlUrlShortener$ShortenResponse$error.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'error',
+    interfaces: [GooGlUrlShortener$ShortenResponse]
+  };
+  function GooGlUrlShortener$ShortenResponse$SingleError(domain, reason, message, locationType, location) {
+    GooGlUrlShortener$ShortenResponse$SingleError$Companion_getInstance();
+    if (locationType === void 0)
+      locationType = null;
+    if (location === void 0)
+      location = null;
+    this.domain = domain;
+    this.reason = reason;
+    this.message = message;
+    this.locationType = locationType;
+    this.location = location;
+  }
+  function GooGlUrlShortener$ShortenResponse$SingleError$Companion() {
+    GooGlUrlShortener$ShortenResponse$SingleError$Companion_instance = this;
+  }
+  GooGlUrlShortener$ShortenResponse$SingleError$Companion.prototype.invoke_qk3xy8$ = function (json) {
+    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6;
+    tmp$_0 = typeof (tmp$ = json['domain']) === 'string' ? tmp$ : null;
+    if (tmp$_0 == null) {
+      return null;
+    }
+    tmp$_2 = typeof (tmp$_1 = json['reason']) === 'string' ? tmp$_1 : null;
+    if (tmp$_2 == null) {
+      return null;
+    }
+    tmp$_4 = typeof (tmp$_3 = json['message']) === 'string' ? tmp$_3 : null;
+    if (tmp$_4 == null) {
+      return null;
+    }
+    return new GooGlUrlShortener$ShortenResponse$SingleError(tmp$_0, tmp$_2, tmp$_4, typeof (tmp$_5 = json['locationType']) === 'string' ? tmp$_5 : null, typeof (tmp$_6 = json['location']) === 'string' ? tmp$_6 : null);
+  };
+  GooGlUrlShortener$ShortenResponse$SingleError$Companion.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Companion',
+    interfaces: []
+  };
+  var GooGlUrlShortener$ShortenResponse$SingleError$Companion_instance = null;
+  function GooGlUrlShortener$ShortenResponse$SingleError$Companion_getInstance() {
+    if (GooGlUrlShortener$ShortenResponse$SingleError$Companion_instance === null) {
+      new GooGlUrlShortener$ShortenResponse$SingleError$Companion();
+    }
+    return GooGlUrlShortener$ShortenResponse$SingleError$Companion_instance;
+  }
+  GooGlUrlShortener$ShortenResponse$SingleError.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'SingleError',
+    interfaces: []
+  };
+  GooGlUrlShortener$ShortenResponse$SingleError.prototype.component1 = function () {
+    return this.domain;
+  };
+  GooGlUrlShortener$ShortenResponse$SingleError.prototype.component2 = function () {
+    return this.reason;
+  };
+  GooGlUrlShortener$ShortenResponse$SingleError.prototype.component3 = function () {
+    return this.message;
+  };
+  GooGlUrlShortener$ShortenResponse$SingleError.prototype.component4 = function () {
+    return this.locationType;
+  };
+  GooGlUrlShortener$ShortenResponse$SingleError.prototype.component5 = function () {
+    return this.location;
+  };
+  GooGlUrlShortener$ShortenResponse$SingleError.prototype.copy_nfi43m$ = function (domain, reason, message, locationType, location) {
+    return new GooGlUrlShortener$ShortenResponse$SingleError(domain === void 0 ? this.domain : domain, reason === void 0 ? this.reason : reason, message === void 0 ? this.message : message, locationType === void 0 ? this.locationType : locationType, location === void 0 ? this.location : location);
+  };
+  GooGlUrlShortener$ShortenResponse$SingleError.prototype.toString = function () {
+    return 'SingleError(domain=' + Kotlin.toString(this.domain) + (', reason=' + Kotlin.toString(this.reason)) + (', message=' + Kotlin.toString(this.message)) + (', locationType=' + Kotlin.toString(this.locationType)) + (', location=' + Kotlin.toString(this.location)) + ')';
+  };
+  GooGlUrlShortener$ShortenResponse$SingleError.prototype.hashCode = function () {
+    var result = 0;
+    result = result * 31 + Kotlin.hashCode(this.domain) | 0;
+    result = result * 31 + Kotlin.hashCode(this.reason) | 0;
+    result = result * 31 + Kotlin.hashCode(this.message) | 0;
+    result = result * 31 + Kotlin.hashCode(this.locationType) | 0;
+    result = result * 31 + Kotlin.hashCode(this.location) | 0;
+    return result;
+  };
+  GooGlUrlShortener$ShortenResponse$SingleError.prototype.equals = function (other) {
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.domain, other.domain) && Kotlin.equals(this.reason, other.reason) && Kotlin.equals(this.message, other.message) && Kotlin.equals(this.locationType, other.locationType) && Kotlin.equals(this.location, other.location)))));
+  };
+  function GooGlUrlShortener$ShortenResponse$unknownError(httpResponse) {
+    GooGlUrlShortener$ShortenResponse.call(this, httpResponse);
+  }
+  GooGlUrlShortener$ShortenResponse$unknownError.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'unknownError',
+    interfaces: [GooGlUrlShortener$ShortenResponse]
+  };
+  function GooGlUrlShortener$ShortenResponse$Companion() {
+    GooGlUrlShortener$ShortenResponse$Companion_instance = this;
+  }
+  GooGlUrlShortener$ShortenResponse$Companion.prototype.invoke_142kgh$ = function (httpResponse) {
+    var tmp$, tmp$_0;
+    return (tmp$_0 = (tmp$ = GooGlUrlShortener$ShortenResponse$error$Companion_getInstance().invoke_142kgh$(httpResponse)) != null ? tmp$ : GooGlUrlShortener$ShortenResponse$success$Companion_getInstance().invoke_142kgh$(httpResponse)) != null ? tmp$_0 : new GooGlUrlShortener$ShortenResponse$unknownError(httpResponse);
+  };
+  GooGlUrlShortener$ShortenResponse$Companion.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Companion',
+    interfaces: []
+  };
+  var GooGlUrlShortener$ShortenResponse$Companion_instance = null;
+  function GooGlUrlShortener$ShortenResponse$Companion_getInstance() {
+    if (GooGlUrlShortener$ShortenResponse$Companion_instance === null) {
+      new GooGlUrlShortener$ShortenResponse$Companion();
+    }
+    return GooGlUrlShortener$ShortenResponse$Companion_instance;
+  }
+  GooGlUrlShortener$ShortenResponse.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'ShortenResponse',
+    interfaces: []
+  };
+  function GooGlUrlShortener$Parameters() {
+    GooGlUrlShortener$Parameters_instance = this;
+  }
+  function GooGlUrlShortener$Parameters$accessKey(key, usage) {
+    HttpRequest$RequestParameter.call(this, 'key', key, usage, GooGlUrlShortener$Parameters$GooGlUrlShortener$Parameters$accessKey_init$lambda);
+  }
+  function GooGlUrlShortener$Parameters$GooGlUrlShortener$Parameters$accessKey_init$lambda(it) {
+    return it;
+  }
+  GooGlUrlShortener$Parameters$accessKey.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'accessKey',
+    interfaces: [HttpRequest$RequestParameter]
+  };
+  function GooGlUrlShortener$Parameters$longUrl(url, usage) {
+    HttpRequest$RequestParameter.call(this, 'longUrl', url, usage, GooGlUrlShortener$Parameters$GooGlUrlShortener$Parameters$longUrl_init$lambda);
+  }
+  function GooGlUrlShortener$Parameters$GooGlUrlShortener$Parameters$longUrl_init$lambda(it) {
+    return it.toString();
+  }
+  GooGlUrlShortener$Parameters$longUrl.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'longUrl',
+    interfaces: [HttpRequest$RequestParameter]
+  };
+  GooGlUrlShortener$Parameters.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Parameters',
+    interfaces: []
+  };
+  var GooGlUrlShortener$Parameters_instance = null;
+  function GooGlUrlShortener$Parameters_getInstance() {
+    if (GooGlUrlShortener$Parameters_instance === null) {
+      new GooGlUrlShortener$Parameters();
+    }
+    return GooGlUrlShortener$Parameters_instance;
+  }
+  GooGlUrlShortener.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'GooGlUrlShortener',
+    interfaces: []
+  };
+  function get_wasSuccessful($receiver) {
+    if (Kotlin.isType($receiver, GooGlUrlShortener$ShortenResponse$success))
+      return true;
+    else if (Kotlin.isType($receiver, GooGlUrlShortener$ShortenResponse$error) || Kotlin.isType($receiver, GooGlUrlShortener$ShortenResponse$unknownError))
+      return false;
+    else
+      return Kotlin.noWhenBranchMatched();
+  }
+  function get_statusText($receiver) {
+    var tmp$;
+    return (tmp$ = $receiver.httpResponse) != null ? tmp$.statusText : null;
   }
   var asList_0 = defineInlineFunction('Rent Split 2.jQueryInterface.asList_9ufosi$', wrapFunction(function () {
     var asList = Kotlin.kotlin.collections.asList_us0mfu$;
@@ -2405,9 +2969,42 @@ this['Rent Split 2'] = function (_, Kotlin) {
       return jq($receiver.cssSelectorString);
     };
   }));
+  var addClass = defineInlineFunction('Rent Split 2.jQueryInterface.addClass_u9bwps$', function ($receiver, class_0) {
+    return $receiver.addClass(class_0.className);
+  });
+  var removeClass = defineInlineFunction('Rent Split 2.jQueryInterface.removeClass_u9bwps$', function ($receiver, class_0) {
+    return $receiver.removeClass(class_0.className);
+  });
+  var data = defineInlineFunction('Rent Split 2.jQueryInterface.data_b7bhqf$', function ($receiver, data) {
+    return $receiver.data(data.dataName);
+  });
+  var data_0 = defineInlineFunction('Rent Split 2.jQueryInterface.data_l9wfl1$', function ($receiver, data, value) {
+    return $receiver.data(data.dataName, value);
+  });
+  var attr = defineInlineFunction('Rent Split 2.jQueryInterface.attr_phnjxj$', function ($receiver, attribute) {
+    return $receiver.attr(attribute.htmlAttributeName);
+  });
+  var attr_0 = defineInlineFunction('Rent Split 2.jQueryInterface.attr_2ul80f$', function ($receiver, attribute, value) {
+    return $receiver.attr(attribute.htmlAttributeName, value);
+  });
+  var attr_1 = defineInlineFunction('Rent Split 2.jQueryInterface.attr_db73uc$', function ($receiver, attribute, value) {
+    return $receiver.attr(attribute.htmlAttributeName, value);
+  });
+  var attr_2 = defineInlineFunction('Rent Split 2.jQueryInterface.attr_mpifw4$', function ($receiver, attribute, value) {
+    return $receiver.attr(attribute.htmlAttributeName, value);
+  });
+  var onChangeData = defineInlineFunction('Rent Split 2.jQueryInterface.onChangeData_x0svav$', function ($receiver, action) {
+    $receiver.on('changeData', void 0, action);
+  });
   var get_parentElement = defineInlineFunction('Rent Split 2.jQueryInterface.get_parentElement_s15u7w$', function ($receiver) {
     return $receiver.parentElement;
   });
+  function delay(seconds, then) {
+    window.setTimeout(then, roundToInt(seconds * 1000));
+  }
+  function delay_0(seconds, then) {
+    window.setTimeout(then, seconds.multiply(Kotlin.Long.fromInt(1000)));
+  }
   function indexOfFirstOrNull($receiver, evaluator) {
     var indexOfFirst$result;
     indexOfFirst$break: do {
@@ -2428,6 +3025,192 @@ this['Rent Split 2'] = function (_, Kotlin) {
     var it = indexOfFirst$result;
     return it < 0 ? null : it;
   }
+  var get_first = defineInlineFunction('Rent Split 2.org.bh.tools.base.collections.extensions.get_first_4mqhgw$', wrapFunction(function () {
+    var first = Kotlin.kotlin.collections.first_7wnvza$;
+    return function ($receiver) {
+      return first($receiver);
+    };
+  }));
+  var get_firstOrNull = defineInlineFunction('Rent Split 2.org.bh.tools.base.collections.extensions.get_firstOrNull_4mqhgw$', wrapFunction(function () {
+    var firstOrNull = Kotlin.kotlin.collections.firstOrNull_7wnvza$;
+    return function ($receiver) {
+      return firstOrNull($receiver);
+    };
+  }));
+  var get_last = defineInlineFunction('Rent Split 2.org.bh.tools.base.collections.extensions.get_last_4mqhgw$', wrapFunction(function () {
+    var last = Kotlin.kotlin.collections.last_7wnvza$;
+    return function ($receiver) {
+      return last($receiver);
+    };
+  }));
+  var get_lastOrNull = defineInlineFunction('Rent Split 2.org.bh.tools.base.collections.extensions.get_lastOrNull_4mqhgw$', wrapFunction(function () {
+    var lastOrNull = Kotlin.kotlin.collections.lastOrNull_7wnvza$;
+    return function ($receiver) {
+      return lastOrNull($receiver);
+    };
+  }));
+  var removeFirst = defineInlineFunction('Rent Split 2.org.bh.tools.base.collections.extensions.removeFirst_vvxzk3$', function ($receiver) {
+    return $receiver.removeAt_za3lpa$(0);
+  });
+  function Triad(a, b, c) {
+    this.a = a;
+    this.b = b;
+    this.c = c;
+  }
+  Triad.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Triad',
+    interfaces: []
+  };
+  Triad.prototype.component1 = function () {
+    return this.a;
+  };
+  Triad.prototype.component2 = function () {
+    return this.b;
+  };
+  Triad.prototype.component3 = function () {
+    return this.c;
+  };
+  Triad.prototype.copy_1l1jfh$ = function (a, b, c) {
+    return new Triad(a === void 0 ? this.a : a, b === void 0 ? this.b : b, c === void 0 ? this.c : c);
+  };
+  Triad.prototype.toString = function () {
+    return 'Triad(a=' + Kotlin.toString(this.a) + (', b=' + Kotlin.toString(this.b)) + (', c=' + Kotlin.toString(this.c)) + ')';
+  };
+  Triad.prototype.hashCode = function () {
+    var result = 0;
+    result = result * 31 + Kotlin.hashCode(this.a) | 0;
+    result = result * 31 + Kotlin.hashCode(this.b) | 0;
+    result = result * 31 + Kotlin.hashCode(this.c) | 0;
+    return result;
+  };
+  Triad.prototype.equals = function (other) {
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.a, other.a) && Kotlin.equals(this.b, other.b) && Kotlin.equals(this.c, other.c)))));
+  };
+  function get_left($receiver) {
+    return $receiver.a;
+  }
+  function get_center($receiver) {
+    return $receiver.b;
+  }
+  function get_right($receiver) {
+    return $receiver.c;
+  }
+  var firstOrNullComparingTriads = defineInlineFunction('Rent Split 2.org.bh.tools.base.collections.extensions.firstOrNullComparingTriads_csic9r$', wrapFunction(function () {
+    var Triad_init = _.org.bh.tools.base.collections.extensions.Triad;
+    return function ($receiver, triadComparator) {
+      var iterator = $receiver.iterator();
+      if (!iterator.hasNext())
+        return null;
+      var previousCenter = iterator.next();
+      if (!iterator.hasNext())
+        return null;
+      var previousRight = iterator.next();
+      while (iterator.hasNext()) {
+        var left = previousCenter;
+        var center = previousRight;
+        var right = iterator.next();
+        var triad = new Triad_init(left, center, right);
+        if (triadComparator(triad)) {
+          return triad;
+        }
+         else {
+          previousCenter = center;
+          previousRight = right;
+        }
+      }
+      return null;
+    };
+  }));
+  var firstOrNullComparingPairs = defineInlineFunction('Rent Split 2.org.bh.tools.base.collections.extensions.firstOrNullComparingPairs_cf0iqu$', wrapFunction(function () {
+    var Pair_init = Kotlin.kotlin.Pair;
+    return function ($receiver, pairComparator) {
+      var iterator = $receiver.iterator();
+      if (!iterator.hasNext())
+        return null;
+      var previousRight = iterator.next();
+      while (iterator.hasNext()) {
+        var left = previousRight;
+        var right = iterator.next();
+        var pair = new Pair_init(left, right);
+        if (pairComparator(pair)) {
+          return pair;
+        }
+         else {
+          previousRight = right;
+        }
+      }
+      return null;
+    };
+  }));
+  function reduceTo($receiver, startingValue, reducer) {
+    var runningValue = {v: startingValue};
+    var tmp$;
+    tmp$ = $receiver.iterator();
+    while (tmp$.hasNext()) {
+      var element = tmp$.next();
+      runningValue.v = reducer(runningValue.v, element);
+    }
+    return runningValue.v;
+  }
+  var safeReduce = defineInlineFunction('Rent Split 2.org.bh.tools.base.collections.extensions.safeReduce_lrrcxv$', wrapFunction(function () {
+    var count = Kotlin.kotlin.collections.count_7wnvza$;
+    var UnsupportedOperationException_init = Kotlin.kotlin.UnsupportedOperationException_init_pdl1vj$;
+    return function ($receiver, operation) {
+      var tmp$;
+      if (count($receiver) < 1)
+        tmp$ = null;
+      else {
+        var iterator = $receiver.iterator();
+        if (!iterator.hasNext())
+          throw UnsupportedOperationException_init("Empty collection can't be reduced.");
+        var accumulator = iterator.next();
+        while (iterator.hasNext()) {
+          accumulator = operation(accumulator, iterator.next());
+        }
+        tmp$ = accumulator;
+      }
+      return tmp$;
+    };
+  }));
+  var safeReduce_0 = defineInlineFunction('Rent Split 2.org.bh.tools.base.collections.extensions.safeReduce_w5eg7r$', wrapFunction(function () {
+    var UnsupportedOperationException_init = Kotlin.kotlin.UnsupportedOperationException_init_pdl1vj$;
+    return function ($receiver, operation) {
+      var tmp$;
+      if ($receiver.isEmpty())
+        tmp$ = null;
+      else {
+        var iterator = $receiver.iterator();
+        if (!iterator.hasNext())
+          throw UnsupportedOperationException_init("Empty collection can't be reduced.");
+        var accumulator = iterator.next();
+        while (iterator.hasNext()) {
+          accumulator = operation(accumulator, iterator.next());
+        }
+        tmp$ = accumulator;
+      }
+      return tmp$;
+    };
+  }));
+  function toString_0($receiver, prefix, glue, suffix) {
+    if (prefix === void 0)
+      prefix = '';
+    if (suffix === void 0)
+      suffix = '';
+    return joinToString($receiver, glue, prefix, suffix);
+  }
+  var nonEmpty = defineInlineFunction('Rent Split 2.org.bh.tools.base.collections.extensions.nonEmpty_b5o7sk$', wrapFunction(function () {
+    var count = Kotlin.kotlin.collections.count_7wnvza$;
+    return function ($receiver) {
+      return count($receiver) > 0 ? $receiver : null;
+    };
+  }));
+  var get_nonEmpty = defineInlineFunction('Rent Split 2.org.bh.tools.base.collections.extensions.get_nonEmpty_yfwuwe$', wrapFunction(function () {
+    var count = Kotlin.kotlin.collections.count_7wnvza$;
+    return function ($receiver) {
+      return count($receiver) > 0 ? $receiver : null;
+    };
+  }));
   function Observing(initialValue, shouldSet, willSet, didSet) {
     if (shouldSet === void 0)
       shouldSet = NullSSB();
@@ -2506,16 +3289,16 @@ this['Rent Split 2'] = function (_, Kotlin) {
       didSet = NullDSB();
     return new observing$ObjectLiteral(shouldSet, willSet, didSet, initialValue);
   }
-  var toString_0 = defineInlineFunction('Rent Split 2.org.bh.tools.base.jsShim.toString_798l30$', function ($receiver, base) {
+  var toString_1 = defineInlineFunction('Rent Split 2.org.bh.tools.base.jsShim.toString_798l30$', function ($receiver, base) {
     return $receiver.toString(base);
   });
-  var toString_1 = defineInlineFunction('Rent Split 2.org.bh.tools.base.jsShim.toString_di2vk2$', function ($receiver, base) {
+  var toString_2 = defineInlineFunction('Rent Split 2.org.bh.tools.base.jsShim.toString_di2vk2$', function ($receiver, base) {
     return $receiver.toString(base);
   });
-  var toString_2 = defineInlineFunction('Rent Split 2.org.bh.tools.base.jsShim.toString_dqglrj$', function ($receiver, base) {
+  var toString_3 = defineInlineFunction('Rent Split 2.org.bh.tools.base.jsShim.toString_dqglrj$', function ($receiver, base) {
     return $receiver.toString(base);
   });
-  var toString_3 = defineInlineFunction('Rent Split 2.org.bh.tools.base.jsShim.toString_if0zpk$', function ($receiver, base) {
+  var toString_4 = defineInlineFunction('Rent Split 2.org.bh.tools.base.jsShim.toString_if0zpk$', function ($receiver, base) {
     return $receiver.toString(base);
   });
   var replace_0 = defineInlineFunction('Rent Split 2.org.bh.tools.base.jsShim.replace_he2ph6$', function ($receiver, regExp, replacer) {
@@ -2674,6 +3457,9 @@ this['Rent Split 2'] = function (_, Kotlin) {
     else
       return Kotlin.noWhenBranchMatched();
   }
+  function deepCopy($receiver) {
+    return JSON.parse(JSON.stringify($receiver));
+  }
   function safeTry(closure) {
     try {
       return closure();
@@ -2686,6 +3472,431 @@ this['Rent Split 2'] = function (_, Kotlin) {
         throw _;
     }
   }
+  function HttpRequest(url, parameters) {
+    if (parameters === void 0)
+      parameters = HttpRequest$RequestParameters$Companion_getInstance().emptyParameters;
+    this.url = url;
+    this.parameters = parameters;
+  }
+  HttpRequest.prototype.get_m8ahyy$ = function (responseListener) {
+    this.send_i16107$('GET', void 0, responseListener);
+  };
+  function HttpRequest$send$lambda(closure$bestResponseSoFar, closure$request, closure$responseListener) {
+    return function (it) {
+      closure$bestResponseSoFar.v = mostInformative(closure$bestResponseSoFar.v, HttpResponse_init(closure$request));
+      if (closure$request.readyState === XMLHttpRequest.DONE) {
+        closure$responseListener(ensureNotNull(closure$bestResponseSoFar.v));
+      }
+      return Unit;
+    };
+  }
+  HttpRequest.prototype.send_i16107$ = function (method, body, responseListener) {
+    if (body === void 0)
+      body = null;
+    var request = new XMLHttpRequest();
+    var bestResponseSoFar = {v: null};
+    request.onreadystatechange = HttpRequest$send$lambda(bestResponseSoFar, request, responseListener);
+    var requestUrlString = this.generateFullRequestUrlString_0();
+    var actualBody = body != null ? body : this.generatePostBody_0();
+    var message = 'Will send ' + method + ' request:';
+    console.log(message);
+    console.log(requestUrlString);
+    console.log(actualBody);
+    request.open(method, requestUrlString, false);
+    var tmp$;
+    tmp$ = this.parameters.justHeaders.allParameters.iterator();
+    while (tmp$.hasNext()) {
+      var element = tmp$.next();
+      request.setRequestHeader(element.key, element.valueAsRequestString);
+    }
+    var message_0 = request.getAllResponseHeaders();
+    console.log(message_0);
+    try {
+      request.send(actualBody);
+    }
+     catch (error) {
+      if (Kotlin.isType(error, Throwable)) {
+        responseListener(new HttpResponse(error.toString(), -1 | 0, 'Failed to send request', null));
+      }
+       else
+        throw error;
+    }
+  };
+  HttpRequest.prototype.generatePostBody_0 = function () {
+    return jsonString(this.parameters.justPostBodyJson.toRequestJson());
+  };
+  HttpRequest.prototype.generateFullRequestUrlString_0 = function () {
+    return this.generateFullRequestUrl_0().toString();
+  };
+  HttpRequest.prototype.generateFullRequestUrl_0 = function () {
+    return withSearchParams(this.url, this.parameters.justUrlParameters);
+  };
+  function HttpRequest$RequestParameters(allParameters) {
+    HttpRequest$RequestParameters$Companion_getInstance();
+    this.allParameters = allParameters;
+  }
+  function HttpRequest$RequestParameters$toRequestJson$lambda(requestJson, parameter) {
+    requestJson[parameter.key] = parameter.valueAsRequestString;
+    return requestJson;
+  }
+  HttpRequest$RequestParameters.prototype.toRequestJson = function () {
+    if (this.allParameters.isEmpty()) {
+      return json([]);
+    }
+     else {
+      return reduceTo(this.allParameters, json([]), HttpRequest$RequestParameters$toRequestJson$lambda);
+    }
+  };
+  function HttpRequest$RequestParameters$toRequestUriParameterString$lambda(it) {
+    return it.key + '=' + it.valueAsRequestString;
+  }
+  HttpRequest$RequestParameters.prototype.toRequestUriParameterString = function () {
+    return '?' + joinToString(this.allParameters, '&', void 0, void 0, void 0, void 0, HttpRequest$RequestParameters$toRequestUriParameterString$lambda);
+  };
+  Object.defineProperty(HttpRequest$RequestParameters.prototype, 'justUrlParameters', {
+    get: function () {
+      var $receiver = this.allParameters;
+      var destination = ArrayList_init();
+      var tmp$;
+      tmp$ = $receiver.iterator();
+      while (tmp$.hasNext()) {
+        var element = tmp$.next();
+        if (element.usage === HttpRequest$RequestParameter$Usage$urlParameter_getInstance())
+          destination.add_11rb$(element);
+      }
+      return new HttpRequest$RequestParameters(destination);
+    }
+  });
+  Object.defineProperty(HttpRequest$RequestParameters.prototype, 'justPostBodyJson', {
+    get: function () {
+      var $receiver = this.allParameters;
+      var destination = ArrayList_init();
+      var tmp$;
+      tmp$ = $receiver.iterator();
+      while (tmp$.hasNext()) {
+        var element = tmp$.next();
+        if (element.usage === HttpRequest$RequestParameter$Usage$postBodyJson_getInstance())
+          destination.add_11rb$(element);
+      }
+      return new HttpRequest$RequestParameters(destination);
+    }
+  });
+  Object.defineProperty(HttpRequest$RequestParameters.prototype, 'justHeaders', {
+    get: function () {
+      var $receiver = this.allParameters;
+      var destination = ArrayList_init();
+      var tmp$;
+      tmp$ = $receiver.iterator();
+      while (tmp$.hasNext()) {
+        var element = tmp$.next();
+        if (element.usage === HttpRequest$RequestParameter$Usage$header_getInstance())
+          destination.add_11rb$(element);
+      }
+      return new HttpRequest$RequestParameters(destination);
+    }
+  });
+  function HttpRequest$RequestParameters$Companion() {
+    HttpRequest$RequestParameters$Companion_instance = this;
+    this.emptyParameters = new HttpRequest$RequestParameters(emptyList());
+  }
+  HttpRequest$RequestParameters$Companion.prototype.invoke_bgp2as$ = function (allParameters) {
+    return new HttpRequest$RequestParameters(toList_0(allParameters));
+  };
+  HttpRequest$RequestParameters$Companion.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Companion',
+    interfaces: []
+  };
+  var HttpRequest$RequestParameters$Companion_instance = null;
+  function HttpRequest$RequestParameters$Companion_getInstance() {
+    if (HttpRequest$RequestParameters$Companion_instance === null) {
+      new HttpRequest$RequestParameters$Companion();
+    }
+    return HttpRequest$RequestParameters$Companion_instance;
+  }
+  HttpRequest$RequestParameters.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'RequestParameters',
+    interfaces: []
+  };
+  function HttpRequest$RequestParameter(key, value, usage, requestValueGenerator) {
+    this.key = key;
+    this.value = value;
+    this.usage = usage;
+    this.valueAsRequestString_3t57w8$_0 = lazy(HttpRequest$RequestParameter$valueAsRequestString$lambda(requestValueGenerator, this));
+  }
+  Object.defineProperty(HttpRequest$RequestParameter.prototype, 'valueAsRequestString', {
+    get: function () {
+      return this.valueAsRequestString_3t57w8$_0.value;
+    }
+  });
+  function HttpRequest$RequestParameter$Usage(name, ordinal) {
+    Enum.call(this);
+    this.name$ = name;
+    this.ordinal$ = ordinal;
+  }
+  function HttpRequest$RequestParameter$Usage_initFields() {
+    HttpRequest$RequestParameter$Usage_initFields = function () {
+    };
+    HttpRequest$RequestParameter$Usage$urlParameter_instance = new HttpRequest$RequestParameter$Usage('urlParameter', 0);
+    HttpRequest$RequestParameter$Usage$postBodyJson_instance = new HttpRequest$RequestParameter$Usage('postBodyJson', 1);
+    HttpRequest$RequestParameter$Usage$header_instance = new HttpRequest$RequestParameter$Usage('header', 2);
+  }
+  var HttpRequest$RequestParameter$Usage$urlParameter_instance;
+  function HttpRequest$RequestParameter$Usage$urlParameter_getInstance() {
+    HttpRequest$RequestParameter$Usage_initFields();
+    return HttpRequest$RequestParameter$Usage$urlParameter_instance;
+  }
+  var HttpRequest$RequestParameter$Usage$postBodyJson_instance;
+  function HttpRequest$RequestParameter$Usage$postBodyJson_getInstance() {
+    HttpRequest$RequestParameter$Usage_initFields();
+    return HttpRequest$RequestParameter$Usage$postBodyJson_instance;
+  }
+  var HttpRequest$RequestParameter$Usage$header_instance;
+  function HttpRequest$RequestParameter$Usage$header_getInstance() {
+    HttpRequest$RequestParameter$Usage_initFields();
+    return HttpRequest$RequestParameter$Usage$header_instance;
+  }
+  HttpRequest$RequestParameter$Usage.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Usage',
+    interfaces: [Enum]
+  };
+  function HttpRequest$RequestParameter$Usage$values() {
+    return [HttpRequest$RequestParameter$Usage$urlParameter_getInstance(), HttpRequest$RequestParameter$Usage$postBodyJson_getInstance(), HttpRequest$RequestParameter$Usage$header_getInstance()];
+  }
+  HttpRequest$RequestParameter$Usage.values = HttpRequest$RequestParameter$Usage$values;
+  function HttpRequest$RequestParameter$Usage$valueOf(name) {
+    switch (name) {
+      case 'urlParameter':
+        return HttpRequest$RequestParameter$Usage$urlParameter_getInstance();
+      case 'postBodyJson':
+        return HttpRequest$RequestParameter$Usage$postBodyJson_getInstance();
+      case 'header':
+        return HttpRequest$RequestParameter$Usage$header_getInstance();
+      default:throwISE('No enum constant org.bh.tools.io.net.HttpRequest.RequestParameter.Usage.' + name);
+    }
+  }
+  HttpRequest$RequestParameter$Usage.valueOf_61zpoe$ = HttpRequest$RequestParameter$Usage$valueOf;
+  function HttpRequest$RequestParameter$genericHeader(key, value) {
+    HttpRequest$RequestParameter.call(this, key, value, HttpRequest$RequestParameter$Usage$header_getInstance(), HttpRequest$RequestParameter$HttpRequest$RequestParameter$genericHeader_init$lambda);
+  }
+  function HttpRequest$RequestParameter$HttpRequest$RequestParameter$genericHeader_init$lambda(it) {
+    return it;
+  }
+  HttpRequest$RequestParameter$genericHeader.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'genericHeader',
+    interfaces: [HttpRequest$RequestParameter]
+  };
+  function HttpRequest$RequestParameter$valueAsRequestString$lambda(closure$requestValueGenerator, this$RequestParameter) {
+    return function () {
+      return closure$requestValueGenerator(this$RequestParameter.value);
+    };
+  }
+  HttpRequest$RequestParameter.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'RequestParameter',
+    interfaces: []
+  };
+  HttpRequest.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'HttpRequest',
+    interfaces: []
+  };
+  function HttpRequest_init(urlString, parameters, $this) {
+    if (parameters === void 0)
+      parameters = HttpRequest$RequestParameters$Companion_getInstance().emptyParameters;
+    $this = $this || Object.create(HttpRequest.prototype);
+    HttpRequest.call($this, new URL(urlString), parameters);
+    return $this;
+  }
+  function withSearchParams($receiver, searchParams) {
+    if (searchParams.allParameters.isEmpty()) {
+      return $receiver;
+    }
+     else {
+      var copy_0 = copy($receiver);
+      copy_0.search = asSearchString(searchParams);
+      return copy_0;
+    }
+  }
+  function asSearchString$lambda(it) {
+    return get_urlEncoded(it.key) + '=' + get_urlEncoded(toString(it.value));
+  }
+  function asSearchString($receiver) {
+    return '?' + joinToString($receiver.allParameters, '&', void 0, void 0, void 0, void 0, asSearchString$lambda);
+  }
+  function send($receiver, method, url, headers, async, username, password) {
+    if (headers === void 0)
+      headers = emptyMap();
+    if (username === void 0)
+      username = null;
+    if (password === void 0)
+      password = null;
+    $receiver.open(method, url, async, username, password);
+    var tmp$;
+    tmp$ = headers.entries.iterator();
+    while (tmp$.hasNext()) {
+      var element = tmp$.next();
+      $receiver.setRequestHeader(element.key, element.value);
+    }
+  }
+  function HttpResponse(text, status, statusText, interactionStage) {
+    this.text = text;
+    this.status = status;
+    this.statusText = statusText;
+    this.interactionStage = interactionStage;
+  }
+  Object.defineProperty(HttpResponse.prototype, 'wasSuccessful', {
+    get: function () {
+      return this.status === toShort(200);
+    }
+  });
+  function HttpResponse$InteractionStage(name, ordinal, xmlHttpRequestReadyState) {
+    Enum.call(this);
+    this.xmlHttpRequestReadyState = xmlHttpRequestReadyState;
+    this.name$ = name;
+    this.ordinal$ = ordinal;
+  }
+  function HttpResponse$InteractionStage_initFields() {
+    HttpResponse$InteractionStage_initFields = function () {
+    };
+    HttpResponse$InteractionStage$notStarted_instance = new HttpResponse$InteractionStage('notStarted', 0, XMLHttpRequest.UNSENT);
+    HttpResponse$InteractionStage$opened_instance = new HttpResponse$InteractionStage('opened', 1, XMLHttpRequest.OPENED);
+    HttpResponse$InteractionStage$headersReceived_instance = new HttpResponse$InteractionStage('headersReceived', 2, XMLHttpRequest.HEADERS_RECEIVED);
+    HttpResponse$InteractionStage$loading_instance = new HttpResponse$InteractionStage('loading', 3, XMLHttpRequest.LOADING);
+    HttpResponse$InteractionStage$completed_instance = new HttpResponse$InteractionStage('completed', 4, XMLHttpRequest.DONE);
+    HttpResponse$InteractionStage$Companion_getInstance();
+  }
+  var HttpResponse$InteractionStage$notStarted_instance;
+  function HttpResponse$InteractionStage$notStarted_getInstance() {
+    HttpResponse$InteractionStage_initFields();
+    return HttpResponse$InteractionStage$notStarted_instance;
+  }
+  var HttpResponse$InteractionStage$opened_instance;
+  function HttpResponse$InteractionStage$opened_getInstance() {
+    HttpResponse$InteractionStage_initFields();
+    return HttpResponse$InteractionStage$opened_instance;
+  }
+  var HttpResponse$InteractionStage$headersReceived_instance;
+  function HttpResponse$InteractionStage$headersReceived_getInstance() {
+    HttpResponse$InteractionStage_initFields();
+    return HttpResponse$InteractionStage$headersReceived_instance;
+  }
+  var HttpResponse$InteractionStage$loading_instance;
+  function HttpResponse$InteractionStage$loading_getInstance() {
+    HttpResponse$InteractionStage_initFields();
+    return HttpResponse$InteractionStage$loading_instance;
+  }
+  var HttpResponse$InteractionStage$completed_instance;
+  function HttpResponse$InteractionStage$completed_getInstance() {
+    HttpResponse$InteractionStage_initFields();
+    return HttpResponse$InteractionStage$completed_instance;
+  }
+  function HttpResponse$InteractionStage$Companion() {
+    HttpResponse$InteractionStage$Companion_instance = this;
+  }
+  HttpResponse$InteractionStage$Companion.prototype.invoke_mq22fl$ = function (xmlHttpRequestReadyState) {
+    var $receiver = HttpResponse$InteractionStage$values();
+    var firstOrNull$result;
+    firstOrNull$break: do {
+      var tmp$;
+      for (tmp$ = 0; tmp$ !== $receiver.length; ++tmp$) {
+        var element = $receiver[tmp$];
+        if (element.xmlHttpRequestReadyState === xmlHttpRequestReadyState) {
+          firstOrNull$result = element;
+          break firstOrNull$break;
+        }
+      }
+      firstOrNull$result = null;
+    }
+     while (false);
+    return firstOrNull$result;
+  };
+  HttpResponse$InteractionStage$Companion.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Companion',
+    interfaces: []
+  };
+  var HttpResponse$InteractionStage$Companion_instance = null;
+  function HttpResponse$InteractionStage$Companion_getInstance() {
+    HttpResponse$InteractionStage_initFields();
+    if (HttpResponse$InteractionStage$Companion_instance === null) {
+      new HttpResponse$InteractionStage$Companion();
+    }
+    return HttpResponse$InteractionStage$Companion_instance;
+  }
+  HttpResponse$InteractionStage.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'InteractionStage',
+    interfaces: [Enum]
+  };
+  function HttpResponse$InteractionStage$values() {
+    return [HttpResponse$InteractionStage$notStarted_getInstance(), HttpResponse$InteractionStage$opened_getInstance(), HttpResponse$InteractionStage$headersReceived_getInstance(), HttpResponse$InteractionStage$loading_getInstance(), HttpResponse$InteractionStage$completed_getInstance()];
+  }
+  HttpResponse$InteractionStage.values = HttpResponse$InteractionStage$values;
+  function HttpResponse$InteractionStage$valueOf(name) {
+    switch (name) {
+      case 'notStarted':
+        return HttpResponse$InteractionStage$notStarted_getInstance();
+      case 'opened':
+        return HttpResponse$InteractionStage$opened_getInstance();
+      case 'headersReceived':
+        return HttpResponse$InteractionStage$headersReceived_getInstance();
+      case 'loading':
+        return HttpResponse$InteractionStage$loading_getInstance();
+      case 'completed':
+        return HttpResponse$InteractionStage$completed_getInstance();
+      default:throwISE('No enum constant org.bh.tools.io.net.HttpResponse.InteractionStage.' + name);
+    }
+  }
+  HttpResponse$InteractionStage.valueOf_61zpoe$ = HttpResponse$InteractionStage$valueOf;
+  HttpResponse.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'HttpResponse',
+    interfaces: []
+  };
+  function HttpResponse_init(xmlHttpResponse, $this) {
+    $this = $this || Object.create(HttpResponse.prototype);
+    HttpResponse.call($this, xmlHttpResponse.responseText, xmlHttpResponse.status, xmlHttpResponse.statusText, HttpResponse$InteractionStage$Companion_getInstance().invoke_mq22fl$(xmlHttpResponse.readyState));
+    return $this;
+  }
+  function mostInformative(a, b) {
+    if (a == null)
+      return b;
+    else {
+      return get_informativeScore(a) > get_informativeScore(b) ? a : b;
+    }
+  }
+  var isBlank = Kotlin.kotlin.text.isBlank_gw00vp$;
+  function get_informativeScore($receiver) {
+    var score = 0.0;
+    if ($receiver.status !== toShort(0)) {
+      score += $receiver.status === toShort(200) ? 1.5 : 1.0;
+    }
+    var $receiver_0 = $receiver.statusText;
+    if (!($receiver_0 == null || isBlank($receiver_0))) {
+      score += 2;
+    }
+    var $receiver_1 = $receiver.text;
+    if (!($receiver_1 == null || isBlank($receiver_1))) {
+      score += 3;
+    }
+    if ($receiver.interactionStage != null) {
+      score *= ($receiver.interactionStage.xmlHttpRequestReadyState + 1) / XMLHttpRequest.DONE;
+    }
+    return score;
+  }
+  function copy($receiver) {
+    return new URL($receiver.toString());
+  }
+  var deepCopy_0 = defineInlineFunction('Rent Split 2.org.bh.tools.io.net.deepCopy_wace04$', wrapFunction(function () {
+    var copy = _.org.bh.tools.io.net.copy_wace04$;
+    return function ($receiver) {
+      return copy($receiver);
+    };
+  }));
   function TernaryCheckboxTree(children, text, id) {
     this.children = children;
     this.text_kabazs$_0 = text;
@@ -3131,14 +4342,14 @@ this['Rent Split 2'] = function (_, Kotlin) {
       return expenseHasApplicableRoommates;
     }
   });
-  Object.defineProperty(package$RentSplit, 'copyStateUrlButton', {
+  Object.defineProperty(package$RentSplit, 'shareUrlButton', {
     get: function () {
-      return copyStateUrlButton;
+      return shareUrlButton;
     }
   });
-  Object.defineProperty(package$RentSplit, 'stateUrlField', {
+  Object.defineProperty(package$RentSplit, 'shareUrlField', {
     get: function () {
-      return stateUrlField;
+      return shareUrlField;
     }
   });
   Object.defineProperty(package$RentSplit, 'localStorageWarning', {
@@ -3154,6 +4365,26 @@ this['Rent Split 2'] = function (_, Kotlin) {
   Object.defineProperty(package$RentSplit, 'localStorageWarningExplicitConsentButton', {
     get: function () {
       return localStorageWarningExplicitConsentButton;
+    }
+  });
+  Object.defineProperty(package$RentSplit, 'shareUrlHolder', {
+    get: function () {
+      return shareUrlHolder;
+    }
+  });
+  Object.defineProperty(package$RentSplit, 'statusMetaData', {
+    get: function () {
+      return statusMetaData;
+    }
+  });
+  Object.defineProperty(package$RentSplit, 'canHaveStatus', {
+    get: function () {
+      return canHaveStatus;
+    }
+  });
+  Object.defineProperty(package$RentSplit, 'showStatus', {
+    get: function () {
+      return showStatus;
     }
   });
   Object.defineProperty(package$RentSplit, 'expenseFilterButton', {
@@ -3304,7 +4535,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
     get: RentSplitViewGenerator_getInstance
   });
   package$RentSplit.AnyCssSelector = AnyCssSelector;
-  package$RentSplit.CssHtmlAttributeWithoutValue = CssHtmlAttributeWithoutValue;
+  package$RentSplit.CssHtmlAttribute = CssHtmlAttribute;
   package$RentSplit.CssHtmlAttributeWithValue = CssHtmlAttributeWithValue;
   CssParameterForAttributeSelector.exactly = CssParameterForAttributeSelector$exactly;
   CssParameterForAttributeSelector.listContainsExactly = CssParameterForAttributeSelector$listContainsExactly;
@@ -3414,6 +4645,11 @@ this['Rent Split 2'] = function (_, Kotlin) {
       return generalStateSerializedName;
     }
   });
+  Object.defineProperty(package$RentSplit, 'gooGlAccessToken', {
+    get: function () {
+      return gooGlAccessToken;
+    }
+  });
   Object.defineProperty(RentSplitState, 'Companion', {
     get: RentSplitState$Companion_getInstance
   });
@@ -3441,6 +4677,8 @@ this['Rent Split 2'] = function (_, Kotlin) {
     get: UserConsent$Companion_getInstance
   });
   package$RentSplit.UserConsent = UserConsent;
+  package$RentSplit.get_urlEncoded_pdl1vz$ = get_urlEncoded;
+  package$RentSplit.get_urlDecoded_pdl1vz$ = get_urlDecoded;
   package$RentSplit.isNeitherNullNorEmpty_5cw0du$ = isNeitherNullNorEmpty;
   package$RentSplit.isNeitherNullNorBlank_5cw0du$ = isNeitherNullNorBlank;
   package$RentSplit.get_dollarFormat_yrwdxr$ = get_dollarFormat;
@@ -3448,16 +4686,43 @@ this['Rent Split 2'] = function (_, Kotlin) {
   package$RentSplit.nonEmptyOrNull_pdl1vz$ = nonEmptyOrNull;
   package$RentSplit.toBooleanOrNull_s8jyvk$ = toBooleanOrNull;
   package$RentSplit.toBoolean_f4dhtg$ = toBoolean;
-  package$RentSplit.reduceTo_i8uhts$ = reduceTo;
   package$RentSplit.adding_bv23uc$ = adding;
   package$RentSplit.copyToClipboardOrThrow_9ufosi$ = copyToClipboardOrThrow;
   package$RentSplit.doNothing = doNothing;
   package$RentSplit.consoleLogString_61zpoe$ = consoleLogString;
   package$RentSplit.log_hyc7mn$ = log;
   package$RentSplit.alsoLog_vxumlc$ = alsoLog;
+  package$RentSplit.consoleLog_mh5how$ = consoleLog;
+  package$RentSplit.log_7uhc0p$ = log_0;
   package$RentSplit.toSetOfIds_pdl1vz$ = toSetOfIds;
   package$RentSplit.serializedSetOfIds_gevexo$ = serializedSetOfIds;
   package$RentSplit.sanitizedForHtml_pdl1vz$ = sanitizedForHtml;
+  package$RentSplit.jsonString_s8jyvk$ = jsonString;
+  Object.defineProperty(GooGlUrlShortener$ShortenResponse$success, 'Companion', {
+    get: GooGlUrlShortener$ShortenResponse$success$Companion_getInstance
+  });
+  GooGlUrlShortener$ShortenResponse.success = GooGlUrlShortener$ShortenResponse$success;
+  Object.defineProperty(GooGlUrlShortener$ShortenResponse$error, 'Companion', {
+    get: GooGlUrlShortener$ShortenResponse$error$Companion_getInstance
+  });
+  GooGlUrlShortener$ShortenResponse.error = GooGlUrlShortener$ShortenResponse$error;
+  Object.defineProperty(GooGlUrlShortener$ShortenResponse$SingleError, 'Companion', {
+    get: GooGlUrlShortener$ShortenResponse$SingleError$Companion_getInstance
+  });
+  GooGlUrlShortener$ShortenResponse.SingleError = GooGlUrlShortener$ShortenResponse$SingleError;
+  GooGlUrlShortener$ShortenResponse.unknownError = GooGlUrlShortener$ShortenResponse$unknownError;
+  Object.defineProperty(GooGlUrlShortener$ShortenResponse, 'Companion', {
+    get: GooGlUrlShortener$ShortenResponse$Companion_getInstance
+  });
+  GooGlUrlShortener.ShortenResponse = GooGlUrlShortener$ShortenResponse;
+  GooGlUrlShortener$Parameters.prototype.accessKey = GooGlUrlShortener$Parameters$accessKey;
+  GooGlUrlShortener$Parameters.prototype.longUrl = GooGlUrlShortener$Parameters$longUrl;
+  Object.defineProperty(GooGlUrlShortener, 'Parameters', {
+    get: GooGlUrlShortener$Parameters_getInstance
+  });
+  package$RentSplit.GooGlUrlShortener = GooGlUrlShortener;
+  package$RentSplit.get_wasSuccessful_i51kfp$ = get_wasSuccessful;
+  package$RentSplit.get_statusText_i51kfp$ = get_statusText;
   var package$jQueryInterface = _.jQueryInterface || (_.jQueryInterface = {});
   package$jQueryInterface.asList_9ufosi$ = asList_0;
   package$jQueryInterface.mapNotNull_fo801r$ = mapNotNull;
@@ -3478,13 +4743,43 @@ this['Rent Split 2'] = function (_, Kotlin) {
   package$jQueryInterface.jq_ch0s56$ = jq_2;
   package$jQueryInterface.get_jq_dzaqfo$ = get_jq;
   package$jQueryInterface.jq_5358jw$ = jq_3;
+  package$jQueryInterface.addClass_u9bwps$ = addClass;
+  package$jQueryInterface.removeClass_u9bwps$ = removeClass;
+  package$jQueryInterface.data_b7bhqf$ = data;
+  package$jQueryInterface.data_l9wfl1$ = data_0;
+  package$jQueryInterface.attr_phnjxj$ = attr;
+  package$jQueryInterface.attr_2ul80f$ = attr_0;
+  package$jQueryInterface.attr_db73uc$ = attr_1;
+  package$jQueryInterface.attr_mpifw4$ = attr_2;
+  package$jQueryInterface.onChangeData_x0svav$ = onChangeData;
   package$jQueryInterface.get_parentElement_s15u7w$ = get_parentElement;
   var package$org = _.org || (_.org = {});
   var package$bh = package$org.bh || (package$org.bh = {});
   var package$tools = package$bh.tools || (package$bh.tools = {});
+  var package$async = package$tools.async || (package$tools.async = {});
+  package$async.delay_5jeynf$ = delay;
+  package$async.delay_u83pai$ = delay_0;
   var package$base = package$tools.base || (package$tools.base = {});
   var package$collections = package$base.collections || (package$base.collections = {});
   package$collections.indexOfFirstOrNull_dmm9ex$ = indexOfFirstOrNull;
+  var package$extensions = package$collections.extensions || (package$collections.extensions = {});
+  package$extensions.get_first_4mqhgw$ = get_first;
+  package$extensions.get_firstOrNull_4mqhgw$ = get_firstOrNull;
+  package$extensions.get_last_4mqhgw$ = get_last;
+  package$extensions.get_lastOrNull_4mqhgw$ = get_lastOrNull;
+  package$extensions.removeFirst_vvxzk3$ = removeFirst;
+  package$extensions.Triad = Triad;
+  package$extensions.get_left_1pmd2p$ = get_left;
+  package$extensions.get_center_1pmd2p$ = get_center;
+  package$extensions.get_right_1pmd2p$ = get_right;
+  package$extensions.firstOrNullComparingTriads_csic9r$ = firstOrNullComparingTriads;
+  package$extensions.firstOrNullComparingPairs_cf0iqu$ = firstOrNullComparingPairs;
+  package$extensions.reduceTo_db6zb0$ = reduceTo;
+  package$extensions.safeReduce_lrrcxv$ = safeReduce;
+  package$extensions.safeReduce_w5eg7r$ = safeReduce_0;
+  package$extensions.toString_j63yia$ = toString_0;
+  package$extensions.nonEmpty_b5o7sk$ = nonEmpty;
+  package$extensions.get_nonEmpty_yfwuwe$ = get_nonEmpty;
   var package$func = package$base.func || (package$base.func = {});
   package$func.Observing = Observing;
   package$func.NullWSB_287e2$ = NullWSB;
@@ -3492,10 +4787,10 @@ this['Rent Split 2'] = function (_, Kotlin) {
   package$func.NullDSB_287e2$ = NullDSB;
   package$func.observing_bjs5ud$ = observing;
   var package$jsShim = package$base.jsShim || (package$base.jsShim = {});
-  package$jsShim.toString_798l30$ = toString_0;
-  package$jsShim.toString_di2vk2$ = toString_1;
-  package$jsShim.toString_dqglrj$ = toString_2;
-  package$jsShim.toString_if0zpk$ = toString_3;
+  package$jsShim.toString_798l30$ = toString_1;
+  package$jsShim.toString_di2vk2$ = toString_2;
+  package$jsShim.toString_dqglrj$ = toString_3;
+  package$jsShim.toString_if0zpk$ = toString_4;
   package$jsShim.replace_he2ph6$ = replace_0;
   FiniteAmountSummary.all = FiniteAmountSummary$all;
   FiniteAmountSummary.some = FiniteAmountSummary$some;
@@ -3523,7 +4818,53 @@ this['Rent Split 2'] = function (_, Kotlin) {
   package$struct.invoke_aa6xk2$ = invoke_1;
   package$struct.invoke_yniobj$ = invoke_2;
   var package$util = package$base.util || (package$base.util = {});
+  package$util.deepCopy_eoe559$ = deepCopy;
   package$util.safeTry_klfg04$ = safeTry;
+  Object.defineProperty(HttpRequest$RequestParameters, 'Companion', {
+    get: HttpRequest$RequestParameters$Companion_getInstance
+  });
+  HttpRequest.RequestParameters = HttpRequest$RequestParameters;
+  Object.defineProperty(HttpRequest$RequestParameter$Usage, 'urlParameter', {
+    get: HttpRequest$RequestParameter$Usage$urlParameter_getInstance
+  });
+  Object.defineProperty(HttpRequest$RequestParameter$Usage, 'postBodyJson', {
+    get: HttpRequest$RequestParameter$Usage$postBodyJson_getInstance
+  });
+  Object.defineProperty(HttpRequest$RequestParameter$Usage, 'header', {
+    get: HttpRequest$RequestParameter$Usage$header_getInstance
+  });
+  HttpRequest$RequestParameter.Usage = HttpRequest$RequestParameter$Usage;
+  HttpRequest$RequestParameter.genericHeader = HttpRequest$RequestParameter$genericHeader;
+  HttpRequest.RequestParameter = HttpRequest$RequestParameter;
+  var package$io = package$tools.io || (package$tools.io = {});
+  var package$net = package$io.net || (package$io.net = {});
+  package$net.HttpRequest_init_g3x9lo$ = HttpRequest_init;
+  package$net.HttpRequest = HttpRequest;
+  Object.defineProperty(HttpResponse$InteractionStage, 'notStarted', {
+    get: HttpResponse$InteractionStage$notStarted_getInstance
+  });
+  Object.defineProperty(HttpResponse$InteractionStage, 'opened', {
+    get: HttpResponse$InteractionStage$opened_getInstance
+  });
+  Object.defineProperty(HttpResponse$InteractionStage, 'headersReceived', {
+    get: HttpResponse$InteractionStage$headersReceived_getInstance
+  });
+  Object.defineProperty(HttpResponse$InteractionStage, 'loading', {
+    get: HttpResponse$InteractionStage$loading_getInstance
+  });
+  Object.defineProperty(HttpResponse$InteractionStage, 'completed', {
+    get: HttpResponse$InteractionStage$completed_getInstance
+  });
+  Object.defineProperty(HttpResponse$InteractionStage, 'Companion', {
+    get: HttpResponse$InteractionStage$Companion_getInstance
+  });
+  HttpResponse.InteractionStage = HttpResponse$InteractionStage;
+  package$net.HttpResponse_init_1endcj$ = HttpResponse_init;
+  package$net.HttpResponse = HttpResponse;
+  package$net.mostInformative_rwjgrz$ = mostInformative;
+  package$net.get_informativeScore_yi7m7y$ = get_informativeScore;
+  package$net.copy_wace04$ = copy;
+  package$net.deepCopy_wace04$ = deepCopy_0;
   var package$ui = package$tools.ui || (package$tools.ui = {});
   var package$behavior = package$ui.behavior || (package$ui.behavior = {});
   package$behavior.TernaryCheckboxTree = TernaryCheckboxTree;
@@ -3546,7 +4887,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
   });
   package$js.JSTernaryCheckboxTreeController_init_cbr6g3$ = JSTernaryCheckboxTreeController_init;
   package$js.JSTernaryCheckboxTreeController = JSTernaryCheckboxTreeController;
-  Object.defineProperty(CssHtmlAttributeWithValue.prototype, 'cssSelectorString', Object.getOwnPropertyDescriptor(CssHtmlAttributeWithoutValue.prototype, 'cssSelectorString'));
+  Object.defineProperty(CssHtmlAttributeWithValue.prototype, 'cssSelectorString', Object.getOwnPropertyDescriptor(CssHtmlAttribute.prototype, 'cssSelectorString'));
   DataAttribute.prototype.cssSelectorString_8ij0n9$ = CssHtmlAttributeWithValue.prototype.cssSelectorString_8ij0n9$;
   Object.defineProperty(DataAttribute.prototype, 'cssSelectorString', Object.getOwnPropertyDescriptor(CssHtmlAttributeWithValue.prototype, 'cssSelectorString'));
   addARoommateRow = new CssId('Add-Roommate-Row');
@@ -3577,11 +4918,15 @@ this['Rent Split 2'] = function (_, Kotlin) {
   resourceId = new DataAttribute('id');
   expenseApplicableRoommates = new DataAttribute('applicable-roommate-ids');
   expenseHasApplicableRoommates = new CssClass('has-applicable-roommates');
-  copyStateUrlButton = new CssId('Copy-URL-Button');
-  stateUrlField = new CssId('State-URL-Field');
+  shareUrlButton = new CssId('Copy-URL-Button');
+  shareUrlField = new CssId('State-URL-Field');
   localStorageWarning = new CssId('Local-Storage-Warning');
   localStorageWarningExplicitRefusalButton = new CssId('Local-Storage-Warning-Decline-Button');
   localStorageWarningExplicitConsentButton = new CssId('Local-Storage-Warning-Consent-Button');
+  shareUrlHolder = new CssId('State-URL-Holder');
+  statusMetaData = new DataAttribute('status-text');
+  canHaveStatus = new CssClass('can-have-status');
+  showStatus = new CssClass('show-status');
   expenseFilterButton = new CssClass('filter-button');
   expenseFilterDialog = new CssId('Filter-Dialog');
   expenseFilterDialogCancelButton = new CssId('Filter-Dialog-Cancel-Button');
@@ -3595,7 +4940,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
   expenseFilterAnyCheckboxSelector = expenseFilterDialog.cssSelectorString + ' input[type=checkbox]';
   expenseFilterButtonExpenseRelation = new DataAttribute('expense');
   anyInputField = new SelectorCombiner$either(new SelectorCombiner$either(new CssElement('input'), roommateAnyInputField), expenseAnyInputField);
-  anyInputButton = new SelectorCombiner$either(new SelectorCombiner$either(new SelectorCombiner$either(new SelectorCombiner$either(new SelectorCombiner$either(new SelectorCombiner$either(addARoommateButton, addAnExpenseButton), removeARoommateButton), removeAnExpenseButton), expenseFilterButton), expenseFilterDialogCancelButton), expenseFilterDialogOkButton);
+  anyInputButton = new SelectorCombiner$either(new SelectorCombiner$either(new SelectorCombiner$either(new SelectorCombiner$either(new SelectorCombiner$either(new SelectorCombiner$either(new SelectorCombiner$either(addARoommateButton, addAnExpenseButton), removeARoommateButton), removeAnExpenseButton), expenseFilterButton), expenseFilterDialogCancelButton), expenseFilterDialogOkButton), shareUrlButton);
   anyInput = new SelectorCombiner$either(anyInputField, anyInputButton);
   rentExpenseType = 'Rent';
   utilitiesExpenseType = 'Utilities';
@@ -3622,6 +4967,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
   rentExpensesSerializedName = 'e';
   localDataPreferencesSerializedName = 'l';
   generalStateSerializedName = 'generalState';
+  gooGlAccessToken = 'AIzaSyBsJvWOGsHnIcPi-wnIB3WAaILRKsI8Pmo';
   main([]);
   Kotlin.defineModule('Rent Split 2', _);
   return _;

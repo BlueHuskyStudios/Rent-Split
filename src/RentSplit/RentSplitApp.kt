@@ -16,9 +16,14 @@
 
 package RentSplit
 
+import RentSplit.GooGlUrlShortener.*
+import RentSplit.GooGlUrlShortener.ShortenResponse.*
 import RentSplit.RentExpenses.Companion.allRoommates
+import RentSplit.SerializationPurpose.*
 import RentSplit.UserConsent.*
 import jQueryInterface.*
+import org.bh.tools.async.*
+import org.bh.tools.base.collections.extensions.*
 import org.bh.tools.base.func.*
 import org.bh.tools.base.struct.*
 import org.bh.tools.base.struct.FiniteAmountSummary.*
@@ -27,6 +32,7 @@ import org.bh.tools.ui.touch.*
 import org.bh.tools.ui.widget.js.*
 import org.w3c.dom.*
 import org.w3c.dom.events.*
+import org.w3c.dom.url.*
 import kotlin.browser.*
 
 
@@ -81,6 +87,7 @@ class RentSplitApp {
      * Reloads all objects on the page by reading the state variable
      */
     fun reloadPageFromState(shouldReRegisterListeners: Boolean = true) {
+        this.replaceShareUrlWithPromptToGenerateANewOne()
         this.applyStateToLocalStorageWarning()
         this.regenerateInputTables()
         if (shouldReRegisterListeners) {
@@ -131,7 +138,8 @@ class RentSplitApp {
         jq(localStorageWarningExplicitConsentButton).click(::didPressLocalStorageWarningExplicitConsentButton)
         jq(localStorageWarningExplicitRefusalButton).click(::didPressLocalStorageWarningExplicitRefusalButton)
 
-        jq(copyStateUrlButton).click(::didPressCopyUrlButton)
+        jq(shareUrlButton).click(::didPressShareButton)
+        jq(shareUrlField).click(::didPressShareUrlField)
 
         registerFilterDialogListeners()
     }
@@ -173,17 +181,14 @@ class RentSplitApp {
 
 
     @Suppress("UNUSED_PARAMETER")
-    fun didPressCopyUrlButton(event: Event) {
-        try {
-            jq(stateUrlField).copyToClipboardOrThrow()
-            jq(copyStateUrlButton).addClass("just-copied")
-            window.setTimeout({
-                jq(copyStateUrlButton).removeClass("just-copied")
-            }, 3000)
-        }
-        catch (error: Throwable) {
-            log("Failed to copy state URL!")
-        }
+    fun didPressShareButton(event: Event) {
+        userWantsShareUrl()
+    }
+
+
+    @Suppress("UNUSED_PARAMETER")
+    fun didPressShareUrlField(event: Event) {
+        jq(shareUrlField).select()
     }
 
 
@@ -800,6 +805,247 @@ class RentSplitApp {
                     .addClass(roommateWhoOwesTooMuch.className)
                     .attr("title", "$name owes ${row.totalContributions - row.representedRoommate.monthlyIncome} too much!")
         }
+    }
+
+
+    ///// SHARING /////
+
+    /**
+     * Call this when you're sure that the user intends to share the URL which contains all the data about this split
+     */
+    fun userWantsShareUrl() {
+        alertUserOfShareUrlGenerationStart()
+        var urlToShare: URL? = null
+        var didCopyShareUrl = false
+
+        generateShareUrl { response, guaranteedUrl ->
+            placeShareUrlOnPage(guaranteedUrl)
+            urlToShare = guaranteedUrl
+            didCopyShareUrl = copyShareUrl()
+            when (response) {
+                is success -> {
+                    alertUserOfSuccessfulGenerationOfShareUrl()
+                    log("Shortened URL!")
+                }
+                is error -> {
+                    alertUserOfFailureToGenerateShareUrl(statusText = "⚠️ Could not shorten URL")
+                    log(response.allErrors.toTypedArray())
+                    log(response.message.nonEmptyOrNull() ?: response.statusText ?: "No message")
+                }
+                is unknownError -> {
+                    alertUserOfFailureToGenerateShareUrl(statusText = "⚠️ Could not shorten URL")
+                    log(response.httpResponse?.text?.nonEmptyOrNull() ?: "No response text")
+                    log(response.statusText?.nonEmptyOrNull() ?: "No message")
+                }
+            }
+        }
+
+        // What follows is a bit of a workaround/hack to allow an ajax fetch to be performed and the result copied
+        // using a single button click. See https://stackoverflow.com/q/49041857/3939277 for more.
+
+        var numberOfRemainingChecks = 18
+
+        fun check() {
+            when {
+                didCopyShareUrl -> return
+
+                numberOfRemainingChecks <= 0 -> {
+                    log("Failed to generate short URL fast enough. Falling back to full-length one...")
+                    placeShareUrlOnPage(fullLengthSharingUrl)
+                    copyShareUrl()
+                    return
+                }
+
+                else -> {
+                    numberOfRemainingChecks -= 1
+                    urlToShare?.let {
+                        placeShareUrlOnPage(it)
+                        didCopyShareUrl = copyShareUrl()
+                        return@check
+                    }
+                    ?: delay(0.05) {
+                        check()
+                    }
+                }
+            }
+        }
+
+        delay(0.1) {
+            check()
+        }
+    }
+
+
+    /**
+     * The full-length sharing URL, before being shortened. This is very long, into the kilobytes, so it can convey
+     * all information required to reproduce this page.
+     */
+    val fullLengthSharingUrl: URL get() {
+        val jsonStringForSharing = state.serialized(forSharing)
+        val actualProtocol = window.location.protocol
+
+        // If we're debugging this straight from a file, don't send that to the shortener; send the live site URL
+        val sharingUrlPrefix = when (actualProtocol) {
+            "file:" -> "https://rent-split.bhstudios.org/"
+            else -> "$actualProtocol//${window.location.host}${window.location.pathname}"
+        } + "?$generalStateSerializedName="
+
+        return URL(sharingUrlPrefix + jsonStringForSharing)
+    }
+
+
+    /**
+     * Uses a URL shortening service to generate the URL that you can use to share this split.
+     *
+     * @param callback The function to be called when we're done. It will either have a valid shortened url or not. In
+     *                 either case, `guaranteedUrl` will always contain a valid URL that can be used to share this
+     *                 split. `response` will always contain a semantic description of what happened.
+     */
+    private fun generateShareUrl(callback: (response: ShortenResponse, guaranteedUrl: URL) -> Unit) {
+        val backupUrl = fullLengthSharingUrl
+        GooGlUrlShortener(gooGlAccessToken).shorten(backupUrl, asynchronous = true) { response ->
+            callback(response, (response as? success)?.shortUrl ?: backupUrl)
+        }
+    }
+
+
+    /**
+     * Immediately copies whatever is in the share URL field
+     *
+     * @return `true` iff the URL was copied successfully
+     */
+    private fun copyShareUrl(): Boolean =
+            try {
+                jq(shareUrlField).copyToClipboardOrThrow()
+                alertUserOfSuccessfulCopyOfShareUrl()
+                /*return*/ true
+            }
+            catch (error: Throwable) {
+                log("Failed to copy state URL!")
+                log(error)
+                alertUserOfFailureToCopyShareUrl("⚠️ Not copied!")
+                /*return*/ false
+            }
+
+
+    /**
+     * Places the given URL into the page's share URL field
+     */
+    private fun placeShareUrlOnPage(url: URL) {
+        jq(shareUrlField).`val`(url.toString())
+    }
+
+
+    /**
+     * Communicates with the user that the process of generating the share URL has started
+     */
+    private fun alertUserOfShareUrlGenerationStart() {
+        shareUrlFieldStatusText = "Hang on; shortening…"
+        showUrlStatusNow()
+    }
+
+
+    /**
+     * After a moment, any status about the share URL will be hidden
+     */
+    fun hideShareUrlStatusSoon() {
+        delay(3) {
+            hideShareUrlStatusNow()
+        }
+    }
+
+
+    /**
+     * Immediately hides any status about the share URL
+     */
+    private fun hideShareUrlStatusNow() {
+        shareUrlHolder.jq.removeClass(showStatus)
+    }
+
+
+    /**
+     * Immediately shows the status about the share URL
+     */
+    private fun showUrlStatusNow() {
+        shareUrlHolder.jq.addClass(showStatus)
+    }
+
+
+    /**
+     * The text of the status popunder on the share URL field
+     */
+    private var shareUrlFieldStatusText: String?
+        get() = jq(shareUrlHolder).data(statusMetaData)?.toString()
+        set(value) {
+            jq(shareUrlHolder)
+                    .data(statusMetaData, value)
+                    .attr(statusMetaData.htmlAttributeName, value)
+        }
+
+
+    /**
+     * The text of the status popunder on the share URL button
+     */
+    private var shareUrlButtonStatusText: String?
+        get() = jq(shareUrlButton).data(statusMetaData)?.toString()
+        set(value) {
+            jq(shareUrlButton)
+                    .data(statusMetaData, value)
+                    .attr(statusMetaData, value)
+        }
+
+
+    /**
+     * Alerts the user that the URL was successfully shortened
+     */
+    private fun alertUserOfSuccessfulGenerationOfShareUrl() {
+        shareUrlFieldStatusText = "Shortened!"
+        showUrlStatusNow()
+        hideShareUrlStatusSoon()
+    }
+
+
+    /**
+     * Alerts the user that the URL was successfully copied
+     */
+    private fun alertUserOfSuccessfulCopyOfShareUrl() {
+        shareUrlButtonStatusText = "Copied!"
+        jq(shareUrlButton).addClass(showStatus)
+        delay(3) {
+            jq(shareUrlButton).removeClass(showStatus)
+        }
+    }
+
+
+    /**
+     * Alerts the user that the URL could not be shortened
+     */
+    private fun alertUserOfFailureToGenerateShareUrl(statusText: String) {
+        shareUrlFieldStatusText = statusText
+        showUrlStatusNow()
+        hideShareUrlStatusSoon()
+    }
+
+
+    /**
+     * Alerts the user that the URL could not be copied
+     */
+    private fun alertUserOfFailureToCopyShareUrl(statusText: String) {
+        shareUrlButtonStatusText = statusText
+        jq(shareUrlButton).addClass(showStatus)
+        delay(3) {
+            jq(shareUrlButton).removeClass(showStatus)
+        }
+    }
+
+
+    /**
+     * Removes the share URL and replaces it with a prompt to generate a new one, because we have 1,000,000 shortenings
+     * per day across all users:
+     * https://developers.google.com/url-shortener/v1/getting_started#quota
+     */
+    private fun replaceShareUrlWithPromptToGenerateANewOne() {
+        jq(shareUrlField).`val`("Get a new share URL: 👉🏽")
     }
 }
 

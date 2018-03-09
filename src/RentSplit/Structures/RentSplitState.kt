@@ -1,8 +1,8 @@
+@file:Suppress("PackageDirectoryMismatch")
 package RentSplit
 
 import RentSplit.SerializationPurpose.*
 import RentSplit.UserConsent.*
-import jQueryInterface.*
 import org.bh.tools.base.util.*
 import org.w3c.dom.url.*
 import kotlin.browser.*
@@ -14,6 +14,7 @@ const val rentRoommatesSerializedName = "r"
 const val rentExpensesSerializedName = "e"
 const val localDataPreferencesSerializedName = "l"
 const val generalStateSerializedName = "generalState"
+const val gooGlAccessToken = "AIzaSyBsJvWOGsHnIcPi-wnIB3WAaILRKsI8Pmo"
 
 
 
@@ -123,8 +124,6 @@ fun RentSplitState.Companion.load(): RentSplitState {
  */
 fun RentSplitState.save() {
     val jsonStringForLocalStorage = serialized(forLocalStorage)
-    val jsonStringForSharing = serialized(forSharing)
-    jq(stateUrlField).`val`("${window.location.protocol}//${window.location.host}${window.location.pathname}?$generalStateSerializedName=$jsonStringForSharing")
 
     // Only save to the local storage if the user consented
     when (this.localDataPreferences.localStorageConsent) {
@@ -159,7 +158,7 @@ fun RentSplitState.addingNewExpense(newExpense: RentExpense): RentSplitState {
  */
 fun RentSplitState.serialized(purpose: SerializationPurpose) = when (purpose) {
     forLocalStorage -> JSON.stringify(this.toJson(purpose))
-    forSharing -> encodeURIComponent(JSON.stringify(this.toJson(purpose)))
+    forSharing -> JSON.stringify(this.toJson(purpose)).urlEncoded
 }
 
 

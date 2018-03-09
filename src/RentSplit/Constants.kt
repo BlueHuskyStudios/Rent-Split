@@ -53,12 +53,17 @@ package RentSplit
 
 /// State Saving ///
 
-        val copyStateUrlButton = CssId("Copy-URL-Button")
-        val stateUrlField = CssId("State-URL-Field")
+        val shareUrlButton = CssId("Copy-URL-Button")
+        val shareUrlField = CssId("State-URL-Field")
 
         val localStorageWarning = CssId("Local-Storage-Warning")
         val localStorageWarningExplicitRefusalButton = CssId("Local-Storage-Warning-Decline-Button")
         val localStorageWarningExplicitConsentButton = CssId("Local-Storage-Warning-Consent-Button")
+
+        val shareUrlHolder = CssId("State-URL-Holder")
+        val statusMetaData = DataAttribute("status-text")
+        val canHaveStatus = CssClass("can-have-status")
+        val showStatus = CssClass("show-status")
 
 
 /// Expense Filters ///
@@ -83,7 +88,8 @@ package RentSplit
         val anyInputField = CssElement("input") or roommateAnyInputField or expenseAnyInputField
         val anyInputButton = addARoommateButton or addAnExpenseButton or
                 removeARoommateButton or removeAnExpenseButton or
-                expenseFilterButton or expenseFilterDialogCancelButton or expenseFilterDialogOkButton
+                expenseFilterButton or expenseFilterDialogCancelButton or expenseFilterDialogOkButton or
+                shareUrlButton
         val anyInput = anyInputField or anyInputButton
 
 

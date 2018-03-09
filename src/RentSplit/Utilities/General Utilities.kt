@@ -1,3 +1,6 @@
+@file:Suppress("PackageDirectoryMismatch",
+               "unused" // Utilities files are exempt from trimming unused functions.
+)
 package RentSplit
 
 import jQueryInterface.*
@@ -13,6 +16,10 @@ import kotlin.browser.*
 
 external fun encodeURIComponent(raw: String): String
 external fun decodeURIComponent(raw: String): String
+
+
+val String.urlEncoded get() = encodeURIComponent(this)
+val String.urlDecoded get() = decodeURIComponent(this)
 
 
 /**
@@ -76,18 +83,6 @@ fun String.toBoolean(valueIfInvalid: Boolean = true): Boolean = toBooleanOrNull(
 
 
 /**
- * Reduces this collection to one value, by using a given starting value and then processing each element off of that
- */
-fun <From, To> Collection<From>.reduceTo(start: To, transformer: (To, From) -> To): To {
-    var value = start
-    forEach {
-        value = transformer(value, it)
-    }
-    return value
-}
-
-
-/**
  * Returns a new list, which is a copy of this one with the given new element added
  */
 fun <Element> List<Element>.adding(newElement: Element): List<Element> {
@@ -101,9 +96,12 @@ fun <Element> List<Element>.adding(newElement: Element): List<Element> {
  * Attempts to copy the text within the element(s) selected by this JQuery selector. If that cannot be done, this
  * throws an error andor returns `false`. If it succeeded, this returns `true`.
  */
-fun JQuery.copyToClipboardOrThrow(): Boolean {
+fun JQuery.copyToClipboardOrThrow() {
+    class CopyFailed: Exception("Could not copy")
     this.select()
-    return document.execCommand("copy")
+    if (!document.execCommand("copy")) {
+        throw CopyFailed()
+    }
 }
 
 
@@ -118,7 +116,7 @@ inline fun doNothing() = Unit
 /**
  * Logs a message and then returns the this value
  */
-inline fun <ValueType> ValueType.alsoLog(message: String, logger: (String) -> Unit = ::consoleLogString) = also { log(message, logger) }
+inline fun <ValueType> ValueType.alsoLog(message: String, logger: (String) -> Unit = ::consoleLogString) = also { log(message + "\t$this", logger) }
 
 
 /**
@@ -128,11 +126,26 @@ inline fun log(message: String, logger: (String) -> Unit = ::consoleLogString) =
 
 
 /**
+ * Simply logs the given object using the given logger (defaults to console.log)
+ */
+inline fun <T> log(`object`: T?, logger: (T?) -> Unit = ::consoleLog) = logger(`object`)
+
+
+/**
  * An alias for `console.log` that can only log `String`s
  */
 @Suppress("NOTHING_TO_INLINE") // Inlined on-purpose because this is an alias for console.log
 inline fun consoleLogString(message: String) {
     console.log(message)
+}
+
+
+/**
+ * An alias for `console.log` that can log anything
+ */
+@Suppress("NOTHING_TO_INLINE") // Inlined on-purpose because this is an alias for console.log
+inline fun <T> consoleLog(`object`: T?) {
+    console.log(`object`)
 }
 
 
@@ -157,3 +170,6 @@ fun String.sanitizedForHtml(): String {
             .replace(oldValue = "<", newValue = "&lt;")
             .replace(oldValue = ">", newValue = "&gt;")
 }
+
+
+fun Any.jsonString() = JSON.stringify(this)
