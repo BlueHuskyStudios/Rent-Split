@@ -291,11 +291,18 @@ th.plain.has-floating-button .floats-to-left {
             display: block;
             opacity: 0;
             position: absolute;
+            text-align: left;
 
             bottom: 1ex;
             left: 1ex;
+            width: 1in;
 
             z-index: -1;
+        }
+        .rent .can-have-status.status-anchored-right[data-status-text]::before {
+            left: auto;
+            right: 1ex;
+            text-align: right;
         }
         .rent .can-have-status.show-status[data-status-text]::before {
             opacity: 1;
