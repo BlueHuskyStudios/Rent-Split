@@ -19,6 +19,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
   var zip = Kotlin.kotlin.collections.zip_45mdf7$;
   var equals = Kotlin.equals;
   var Throwable = Error;
+  var L3 = Kotlin.Long.fromInt(3);
   var throwCCE = Kotlin.throwCCE;
   var Kind_CLASS = Kotlin.Kind.CLASS;
   var joinToString = Kotlin.kotlin.collections.joinToString_fmv235$;
@@ -501,6 +502,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
     this.regenerateRoommateInputTable_0();
     this.regenerateExpenseInputTable_0();
   };
+  var checkIndexOverflow = Kotlin.kotlin.collections.checkIndexOverflow_za3lpa$;
   RentSplitApp.prototype.regenerateInputTable_0 = function (rowSelector, allResources, configureExistingInput, insertNewInput) {
     var existingInputs = asList(jq(rowSelector.cssSelectorString).toArray());
     var offset = existingInputs.size;
@@ -518,7 +520,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
     tmp$_0 = newResources.iterator();
     while (tmp$_0.hasNext()) {
       var item = tmp$_0.next();
-      insertNewInput((tmp$_0_0 = index, index = tmp$_0_0 + 1 | 0, tmp$_0_0) + offset | 0, item);
+      insertNewInput(checkIndexOverflow((tmp$_0_0 = index, index = tmp$_0_0 + 1 | 0, tmp$_0_0)) + offset | 0, item);
     }
   };
   function RentSplitApp$regenerateExpenseInputTable$lambda(this$RentSplitApp) {
@@ -712,9 +714,10 @@ this['Rent Split 2'] = function (_, Kotlin) {
     roommateRow != null ? (roommateRow.remove(), Unit) : null;
     this.reloadStateFromPage();
   };
+  var ArrayList_init_0 = Kotlin.kotlin.collections.ArrayList_init_287e2$;
   RentSplitApp.prototype.notifyOfProblems_1a4gu5$ = function (table) {
     var $receiver = table.rows;
-    var destination = ArrayList_init();
+    var destination = ArrayList_init_0();
     var tmp$;
     tmp$ = $receiver.iterator();
     while (tmp$.hasNext()) {
@@ -865,7 +868,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
     };
   }
   RentSplitApp.prototype.hideShareUrlStatusSoon = function () {
-    delay_0(Kotlin.Long.fromInt(3), RentSplitApp$hideShareUrlStatusSoon$lambda(this));
+    delay_0(L3, RentSplitApp$hideShareUrlStatusSoon$lambda(this));
   };
   RentSplitApp.prototype.hideShareUrlStatusNow_0 = function () {
     jq(shareUrlHolder.cssSelectorString).removeClass(showStatus.className);
@@ -903,7 +906,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
   RentSplitApp.prototype.alertUserOfSuccessfulCopyOfShareUrl_0 = function () {
     this.shareUrlButtonStatusText_0 = 'Copied!';
     jq(shareUrlButton.cssSelectorString).addClass(showStatus.className);
-    delay_0(Kotlin.Long.fromInt(3), RentSplitApp$alertUserOfSuccessfulCopyOfShareUrl$lambda);
+    delay_0(L3, RentSplitApp$alertUserOfSuccessfulCopyOfShareUrl$lambda);
   };
   RentSplitApp.prototype.alertUserOfFailureToGenerateShareUrl_0 = function (statusText) {
     this.shareUrlFieldStatusText_0 = statusText;
@@ -917,7 +920,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
   RentSplitApp.prototype.alertUserOfFailureToCopyShareUrl_0 = function (statusText) {
     this.shareUrlButtonStatusText_0 = statusText;
     jq(shareUrlButton.cssSelectorString).addClass(showStatus.className);
-    delay_0(Kotlin.Long.fromInt(3), RentSplitApp$alertUserOfFailureToCopyShareUrl$lambda);
+    delay_0(L3, RentSplitApp$alertUserOfFailureToCopyShareUrl$lambda);
   };
   RentSplitApp.prototype.replaceShareUrlWithPromptToGenerateANewOne_0 = function () {
     jq(shareUrlField.cssSelectorString).val('Get a new share URL: \uD83D\uDC49\uD83C\uDFFD');
@@ -992,7 +995,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
       var transform$result;
       if (item.appliesTo_pcqrmu$($receiver)) {
         var $receiver_1 = overallState.r.r;
-        var destination_0 = ArrayList_init();
+        var destination_0 = ArrayList_init_0();
         var tmp$_2;
         tmp$_2 = $receiver_1.iterator();
         while (tmp$_2.hasNext()) {
@@ -1728,7 +1731,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
   };
   RentExpenses.prototype.filter_8h766n$ = defineInlineFunction('Rent Split 2.RentSplit.RentExpenses.filter_8h766n$', wrapFunction(function () {
     var RentExpenses_init = _.RentSplit.RentExpenses;
-    var ArrayList_init = Kotlin.kotlin.collections.ArrayList_init_ww73n8$;
+    var ArrayList_init = Kotlin.kotlin.collections.ArrayList_init_287e2$;
     return function (function_0) {
       var $receiver = this.e;
       var destination = ArrayList_init();
@@ -1985,7 +1988,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
   };
   RentRoommates.prototype.filter_44cvmn$ = defineInlineFunction('Rent Split 2.RentSplit.RentRoommates.filter_44cvmn$', wrapFunction(function () {
     var RentRoommates_init = _.RentSplit.RentRoommates;
-    var ArrayList_init = Kotlin.kotlin.collections.ArrayList_init_ww73n8$;
+    var ArrayList_init = Kotlin.kotlin.collections.ArrayList_init_287e2$;
     return function (function_0) {
       var $receiver = this.r;
       var destination = ArrayList_init();
@@ -3570,7 +3573,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
   Object.defineProperty(HttpRequest$RequestParameters.prototype, 'justUrlParameters', {
     get: function () {
       var $receiver = this.allParameters;
-      var destination = ArrayList_init();
+      var destination = ArrayList_init_0();
       var tmp$;
       tmp$ = $receiver.iterator();
       while (tmp$.hasNext()) {
@@ -3584,7 +3587,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
   Object.defineProperty(HttpRequest$RequestParameters.prototype, 'justPostBodyJson', {
     get: function () {
       var $receiver = this.allParameters;
-      var destination = ArrayList_init();
+      var destination = ArrayList_init_0();
       var tmp$;
       tmp$ = $receiver.iterator();
       while (tmp$.hasNext()) {
@@ -3598,7 +3601,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
   Object.defineProperty(HttpRequest$RequestParameters.prototype, 'justHeaders', {
     get: function () {
       var $receiver = this.allParameters;
-      var destination = ArrayList_init();
+      var destination = ArrayList_init_0();
       var tmp$;
       tmp$ = $receiver.iterator();
       while (tmp$.hasNext()) {
@@ -3915,7 +3918,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
     this.children = children;
     this.text_kabazs$_0 = text;
     this.id_hn756u$_0 = id;
-    this.stateChangeObservers_5dru4n$_0 = ArrayList_init();
+    this.stateChangeObservers_5dru4n$_0 = ArrayList_init_0();
     this.shouldUpdateChildrenBasedOnState_uc0g85$_0 = true;
     this.shouldUpdateStateBasedOnChildren_xmc661$_0 = true;
     this.state_anhe36$_0 = observing(Ternary$indeterminate_getInstance(), void 0, void 0, TernaryCheckboxTree$state$lambda(this));
