@@ -886,7 +886,7 @@ class RentSplitApp {
 
         // If we're debugging this straight from a file, don't send that to the shortener; send the live site URL
         val sharingUrlPrefix = when (actualProtocol) {
-            "file:" -> "https://rent-split.bhstudios.org/"
+            "file:" -> "https://Rent-Split.BHStudios.org/"
             else -> "$actualProtocol//${window.location.host}${window.location.pathname}"
         } + "?$generalStateSerializedName="
 
