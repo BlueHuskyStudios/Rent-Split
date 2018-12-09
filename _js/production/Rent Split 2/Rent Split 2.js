@@ -817,7 +817,7 @@ this['Rent Split 2'] = function (_, Kotlin) {
       var jsonStringForSharing = serialized(this.state, SerializationPurpose$forSharing_getInstance());
       var actualProtocol = window.location.protocol;
       if (equals(actualProtocol, 'file:'))
-        tmp$ = 'https://rent-split.bhstudios.org/';
+        tmp$ = 'https://Rent-Split.BHStudios.org/';
       else
         tmp$ = actualProtocol + '//' + window.location.host + window.location.pathname;
       var sharingUrlPrefix = tmp$ + '?generalState=';

@@ -4,7 +4,7 @@
  * @since 2016-09-05
  * @author Kyli Rouge & Ben Leggiero of Blue Husky Studios
  *
- * @see https://BlueHuskyStudios.GitHub.IO/Rent-Split-Calculator
+ * @see https://Rent-Split.BHStudios.org
  */
 
 .rent *,
@@ -28,7 +28,17 @@ html.rent {
 .rent header {
     padding: 4pt 8pt;
     min-height: auto;
+    height: 3rem;
 }
+
+.rent body>header h1.title {
+    margin: -4pt -8pt;
+    color: transparent;
+    background-image: url("/_img/Logo 1.1.0-Transparent (256p).png");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
 
 .rent section {
     margin: 2em 0;
