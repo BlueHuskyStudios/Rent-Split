@@ -1,0 +1,14 @@
+---
+layout: Neon-Jekyll-Layouts/general
+
+app-bar:
+    position: bottom
+---
+
+{% for banner in site.emergency-banners %}
+<header class="emergency-banner {{ banner.classes }}">
+    {% include {{ banner.include }} %}
+</header>
+{% endfor %}
+
+{{ content }}
