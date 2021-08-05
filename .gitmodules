@@ -1,0 +1,9 @@
+[submodule "_includes/Neon-Jekyll-Basics"]
+	path = _includes/Neon-Jekyll-Basics
+	url = https://github.com/BlueHuskyStudios/Neon-Jekyll-Basics.git
+[submodule "_includes/Neon-Jekyll-Components"]
+	path = _includes/Neon-Jekyll-Components
+	url = https://github.com/BlueHuskyStudios/Neon-Jekyll-Components.git
+[submodule "_layouts/Neon-Jekyll-Layouts"]
+	path = _layouts/Neon-Jekyll-Layouts
+	url = https://github.com/BlueHuskyStudios/Neon-Jekyll-Layouts.git
