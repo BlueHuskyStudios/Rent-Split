@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="RentSplit3-3.0.0-MVP.0">
+    <output-path>$PROJECT_DIR$/build/libs</output-path>
+    <root id="archive" name="RentSplit3-3.0.0-MVP.0.jar">
+      <element id="module-output" name="RentSplit3.main" />
+    </root>
+  </artifact>
+</component>
