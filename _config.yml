@@ -1,0 +1,107 @@
+#
+# This file contains configuration flags to customize your site
+#
+
+# Name of your site (displayed in the header)
+name: Rent Split
+title: Rent Split
+author:
+    name: Ky Leggiero
+    first-name: Ky
+    last-name: Leggiero
+    avatar: https://www.gravatar.com/avatar/2f4691f7a1c9d3192fe843a164a27535?s=140px
+
+description: Fairly share your home's expenses
+
+source-code:
+    url: https://GitHub.com/BlueHuskyStudios/Rent-Split-Calculator
+    service: GitHub
+
+default-neon-theme-url: https://stylesheets.bhstudios.org/assets/v2/neon/neon-earth.css
+
+
+#
+# Flags below are optional
+#
+
+# Includes icons in the sidebar
+social:
+    github: /BlueHuskyStudios/Rent-Split-Calculator
+
+theme-color: "#D7CCC8"
+
+sidebar:
+    headerImage:
+        url: /images/Social-Preview.png
+    defaultLinks:
+        -
+            text: Made by Ky Leggiero
+            url: https://KyLeggiero.me
+            materialIcon: portrait
+
+future: false
+
+
+# Enter your Google Analytics web tracking code (e.g. UA-2110908-2) to activate tracking
+google_analytics: #UA-123332868-1
+
+# Your website URL (e.g. http://barryclark.github.io or http://www.barryclark.co)
+# Used for Sitemap.xml and your RSS feed
+url: https://Split.Rent
+
+# If you're hosting your site at a Project repository on GitHub pages
+# (http://yourusername.github.io/repository-name)
+# and NOT your User repository (http://yourusername.github.io)
+# then add in the baseurl here, like this: "/repository-name"
+baseurl: ""
+
+timezone: America/Denver
+
+
+#
+# Low-level configuration:
+#
+
+permalink: /:title/
+
+version: v3.9.0
+
+# Kramdown is Jekyll's Markdown processor
+kramdown:
+    # Use GitHub flavored markdown, including triple backtick fenced code blocks
+    input: GFM
+    # Jekyll 3 and GitHub Pages now only support rouge for syntax highlighting
+    syntax_highlighter: rouge
+    syntax_highlighter_opts:
+        # Use existing pygments syntax highlighting css
+        css_class: 'highlight'
+
+# Set the Sass partials directory, as we're using @imports
+sass:
+    style: expanded  # nested|expanded|compact|compressed
+    deploy_style: compressed  # nested|expanded|compact|compressed
+    compile_in_place: false  # true|false
+    load_paths:
+        - _sass
+    sass_dir: _sass
+
+# Use the following plug-ins
+plugins:
+    - jekyll-sitemap  # Create a sitemap using the official Jekyll sitemap gem
+    - jekyll-feed  # Create an Atom feed using the official Jekyll feed gem
+    - jekyll-archives
+    - jekyll-redirect-from
+
+whitelist:
+    - jekyll-redirect-from
+
+# Exclude these files from your production _site
+exclude:
+    - Gemfile
+    - Gemfile.lock
+    - LICENSE
+    - README.md
+    - CNAME
+    - runServer.sh
+    - updateGems.sh
+    - _kotlinSource

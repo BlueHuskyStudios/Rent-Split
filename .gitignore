@@ -16,3 +16,6 @@ _js/production/Rent Split 2/Rent Split 2\.meta\.js
 _site/
 
 Mockup/**/*.png
+_kotlinSource/.gradle/
+
+_kotlinSource/build/

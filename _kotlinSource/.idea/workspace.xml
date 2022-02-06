@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7dfc0783-d4d1-4eae-b6fb-a0487177c98c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../_config.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../_img/Rent Split.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../_img/Rent Split.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../runServer.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Gemfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../Gemfile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Mockup/Export/Desktop/Dark Mode/Icon&#10;" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Mockup/Export/Desktop/Icon&#10;" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Mockup/Export/Desktop/Light Mode/Icon&#10;" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Mockup/Export/Icon&#10;" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Mockup/Export/Phone/Dark Mode/Icon&#10;" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Mockup/Export/Phone/Icon&#10;" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Mockup/Export/Phone/Light Mode/Icon&#10;" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Mockup/Icon&#10;" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Mockup/Logos/Icon&#10;" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Mockup/Rent Split V3.sketch" beforeDir="false" afterPath="$PROJECT_DIR$/../Mockup/Rent Split V3.sketch" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Mockup/Screens/Icon&#10;" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Mockup/Screens/Phone/Dark Mode/Icon&#10;" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Mockup/Screens/Phone/Icon&#10;" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Mockup/Screens/Phone/Light Mode/Icon&#10;" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Mockup/Symbols/Icon&#10;" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Mockup/Symbols/x/Background Pattern/Icon&#10;" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Mockup/Symbols/x/Icon&#10;" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../_includes/Neon-Jekyll-Basics" beforeDir="false" afterPath="$PROJECT_DIR$/../_includes/Neon-Jekyll-Basics" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../_includes/Neon-Jekyll-Components" beforeDir="false" afterPath="$PROJECT_DIR$/../_includes/Neon-Jekyll-Components" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../_layouts/Neon-Jekyll-Layouts" beforeDir="false" afterPath="$PROJECT_DIR$/../_layouts/Neon-Jekyll-Layouts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../old src/RentSplit/Constants.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../old src/RentSplit/IdManager.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../old src/RentSplit/RentSplitApp.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../old src/RentSplit/RentSplitCalculationEngine.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../old src/RentSplit/RentSplitViewGenerator.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../old src/RentSplit/Structures/CssSelector.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../old src/RentSplit/Structures/LocalDataPreferences.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../old src/RentSplit/Structures/RentExpense.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../old src/RentSplit/Structures/RentRoommate.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../old src/RentSplit/Structures/RentSplitState.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../old src/RentSplit/Structures/UserConsent.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../old src/RentSplit/Utilities/General Utilities.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../old src/RentSplit/Utilities/GooGlUrlShortener.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../old src/jQueryInterface/jQuery Conveniences.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../old src/jQueryInterface/jQuery Headers.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../old src/org/bh/tools/async/Delayed Operations.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../old src/org/bh/tools/base/collections/Convenince Functions.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../old src/org/bh/tools/base/collections/extensions/Iterable Extensions.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../old src/org/bh/tools/base/func/Observing.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../old src/org/bh/tools/base/jsShim/Strings.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../old src/org/bh/tools/base/struct/FiniteAmountSummary.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../old src/org/bh/tools/base/struct/Ternary.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../old src/org/bh/tools/base/util/Copying.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../old src/org/bh/tools/base/util/Error Utils.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../old src/org/bh/tools/io/net/HttpRequest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../old src/org/bh/tools/io/net/URL Extensions.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../old src/org/bh/tools/ui/behavior/TernaryCheckboxTree.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../old src/org/bh/tools/ui/touch/TouchBasics.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../old src/org/bh/tools/ui/widget/Checkbox.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../old src/org/bh/tools/ui/widget/Widget.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../old src/org/bh/tools/ui/widget/js/JSCheckboxController.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../old src/org/bh/tools/ui/widget/js/package-info.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/.gradle/7.1/dependencies-accessors/dependencies-accessors.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/.gradle/7.1/dependencies-accessors/gc.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/.gradle/7.1/executionHistory/executionHistory.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/.gradle/7.1/executionHistory/executionHistory.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/.gradle/7.1/fileChanges/last-build.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/.gradle/7.1/fileHashes/fileHashes.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/.gradle/7.1/fileHashes/fileHashes.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/.gradle/7.1/gc.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/.gradle/checksums/checksums.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/.gradle/checksums/md5-checksums.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/.gradle/checksums/sha1-checksums.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/.gradle/vcs-1/gc.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/.idea/artifacts/RentSplit3_3_0_0_MVP_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/.idea/modules/RentSplit3.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/.idea/modules/RentSplit3.test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/gradle.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/settings.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/src/main/kotlin/Client.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/src/main/resources/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/src/test/kotlin/TestClient.kt" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="24AhOEP9PxzjeqqNZffcUCgJDgt" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="RunManager" selected="Gradle.BrowserDevelopmentRun in continuous mode">
+    <configuration name="BrowserDevelopmentRun in continuous mode" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--continuous" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="browserDevelopmentRun" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="BrowserProductionRun in continuous mode" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--continuous" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="browserProductionRun" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7dfc0783-d4d1-4eae-b6fb-a0487177c98c" name="Changes" comment="" />
+      <created>1643079268454</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1643079268454</updated>
+    </task>
+    <servers />
+  </component>
+</project>
