@@ -42,9 +42,9 @@ If you got this:
 
 
 1: DECLARATION OF COPYRIGHT
-   This Product is copyright Ben 'Ky' Leggiero (c) 2021 BH-1-PS
+   This Product is copyright Ky Leggiero (c) 2021 BH-1-PS
 
-   Ben 'Ky' Leggiero may be reached at KyLeggiero@Gmail.com
+   Ky Leggiero may be reached at KyLeggiero@Gmail.com
 
 
 2: DEFINITIONS
