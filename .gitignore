@@ -12,3 +12,5 @@ _js/production/Rent Split 2/Rent Split 2\.meta\.js
 \.DS_Store
 
 .jekyll-metadata
+
+_site/

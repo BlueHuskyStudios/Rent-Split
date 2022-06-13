@@ -1,0 +1,76 @@
+#
+# This file contains configuration flags to customize your site
+#
+
+# Name of your site (displayed in the header)
+name: Rent Split
+# Name of your site (displayed in the tab)
+title: Rent Split – Split Rent Fairly
+
+# Short bio or description (for social media links)
+description: Calculates what your portion of the rent should be
+
+author:
+    # Your name
+    name: Ky
+    # URL of your avatar or profile pic (you could use your GitHub profile pic)
+    avatar: https://www.gravatar.com/avatar/2f4691f7a1c9d3192fe843a164a27535?s=284px
+
+social:
+    twitter-username: KyLeggiero
+
+git:
+    default-branch: production
+
+
+theme-color: "#5AC561"
+
+
+# Your website URL (e.g. http://barryclark.github.io or http://www.barryclark.co)
+# Used for Sitemap.xml and your RSS feed
+url: https://Split.Rent
+
+# If you're hosting your site at a Project repository on GitHub pages
+# (http://yourusername.github.io/repository-name)
+# and NOT your User repository (http://yourusername.github.io)
+# then add in the baseurl here, like this: "/repository-name"
+baseurl: ""
+
+timezone: America/Denver
+
+#
+# !! You don't need to change any of the configuration flags below !!
+#
+
+permalink: /:title/
+
+# The version of this release of Rent Split
+version: 2.5.0
+
+# Jekyll 3 now only supports Kramdown for Markdown
+kramdown:
+  # Use GitHub flavored markdown, including triple backtick fenced code blocks
+  input: GFM
+  # Jekyll 3 and GitHub Pages now only support rouge for syntax highlighting
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    # Use existing pygments syntax highlighting css
+    css_class: 'highlight'
+
+# Set the Sass partials directory, as we're using @imports
+sass:
+  style: :expanded # You might prefer to minify using :compressed
+
+# Use the following plug-ins
+plugins:
+  - jekyll-sitemap # Create a sitemap using the official Jekyll sitemap gem
+  - jekyll-feed # Create an Atom feed using the official Jekyll feed gem
+  - jekyll-archives
+
+# Exclude these files from your production _site
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE
+  - README.md
+  - CNAME

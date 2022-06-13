@@ -1,17 +1,22 @@
 /**
  * Green-themed styles for Rent Split
  *
- * @dependency Visual Clean Green: https://shared.BHStudios.org/_css/visual_Clean_Green.php
+ * @dependency Neon: https://github.com/BlueHuskyStudios/stylesheets
  *
  * @since 2016-09-05
- * @author Kyli Rouge & Ben Leggiero of Blue Husky Studios
+ * @author Ky (https://KyLeggiero.me)
  *
  * @see https://Split.Rent
  */
 
-@import url("./rent-base.css");
-@import url("./rent-type.css");
-@import url("https://shared.BHStudios.org/_css/visual_Clean_Green.php");
+@import "rent-base";
+@import "rent-type";
+
+
+:root {
+    --theme-primary-color: #5AC561;
+}
+
 
 .rent .color-danger {
     color: #b71c1c;
