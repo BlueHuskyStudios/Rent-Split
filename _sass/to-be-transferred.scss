@@ -1,0 +1,36 @@
+
+// BEGIN do-not-transfer
+$phone-portrait-max-width: 600px !default;
+// END do-not-transfer
+
+
+@media (min-width: $phone-portrait-max-width) {
+    .show-tiny {
+        display: none;
+    }
+}
+
+button,
+.button,
+:link.button,
+:visited.button,
+input[type=submit],
+input[type=reset],
+.image-button,
+.floating-action-button,
+.mini-floating-action-button {
+    &.medium-emphasis:not(:hover):not(:focus):not(:active) {
+        box-shadow: var(--box-shadow-z0);
+    }
+}
+
+
+// neon-renderer.scss
+
+html,
+dialog {
+    background: var(--default-theme-background-color);
+    color: var(--default-theme-foreground-color);
+
+    cursor: default;
+}

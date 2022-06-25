@@ -1,17 +1,8 @@
 ---
-layout: default
+layout: general
 
 navigation-back: false
 ---
-
-<header class="flex-row flex-horiz-space-between flex-vert-stretch">
-    <h1 class="brand title">Rent Split</h1>
-    <aside class="flex-row flex-vert-stretch">
-        <a href="https://github.com/BlueHuskyStudios/Rent-Split-Calculator" class="fork flex-row flex-vert-center flex-nowrap" tabindex="1">
-            <b class="fork-cta">Fork me on GitHub!&emsp;</b> <i class="fa fa-github fa-2x" aria-hidden="true"></i>
-        </a>
-    </aside>
-</header>
 
 <noscript>
     <dialog class="big severe hero" open>
@@ -28,15 +19,15 @@ navigation-back: false
 
 <main class="flex-column flex-vert-space-between">
 
-    <h2 class="text-center">Calculate what your portion of the rent should be.</h2>
+    <h2 class="tagline">Calculate what your portion of the rent should be!</h2>
     <section id="input-vars" class="flex-row flex-wrap flex-horiz-space-around">
         <table id="Roommates" class="pretty">
             <caption>Roommates</caption>
             <thead>
                 <tr>
-                    <th class="text-center">Name</th>
+                    <th>Name</th>
                     <th>Monthly Income</th>
-                    <th class="text-center">Proportion</th>
+                    <th>Proportion</th>
                 </tr>
             </thead>
             <tbody>
@@ -62,6 +53,22 @@ navigation-back: false
         </table>
     </section>
 
+    <aside id="Local-Storage-Warning" class="warning-message card   brightness-light">
+        <p>I can tell your computer to automatically save what you do on this page, even after you refresh it. This
+            data will stay on your computer, and I will never send it to a server nor share it or anything; it'll just
+            be here so you don't lose your progress.</p>
+        <p>If you don't want me to do this, that's fine! I'll only do it if you click the
+            <q>Turn on auto-save! 🍪</q> button and I won't save anything.</p>
+
+        <div class="flex-row flex-horiz-space-between flex-wrap">
+            <a href="https://en.wikipedia.org/wiki/General_Data_Protection_Regulation" target="_blank" class="medium-emphasis button">Learn more&nbsp;&raquo;</a>
+            <div class="flex-row flex-horiz-stretch flex-wrap">
+                <button id="Local-Storage-Warning-Decline-Button" class="inverse">No, thank you 🙂</button>
+                <button id="Local-Storage-Warning-Consent-Button">Turn on auto-save! 🍪</button>
+            </div>
+        </div>
+    </aside>
+
     <section id="output" class="big   flex-row flex-horiz-space-around">
         <table id="Results" class="pretty">
             <caption>Results</caption>
@@ -71,33 +78,18 @@ navigation-back: false
     </section>
 
     <section id="State-Management" class="flex-column flex-horiz-space-around">
-        <section id="Share-State">
-            <label class="flex-column flex-wrap flex-horiz-stretch flex-vert-bottom">Share this split with your roommates:&nbsp;
+        <section id="Share-State" class="card">
+            <label for="Copy-URL-Button" class="flex-column flex-wrap flex-horiz-stretch flex-vert-bottom">
+                <h3>Share this split with your roommates:</h3>
                 <!--suppress HtmlUnknownTag -->
                 <div id="State-URL-Holder" class="flex-row flex-horiz-stretch   can-have-status" data-status-text="">
                     <input type="text" id="State-URL-Field" readonly />
-                    <button type="button" id="Copy-URL-Button" title="Copy" class="copy-button   can-have-status status-anchored-right" data-status-text=""><i class="fa fa-share-alt fa-lg"></i></button>
+                    <button type="button" id="Copy-URL-Button" name="Copy-URL-Button" title="Copy" class="copy-button   can-have-status status-anchored-right" data-status-text=""><i class="fa fa-share-alt fa-lg"></i></button>
                 </div>
             </label>
         </section>
         <!--br/>
         <button type="reset" id="Reset-State-Button" class="big">Reset</button-->
-
-        <aside id="Local-Storage-Warning" class="warning-message">
-            <p>I can tell your computer to save a little bit of data, which will let me remember what you did on this
-                page even after you refresh it. This data will stay on your computer, and I will never send it to a
-                server nor share it or anything; it'll just be there so you don't lose your progress.</p>
-            <p>If you don't want me to do this, that's fine; just <strong>don't</strong> click the <q>Sweet! 🍪</q> button and I won't
-                save anything.</p>
-
-            <div class="flex-row flex-horiz-space-between flex-wrap   button-list">
-                <a href="https://en.wikipedia.org/wiki/HTTP_cookie#EU_cookie_directive" target="_blank">Learn more&nbsp;&raquo;</a>
-                <div class="flex-row flex-horiz-stretch flex-wrap">
-                    <button id="Local-Storage-Warning-Decline-Button" class="inverse">No, thank you 🙂</button>
-                    <button id="Local-Storage-Warning-Consent-Button">Sweet! 🍪</button>
-                </div>
-            </div>
-        </aside>
     </section>
 </main>
 
@@ -112,17 +104,17 @@ navigation-back: false
 
     <hr/>
 
-    <aside>
-        &copy; <a href="https://BHStudios.org" target="_blank">Blue Husky Studios</a> 2018, <a href="https://bit.ly/BH-1-PS">BH-1-PS</a>
-        <span class="hide-small hide-medium">&ensp;&mdash;&ensp;</span><br class="hide-large"/>
-        <a href="https://github.com/BlueHuskyStudios/Rent-Split-Calculator/releases/tag/2.4.9" target="_blank">Version {{ site.version }}</a>
-        <span>&ensp;&mdash;&ensp;</span>
-        <a href="https://github.com/BlueHuskyStudios/Rent-Split-Calculator/issues/new" target="_blank"><i class="fa fa-bug"></i> Report a Bug</a>
+    <aside class="flex-column flex-horiz-center">
+        <div>
+            <p>Made by <a href="https://KyLeggiero.me" target="_blank">Ky Leggiero</a>. Released under <a href="/LICENSE.txt">the MIT License</a>.</p>
+        </div>
+        <a href="https://github.com/BlueHuskyStudios/Rent-Split-Calculator/releases/tag/2.4.9" target="_blank" class="low-emphasis button">Version {{ site.version }}</a>
+        <a href="https://github.com/BlueHuskyStudios/Rent-Split-Calculator/issues/new" target="_blank" class="button"><i class="fa fa-bug"></i> <span>Report a Bug</span></a>
     </aside>
 </footer>
 
 
-<dialog id="Filter-Dialog">
+<dialog id="Filter-Dialog" class="brightness-dark">
     Who should pay <b class="expense-name">this expense</b>?
 
     <ul id="Expense-Filter-Applicable-Roommate-Checklist" class="checklist">
@@ -130,9 +122,9 @@ navigation-back: false
         <li><hr /></li>
     </ul>
 
-    <footer class="flex-row flex-horiz-right   button-list">
-        <button id="Filter-Dialog-Cancel-Button" class="inverse">Cancel</button>
-        <button id="Filter-Dialog-Ok-Button">OK</button>
+    <footer class="flex-row flex-horiz-right">
+        <button id="Filter-Dialog-Cancel-Button" class="low-emphasis">Cancel</button>
+        <button id="Filter-Dialog-Ok-Button" class="medium-emphasis">OK</button>
     </footer>
 </dialog>
 

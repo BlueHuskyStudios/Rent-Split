@@ -4,7 +4,7 @@
  * @dependency Neon: https://github.com/BlueHuskyStudios/stylesheets
  *
  * @since 2016-09-05
- * @author Ky (https://KyLeggiero.me)
+ * @author Ky – https://KyLeggiero.me
  *
  * @see https://Split.Rent
  */
@@ -13,29 +13,35 @@
 @import "rent-type";
 
 
-:root {
+:root,
+.brightness-light,
+.brightness-white {
+    --theme-primary-color: var(--theme-earth-primary-color);
+    --theme-accent-color: var(--material-indigo-a400);
+    --theme-danger-color: #b71c1c;
+}
+
+.brightness-dark,
+.brightness-black {
     --theme-primary-color: #5AC561;
+    --theme-accent-color: var(--material-indigo-300);
+    --theme-danger-color: #b71c1c;
 }
 
-
-.rent .color-danger {
-    color: #b71c1c;
+.roommate-owes-too-much {
+    background-color: var(--theme-danger-color);
+    color: var(--dark-theme-foreground-color, #EEE);
 }
 
-.rent .roommate-owes-too-much {
-    background-color: #b71c1c;
-    color: #EEE
-}
-
-.rent .warning-message {
-    background-color: #FFEB3B;
+.warning-message {
+    background-color: var(--material-yellow-500);
     color: #000;
 }
 
-.rent input:read-only {
+input:read-only {
     background: rgba(127,127,127, 0.2) !important;
 }
 
-.rent .has-applicable-roommates .filter-button {
-    background-color: #9C27B0 !important; /* Material Purple 500: https://www.materialui.co/colors/purple/500 */
+.has-applicable-roommates .filter-button {
+    background-color: var(--theme-accent-color) !important; /* Material Purple 500: https://www.materialui.co/colors/purple/500 */
 }

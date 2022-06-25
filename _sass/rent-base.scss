@@ -1,50 +1,48 @@
 /**
- * Layout for Rent Split Calculator
+ * Layout for Rent Split
  *
  * @since 2016-09-05
- * @author Kyli Rouge & Ben Leggiero of Blue Husky Studios
+ * @author Ky – https://KyLeggiero.me
  *
  * @see https://Split.Rent
  */
 
-.rent *,
-.rent *::before,
-.rent *::after {
+$button-selector: "button, #Add-Roommate-Button, #Add-Expense-Button, .remove-roommate-button, .remove-expense-button, .button, :link.button, :visited.button, input[type=submit], input[type=reset], .image-button";
+
+
+// MARK: - Basic Structure
+
+:root {
+    min-height: 100vh;
+    --button-border-radius: 4pt;
+}
+
+*,
+*::before,
+*::after {
     transition-duration: 0.2s;
     transition-timing-function: ease-in-out;
 }
 
-.rent html,
-html.rent {
-    min-height: 100vh;
-}
-.rent body {
+body {
     min-height: 80vh;
 }
-.rent main {
+
+main {
     height: 100%
 }
 
-.rent header {
+header {
     padding: 4pt 8pt;
     min-height: auto;
     height: 3rem;
 }
 
-.rent body>header h1.title {
-    margin: -4pt -8pt;
-    color: transparent;
-    background-image: url("/_img/Logo 1.1.0-Transparent (256p).png");
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-
-
-.rent section {
+section {
     margin: 2em 0;
 }
 
-.rent dialog {
+dialog {
     box-shadow: 0 2em 5em rgba(0, 0, 0, 0.1), 0 1em 2em rgba(0, 0, 0, 0.2), 0 1pt 4pt rgba(0, 0, 0, 0.3);
     border: none;
     border-radius: 2pt;
@@ -72,141 +70,168 @@ html.rent {
 
     opacity: 0;
 
-    } @media (max-width: 479px) { .rent dialog {
+    @media (max-width: 479px) {
         width: 95vw;
         width: calc(100vw - 1em);
     }
-}
-    .rent dialog.severe {
-        box-shadow: 0 2em 5em rgba(0, 0, 0, .8), 0 0 0 .5em #FF1744, 0 1em 2em rgba(0, 0, 0, .5), 0 1pt 4pt rgba(0, 0, 0, .2);
+
+    &.severe {
+        box-shadow: 0 2em 5em rgba(0, 0, 0, .8),
+                    0 0 0 .5em #FF1744,
+                    0 1em 2em rgba(0, 0, 0, .5),
+                    0 1pt 4pt rgba(0, 0, 0, .2);
     }
 
-    .rent dialog[open] {
+    &[open] {
         opacity: 1;
     }
 
-.rent body .warning-message {
+    &::backdrop {
+        background: hsla(0deg, 0%, 0%, 0.3);
+        backdrop-filter: blur(1px) brightness(0.5);
+    }
+}
+
+#{$button-selector} {
+    &.low-emphasis,
+    &.medium-emphasis {
+        background-color: var(--theme-background-color);
+    }
+}
+
+.warning-message {
     padding: 1em;
 }
-.rent main .warning-message {
+
+main .warning-message {
     margin: 1em 0;
-    
-    } @media screen and (max-width: 479px) { .rent main .warning-message {
-        width: 100vw;
+
+    @media screen and (max-width: 479px) {
+        max-width: 100vw;
     }
 }
 
-.rent button {
-    border-radius: 2pt;
+
+/* MARK: - Visibility */
+
+.hidden {
+    display: none;
 }
-    .rent dialog button {
-        } @media (min-width: 480px) { .rent dialog button {
-            padding: 3px 1em;
-            min-width: 64px;
-        }
+
+
+@media screen and (max-width: $phone-portrait-max-width) {
+    .hide-medium {
+        display: none;
+    }
+}
+
+
+/* MARK: - Common Elements */
+
+table {
+    td.vert-bottom {
+        vertical-align: bottom;
     }
 
-.rent button,
-.rent #Add-Roommate-Button,
-.rent #Add-Expense-Button,
-.rent .remove-roommate-button,
-.rent .remove-expense-button {
-    cursor: pointer;
-    transition-duration: 0.5s;
-    transition-property: box-shadow;
+    input {
+        background: transparent;
+        box-shadow: inset 0 -3px var(--theme-primary-color);
+        border: none;
+        vertical-align: middle;
+        color: var(--theme-foreground-color);
+        max-height: none;
+        font-size: inherit;
+        padding: var(--table-cell-spacing);
+    }
 }
 
-.rent button:not(:disabled):hover,
-.rent button:not(:disabled):focus,
-.rent #Add-Roommate-Button:hover,
-.rent #Add-Roommate-Button:focus,
-.rent #Add-Expense-Button:hover,
-.rent #Add-Expense-Button:focus,
-.rent .remove-roommate-button:hover,
-.rent .remove-roommate-button:focus,
-.rent .remove-expense-button:hover,
-.rent .remove-expense-button:focus {
-    box-shadow: 0 2pt 10pt rgba(0, 0, 0, 0.2), 0 2pt 5pt rgba(0, 0, 0, 0.2);
-}
-
-.rent button:active,
-.rent #Add-Roommate-Button:active,
-.rent #Add-Expense-Button:active,
-.rent .remove-roommate-button:active,
-.rent .remove-expense-button:active {
-    box-shadow: inset 0 2pt 10pt rgba(0, 0, 0, 0.2), inset 0 2pt 5pt rgba(0, 0, 0, 0.2);
-}
-
-.rent td.vert-bottom {
-    vertical-align: bottom;
-}
-
-.rent.material input[type=text][placeholder]::before {
-    box-shadow: 0 0 0 10px magenta;
-    content: "Text";
-    position: absolute;
-    z-index: 1;
-    top: -1em;
-}
-
-.rent.material input[type=text][placeholder] {
+input[type=text][placeholder] {
     position: relative;
     z-index: 0;
+
+    ::before {
+        box-shadow: 0 0 0 10px magenta;
+        content: "Text";
+        position: absolute;
+        z-index: 1;
+        top: -1em;
+    }
 }
 
-.rent .fork:link,
-.rent .fork:visited,
-.rent :link .fa,
-.rent :visited .fa,
-.rent :link:hover .fa,
-.rent :visited:hover .fa,
-.rent :link:focus .fa,
-.rent :visited:focus .fa {
-    text-decoration: none !important;
+:link,
+:visited {
+    &.fork,
+    & .fa
+    &:hover .fa,
+    &:focus .fa {
+        text-decoration: none !important;
+    }
 }
 
-
-.rent :link b.fork-cta {
+:link b.fork-cta {
     text-overflow: clip;
     white-space: nowrap;
     overflow: hidden;
     transition-property: max-width;
     max-width: 50vw;
 }
-.rent :link:not(:hover):not(:focus) b.fork-cta {
+
+:link:not(:hover):not(:focus) b.fork-cta {
     max-width: 0;
 }
 
-.rent input.roommate-income,
-.rent input.expense-cost {
-    width: 0;
-    min-width: 100%;
+input {
+    &.roommate-income,
+    &.expense-cost {
+        width: 0;
+        min-width: 100%;
+    }
+
+    &:read-only {
+        opacity: 0.5;
+    }
+
+    &[type="text"] {
+        border: none;
+        background: transparent;
+        color: var(--theme-foreground-color);
+        text-align: center;
+        padding: var(--table-cell-spacing);
+    }
+}
+
+aside {
+    p {
+        margin: 0 0.5ex;
+    }
+
+    footer & {
+        line-height: 1.5;
+    }
+}
+
+hr {
+    min-width: 3em;
+    margin: 3em;
+    border: none;
+    border-top: 1px solid currentColor;
+    opacity: 0.2;
 }
 
 
-.rent aside p {
-    margin: 0 0.5ex;
-}
 
-.rent footer aside {
-    line-height: 1.5;
-}
+.app-bar {
+   background-image:  url("/images/Logo-Transparent (256p).png");
+   background-size: contain;
+   background-repeat: no-repeat;
 
-.rent .button-list button:not(:last-child) {
-    margin-right: 1rem;
-}
-
-.rent .button-list:last-child {
-    margin-top: 1ex;
-}
-
-.rent input:read-only {
-    opacity: 0.5;
+   .title .title-text {
+       color: transparent;
+   }
 }
 
 
-
-/* MARK: - Hidden floating row buttons */
+/* MARK: - Floating row buttons */
 
 .has-floating-button {
     position: relative;
@@ -214,47 +239,77 @@ html.rent {
 
 .floats-to-left {
     position: absolute;
-    left: -3em;
+    // left: -3em;
     top: calc(50% - 1.5ex);
 
-    } @media (max-width: 479px) { .floats-to-left {
+    @media (max-width: 479px) {
         left: -4.5em;
         top: calc(50% - 3.5ex);
     }
+
+    // th.plain.has-floating-button & {
+    //     left: -2.25em;
+    //
+    //     @media (max-width: 479px) {
+    //         left: -3.75em;
+    //     }
+    // }
 }
 
-th.plain.has-floating-button .floats-to-left {
-    left: -2.25em;
 
-    } @media (max-width: 479px) { th.plain.has-floating-button .floats-to-left {
-        left: -3.75em;
+// .hides-something-until-hover {
+//     .hidden-until-parent-hover {
+//         transition-property: opacity, box-shadow, background-color;
+//         transition-timing-function: ease-in-out;
+//         transition-delay: 1s;
+//         transition-duration: 1s;
+//     }
+//
+//     .touch-not-supported & {
+//         &:hover .hidden-until-parent-hover,
+//         &:focus .hidden-until-parent-hover,
+//         & .hidden-until-parent-hover:hover,
+//         & .hidden-until-parent-hover:focus {
+//             transition-delay: 0s;
+//             transition-duration: 0.2s;
+//         }
+//     }
+// }
+
+.filter-button {
+    margin: 0;
+    min-width: 0;
+    top: 0;
+    left: calc(0px - (
+        (
+              var(--table-cell-spacing, 1ex)
+            + var(--table-visual-border-thickness, 0ex)
+        )
+        + (
+              var(--button-padding-each-horizontal, 0.5ex)
+            + var(--button-padding-each-horizontal, 0.5ex)
+            + 1em
+        )
+    ));
+
+    .has-applicable-roommates & {
+        opacity: 1 !important;
     }
-}
 
+    th.plain &,
+    td.plain & {
 
-.hides-something-until-hover .hidden-until-parent-hover {
-    transition-property: opacity, box-shadow, background-color;
-    transition-timing-function: ease-in-out;
-    transition-delay: 1s;
-    transition-duration: 1s;
-}
-
-.touch-not-supported .hides-something-until-hover:hover .hidden-until-parent-hover,
-.touch-not-supported .hides-something-until-hover:focus .hidden-until-parent-hover,
-.touch-not-supported .hides-something-until-hover .hidden-until-parent-hover:hover,
-.touch-not-supported .hides-something-until-hover .hidden-until-parent-hover:focus {
-    transition-delay: 0s;
-    transition-duration: 0.2s;
-}
-
-@media (min-width: 480px) { /* Tiny screens always get the buttons, and when we detect touch devices, those do too */
-    .touch-not-supported .hides-something-until-hover:not(:hover):not(:focus) .hidden-until-parent-hover:not(:hover):not(:focus) {
-        opacity: 0;
+        left: calc(0px - (
+            (
+                  var(--table-cell-spacing, 1ex)
+            )
+            + (
+                  var(--button-padding-each-horizontal, 0.5ex)
+                + var(--button-padding-each-horizontal, 0.5ex)
+                + 1em
+            )
+        ));
     }
-}
-
-.rent .has-applicable-roommates .filter-button {
-    opacity: 1 !important;
 }
 
 #Expenses {
@@ -262,39 +317,51 @@ th.plain.has-floating-button .floats-to-left {
 }
 
 
-.rent .checklist {
+.checklist {
     list-style-type: none;
     margin: 1em 0;
-}
-    .rent .checklist li {
+
+    li {
         margin: 0;
     }
-    .rent .checklist .checklist-item {
+
+    .checklist-item {
         margin: 1ex 1em;
     }
-    .rent .checklist hr {
+
+    hr {
         margin: 1ex 0;
     }
-
-.rent #Share-State {
-    line-height: 1.5;
 }
-    .rent #Share-State label>* {
-        margin: 1ex 0;
+
+#Share-State {
+    line-height: 1.5;
+    max-width: var(--phone-portrait-max-width);
+    margin-inline: auto;
+
+    #State-URL-Holder {
+        margin-top: 1em;
     }
 
+    #Copy-URL-Button {
+        margin: 0;
+        margin-left: var(--button-margin);
+        flex-grow: 0;
+    }
+}
 
-.rent .can-have-status {
+
+.can-have-status {
     position: relative;
 
     z-index: 0;
-}
-    .rent .can-have-status::before {
+
+    &::before {
         transition-property: bottom, opacity;
         transition-duration: 1.5s;
     }
-        .rent .can-have-status[data-status-text]::before {
-            color: #263238;
+        &[data-status-text]::before {
+            color: var(--theme-danger-color);
             content: attr(data-status-text);
             font-size: 11px;
             font-weight: 500;
@@ -305,18 +372,19 @@ th.plain.has-floating-button .floats-to-left {
 
             bottom: 1ex;
             left: 1ex;
-            width: 1in;
+            min-width: 1in;
 
             z-index: -1;
         }
-        .rent .can-have-status.status-anchored-right[data-status-text]::before {
+        &.status-anchored-right[data-status-text]::before {
             left: auto;
             right: 1ex;
             text-align: right;
         }
-        .rent .can-have-status.show-status[data-status-text]::before {
+        &.show-status[data-status-text]::before {
             opacity: 1;
             bottom: -3ex;
 
             transition-duration: 0.2s;
         }
+}

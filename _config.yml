@@ -4,7 +4,7 @@
 
 # Name of your site (displayed in the header)
 name: Rent Split
-# Name of your site (displayed in the tab)
+# Name of your site (displayed in the app bar)
 title: Rent Split – Split Rent Fairly
 
 # Short bio or description (for social media links)
@@ -24,6 +24,18 @@ git:
 
 
 theme-color: "#5AC561"
+default-neon-theme-url: "https://stylesheets.bhstudios.org/assets/v2/neon/neon-earth.css"
+
+
+app-bar:
+    right-buttons:
+        -
+            href: https://github.com/BlueHuskyStudios/Rent-Split
+            fontAwesomeIcon: fa fa-github fa-2x
+
+
+sidebar:
+    exclude: true
 
 
 # Your website URL (e.g. http://barryclark.github.io or http://www.barryclark.co)
