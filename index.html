@@ -10,7 +10,7 @@ navigation-back: false
     </dialog>
 </noscript>
 
-<aside class="warning-message show-tiny">
+<aside class="warning-message show-tiny card">
     Sorry, I don't support screens this thin, just yet. Don't worry; I will in the future! For now, if this is a
     phone, try turning it sideways. &#x1F638;
 </aside>
@@ -20,7 +20,7 @@ navigation-back: false
 <main class="flex-column flex-vert-space-between">
 
     <h2 class="tagline">Calculate what your portion of the rent should be!</h2>
-    <section id="input-vars" class="flex-row flex-wrap flex-horiz-space-around">
+    <section id="input-vars" class="flex-row flex-wrap flex-horiz-space-around flex-vert-top">
         <table id="Roommates" class="pretty">
             <caption>Roommates</caption>
             <thead>
@@ -54,40 +54,43 @@ navigation-back: false
     </section>
 
     <aside id="Local-Storage-Warning" class="warning-message card   brightness-light">
+        {%- assign auto-save-button-text="Turn on auto-save! 🍪" %}
+        <h3>Your changes will be lost without auto-save!</h3>
+
         <p>I can tell your computer to automatically save what you do on this page, even after you refresh it. This
             data will stay on your computer, and I will never send it to a server nor share it or anything; it'll just
             be here so you don't lose your progress.</p>
         <p>If you don't want me to do this, that's fine! I'll only do it if you click the
-            <q>Turn on auto-save! 🍪</q> button and I won't save anything.</p>
+            <q>{{ auto-save-button-text }}</q> button and I won't save anything.</p>
 
         <div class="flex-row flex-horiz-space-between flex-wrap">
             <a href="https://en.wikipedia.org/wiki/General_Data_Protection_Regulation" target="_blank" class="medium-emphasis button">Learn more&nbsp;&raquo;</a>
             <div class="flex-row flex-horiz-stretch flex-wrap">
                 <button id="Local-Storage-Warning-Decline-Button" class="inverse">No, thank you 🙂</button>
-                <button id="Local-Storage-Warning-Consent-Button">Turn on auto-save! 🍪</button>
+                <button id="Local-Storage-Warning-Consent-Button">{{ auto-save-button-text }}</button>
             </div>
         </div>
     </aside>
 
     <section id="output" class="big   flex-row flex-horiz-space-around">
-        <table id="Results" class="pretty">
-            <caption>Results</caption>
-            <thead><tr></tr></thead>
-            <tbody></tbody>
-        </table>
+        <div class="wide-table-holder">
+            <table id="Results" class="pretty">
+                <caption>Results</caption>
+                <thead><tr></tr></thead>
+                <tbody></tbody>
+            </table>
+        </div>
     </section>
 
     <section id="State-Management" class="flex-column flex-horiz-space-around">
-        <section id="Share-State" class="card">
-            <label for="Copy-URL-Button" class="flex-column flex-wrap flex-horiz-stretch flex-vert-bottom">
-                <h3>Share this split with your roommates:</h3>
-                <!--suppress HtmlUnknownTag -->
-                <div id="State-URL-Holder" class="flex-row flex-horiz-stretch   can-have-status" data-status-text="">
-                    <input type="text" id="State-URL-Field" readonly />
-                    <button type="button" id="Copy-URL-Button" name="Copy-URL-Button" title="Copy" class="copy-button   can-have-status status-anchored-right" data-status-text=""><i class="fa fa-share-alt fa-lg"></i></button>
-                </div>
-            </label>
-        </section>
+        <label for="Copy-URL-Button" id="Share-State" class="card   flex-column flex-wrap flex-horiz-stretch flex-vert-bottom">
+            <h3>Share this split with your roommates:</h3>
+            <!--suppress HtmlUnknownTag -->
+            <div id="State-URL-Holder" class="flex-row flex-horiz-stretch   can-have-status" data-status-text="">
+                <input type="text" id="State-URL-Field" readonly />
+                <button type="button" id="Copy-URL-Button" name="Copy-URL-Button" title="Copy" class="copy-button   can-have-status status-anchored-center" data-status-text=""><i class="fa fa-share-alt fa-lg"></i></button>
+            </div>
+        </label>
         <!--br/>
         <button type="reset" id="Reset-State-Button" class="big">Reset</button-->
     </section>

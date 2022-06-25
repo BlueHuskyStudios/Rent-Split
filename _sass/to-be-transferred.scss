@@ -34,3 +34,43 @@ dialog {
 
     cursor: default;
 }
+
+
+
+// neon-tables.scss
+
+table {
+    tr:first-child {
+        th:first-child {
+            border-top-left-radius: var(--table-visual-border-thickness);
+        }
+        th:last-child {
+            border-top-right-radius: var(--table-visual-border-thickness);
+        }
+    }
+
+    thead+tbody tr:first-child {
+        th:first-child,
+        th:last-child {
+            border-top-left-radius: unset;
+            border-top-right-radius: unset;
+        }
+    }
+
+    tr:last-child {
+        th:first-child {
+            border-bottom-left-radius: var(--table-visual-border-thickness);
+        }
+        th:last-child {
+            border-bottom-right-radius: var(--table-visual-border-thickness);
+        }
+    }
+
+    thead tr:last-child {
+        th:first-child,
+        th:last-child {
+            border-bottom-left-radius: unset;
+            border-bottom-right-radius: unset;
+        }
+    }
+}
