@@ -1,0 +1,458 @@
+/**
+ * Layout for Rent Split
+ *
+ * @since 2016-09-05
+ * @author Ky – https://KyLeggiero.me
+ *
+ * @see https://Split.Rent
+ */
+
+$button-selector: "button, #Add-Roommate-Button, #Add-Expense-Button, .remove-roommate-button, .remove-expense-button, .button, :link.button, :visited.button, input[type=submit], input[type=reset], .image-button";
+
+
+// MARK: - Basic Structure
+
+:root {
+    min-height: 100vh;
+    --button-border-radius: 4pt;
+}
+
+*,
+*::before,
+*::after {
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
+}
+
+body {
+    min-height: 80vh;
+}
+
+main {
+    height: 100%
+}
+
+header {
+    padding: 4pt 8pt;
+    min-height: auto;
+    height: 3rem;
+}
+
+section {
+    margin: 2em 0;
+}
+
+dialog {
+    box-shadow: 0 2em 5em rgba(0, 0, 0, 0.1), 0 1em 2em rgba(0, 0, 0, 0.2), 0 1pt 4pt rgba(0, 0, 0, 0.3);
+    border: none;
+    border-radius: 2pt;
+    position: fixed;
+    top: 10%;
+    left: 0;
+    right: 0;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: -ms-fit-content;
+    height: fit-content;
+    max-height: -webkit-fit-content;
+    max-height: -moz-fit-content;
+    max-height: -ms-fit-content;
+    max-height: fit-content;
+    margin: auto !important;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: -ms-fit-content;
+    width: fit-content;
+    z-index: 10;
+
+    transition-property: opacity;
+    transition-duration: 1s;
+
+    opacity: 0;
+
+    @media (max-width: 479px) {
+        width: 95vw;
+        width: calc(100vw - 1em);
+    }
+
+    &.severe {
+        box-shadow: 0 2em 5em rgba(0, 0, 0, .8),
+                    0 0 0 .5em #FF1744,
+                    0 1em 2em rgba(0, 0, 0, .5),
+                    0 1pt 4pt rgba(0, 0, 0, .2);
+    }
+
+    &[open] {
+        opacity: 1;
+    }
+
+    &::backdrop {
+        background: hsla(0deg, 0%, 0%, 0.3);
+        backdrop-filter: blur(1px) brightness(0.5);
+    }
+}
+
+#{$button-selector} {
+    &.low-emphasis,
+    &.medium-emphasis {
+        background-color: var(--theme-background-color);
+    }
+}
+
+.warning-message {
+    padding: 1em;
+}
+
+main .warning-message {
+    margin: 1em 0;
+
+    @media screen and (max-width: 479px) {
+        max-width: 100vw;
+    }
+}
+
+
+/* MARK: - Visibility */
+
+.hidden {
+    display: none;
+}
+
+
+@media screen and (max-width: $phone-portrait-max-width) {
+    .hide-medium {
+        display: none;
+    }
+
+    table {
+        th,
+        td {
+            &:not(:first-child):not(:last-child) {
+                display: none;
+            }
+        }
+    }
+}
+
+
+/* MARK: - Common Elements */
+
+table {
+    td.vert-bottom {
+        vertical-align: bottom;
+    }
+
+    tr>th:first-child {
+        min-width: 3.5cm;
+        text-align: right;
+        text-align: end;
+    }
+
+    input {
+        &,
+        &[type="text"],
+        &[type="number"] {
+            background: transparent;
+            box-shadow: inset 0 -3px var(--theme-primary-color);
+            border: none;
+            color: var(--theme-foreground-color);
+
+            vertical-align: middle;
+            font-size: inherit;
+            padding: var(--table-cell-spacing);
+
+            max-height: none;
+            width: 100%;
+
+            text-align: inherit;
+        }
+    }
+}
+
+input[type=text][placeholder] {
+    position: relative;
+    z-index: 0;
+
+    ::before {
+        box-shadow: 0 0 0 10px magenta;
+        content: "Text";
+        position: absolute;
+        z-index: 1;
+        top: -1em;
+    }
+}
+
+:link,
+:visited {
+    &.fork,
+    & .fa
+    &:hover .fa,
+    &:focus .fa {
+        text-decoration: none !important;
+    }
+}
+
+:link b.fork-cta {
+    text-overflow: clip;
+    white-space: nowrap;
+    overflow: hidden;
+    transition-property: max-width;
+    max-width: 50vw;
+}
+
+:link:not(:hover):not(:focus) b.fork-cta {
+    max-width: 0;
+}
+
+input {
+    &.roommate-income,
+    &.expense-cost {
+        width: 0;
+        min-width: 100%;
+    }
+
+    &:read-only {
+        opacity: 0.5;
+    }
+
+    &[type="text"] {
+        border: none;
+        background: transparent;
+        color: var(--theme-foreground-color);
+        text-align: center;
+        padding: var(--table-cell-spacing);
+    }
+}
+
+aside {
+    p {
+        margin: 0 0.5ex;
+    }
+
+    footer & {
+        line-height: 1.5;
+    }
+}
+
+hr {
+    min-width: 3em;
+    margin: 3em;
+    border: none;
+    border-top: 1px solid currentColor;
+    opacity: 0.2;
+}
+
+
+/* MARK: - Components & Styles */
+
+.app-bar {
+   background-image:  url("/images/Logo-Transparent (256p).png");
+   background-size: contain;
+   background-repeat: no-repeat;
+
+   .title .title-text {
+       color: transparent;
+   }
+}
+
+
+.color-danger {
+    color: var(--theme-danger-color);
+}
+
+
+/* MARK: - Floating row buttons */
+
+.has-floating-button {
+    position: relative;
+}
+
+.floats-to-left {
+    position: absolute;
+    // left: -3em;
+    top: calc(50% - 1.5ex);
+
+    @media (max-width: 479px) {
+        left: -4.5em;
+        top: calc(50% - 3.5ex);
+    }
+
+    // th.plain.has-floating-button & {
+    //     left: -2.25em;
+    //
+    //     @media (max-width: 479px) {
+    //         left: -3.75em;
+    //     }
+    // }
+}
+
+
+/* MARK: - User Input */
+
+// .hides-something-until-hover {
+//     .hidden-until-parent-hover {
+//         transition-property: opacity, box-shadow, background-color;
+//         transition-timing-function: ease-in-out;
+//         transition-delay: 1s;
+//         transition-duration: 1s;
+//     }
+//
+//     .touch-not-supported & {
+//         &:hover .hidden-until-parent-hover,
+//         &:focus .hidden-until-parent-hover,
+//         & .hidden-until-parent-hover:hover,
+//         & .hidden-until-parent-hover:focus {
+//             transition-delay: 0s;
+//             transition-duration: 0.2s;
+//         }
+//     }
+// }
+
+.filter-button {
+    margin: 0;
+    min-width: 0;
+    top: 0;
+    left: calc(0px - (
+        (
+              var(--table-cell-spacing, 1ex)
+            + var(--table-visual-border-thickness, 0ex)
+        )
+        + (
+              var(--button-padding-each-horizontal, 0.5ex)
+            + var(--button-padding-each-horizontal, 0.5ex)
+            + 1em
+        )
+    ));
+
+    .has-applicable-roommates & {
+        opacity: 1 !important;
+    }
+
+    th.plain &,
+    td.plain & {
+
+        left: calc(0px - (
+            (
+                  var(--table-cell-spacing, 1ex)
+            )
+            + (
+                  var(--button-padding-each-horizontal, 0.5ex)
+                + var(--button-padding-each-horizontal, 0.5ex)
+                + 1em
+            )
+        ));
+    }
+}
+
+#Expenses {
+    padding-left: 1em;
+}
+
+
+.checklist {
+    list-style-type: none;
+    margin: 1em 0;
+
+    li {
+        margin: 0;
+    }
+
+    .checklist-item {
+        margin: 1ex 1em;
+    }
+
+    hr {
+        margin: 1ex 0;
+    }
+}
+
+.tagline {
+    text-align: center;
+}
+
+.card {
+    max-width: unset;
+
+    &>* {
+        margin-block: 1ex;
+
+        &:first-child {
+            margin-top: 0;
+        }
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+#Share-State {
+    line-height: 1.5;
+    max-width: var(--phone-portrait-max-width);
+    margin-inline: auto;
+
+    #Copy-URL-Button {
+        margin: 0;
+        margin-left: var(--button-margin);
+        flex-grow: 0;
+    }
+}
+
+.can-have-status {
+    position: relative;
+    overflow: visible;
+
+    z-index: 0;
+
+    &::after {
+        transition-property: bottom, opacity;
+        transition-duration: 1.5s;
+        transition-timing-function: ease-in-out;
+    }
+        &[data-status-text]::after {
+            color: var(--theme-foreground-color);
+            content: attr(data-status-text);
+            font-size: 11px;
+            font-weight: 500;
+            display: block;
+            opacity: 0;
+            position: absolute;
+            text-align: left;
+
+            top: unset;
+            right: unset;
+            bottom: 0%;
+            left: 1ex;
+
+            width: unset;
+            // min-width: 1in;
+            height: unset;
+
+            padding: 1ex;
+            margin: 1ex;
+            background: var(--theme-background-color-at-level-raised);
+            box-shadow: var(--box-shadow-z1);
+            border-radius: 99in;
+
+            z-index: -1;
+            transition-property: bottom, opacity;
+            transition-timing-function: ease-in-out;
+        }
+        &.status-anchored-center[data-status-text]::after {
+            left: auto;
+            right: auto;
+            text-align: center;
+        }
+        &.status-anchored-right[data-status-text]::after {
+            left: unset;
+            right: 1ex;
+            text-align: right;
+        }
+        &.show-status[data-status-text]::after {
+            opacity: 1;
+            bottom: -100%;
+
+            transition-duration: 0.2s;
+            transition-property: bottom, opacity;
+            transition-timing-function: ease-in-out;
+        }
+}

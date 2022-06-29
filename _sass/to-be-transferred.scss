@@ -1,0 +1,76 @@
+
+// BEGIN do-not-transfer
+$phone-portrait-max-width: 600px !default;
+// END do-not-transfer
+
+
+@media (min-width: $phone-portrait-max-width) {
+    .show-tiny {
+        display: none;
+    }
+}
+
+button,
+.button,
+:link.button,
+:visited.button,
+input[type=submit],
+input[type=reset],
+.image-button,
+.floating-action-button,
+.mini-floating-action-button {
+    &.medium-emphasis:not(:hover):not(:focus):not(:active) {
+        box-shadow: var(--box-shadow-z0);
+    }
+}
+
+
+// neon-renderer.scss
+
+html,
+dialog {
+    background: var(--default-theme-background-color);
+    color: var(--default-theme-foreground-color);
+
+    cursor: default;
+}
+
+
+
+// neon-tables.scss
+
+table {
+    tr:first-child {
+        th:first-child {
+            border-top-left-radius: var(--table-visual-border-thickness);
+        }
+        th:last-child {
+            border-top-right-radius: var(--table-visual-border-thickness);
+        }
+    }
+
+    thead+tbody tr:first-child {
+        th:first-child,
+        th:last-child {
+            border-top-left-radius: unset;
+            border-top-right-radius: unset;
+        }
+    }
+
+    tr:last-child {
+        th:first-child {
+            border-bottom-left-radius: var(--table-visual-border-thickness);
+        }
+        th:last-child {
+            border-bottom-right-radius: var(--table-visual-border-thickness);
+        }
+    }
+
+    thead tr:last-child {
+        th:first-child,
+        th:last-child {
+            border-bottom-left-radius: unset;
+            border-bottom-right-radius: unset;
+        }
+    }
+}
