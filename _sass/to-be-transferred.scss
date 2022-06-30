@@ -1,9 +1,20 @@
 
 // BEGIN do-not-transfer
+$phone-portrait-medium-max-width: 400px !default;
 $phone-portrait-max-width: 600px !default;
 // END do-not-transfer
 
 
+@media screen and (max-width: $phone-portrait-medium-max-width) {
+    .hide-small {
+        display: none;
+    }
+}
+@media screen and (max-width: $phone-portrait-max-width) {
+    .hide-medium {
+        display: none;
+    }
+}
 @media (min-width: $phone-portrait-max-width) {
     .show-tiny {
         display: none;
