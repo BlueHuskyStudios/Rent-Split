@@ -119,21 +119,6 @@ main .warning-message {
 }
 
 
-@media screen and (max-width: $phone-portrait-max-width) {
-    .hide-medium {
-        display: none;
-    }
-
-    table {
-        th,
-        td {
-            &:not(:first-child):not(:last-child) {
-                display: none;
-            }
-        }
-    }
-}
-
 
 /* MARK: - Common Elements */
 
