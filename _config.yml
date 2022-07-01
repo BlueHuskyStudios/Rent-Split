@@ -57,7 +57,7 @@ timezone: America/Denver
 permalink: /:title/
 
 # The version of this release of Rent Split
-version: 2.5.0
+version: 2.5.2
 
 # Jekyll 3 now only supports Kramdown for Markdown
 kramdown:
