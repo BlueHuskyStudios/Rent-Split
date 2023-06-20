@@ -14,3 +14,8 @@ _js/production/Rent Split 2/Rent Split 2\.meta\.js
 .jekyll-metadata
 
 _site/
+
+Mockup/**/*.png
+_kotlinSource/.gradle/
+
+_kotlinSource/build/

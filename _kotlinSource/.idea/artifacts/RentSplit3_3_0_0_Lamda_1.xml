@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="RentSplit3-3.0.0-Lamda.1">
+    <output-path>$PROJECT_DIR$/../js</output-path>
+    <root id="archive" name="RentSplit3-3.0.0-Lamda.1.jar" />
+  </artifact>
+</component>
