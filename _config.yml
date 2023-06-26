@@ -6,6 +6,8 @@
 name: Rent Split
 # Name of your site (displayed in the app bar)
 title: Rent Split – Split Rent Fairly
+# The version of this release of Rent Split
+version: 2.5.3
 
 # Short bio or description (for social media links)
 description: Calculate what your fair portion of the rent should be! Rent Split divides up expenses in a fair way, taking into account income disparity and who pays for what
@@ -55,9 +57,6 @@ timezone: America/Denver
 #
 
 permalink: /:title/
-
-# The version of this release of Rent Split
-version: 2.5.2
 
 # Jekyll 3 now only supports Kramdown for Markdown
 kramdown:
