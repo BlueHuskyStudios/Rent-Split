@@ -97,6 +97,10 @@ dialog {
     &.medium-emphasis {
         background-color: var(--theme-background-color);
     }
+
+    .app-bar &.raised {
+        height: auto;
+    }
 }
 
 .warning-message {

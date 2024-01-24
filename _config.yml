@@ -32,6 +32,11 @@ default-neon-theme-url: "https://stylesheets.bhstudios.org/assets/v2/neon/neon-e
 app-bar:
     right-buttons:
         -
+            href: https://paypal.me/KyLeggiero
+            text: Donate
+            raised: true
+            classNames: donate-button
+        -
             href: https://github.com/BlueHuskyStudios/Rent-Split
             fontAwesomeIcon: fa fa-github fa-2x
 
