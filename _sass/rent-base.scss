@@ -96,8 +96,19 @@ dialog {
     }
 
     &::backdrop {
+        background: hsla(0deg, 0%, 0%, 0.0);
+        -webkit-backdrop-filter: blur(0px) brightness(1) saturate(1.2);
+        backdrop-filter: blur(0px) brightness(1) saturate(1.2);
+
+        transition-property: background, backdrop-filter;
+        transition-duration: 0.3s;
+        transition-timing-function: ease-in-out;
+    }
+
+    &[open]::backdrop {
         background: hsla(0deg, 0%, 0%, 0.3);
-        backdrop-filter: blur(1px) brightness(0.5);
+        -webkit-backdrop-filter: blur(12px) brightness(0.6) saturate(1.2);
+        backdrop-filter: blur(12px) brightness(0.6) saturate(1.2);
     }
 
     p,
@@ -111,6 +122,14 @@ dialog {
     &.medium-emphasis {
         background-color: var(--theme-background-color);
     }
+
+    // &.medium-emphasis {
+    //     &:hover,
+    //     &:active {
+    //         background-color: var(--theme-primary-color) !important;
+    //         color: var(--light-theme-foreground-color);
+    //     }
+    // }
 
     .app-bar &.raised {
         height: auto;
@@ -128,17 +147,31 @@ dialog {
         right: var(--dialog-close-button-topright-position);
         padding: 1em;
         min-width: auto;
-        border-radius: 100%;
+        border-radius: 99in;
         margin: 0;
 
         --dialog-close-button-size: 1em;
         --dialog-close-button-topright-position: calc(0em - ((var(--dialog-close-button-size) + var(--dialog-padding)) / 2));
     }
 
+    .button-stack:hover & {
+        &:hover {
+            border-radius: 1.5em;
+        }
+
+        &:not(:hover) {
+            opacity: 0.7;
+            border-color: transparent;
+        }
+    }
+
     .button-stack & {
         justify-content: flex-start;
         margin: 0;
         width: 3in;
+        max-width: 100%;
+
+        transition-property: transform, box-shadow, color, background, border, opacity, border-radius;
 
         &:hover,
         &:active {
