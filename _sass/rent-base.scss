@@ -9,12 +9,17 @@
 
 $button-selector: "button, #Add-Roommate-Button, #Add-Expense-Button, .remove-roommate-button, .remove-expense-button, .button, :link.button, :visited.button, input[type=submit], input[type=reset], .image-button";
 
+// @import url(https://stylesheets.bhstudios.org/assets/v2/general/icons-import.scss);
+$icon-selector: ".material-icons, .material-icons-outlined, .material-icons-round, .material-icons-sharp, .material-icons-two-tone, .fa, .fab, .fas";
+
 
 // MARK: - Basic Structure
 
 :root {
     min-height: 100vh;
     --button-border-radius: 4pt;
+
+    --theme-donate-color: var(--material-yellow-500);
 }
 
 *,
@@ -45,7 +50,7 @@ section {
 dialog {
     box-shadow: 0 2em 5em rgba(0, 0, 0, 0.1), 0 1em 2em rgba(0, 0, 0, 0.2), 0 1pt 4pt rgba(0, 0, 0, 0.3);
     border: none;
-    border-radius: 2pt;
+    border-radius: 1rem;
     position: fixed;
     top: 10%;
     left: 0;
@@ -59,10 +64,8 @@ dialog {
     max-height: -ms-fit-content;
     max-height: fit-content;
     margin: auto !important;
-    width: -webkit-fit-content;
-    width: -moz-fit-content;
-    width: -ms-fit-content;
     width: fit-content;
+    max-width: min-content;
     z-index: 10;
 
     transition-property: opacity;
@@ -100,6 +103,46 @@ dialog {
 
     .app-bar &.raised {
         height: auto;
+    }
+
+    &.donate-button {
+        --button-background: var(--material-pink-a700) !important;
+    }
+
+    .button-stack & {
+        justify-content: flex-start;
+        margin: 0;
+        width: 3in;
+
+        &:hover,
+        &:active {
+            z-index: 1;
+        }
+    }
+
+    .button-stack li:not(:first-child) & {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+    .button-stack li:not(:last-child) & {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        margin-block-end: -1px;
+    }
+
+    #{$icon-selector} {
+        font-size: 18px;
+        width: 1em;
+        margin-right: 0.5em;
+
+        &.fa-2x {
+            font-size: 2em;
+        }
+
+        &.fa-3x {
+            font-size: 3em;
+        }
     }
 }
 
@@ -242,6 +285,10 @@ hr {
    .title .title-text {
        color: transparent;
    }
+
+    .app-bar-empty-leading-placeholder {
+        flex-grow: 1;
+    }
 }
 
 
@@ -330,6 +377,10 @@ hr {
                 + 1em
             )
         ));
+    }
+
+    #{$icon-selector} {
+        width: auto;
     }
 }
 

@@ -120,7 +120,7 @@ exclude-main-element: true
 
 
 <dialog id="Filter-Dialog" class="brightness-dark">
-    Who should pay <b class="expense-name">this expense</b>?
+    <h4>Who should pay <b class="expense-name">this expense</b>?</h4>
 
     <ul id="Expense-Filter-Applicable-Roommate-Checklist" class="checklist">
         <li class="checklist-item"><label><input type="checkbox" id="Roommate-Filter-Everyone-Checkbox" checked> Everyone</label></li>
@@ -131,6 +131,34 @@ exclude-main-element: true
         <button id="Filter-Dialog-Cancel-Button" class="low-emphasis">Cancel</button>
         <button id="Filter-Dialog-Ok-Button" class="medium-emphasis">OK</button>
     </footer>
+</dialog>
+
+
+<dialog id="Donate-Dialog" class="brightness-dark">
+    <h3>Thank you! Even $1 helps</h3>
+    <p>{{ site.name }} is made almost entirely just by Ky Leggiero.</p>
+    <p>{{ site.name }} will never have ads, and will never require payment. If you wish to donate, you won't get anything, but you'll be helping Ky out personally.</p>
+
+    <ul id="Donation-Servies-List" class="plain button-stack">
+        {% for service in site.donation-services -%}
+        <li class="donation-service"><a href="{{ service.href }}" class="medium-emphasis button">
+            {%- if service.materialIcon or service.materialIconVariant or service.fontAwesomeIcon -%}
+            {% include Neon-Jekyll-Components/Icons/icon.html
+                materialIcon = service.materialIcon
+                materialIconVariant = service.materialIconVariant
+                fontAwesomeIcon = service.fontAwesomeIcon
+                -%}
+            {%- endif %}
+            <span class="title">{{ service.name }}</span>
+        </a></li>
+        {%- endfor %}
+    </ul>
+
+    <button id="Donate-Dialog-Close-Button" class="low-emphasis" onclick="$('#Donate-Dialog')[0].close()">
+        {%- include Neon-Jekyll-Components/Icons/icon.html
+            materialIcon = "close"
+        -%}
+    </button>
 </dialog>
 
 

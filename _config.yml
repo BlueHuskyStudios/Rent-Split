@@ -36,10 +36,26 @@ app-bar:
             text: Donate
             raised: true
             classNames: donate-button
+            materialIcon: favorite
+            onClick: "$('#Donate-Dialog')[0].showModal(); return false;"
         -
             href: https://github.com/BlueHuskyStudios/Rent-Split
             fontAwesomeIcon: fa fa-github fa-2x
 
+donation-services:
+    -
+        href: https://paypal.me/KyLeggiero
+        name: PayPal
+        fontAwesomeIcon: fab fa-paypal
+    -
+        href: https://ko-fi.com/bluehuskystudios
+        name: Ko-Fi
+        materialIcon: local_cafe
+        materialIconVariant: outlined
+    -
+        href: https://github.com/sponsors/KyLeggiero
+        name: GitHub Sponsors
+        fontAwesomeIcon: fab fa-github
 
 sidebar:
     exclude: true
