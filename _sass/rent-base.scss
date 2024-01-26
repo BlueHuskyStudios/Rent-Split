@@ -63,15 +63,21 @@ dialog {
     max-height: -moz-fit-content;
     max-height: -ms-fit-content;
     max-height: fit-content;
+    padding: var(--dialog-padding);
     margin: auto !important;
     width: fit-content;
     max-width: min-content;
     z-index: 10;
 
+    position: relative;
+    overflow: visible;
+
     transition-property: opacity;
     transition-duration: 1s;
 
     opacity: 0;
+
+    --dialog-padding: 1em;
 
     @media (max-width: 479px) {
         width: 95vw;
@@ -93,6 +99,11 @@ dialog {
         background: hsla(0deg, 0%, 0%, 0.3);
         backdrop-filter: blur(1px) brightness(0.5);
     }
+
+    p,
+    h1, h2, h3, h4, h5, h6 {
+        margin-block-end: 0.8em;
+    }
 }
 
 #{$button-selector} {
@@ -107,6 +118,21 @@ dialog {
 
     &.donate-button {
         --button-background: var(--material-pink-a700) !important;
+    }
+
+    &.dialog-close {
+        position: absolute;
+        width: var(--dialog-close-button-size);
+        height: var(--dialog-close-button-size);
+        top: var(--dialog-close-button-topright-position);
+        right: var(--dialog-close-button-topright-position);
+        padding: 1em;
+        min-width: auto;
+        border-radius: 100%;
+        margin: 0;
+
+        --dialog-close-button-size: 1em;
+        --dialog-close-button-topright-position: calc(0em - ((var(--dialog-close-button-size) + var(--dialog-padding)) / 2));
     }
 
     .button-stack & {
@@ -263,6 +289,16 @@ aside {
 
     footer & {
         line-height: 1.5;
+    }
+}
+
+p {
+    &.secondary {
+        color: hsl(0deg, 0%, 80%);
+    }
+
+    strong {
+        color: hsl(0deg, 0%, 100%);
     }
 }
 

@@ -136,12 +136,13 @@ exclude-main-element: true
 
 <dialog id="Donate-Dialog" class="brightness-dark">
     <h3>Thank you! Even $1 helps</h3>
-    <p>{{ site.name }} is made almost entirely just by Ky Leggiero.</p>
-    <p>{{ site.name }} will never have ads, and will never require payment. If you wish to donate, you won't get anything, but you'll be helping Ky out personally.</p>
+    <p class="secondary">{{ site.name }} is almost entirely <strong>made by <a href="https://GitHub.com/{{ site.author.social.github-username }}" target="_blank">{{ site.author.name }}</a> alone. Your support goes a long way.</strong></p>
+    <p class="secondary">{{ site.name }} will never have ads, and will never require payment. After all, the whole point of {{ site.name }} is to be a free tool to help with household income inequality.</p>
+    <p>Your donation will help {{ site.author.name }} out personally.</p>
 
     <ul id="Donation-Servies-List" class="plain button-stack">
         {% for service in site.donation-services -%}
-        <li class="donation-service"><a href="{{ service.href }}" class="medium-emphasis button">
+        <li class="donation-service"><a href="{{ service.href }}" class="medium-emphasis button" tabindex="-1" target="_blank">
             {%- if service.materialIcon or service.materialIconVariant or service.fontAwesomeIcon -%}
             {% include Neon-Jekyll-Components/Icons/icon.html
                 materialIcon = service.materialIcon
@@ -154,7 +155,7 @@ exclude-main-element: true
         {%- endfor %}
     </ul>
 
-    <button id="Donate-Dialog-Close-Button" class="low-emphasis" onclick="$('#Donate-Dialog')[0].close()">
+    <button id="Donate-Dialog-Close-Button" class="medium-emphasis dialog-close button" onclick="$('#Donate-Dialog')[0].close()">
         {%- include Neon-Jekyll-Components/Icons/icon.html
             materialIcon = "close"
         -%}
