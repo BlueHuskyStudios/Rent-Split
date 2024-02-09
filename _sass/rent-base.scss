@@ -19,7 +19,7 @@ $icon-selector: ".material-icons, .material-icons-outlined, .material-icons-roun
     min-height: 100vh;
     --button-border-radius: 4pt;
 
-    --theme-donate-color: var(--material-yellow-500);
+    --theme-donate-color: var(--material-yellow-800);
 }
 
 *,
@@ -48,7 +48,7 @@ section {
 }
 
 dialog {
-    box-shadow: 0 2em 5em rgba(0, 0, 0, 0.1), 0 1em 2em rgba(0, 0, 0, 0.2), 0 1pt 4pt rgba(0, 0, 0, 0.3);
+    box-shadow: var(--box-shadow-z24);
     border: none;
     border-radius: 1rem;
     position: fixed;
@@ -113,8 +113,13 @@ dialog {
 
     p,
     h1, h2, h3, h4, h5, h6 {
+        margin-block-start: 0;
         margin-block-end: 0.8em;
     }
+}
+
+#Donate-Dialog {
+    --theme-primary-color: var(--theme-donate-color);
 }
 
 #{$button-selector} {
@@ -136,7 +141,7 @@ dialog {
     }
 
     &.donate-button {
-        --button-background: var(--material-pink-a700) !important;
+        --button-background: var(--theme-donate-color) !important;
     }
 
     &.dialog-close {
@@ -413,6 +418,12 @@ hr {
 //     }
 // }
 
+#Filter-Dialog {
+    h1, h2, h3, h4, h5, h6 {
+        color: hsla(0deg, 0%, 100%, 74%);
+    }
+}
+
 .filter-button {
     margin: 0;
     min-width: 0;
@@ -428,6 +439,9 @@ hr {
             + 1em
         )
     ));
+
+    height: 100%;
+    --button-padding-each-vertical: 0.5em;
 
     .has-applicable-roommates & {
         opacity: 1 !important;
@@ -455,6 +469,11 @@ hr {
 
 #Expenses {
     padding-left: 1em;
+}
+
+.expense-name {
+    font-weight: bolder;
+    color: var(--theme-text-on-primary-color-color);
 }
 
 

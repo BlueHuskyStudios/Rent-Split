@@ -38,7 +38,7 @@ app-bar:
             onClick: "$('#Donate-Dialog')[0].showModal(); return false;"
         -
             href: https://github.com/BlueHuskyStudios/Rent-Split
-            fontAwesomeIcon: fa fa-github fa-2x
+            fontAwesomeIcon: fab fa-github fa-2x
 
 donation-services:
     -
