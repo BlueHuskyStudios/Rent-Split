@@ -26,3 +26,22 @@
     font-weight: 600;
     text-transform: UPPERCASE;
 }
+
+
+h1 {
+    text-align: center;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 2em 0 0.5em;
+}
+
+p,
+ol,
+ul {
+    margin: 0 0 1.5em;
+}
+
+li {
+    margin-block-end: 0.5em;
+}

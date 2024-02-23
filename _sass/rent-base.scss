@@ -9,12 +9,17 @@
 
 $button-selector: "button, #Add-Roommate-Button, #Add-Expense-Button, .remove-roommate-button, .remove-expense-button, .button, :link.button, :visited.button, input[type=submit], input[type=reset], .image-button";
 
+// @import url(https://stylesheets.bhstudios.org/assets/v2/general/icons-import.scss);
+$icon-selector: ".material-icons, .material-icons-outlined, .material-icons-round, .material-icons-sharp, .material-icons-two-tone, .fa, .fab, .fas";
+
 
 // MARK: - Basic Structure
 
 :root {
     min-height: 100vh;
     --button-border-radius: 4pt;
+
+    --theme-donate-color: var(--material-yellow-800);
 }
 
 *,
@@ -43,9 +48,9 @@ section {
 }
 
 dialog {
-    box-shadow: 0 2em 5em rgba(0, 0, 0, 0.1), 0 1em 2em rgba(0, 0, 0, 0.2), 0 1pt 4pt rgba(0, 0, 0, 0.3);
+    box-shadow: var(--box-shadow-z24);
     border: none;
-    border-radius: 2pt;
+    border-radius: 1rem;
     position: fixed;
     top: 10%;
     left: 0;
@@ -58,17 +63,21 @@ dialog {
     max-height: -moz-fit-content;
     max-height: -ms-fit-content;
     max-height: fit-content;
+    padding: var(--dialog-padding);
     margin: auto !important;
-    width: -webkit-fit-content;
-    width: -moz-fit-content;
-    width: -ms-fit-content;
     width: fit-content;
+    max-width: min-content;
     z-index: 10;
+
+    position: relative;
+    overflow: visible;
 
     transition-property: opacity;
     transition-duration: 1s;
 
     opacity: 0;
+
+    --dialog-padding: 1em;
 
     @media (max-width: 479px) {
         width: 95vw;
@@ -87,15 +96,117 @@ dialog {
     }
 
     &::backdrop {
-        background: hsla(0deg, 0%, 0%, 0.3);
-        backdrop-filter: blur(1px) brightness(0.5);
+        background: hsla(0deg, 0%, 0%, 0.0);
+        -webkit-backdrop-filter: blur(0px) brightness(1) saturate(1.2);
+        backdrop-filter: blur(0px) brightness(1) saturate(1.2);
+
+        transition-property: background, backdrop-filter;
+        transition-duration: 0.3s;
+        transition-timing-function: ease-in-out;
     }
+
+    &[open]::backdrop {
+        background: hsla(0deg, 0%, 0%, 0.3);
+        -webkit-backdrop-filter: blur(12px) brightness(0.6) saturate(1.2);
+        backdrop-filter: blur(12px) brightness(0.6) saturate(1.2);
+    }
+
+    p,
+    h1, h2, h3, h4, h5, h6 {
+        margin-block-start: 0;
+        margin-block-end: 0.8em;
+    }
+}
+
+#Donate-Dialog {
+    --theme-primary-color: var(--theme-donate-color);
 }
 
 #{$button-selector} {
     &.low-emphasis,
     &.medium-emphasis {
         background-color: var(--theme-background-color);
+    }
+
+    // &.medium-emphasis {
+    //     &:hover,
+    //     &:active {
+    //         background-color: var(--theme-primary-color) !important;
+    //         color: var(--light-theme-foreground-color);
+    //     }
+    // }
+
+    .app-bar &.raised {
+        height: auto;
+    }
+
+    &.donate-button {
+        --button-background: var(--theme-donate-color) !important;
+    }
+
+    &.dialog-close {
+        position: absolute;
+        width: var(--dialog-close-button-size);
+        height: var(--dialog-close-button-size);
+        top: var(--dialog-close-button-topright-position);
+        right: var(--dialog-close-button-topright-position);
+        padding: 1em;
+        min-width: auto;
+        border-radius: 99in;
+        margin: 0;
+
+        --dialog-close-button-size: 1em;
+        --dialog-close-button-topright-position: calc(0em - ((var(--dialog-close-button-size) + var(--dialog-padding)) / 2));
+    }
+
+    .button-stack:hover & {
+        &:hover {
+            border-radius: 1.5em;
+        }
+
+        &:not(:hover) {
+            opacity: 0.7;
+            border-color: transparent;
+        }
+    }
+
+    .button-stack & {
+        justify-content: flex-start;
+        margin: 0;
+        width: 3in;
+        max-width: 100%;
+
+        transition-property: transform, box-shadow, color, background, border, opacity, border-radius;
+
+        &:hover,
+        &:active {
+            z-index: 1;
+        }
+    }
+
+    .button-stack li:not(:first-child) & {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+    .button-stack li:not(:last-child) & {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        margin-block-end: -1px;
+    }
+
+    #{$icon-selector} {
+        font-size: 18px;
+        width: 1em;
+        margin-right: 0.5em;
+
+        &.fa-2x {
+            font-size: 2em;
+        }
+
+        &.fa-3x {
+            font-size: 3em;
+        }
     }
 }
 
@@ -219,6 +330,16 @@ aside {
     }
 }
 
+p {
+    &.secondary {
+        color: hsl(0deg, 0%, 80%);
+    }
+
+    strong {
+        color: hsl(0deg, 0%, 100%);
+    }
+}
+
 hr {
     min-width: 3em;
     margin: 3em;
@@ -238,6 +359,10 @@ hr {
    .title .title-text {
        color: transparent;
    }
+
+    .app-bar-empty-leading-placeholder {
+        flex-grow: 1;
+    }
 }
 
 
@@ -293,6 +418,12 @@ hr {
 //     }
 // }
 
+#Filter-Dialog {
+    h1, h2, h3, h4, h5, h6 {
+        color: hsla(0deg, 0%, 100%, 74%);
+    }
+}
+
 .filter-button {
     margin: 0;
     min-width: 0;
@@ -308,6 +439,9 @@ hr {
             + 1em
         )
     ));
+
+    height: 100%;
+    --button-padding-each-vertical: 0.5em;
 
     .has-applicable-roommates & {
         opacity: 1 !important;
@@ -327,10 +461,19 @@ hr {
             )
         ));
     }
+
+    #{$icon-selector} {
+        width: auto;
+    }
 }
 
 #Expenses {
     padding-left: 1em;
+}
+
+.expense-name {
+    font-weight: bolder;
+    color: var(--theme-text-on-primary-color-color);
 }
 
 
